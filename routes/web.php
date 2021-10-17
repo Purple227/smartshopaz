@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategryController;
 use App\Http\Controllers\Admin\ProductController;
-
+use App\Http\Controllers\Admin\BrandController;
 
 
 /*
@@ -39,6 +39,14 @@ Route::get('/list-categories', [CategryController::class, 'index'])->name('list.
 Route::get('/delete-category/{id}', [CategryController::class, 'destroy'])->name('destroy.category');
 Route::patch('/update-category/{id}', [CategryController::class, 'update'])->name('patch.category');
 Route::get('/update-category/{id}', [CategryController::class, 'updateCategoryUI'])->name('update.catgory'); 
+
+// Admin brand section
+Route::get('/add-brand', [BrandController::class, 'addBrandUI'])->name('add.brand');
+Route::post('/add-brand', [BrandController::class, 'store'])->name('post.brand');
+Route::get('/list-brands', [BrandController::class, 'index'])->name('list.brand');
+Route::get('/delete-brand/{id}', [BrandController::class, 'destroy'])->name('destroy.brand');
+Route::patch('/update-brand/{id}', [BrandController::class, 'update'])->name('patch.brand');
+Route::get('/update-brand/{id}', [BrandController::class, 'updateBrandUI'])->name('update.brand'); 
 
 
 // Admin product section

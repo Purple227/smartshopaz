@@ -111,7 +111,7 @@
                                             <tbody>
                                                 <tr>
                                                     @foreach ($list_categories as $key => $category)
-                                                    <td> {{ $key+1 }} </td>
+                                                    <td> {{ 'CAT-' $key+1 }} </td>
                                                     <td> {{ $category->name }} </td>
                                                     <td><img src="{{ asset('storage/'.$category->image) }}" alt="" width="35px"></td>
                                                     <td>

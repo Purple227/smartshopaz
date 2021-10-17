@@ -138,11 +138,6 @@
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
 
-                                                   <form  method="GET" action="{{ route('destroy.category', $category->id)}}">
-                                                                @csrf
-                                                    <button type="submit" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-trash-alt"></i></button>
-                                                    </form>
-
                                                     <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Update</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
 
                                                 </div>

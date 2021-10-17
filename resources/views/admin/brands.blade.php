@@ -31,10 +31,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -58,7 +58,7 @@
                             <div class="col-md-4">
                                 <div class="float-right">
                                     <div class="dropdown">
-                                        <a href="add-new-brand" class="btn btn-dark btn-rounded " type="button">
+                                        <a href="{{ route('add.brand') }}" class="btn btn-dark btn-rounded " type="button">
                                             <i class="mdi mdi-plus mr-1"></i> Add New Brand
                                         </a>
                                     </div>
@@ -81,14 +81,22 @@
                                         <h4 class="header-title">Brands</h4>
                                         <p class="card-title-desc"></p>
 
+
+
+@if(Session::has('fail'))
                                         <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>oops! Could not add</b>
+                                            <b> {{ Session::get('fail') }} </b>
                                         </div>
+@endif
+
+
+@if(Session::has('status'))
                                         <div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>Added Successfully</b>
+                                            <b> {{ Session::get('status') }} </b>
                                         </div>
+@endif
 
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
@@ -102,21 +110,28 @@
 
 
                                             <tbody>
+                                                @foreach ($list_brands as $key => $brand)
                                                 <tr>
-                                                    <td>CAT-01</td>
-                                                    <td>Tommy Hilfiger</td>
+                                                    <td> {{ $key+1 }}</td>
+                                                    <td> {{ $brand->name }} </td>
                                                     <td><img src="../assets-dash/images/flags/french.jpg" alt="" width="35px"></td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                            <a href="" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <a href="{{ route('update.brand', $brand->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="mdi mdi-pencil"></i>
                                                             </a>
-                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete">
+
+                                                            <form id="form" method="GET" action=" {{ route('destroy.brand', $brand->id) }} ">
+                                                                @csrf
+                                                            <button class="btn btn-danger btn-sm" type="submit" data-toggle="tooltip" data-placement="top" title="Delete">
                                                                 <i class="mdi mdi-trash-can"></i>
-                                                            </a>
+                                                            </button>
+                                                            </form>
+
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -132,7 +147,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -140,7 +155,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

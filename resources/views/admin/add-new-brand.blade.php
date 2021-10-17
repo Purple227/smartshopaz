@@ -58,10 +58,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -97,10 +97,24 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <form id="form">
+
+@if ($errors->any())
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            @foreach ($errors->all() as $error)
+                                            <b>oops! {{ $error }} </b>
+                                            @endforeach
+                                        </div>
+@endif
+
+
+                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('post.brand') }} ">
+
+                                            @csrf
+
                                             <div class="form-group">
                                                 <label for="to-input">Brand Name</label>
-                                                <input type="email" class="form-control" id="to-input" placeholder="Name">
+                                                <input type="text" class="form-control" id="to-input" placeholder="Name" name="name">
                                             </div>
 
                                             <div class="form-group">
@@ -109,7 +123,7 @@
                                                 <div>
                                                     <div class="dropzone">
                                                         <!-- <div class="fallback"> -->
-                                                        <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+                                                        <input type="file" name="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
                                                         <!-- <button class="btn btn-sm btn-primary" type="button">Choose Images</button> -->
                                                         <div class="preview">
                                                             <img id="file-ip-1-preview" style="width: 35px;">
@@ -124,7 +138,7 @@
 
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
-                                                    <a href="" class="btn btn-primary waves-effect waves-light"> <span>Add</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </a>
+    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Add</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
                                                 </div>
                                             </div>
 
@@ -144,7 +158,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -152,7 +166,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
