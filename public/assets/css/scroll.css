@@ -1,0 +1,15 @@
+#scrollUp {
+	left: 10px;
+	bottom: 10px;
+	background-color: #e69535;
+	color: white;
+	padding: 5px;
+	border-radius: 999px;
+	font-size: 30px;
+	border: 2px solid white;
+	transition: 0.3s;
+}
+#scrollUp:hover {
+	text-decoration: none;
+	background-color: #c79b4ac7;
+}
