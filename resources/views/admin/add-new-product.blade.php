@@ -98,30 +98,46 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <form id="form">
+
+@if ($errors->any())
+                                            @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b>oops! {{ $error }} </b>
+                                        </div>
+                                            @endforeach
+@endif
+
+
+                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('post.product') }} ">
+
+                                            @csrf
+
                                             <div class="form-group">
                                                 <label for="to-input">Product Name</label>
-                                                <input type="email" class="form-control" id="to-input" placeholder="Title">
+                                                <input type="text" name="title" class="form-control" id="to-input" placeholder="Title">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Discount(%)</label>
-                                                <input type="number" class="form-control" placeholder="Discount" />
+                                                <input type="number" name="discount" class="form-control" placeholder="Discount" />
                                             </div>
                                             <div class="form-group ">
                                                 <label>Categories</label>
-                                                <select class="selectize form-control">
+                                                <select class="selectize form-control" name="category_id">
                                                     <option value="">Select...</option>
-                                                    <option value="AK">Alaska</option>
-                                                    <option value="HI">Hawaii</option>
+                                                    @foreach ($list_categories as $key => $category)
+                                                    <option value=" {{ $category->id }} "> {{ $category->name }} </option>
+                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group ">
                                                 <label>Brand</label>
-                                                <select class="selectize form-control" id="siteID" class="abcd">
+                                                <select class="selectize form-control" id="siteID" class="abcd" name="brand_id">
                                                     <option value="">Select...</option>
-                                                    <option value="NA">Not Available</option>
-                                                    <option value="HI">Puma</option>
+                                                    @foreach ($list_brands as $key => $brand)
+                                                    <option value="{{ $brand->id }}"> {{ $brand->name }} </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="row mb-3">
@@ -142,28 +158,28 @@
                                             <div class="row types" id="Typesingle">
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom01">Main Price(₦)</label>
-                                                    <input type="number" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="" required>
+                                                    <input type="number" name="main_price" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="" >
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom02">Regular Price(₦)</label>
-                                                    <input type="number" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" required>
+                                                    <input type="number" name="regular_price" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" >
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom02">SuperBuyers Price(₦)</label>
-                                                    <input type="number" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="" required>
+                                                    <input type="number" name="super_buyer_price" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="" >
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom01">Weight(kg)</label>
-                                                    <input type="number" class="form-control" id="validationCustom01" placeholder="Weight" value="" required>
+                                                    <input type="number" name="weight" class="form-control" id="validationCustom01" placeholder="Weight" value="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
@@ -173,35 +189,35 @@
                                                 <div class="row">
                                                     <div class="col-md-3 mb-3">
                                                         <label for="validationCustom01">Variation Name</label>
-                                                        <input type="text" class="form-control" id="validationCustom01" placeholder="e.g: Adidas" value="" required>
+                                                        <input type="text" name="variation_name" class="form-control" id="validationCustom01" placeholder="e.g: Adidas" value="">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label for="validationCustom01">Weight(kg)</label>
-                                                        <input type="text" class="form-control" id="validationCustom01" placeholder="e.g 20" value="" required>
+                                                        <input type="number" name="multiple_weight" class="form-control" id="validationCustom01" placeholder="e.g 20" value="">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 mb-3">
                                                         <label for="validationCustom01">Main Price(₦)</label>
-                                                        <input type="number" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="" required>
+                                                        <input type="number" name="multiple_main_price" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 mb-3">
                                                         <label for="validationCustom02">Regular Price(₦)</label>
-                                                        <input type="number" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" required>
+                                                        <input type="number" name="multiple_regular_price" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" >
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 mb-3">
                                                         <label for="validationCustom02">SuperBuyers Price(₦)</label>
-                                                        <input type="number" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="" required>
+                                                        <input type="number" name="multiple_super_buyer_price" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
@@ -209,9 +225,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="summernote">
-
-                                                </div>
+                                                <textarea class="summernote" name="description"> </textarea>
                                             </div>
 
                                             <div class="form-group">
@@ -220,7 +234,7 @@
                                                 <div>
                                                     <div class="dropzone">
                                                         <div class="fallback">
-                                                            <input type="file" name="Image" id="image" multiple="" class="d-none" onchange="image_select()">
+                                                            <input type="file" name="file" id="image" multiple="" class="d-none" onchange="image_select()">
                                                             <button class="btn btn-sm btn-primary" type="button" onclick="document.getElementById('image').click()">Choose Images</button>
                                                             <div class="card-body d-flex flex-wrap justify-content-start" id="container">
                                                                 <!-- image preview -->
@@ -232,9 +246,7 @@
 
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
-                                                    <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-save"></i></button>
-                                                    <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-trash-alt"></i></button>
-                                                    <button class="btn btn-primary waves-effect waves-light"> <span>Post</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
+    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Add</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
                                                 </div>
                                             </div>
 

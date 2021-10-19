@@ -30,11 +30,11 @@ class BrandController extends Controller
 
         $brand = new Brand;
 
-        //$path = $request->file('file')->store('public/images');
-
-        $path = Storage::putFile('public/images', new File($request->file));        
-
+        if ($request->file != null) {
+        $path = $request->file('file')->store('public/images');
         $brand->image = $path;
+        }      
+
         $brand->name = $request->name;
         $brand->slug = $unique_slug;
         $brand->save();
@@ -51,9 +51,11 @@ class BrandController extends Controller
 
         $brand = Brand::find($id);
 
+        if ($request->file != null) {
         $path = $request->file('file')->store('public/images');
-
         $brand->image = $path;
+        }
+
         $brand->name = $request->name;
         $brand->save();
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Auth\UserController;
 
 
 /*
@@ -51,13 +52,20 @@ Route::get('/update-brand/{id}', [BrandController::class, 'updateBrandUI'])->nam
 
 // Admin product section
 Route::get('/add-product', [ProductController::class, 'addProductUI'])->name('add.product');
-//Route::post('/add-category', [CategryController::class, 'store'])->name('post.category');
-//Route::get('/list-categories', [CategryController::class, 'index'])->name('list.category');
-//Route::get('/delete-category/{id}', [CategryController::class, 'destroy'])->name('destroy.category');
-//Route::patch('/update-category/{id}', [CategryController::class, 'update'])->name('patch.category');
-//Route::get('/update-category/{id}', [CategryController::class, 'updateCategoryUI'])->name('update.catgory'); 
+Route::post('/add-product', [ProductController::class, 'store'])->name('post.product');
+Route::get('/list-products', [ProductController::class, 'index'])->name('list.product');
+Route::get('/delete-product/{id}', [ProductController::class, 'destroy'])->name('destroy.product');
+Route::patch('/update-product/{id}', [ProductController::class, 'update'])->name('patch.product');
+Route::get('/update-product/{id}', [ProductController::class, 'updateProductUI'])->name('update.product'); 
 
 });
 
 
+
+Route::prefix('super-buyer')->group(function () {
+
+Route::get('/register', [UserController::class, 'registerUI'])->name('super-buyer.register');
+
+
+});
 

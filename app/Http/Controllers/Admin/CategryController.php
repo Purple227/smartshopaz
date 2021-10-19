@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CategryController extends Controller
 {
@@ -22,14 +23,19 @@ class CategryController extends Controller
         'name' => 'required',
         ]);
 
+        $random = Str::random(4);
+        $slug = Str::slug($request->name, '-');
+        $unique_slug = $slug.'-'.$random;
+
         $category = new Category;
 
-        //$path = $request->file('file')->store('public/images');
-
-        $path = Storage::putFile('public/images', new File($request->file));
-
+        if ($request->file != null)
+        $path = $request->file('file')->store('public/images');
         $category->image = $path;
+        }
+
         $category->name = $request->name;
+        $category->slug = $unique_slug;
         $category->save();
 
         $request->session()->flash('status', 'Task was successful!');
@@ -44,9 +50,11 @@ class CategryController extends Controller
 
         $category = Category::find($id);
 
+        if ($request->file != null)
         $path = $request->file('file')->store('public/images');
-
         $category->image = $path;
+        }
+
         $category->name = $request->name;
         $category->save();
 

@@ -19,14 +19,15 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->integer('discount')->nullable();
             $table->integer('category_id')->nullable();
-            $table->string('brand')->nullable();
+            $table->string('brand_id')->nullable();
             $table->double('main_price', 8, 2 );
             $table->double('regular_price', 8, 2 )->nullable();
             $table->double('super_buyer_price', 8, 2 )->nullable();
             $table->integer('weight')->nullable();
-            $table->string('description');
+            $table->text('description');
             $table->string('image')->nullable();
             $table->string('variation_name')->nullable();
+            $table->string('slug');
 
             $table->timestamps();
         });

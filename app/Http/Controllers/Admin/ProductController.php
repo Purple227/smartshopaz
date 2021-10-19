@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Brand;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -14,7 +18,10 @@ class ProductController extends Controller
 
     public function addProductUI()
     {
-        return view('admin.add-new-product');
+        $list_brands = Brand::all();
+        $list_categories = Category::all();
+
+        return view('admin.add-new-product', ['list_brands' => $list_brands, 'list_categories' => $list_categories]);
     }
 
     public function store(Request $request)
@@ -25,53 +32,93 @@ class ProductController extends Controller
         'description' => 'required',
         ]);
 
-        $path = Storage::putFile('public/images', new File($request->file));
+        $random = Str::random(4);
+        $slug = Str::slug($request->title, '-');
+        $unique_slug = $slug.'-'.$random;
 
-        Product::create($request->all());
+        $product = new Product;
+
+        if ($request->file != null) {
+        $path = $request->file('file')->store('public/images');
+        $product->image = $path ;
+        }
+
+        $product->title = $request->title;
+        $product->discount = $request->discount;
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->main_price = $request->main_price == null ? $request->multiple_main_price : $request->main_price;
+        $product->regular_price = $request->regular_price == null ? $request->multiple_regular_price : $request->regular_price;
+        $product->super_buyer_price = $request->super_buyer_price == null ? $request->multiple_super_buyer_price : $request->super_buyer_price;
+        $product->weight = $request->weight == null ? $request->multiple_weight : $request->weight;
+        $product->description = $request->description;
+        $product->variation_name = $request->variation_name;
+        $product->slug = $unique_slug;
+        $product->save();
 
         $request->session()->flash('status', 'Task was successful!');
-        return redirect()->route('list.category');
+        return redirect()->route('list.product');
     }
 
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-        'name' => 'required',
+        'title' => 'required',
+        'main_price' => 'required',
+        'description' => 'required',
         ]);
 
-        $category = Category::find($id);
+        $product = Product::find($id);
 
+        if ($request->file != null) {
         $path = $request->file('file')->store('public/images');
+        $product->image = $path ;
+        }
 
-        $category->image = $path;
-        $category->name = $request->name;
-        $category->save();
+        $product->title = $request->title;
+        $product->discount = $request->discount;
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->main_price = $request->main_price == null ? $request->multiple_main_price : $request->main_price;
+        $product->regular_price = $request->regular_price == null ? $request->multiple_regular_price : $request->regular_price;
+        $product->super_buyer_price = $request->super_buyer_price == null ? $request->multiple_super_buyer_price : $request->super_buyer_price;
+        $product->weight = $request->weight == null ? $request->multiple_weight : $request->weight;
+        $product->description = $request->description;
+        $product->variation_name = $request->variation_name;
+        $product->save();
 
         $request->session()->flash('status', 'Task was successful!');
-        return redirect()->route('list.category');
+        return redirect()->route('list.product');
     }
 
     public function index()
     {
-        $list_categories = Category::all();
+       $list_products = Product::with('category')->get();
 
-        return view('admin.categories', [
-            'list_categories' => $list_categories
+       //return $list_products;
+
+        return view('admin.products', [
+            'list_products' => $list_products
         ]);
     }
 
     public function destroy(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->delete();
+        $product = Product::find($id);
+        $product->delete();
         $request->session()->flash('fail', 'Task was successful!');
-        return redirect()->route('list.category');
+        return redirect()->route('list.product');
     }
 
-    public function updateCategoryUI($id)
+    public function updateProductUI($id)
     {
-        $category = Category::find($id);
-        return view('admin.edit-category',  ['category' => $category]);
+        $product = Product::where('id', $id)->with('category', 'brand')->first();
+
+        $list_brands = Brand::all();
+        $list_categories = Category::all();
+
+
+        return view('admin.edit-product',  ['product' => $product, 'list_brands' => $list_brands, 'list_categories' => $list_categories]);
     }
 
 
