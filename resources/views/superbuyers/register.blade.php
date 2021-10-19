@@ -39,57 +39,74 @@
                             <div class="card-body p-4">
                                 <div class="p-2">
                                     <h5 class="mb-5 text-center">Register Account.</h5>
-                                    <form class="form-horizontal" action="./">
+
+
+@if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b>oops! {{ $error }} </b>
+                                        </div>
+                                        @endforeach
+@endif
+
+
+                                        <form id="form" class="form-horizontal" method="POST" action=" {{ route('post.super-buyer.register') }} ">
+
+                                            @csrf
+
 
                                         <div class="row">
                                             <div class="col-md-12">
                                             <div class="form-group form-group-custom mb-4">
-                                                    <input type="text" class="form-control" id="title" required>
+                                                    <input type="text" name="title" class="form-control" id="title">
                                                     <label for="username"> Title</label>
                                                 </div>
+
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="text" class="form-control" id="firstname" required>
-                                                    <label for="username"> First Name</label>
+                                                    <input type="text" name="name" class="form-control" id="lastname" required>
+                                                    <label for="username"> Name</label>
                                                 </div>
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="text" class="form-control" id="lastname" required>
-                                                    <label for="username"> Last Name</label>
-                                                </div>
-                                                <div class="form-group form-group-custom mb-4">
-                                                    <input type="email" class="form-control" id="useremail" required>
+                                                    <input type="email" name="email" class="form-control" id="useremail" required>
                                                     <label for="useremail">Email</label> 
                                                 </div>
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="number" class="form-control" id="phone" required>
+                                                    <input type="number" name="phone" class="form-control" id="phone" >
                                                     <label for="useremail">Phone Number</label> 
                                                 </div>
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="password" class="form-control" id="password" required>
+                                                    <input type="password" name="password" class="form-control" id="password" required>
                                                     <label for="userpassword">Password</label>
                                                 </div>
                                                 
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="password" class="form-control" id="confirm_password" required>
+                                                    <input type="password" name="password_confirmation" class="form-control" id="confirm_password" required>
                                                     <label for="userpassword">Confirm Password <i id='message'></i></label>
                                                 </div>
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="text" class="form-control" id="sponsor" required>
+                                                    <input type="number" name="sponsor_id" class="form-control" id="sponsor" required>
                                                     <label for="sponsor"> Sponsor ID</label>
                                                 </div>
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="text" class="form-control" id="ron" required>
+                                                    <input type="text" name="ron_code" class="form-control" id="ron" required>
                                                     <label for="ron"> RON Code</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="term-conditionCheck" required>
+                                                    <input type="checkbox" name="privacy" class="custom-control-input" id="term-conditionCheck" required>
                                                     <label class="custom-control-label font-weight-normal" for="term-conditionCheck">I accept <a href="terms-conditions" class="text-primary">Terms and Conditions</a></label>
                                                 </div>
                                                 <div class="mt-4">
+
                                                     <!-- <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button> -->
-                                                    <a href="register-stage2" class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</a>
+
+                                                    <button type="submit" class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button>
+
                                                 </div>
                                                 <div class="mt-4 text-center">
-                                                    <a href="login" class="text-muted"><i class="mdi mdi-account-circle mr-1"></i> Already have account?</a>
+
+                                                    <a href="{{ route('super-buyer.login') }}" class="text-muted"><i class="mdi mdi-account-circle mr-1"></i> Already have account?</a>
+
                                                 </div>
                                             </div>
                                         </div>

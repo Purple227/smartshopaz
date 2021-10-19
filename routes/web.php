@@ -64,8 +64,13 @@ Route::get('/update-product/{id}', [ProductController::class, 'updateProductUI']
 
 Route::prefix('super-buyer')->group(function () {
 
-Route::get('/register', [UserController::class, 'registerUI'])->name('super-buyer.register');
+Route::get('/', function () {
+    return view('superbuyers/index');
+})->name('super-buyer.home');
 
+Route::get('/register', [UserController::class, 'registerUI'])->name('super-buyer.register');
+Route::get('/login', [UserController::class, 'loginUI'])->name('super-buyer.login');
+Route::post('/register', [UserController::class, 'register'])->name('post.super-buyer.register');
 
 });
 
