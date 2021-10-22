@@ -11,7 +11,7 @@
                 <li>
                     <a href="index" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:bag"></i></div>
-                        <span>Dashboard</span>
+                        <span>Home</span>
                     </a>
                 </li>
 
@@ -20,7 +20,7 @@
                 <li>
                     <a href="products" class=" waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:box"></i></div>
-                        <span>Products</span>
+                        <span>Mall</span>
                     </a>
                 </li>
 
@@ -43,7 +43,19 @@
                 <li>
                     <a href="downline" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:flip-v-alt"></i></div>
+                        <span>Genealogy</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="downline" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:flip-v-alt"></i></div>
                         <span>Downline</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="downline" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:flip-v-alt"></i></div>
+                        <span>All Downline Details</span>
                     </a>
                 </li>
                 <li>
