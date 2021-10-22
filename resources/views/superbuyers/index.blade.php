@@ -34,11 +34,11 @@
         <div id="layout-wrapper">
 
             
-            <?php include 'inc/sb-topbar.php'; ?>
+            @include('partials/sb-topbar')
 
             <!-- ========== Left Sidebar Start ========== -->
             
-            <?php include 'inc/sb-sidebar.php'; ?>
+            @include('partials/sb-sidebar')
             <!-- Left Sidebar End -->
 
             <!-- ============================================================== -->
@@ -403,7 +403,7 @@
                 <!-- End Page-content -->
 
                 
-                <?php include 'inc/sb-footer.php'; ?>
+                @include('partials/sb-footer')
             </div>
             <!-- end main content-->
 
@@ -411,7 +411,7 @@
         <!-- END layout-wrapper -->
 
         <!-- Right Sidebar -->
-        <?php include 'inc/sb-rightbar.php'; ?>
+        @include('partials/sb-rightbar')
         <!-- /Right-bar -->
 
         <!-- Right bar overlay-->
