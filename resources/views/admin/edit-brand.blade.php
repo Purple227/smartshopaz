@@ -193,8 +193,7 @@
     <script src="{{ asset('assets-dash/js/pages/email-summernote.init.js') }}"></script>
     <!-- dropzone js -->
     <script src="{{ asset('assets-dash/libs/dropzone/min/dropzone.min.js') }}"></script>
-
-    <script src="{{ asset('assets-dash/js/app.js') }}"></script>
+    
     <script src="{{ asset('assets-dash/js/iconify.min.js') }}"></script>
     <script>
 

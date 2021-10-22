@@ -23,7 +23,6 @@ class User extends Authenticatable
         'phone',
         'title',
         'sponsor_id',
-        'ron_code',
         'policy'
     ];
 

@@ -38,21 +38,30 @@
                             <div class="card-body p-4">
                                 <div class="p-2">
                                     <h5 class="mb-5 text-center">Sign in to continue</h5>
-                                    <form class="form-horizontal" action="./">
+
+                                        <form id="form" class="form-horizontal" method="POST" action=" {{ route('login') }} ">
+
+                                            @csrf
 
                                         <div class="row">
                                             <div class="col-md-12">
+                                                
+                                                @if ($errors->any())
+                                                @foreach ($errors->all() as $error)
                                                 <div class="alert alert-danger alert-dismissible">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                    Incorrect <b>Password</b>
+                                                    oops! <b> {{ $error }} </b>
                                                 </div>
+                                                 @endforeach
+                                                 @endif
+
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="email" class="form-control" id="email" required>
+                                                    <input type="email" class="form-control" name="email" id="email" required>
                                                     <label for="username">Email</label>
                                                 </div>
 
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="password" class="form-control" id="userpassword" required>
+                                                    <input type="password" class="form-control" name="password" id="userpassword" required>
                                                     <label for="userpassword">Password</label>
                                                 </div>
 
@@ -71,7 +80,7 @@
                                                 </div>
                                                 <div class="mt-4">
 
-                                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In</button>
+                                                    <button type="submit" class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In</button>
 
                                                 </div>
 

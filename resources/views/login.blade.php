@@ -58,7 +58,7 @@
                   <div class="account-forgot"><a href="forgot-password">Forgot Password?</a></div>
                 </div>
                 <div class="account-function">
-                  <button class="no-round-btn">Sign in</button><a class="create-account" href="register">Or create an account</a>
+                  <button type="submit" class="no-round-btn">Sign in</button><a class="create-account" href="{{ route('super-buyer.register') }}">Or create an account</a>
                 </div>
               </form>
             </div>

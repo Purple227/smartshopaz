@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +23,7 @@
 
 
 <body>
+
     <div id="main">
         <header class="coffee-2">
             @include('partials/main-topbar')
@@ -672,4 +674,3 @@
 </body>
 
 </html>
-

@@ -15,6 +15,8 @@
                     </a>
                 </li>
 
+    @if ( Auth::user()->complete_registration == 1)
+
                 <li>
                     <a href="products" class=" waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:box"></i></div>
@@ -64,6 +66,10 @@
                         <span>Admins</span>
                     </a>
                 </li>
+
+@endif
+
+                
                 <li>
                     <a href="ron-codes" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:process"></i></div>

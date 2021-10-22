@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\TransactionController;
 
 
 /*
@@ -20,7 +21,7 @@ use App\Http\Controllers\Auth\UserController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 
 Route::get('/about', function () {
     return view('about-us');
@@ -66,11 +67,15 @@ Route::prefix('super-buyer')->group(function () {
 
 Route::get('/', function () {
     return view('superbuyers/index');
-})->name('super-buyer.home');
+})->name('super-buyer.home')->middleware(['super.buyer']);
 
 Route::get('/register', [UserController::class, 'registerUI'])->name('super-buyer.register');
 Route::get('/login', [UserController::class, 'loginUI'])->name('super-buyer.login');
 Route::post('/register', [UserController::class, 'register'])->name('post.super-buyer.register');
-
+Route::post('/payment', [TransactionController::class, 'payment'])->name('post.super-buyer.register');
+Route::post('/complete-registration', [UserController::class, 'completeRegistration'])->name('post.super-buyer.complete-registration');
 });
 
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/login', [UserController::class, 'authenticate'])->name('login');

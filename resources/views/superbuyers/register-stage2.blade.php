@@ -32,10 +32,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/sb-topbar.php')
+        @include('partials/sb-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/sb-sidebar.php')
+        @include('partials/sb-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -80,44 +80,68 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="header-title">Complete the form before you can proceed</h4>
+
+
+@if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b>oops! {{ $error }} </b>
+                                        </div>
+                                        @endforeach
+@endif
+
                                         <p class="card-title-desc"></p>
 
-                                        <form class="needs-validation" novalidate>
+                                        <form id="form" method="POST" action=" {{ route('post.super-buyer.complete-registration') }} " class="needs-validation" novalidate>
+
+                                            @csrf
 
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Date of Birth</label>
-                                                    <input type="text" class="form-control datepicker-here" data-range="true" data-multiple-dates-separator=" - " data-language="en" />
+                                                    <input type="text" name="date_of_birth" class="form-control datepicker-here" data-range="true" data-multiple-dates-separator=" - " data-language="en" />
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Address.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">Gender</label>
-                                                    <select class="custom-select" required>
+                                                    <select class="custom-select" required name="gender">
                                                         <option>Select Gender</option>
                                                         <option value="male">Male</option>
-                                                        <option value="male">Female</option>
+                                                        <option value="female">Female</option>
                                                     </select>
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
+
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Address</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Address" required>
+                                                    <input type="text" name="address" class="form-control" id="validationCustom03" placeholder="Address" required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Address.
                                                     </div>
                                                 </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustom03"> RON Code</label>
+                                                    <input type="text" name="ron_code" class="form-control" id="validationCustom03" placeholder="RON Code" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid Address.
+                                                    </div>
+                                                </div>
+
+
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">LGA</label>
-                                                    <input type="text" class="form-control" id="validationCustom04" placeholder="LGA" required>
+                                                    <input type="text" name="L_G_A" class="form-control" id="validationCustom04" placeholder="LGA" required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid LGA.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label>State</label>
-                                                    <select class="custom-select" required>
+                                                    <select class="custom-select" required name="state" >
                                                         <option value="">Select State</option>
                                                         <option value="abia">Abia</option>
                                                         <option value="adamawa">Adamawa</option>
@@ -127,24 +151,16 @@
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label>Country</label>
-                                                    <select class="custom-select" required>
+                                                    <select class="custom-select" required name="country">
                                                         <option value="">Select Country</option>
                                                         <option value="nigeria">Nigeria</option>
                                                     </select>
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="invalidCheck" required>
-                                                    <label class="custom-control-label" for="invalidCheck">Agree to terms and conditions</label>
-                                                    <div class="invalid-feedback">
-                                                        You must agree before submitting.
-                                                    </div>
-                                                </div>
-                                            </div>
+                                          
                                             <!-- <button class="btn btn-primary" type="submit">Complete</button> -->
-                                            <a href="success" class="btn btn-primary" type="submit">Complete</a>
+                                            <button href="success" class="btn btn-primary" type="submit">Complete</button>
                                         </form>
                                     </div>
                                 </div>
@@ -159,7 +175,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/sb-footer.php')
+            @include('partials/sb-footer')
         </div>
         <!-- end main content-->
 
@@ -167,7 +183,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/sb-rightbar.php')
+    @include('partials/sb-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
