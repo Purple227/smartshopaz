@@ -150,8 +150,14 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('add.ron.code') }}"> Add RON code</a></li>
-                        <li><a href=" {{ route('list.ron.code') }}"> Categories </a></li>
+                        <li><a href=" {{ route('list.ron.code') }}"> List of RON Codes </a></li>
                     </ul>
+                </li>
+                <li>
+                    <a href="ranks" class="has-arrow waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"></div>
+                        <span> Ranks </span>
+                    </a>
                 </li>
 
             </ul>
