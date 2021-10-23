@@ -30,6 +30,7 @@ class CategryController extends Controller
         $category = new Category;
 
         if ($request->file != null)
+        {
         $path = $request->file('file')->store('public/images');
         $category->image = $path;
         }
@@ -51,6 +52,7 @@ class CategryController extends Controller
         $category = Category::find($id);
 
         if ($request->file != null)
+        {
         $path = $request->file('file')->store('public/images');
         $category->image = $path;
         }
@@ -79,9 +81,9 @@ class CategryController extends Controller
         return redirect()->route('list.category');
     }
 
-    public function updateCategoryUI($id)
+    public function updateCategoryUI($slug)
     {
-        $category = Category::find($id);
+        $category = Category::where('slug', $slug)->first();
         return view('admin.edit-category',  ['category' => $category]);
     }
 
