@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Users List | Smartshoppers Dashboard</title>
+    <title>Support | Smartshoppers Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Smartshoppers Admin CMS" name="description" />
     <meta content="Smartshoppers" name="author" />
@@ -16,6 +16,7 @@
 
     <!-- Responsive datatable examples -->
     <link href="../assets-dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets-dash/libs/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
     <link href="../assets-dash/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -35,7 +36,6 @@
 
         <!-- ========== Left Sidebar Start ========== -->
         @include('../partials/sb-sidebar.php')
-        <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
         <!-- Start right Content here -->
@@ -49,17 +49,17 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h4 class="page-title mb-1">Users List</h4>
+                                <h4 class="page-title mb-1">Support</h4>
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                    <li class="breadcrumb-item active">Users List</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">support</li>
                                 </ol>
                             </div>
                             <!-- <div class="col-md-4">
                                 <div class="float-right">
                                     <div class="dropdown">
-                                        <a href="" class="btn btn-dark btn-rounded " type="button">
-                                            <i class="mdi mdi-plus mr-1"></i> Add New
+                                        <a href="add-new-product" class="btn btn-dark btn-rounded " type="button">
+                                            <i class="mdi mdi-plus mr-1"></i> Add New Product
                                         </a>
                                     </div>
                                 </div>
@@ -73,53 +73,50 @@
                 <div class="page-content-wrapper">
                     <div class="container-fluid">
 
-                    <div class="row">
+                        <div class="row">
                             <div class="col-12">
+
                                 <div class="card">
                                     <div class="card-body">
-
-                                        <h4 class="header-title">Users List</h4>
+                                        <h4 class="header-title">Complete the form before you can proceed</h4>
                                         <p class="card-title-desc"></p>
 
-                                        <div class="alert alert-danger alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>oops! </b>
-                                        </div>
-                                        <div class="alert alert-success alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>Added Successfully</b>
-                                        </div>
+                                        <form class="needs-validation" novalidate>
 
-                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                <th>s/n</th>
-                                                    <th>Member ID</th>
-                                                    <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Email</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Date joined</th>
-                                                </tr>
-                                            </thead>
-
-
-                                            <tbody>
-                                                <tr>
-                                                <td>0</td>
-                                                    <td>SB-0001</td>
-                                                    <td>Helen</td>
-                                                    <td>Alexandrite</td>
-                                                    <td>abc@superbuyers.com</td>
-                                                    <td>0800000</td>
-                                                    <td>12/10/2021</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom03">Name</label>
+                                                    <input type="text" class="form-control " required />
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom04">Email</label>
+                                                    <input type="email" class="form-control " required />
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom03">Phone Number</label>
+                                                    <input type="number" class="form-control" id="validationCustom03" placeholder="Address" required>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="validationCustom04">Message</label>
+                                                    <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="invalidCheck" required>
+                                                    <label class="custom-control-label" for="invalidCheck">Agree to terms and conditions</label>
+                                                    <div class="invalid-feedback">
+                                                        You must agree before submitting.
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- <button class="btn btn-primary" type="submit">Complete</button> -->
+                                            <a href="success" class="btn btn-primary" type="submit">Send</a>
+                                        </form>
                                     </div>
                                 </div>
                             </div> <!-- end col -->
-                        </div><!-- end row -->
+                        </div> <!-- end row -->
 
                     </div>
                     <!-- end container-fluid -->
@@ -167,6 +164,8 @@
     <!-- Responsive examples -->
     <script src="../assets-dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../assets-dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="../assets-dash/libs/air-datepicker/js/datepicker.min.js"></script>
+    <script src="../assets-dash/libs/air-datepicker/js/i18n/datepicker.en.js"></script>
 
     <!-- Datatable init js -->
     <script src="../assets-dash/js/pages/datatables.init.js"></script>
