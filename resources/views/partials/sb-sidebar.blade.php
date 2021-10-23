@@ -10,17 +10,19 @@
 
                 <li>
                     <a href="index" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:bag"></i></div>
+                        <div class="d-inline-block icons-sm mr-1">
+                            <!-- <i class="iconify" data-icon="uim:bag"></i> -->
+                        </div>
                         <span>Home</span>
                     </a>
                 </li>
 
-    @if ( Auth::user()->complete_registration == 1)
+                @if ( Auth::user()->complete_registration == 1)
 
-    <li>
+                <li>
                     <a href="products" class=" waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:box"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:box"></i> -->
                         </div>
                         <span>Mall</span>
                     </a>
@@ -29,7 +31,7 @@
                 <li>
                     <a href="orders" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:grid"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:grid"></i> -->
                         </div>
                         <span class="badge badge-pill badge-primary float-right">0</span>
                         <span>Orders</span>
@@ -39,7 +41,7 @@
                 <li>
                     <a href="genealogy" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>
                         <span>Genealogy</span>
                     </a>
@@ -47,7 +49,7 @@
                 <li>
                     <a href="my-downline" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>
                         <span>Downline</span>
                     </a>
@@ -55,7 +57,7 @@
                 <li>
                     <a href="downline" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>
                         <span>All Downline Details</span>
                     </a>
@@ -63,7 +65,7 @@
                 <li>
                     <a href="generation-view" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:record-audio"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:record-audio"></i> -->
                         </div>
                         <span>Generation View</span>
                     </a>
@@ -72,7 +74,7 @@
                 <li>
                     <a href="users-list" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:star-half-alt"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:star-half-alt"></i> -->
                         </div>
                         <span class="badge badge-pill badge-primary float-right">1</span>
                         <span>Direct Downline</span>
@@ -81,7 +83,7 @@
                 <li>
                     <a href="withdrawal" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:grid"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:grid"></i> -->
                         </div>
                         <span class="badge badge-pill badge-primary float-right">0</span>
                         <span>Bank</span>
@@ -90,15 +92,15 @@
                 <li>
                     <a href="support" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
                         </div>
                         <span>Support</span>
                     </a>
                 </li>
                 <li>
-                    <a href="login" class="waves-effect">
+                    <a href="revenue" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
                         </div>
                         <span>Revenue</span>
                     </a>
@@ -106,16 +108,16 @@
                 <li>
                     <a href="login" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
-                        <!-- <i class="iconify" data-icon="uim:padlock"></i> -->
+                            <!-- <i class="iconify" data-icon="uim:padlock"></i> -->
                         </div>
                         <span>Logout</span>
                     </a>
                 </li>
 
-@endif
+                @endif
 
-                
-<!-- 
+
+                <!-- 
                 <li class="menu-title">Shop</li>
 
                 <li>

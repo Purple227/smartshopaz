@@ -92,10 +92,93 @@
                 <div class="page-content-wrapper">
                     <div class="container-fluid">
 
+                    <div class="row">
+                            <div class="col-xl-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="header-title mb-4">Total Earnings</h5>
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="text-muted mb-2">Total</p>
+                                                <h4>₦ 0</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header bg-transparent p-3">
+                                        <h5 class="header-title mb-0">Current Balance</h5>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="media my-2">
+
+                                                <div class="media-body">
+                                                    <p class="text-muted mb-2">Amount</p>
+                                                    <h5 class="mb-0">₦ 0</h5>
+                                                </div>
+                                                <div class="icons-lg ml-2 align-self-center">
+                                                    <!-- <i class="uim uim-layer-group"></i> -->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header bg-transparent p-3">
+                                        <h5 class="header-title mb-0">Withdrawal</h5>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="media my-2">
+
+                                                <div class="media-body">
+                                                    <p class="text-muted mb-2">Amount</p>
+                                                    <h5 class="mb-0">₦ 0</h5>
+                                                </div>
+                                                <div class="icons-lg ml-2 align-self-center">
+                                                    <!-- <i class="uim uim-layer-group"></i> -->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header bg-transparent p-3">
+                                        <h5 class="header-title mb-0">Incentive Request</h5>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="media my-2">
+
+                                                <div class="media-body">
+                                                    <p class="text-muted mb-2">Amount</p>
+                                                    <h5 class="mb-0">₦ 0</h5>
+                                                </div>
+                                                <div class="icons-lg ml-2 align-self-center">
+                                                    <!-- <i class="uim uim-layer-group"></i> -->
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
+                                    <h1>Withdraw</h1>
 
                                         <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -117,7 +200,12 @@
 
                                             <div class="form-group">
                                                 <label for="subject-input">Balance (Naira)</label>
-                                                <input type="number" class="form-control" value="12000" readonly />
+                                                <input type="number" class="form-control" value="0" readonly />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="subject-input">Account Number (Nigeria)</label>
+                                                <input type="number" class="form-control" value="0" readonly />
                                             </div>
 
                                             <div class="form-group">
@@ -136,6 +224,68 @@
 
 
                                         </form>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Account Statement</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Transaction Id</th>
+                                                    <th>Request Status</th>
+                                                    <th>Date/Time of Request</th>
+                                                    <th>Amount</th>
+                                                    <th>Balance</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>WSB-8662</td>
+                                                    <td class="badge badge-soft-primary"> waiting</td>
+                                                    <td>12/08/2021</td>
+                                                    <td>₦135,000</td>
+                                                    <td>₦200,000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Encashment</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Transaction Id</th>
+                                                    <th>Request Status</th>
+                                                    <th>Date/Time of Request</th>
+                                                    <th>Amount</th>
+                                                    <th>Options</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>WSB-8662</td>
+                                                    <td class="badge badge-soft-primary"> waiting</td>
+                                                    <td>12/08/2021</td>
+                                                    <td>₦135,000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div> <!-- end col -->
