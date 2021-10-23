@@ -8,7 +8,12 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios);
 
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate);
+
 const PaystackPop = window.PaystackPop;
+
+import { required, minValue, email, sameAs } from 'vuelidate/lib/validators'
 
 const app = new Vue({
 
@@ -35,6 +40,47 @@ const app = new Vue({
 
     }
   },
+
+
+  validations: { // Validation calibrace open
+
+    registration: {
+
+      name: {
+        required,
+        maxLength: maxLength(30)
+      },
+
+      address: {
+        required,
+      },
+
+      email: {
+        required,
+        email,
+        maxLength: maxLength(255)
+      },
+      
+      phone: {
+        required,
+        minLength: minLength(10),
+        maxLength: maxLength(10)
+      },
+
+      password: {
+        required,
+        minLength: minLength(6)
+      },
+
+      passwordConfirmation: {
+        sameAsPassword: sameAs('password')
+      },
+
+    }, // RegistrationDetails calibrace closes
+
+  }, // Validation calibrace close
+
+
 
   methods: { //Method calibrace open
 

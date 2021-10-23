@@ -127,6 +127,11 @@ class UserController extends Controller
             return response()->json('ron code not found', 400);
         }
 
+        if ($ron_code->status == true) 
+        {
+            return response()->json('ron code already used', 400);
+        }
+
         return 'ron code match succesfully';
 
     }
