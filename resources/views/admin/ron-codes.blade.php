@@ -31,10 +31,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -58,7 +58,7 @@
                             <div class="col-md-4">
                                 <div class="float-right">
                                     <div class="dropdown">
-                                        <a href="" class="btn btn-dark btn-rounded " type="button">
+                                        <a href=" {{ route('add.ron.code') }} " class="btn btn-dark btn-rounded " type="button">
                                             <i class="mdi mdi-plus mr-1"></i> Add New
                                         </a>
                                     </div>
@@ -81,14 +81,12 @@
                                         <h4 class="header-title">Users List</h4>
                                         <p class="card-title-desc"></p>
 
-                                        <div class="alert alert-danger alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>oops! </b>
-                                        </div>
+@if(Session::has('status'))
                                         <div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>Added Successfully</b>
+                                            <b> {{ Session::get('status') }} </b>
                                         </div>
+@endif
 
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
@@ -96,27 +94,19 @@
                                                     <th>ID</th>
                                                     <th>Code</th>
                                                     <th>Status</th>
-                                                    <th>Options</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
+                                                   @foreach ($ron_codes as $key => $code)
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>ron235664</td>
-                                                    <th>Used</th>
-                                                    <td>
-                                                        <div class="btn-group" role="group">
-                                                            <a href="" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="View">
-                                                                Edit
-                                                            </a>
-                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                                Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
+                                                    <td> {{ $key }} </td>
+                                                    <td> {{ $code->ron_code }} </td>
+                                                    <th> {{ $code->status == true ? 'used' : 'Unused'}} </th>
                                                 </tr>
+                                                    @endforeach
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -132,7 +122,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -140,7 +130,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

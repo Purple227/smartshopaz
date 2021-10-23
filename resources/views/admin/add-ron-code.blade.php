@@ -31,10 +31,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -81,10 +81,24 @@
                                         <h4 class="header-title">Add RON Code</h4>
                                         <p class="card-title-desc"></p>
 
-                                        <form id="form">
+
+@if ($errors->any())
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            @foreach ($errors->all() as $error)
+                                            <b>oops! {{ $error }} </b>
+                                            @endforeach
+                                        </div>
+@endif
+
+
+                                        <form id="form" method="POST" action=" {{ route('post.ron.code') }} ">
+
+                                            @csrf
+                                            
                                             <div class="form-group">
                                                 <label for="to-input">RON CODE</label>
-                                                <input type="number" class="form-control" id="to-input" placeholder="RON CODE" required> 
+                                                <input type="number" name="ron_code" class="form-control" id="to-input" placeholder="RON CODE" required> 
                                             </div>
 
                                         
@@ -93,7 +107,7 @@
                                                 <div class="">
                                                     <!-- <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-save"></i></button>
                                                     <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-trash-alt"></i></button> -->
-                                                    <button class="btn btn-primary waves-effect waves-light"> <span>Submit</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Submit</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
                                                 </div>
                                             </div>
 
@@ -113,7 +127,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -121,7 +135,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

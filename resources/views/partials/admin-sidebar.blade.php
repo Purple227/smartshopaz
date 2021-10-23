@@ -142,11 +142,16 @@
                         <span>Super Buyers</span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="ron-codes" class="has-arrow waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:process"></i></div>
-                        <span> RON CODES </span>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div>
+                        <span> RON Code </span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('add.ron.code') }}"> Add RON code</a></li>
+                        <li><a href=" {{ route('list.ron.code') }}"> Categories </a></li>
+                    </ul>
                 </li>
 
             </ul>

@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\TransactionController;
-
+use App\Http\Controllers\Admin\RonCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +58,11 @@ Route::get('/list-products', [ProductController::class, 'index'])->name('list.pr
 Route::get('/delete-product/{id}', [ProductController::class, 'destroy'])->name('destroy.product');
 Route::patch('/update-product/{id}', [ProductController::class, 'update'])->name('patch.product');
 Route::get('/update-product/{slug}', [ProductController::class, 'updateProductUI'])->name('update.product'); 
+
+// Admin Ron Code
+Route::get('/add-ron-code', [RonCodeController::class, 'addRonCodeUI'])->name('add.ron.code');
+Route::post('/add-ron-code', [RonCodeController::class, 'store'])->name('post.ron.code');
+Route::get('/list-ron-code', [RonCodeController::class, 'index'])->name('list.ron.code');
 
 });
 
