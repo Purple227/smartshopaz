@@ -199,7 +199,7 @@
                                                     </div>
                                                     <div class="col-md-2 mb-3">
                                                         <label for="validationCustom01">Main Price(₦)</label>
-                                                        <input type="number" name="multiple_main_price" value="{{$product->multiple_main_price }}" class="form-control" id="validationCustom01" placeholder="e.g: 20,000">
+                                                        <input type="number" name="multiple_main_price" value="{{$product->main_price }}" class="form-control" id="validationCustom01" placeholder="e.g: 20,000">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>

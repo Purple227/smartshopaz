@@ -28,7 +28,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
         'title' => 'required',
-        'main_price' => 'required',
+        'main_price' => 'required_if:multiple_main_price,==,null',
         'description' => 'required',
         ]);
 
@@ -64,13 +64,14 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
         'title' => 'required',
-        'main_price' => 'required',
+        'main_price' => 'required_if:multiple_main_price,==,null',
         'description' => 'required',
         ]);
 
         $product = Product::find($id);
 
-        if ($request->file != null) {
+        if ($request->file != null) 
+        {
         $path = $request->file('file')->store('public/images');
         $product->image = $path ;
         }
@@ -95,8 +96,6 @@ class ProductController extends Controller
     {
        $list_products = Product::with('category')->get();
 
-       //return $list_products;
-
         return view('admin.products', [
             'list_products' => $list_products
         ]);
@@ -110,9 +109,9 @@ class ProductController extends Controller
         return redirect()->route('list.product');
     }
 
-    public function updateProductUI($id)
+    public function updateProductUI($slug)
     {
-        $product = Product::where('id', $id)->with('category', 'brand')->first();
+        $product = Product::where('slug', $slug)->with('category', 'brand')->first();
 
         $list_brands = Brand::all();
         $list_categories = Category::all();

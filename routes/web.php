@@ -48,7 +48,7 @@ Route::post('/add-brand', [BrandController::class, 'store'])->name('post.brand')
 Route::get('/list-brands', [BrandController::class, 'index'])->name('list.brand');
 Route::get('/delete-brand/{id}', [BrandController::class, 'destroy'])->name('destroy.brand');
 Route::patch('/update-brand/{id}', [BrandController::class, 'update'])->name('patch.brand');
-Route::get('/update-brand/{id}', [BrandController::class, 'updateBrandUI'])->name('update.brand'); 
+Route::get('/update-brand/{slug}', [BrandController::class, 'updateBrandUI'])->name('update.brand'); 
 
 
 // Admin product section
@@ -57,7 +57,7 @@ Route::post('/add-product', [ProductController::class, 'store'])->name('post.pro
 Route::get('/list-products', [ProductController::class, 'index'])->name('list.product');
 Route::get('/delete-product/{id}', [ProductController::class, 'destroy'])->name('destroy.product');
 Route::patch('/update-product/{id}', [ProductController::class, 'update'])->name('patch.product');
-Route::get('/update-product/{id}', [ProductController::class, 'updateProductUI'])->name('update.product'); 
+Route::get('/update-product/{slug}', [ProductController::class, 'updateProductUI'])->name('update.product'); 
 
 });
 

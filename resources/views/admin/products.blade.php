@@ -58,7 +58,7 @@
                             <div class="col-md-4">
                                 <div class="float-right">
                                     <div class="dropdown">
-                                        <a href="add-new-product" class="btn btn-dark btn-rounded " type="button">
+                                        <a href="{{ route('add.product') }}" class="btn btn-dark btn-rounded " type="button">
                                             <i class="mdi mdi-plus mr-1"></i> Add New Product
                                         </a>
                                     </div>
@@ -119,7 +119,7 @@
                                                     <td>
                                                         <div class="btn-group" role="group">
 
-                                                            <a href=" {{ route('update.product', $product->id) }} " class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <a href=" {{ route('update.product', $product->slug) }} " class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="mdi mdi-pencil"></i>
                                                             </a>
 
