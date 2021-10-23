@@ -78,7 +78,7 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="header-title">Users List</h4>
+                                        <h4 class="header-title">Ron Code List</h4>
                                         <p class="card-title-desc"></p>
 
 @if(Session::has('status'))
@@ -106,7 +106,6 @@
                                                     <th> {{ $code->status == true ? 'used' : 'Unused'}} </th>
                                                 </tr>
                                                     @endforeach
-
                                             </tbody>
                                         </table>
                                     </div>
