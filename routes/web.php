@@ -40,7 +40,7 @@ Route::post('/add-category', [CategryController::class, 'store'])->name('post.ca
 Route::get('/list-categories', [CategryController::class, 'index'])->name('list.category');
 Route::get('/delete-category/{id}', [CategryController::class, 'destroy'])->name('destroy.category');
 Route::patch('/update-category/{id}', [CategryController::class, 'update'])->name('patch.category');
-Route::get('/update-category/{id}', [CategryController::class, 'updateCategoryUI'])->name('update.catgory'); 
+Route::get('/update-category/{slug}', [CategryController::class, 'updateCategoryUI'])->name('update.catgory'); 
 
 // Admin brand section
 Route::get('/add-brand', [BrandController::class, 'addBrandUI'])->name('add.brand');

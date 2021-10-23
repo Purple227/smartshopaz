@@ -111,13 +111,13 @@
                                             <tbody>
                                                 <tr>
                                                     @foreach ($list_categories as $key => $category)
-                                                    <td> {{ 'CAT-' $key+1 }} </td>
+                                                    <td> {{  $key + 1 }} </td>
                                                     <td> {{ $category->name }} </td>
                                                     <td><img src="{{ asset('storage/'.$category->image) }}" alt="" width="35px"></td>
                                                     <td>
                                                         <div class="btn-group" role="group">
 
-                                                            <a href="{{ route('update.catgory', $category->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <a href="{{ route('update.catgory', $category->slug) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="mdi mdi-pencil"></i>
                                                             </a>
 
