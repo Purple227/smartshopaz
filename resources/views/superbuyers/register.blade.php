@@ -72,7 +72,7 @@
                                                 </div>
                                                 
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="number" name="sponsor_id"  class="form-control" v-model="registration.sponsorID" id="sponsor" required>
+                                                    <input type="number" name="sponsor_id"  class="form-control" v-model="registration.sponsorCode" id="sponsor" required>
                                                     <label for="sponsor"> Sponsor ID</label>
                                                 </div>
 

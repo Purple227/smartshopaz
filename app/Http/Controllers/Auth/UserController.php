@@ -101,4 +101,34 @@ class UserController extends Controller
         ]);
     }
 
+    public function checkSponsorCode(Request $request)
+    {
+        $sponsor_code = Profile::where('sponsor_code', $request->sponsor_id)->first();
+
+        if ($sponsor_code == null) 
+        {
+            return response()->json('sponsor code not found', 400);
+        }
+
+        if($sponsor_code->sponsor_code_counter == 5)
+        {
+            return response()->json('sponsor code no longer eligible for use', 400);
+        }
+
+        return 'Sponsor code match succesfully';
+    }
+
+    public function checkRonCode()
+    {
+        $ron_code = RonCode::where('ron_code', $request->ron_code)->first();
+
+        if ($ron_code == null) 
+        {
+            return response()->json('ron code not found', 400);
+        }
+
+        return 'ron code match succesfully';
+
+    }
+
 }
