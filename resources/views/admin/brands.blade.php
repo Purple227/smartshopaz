@@ -117,7 +117,7 @@
                                                     <td><img src="../assets-dash/images/flags/french.jpg" alt="" width="35px"></td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                            <a href="{{ route('update.brand', $brand->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <a href="{{ route('update.brand', $brand->slug) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="mdi mdi-pencil"></i>
                                                             </a>
 

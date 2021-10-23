@@ -80,9 +80,9 @@ class BrandController extends Controller
         return redirect()->route('list.brand');
     }
 
-    public function updateBrandUI($id)
+    public function updateBrandUI($slug)
     {
-        $brand = Brand::find($id);
+        $brand = Brand::where('slug',$slug)->first();
         return view('admin.edit-brand',  ['brand' => $brand]);
     }
 
