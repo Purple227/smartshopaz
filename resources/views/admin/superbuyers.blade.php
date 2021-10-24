@@ -31,10 +31,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -81,15 +81,6 @@
                                         <h4 class="header-title">Superbuyers</h4>
                                         <p class="card-title-desc"></p>
 
-                                        <div class="alert alert-danger alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>oops! Could not add</b>
-                                        </div>
-                                        <div class="alert alert-success alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>Added Successfully</b>
-                                        </div>
-
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
@@ -104,14 +95,16 @@
 
 
                                             <tbody>
+                                                @foreach ($list_super_buyer as $key => $super_buyer)
                                                 <tr>
-                                                    <td>SB-00011</td>
-                                                    <td>Angel</td>
-                                                    <td>abc@xyz</td>
+                                                    <td> {{ $key + 1}} </td>
+                                                    <td> {{ $super_buyer->name }}</td>
+                                                    <td>{{ $super_buyer->email }}</td>
                                                     <td>Diamond</td>
                                                     <td>5</td>
                                                     <td>12,0000</td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -127,7 +120,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -135,7 +128,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

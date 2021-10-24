@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Admin\RonCodeController;
+use App\Http\Controllers\Admin\SuperBuyerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +65,9 @@ Route::get('/update-product/{slug}', [ProductController::class, 'updateProductUI
 Route::get('/add-ron-code', [RonCodeController::class, 'addRonCodeUI'])->name('add.ron.code');
 Route::post('/add-ron-code', [RonCodeController::class, 'store'])->name('post.ron.code');
 Route::get('/list-ron-code', [RonCodeController::class, 'index'])->name('list.ron.code');
+
+// Admin Super Buyer
+Route::get('/super-buyer', [SuperBuyerController::class, 'index'])->name('admin.list.super-buyer');
 
 });
 

@@ -44,4 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Get the sponsor associated with the user.
+     */
+    public function sponsor()
+    {
+        return $this->hasOne(Sponsor::class);
+    }
+
 }

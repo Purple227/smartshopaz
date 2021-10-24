@@ -137,7 +137,7 @@
                 </li>
 
                 <li>
-                    <a href="superbuyers" class="waves-effect">
+                    <a href=" {{ route('admin.list.super-buyer') }} " class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:circle-layer"></i></div>
                         <span>Super Buyers</span>
                     </a>
