@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SuperBuyer
 {
+
     /**
      * Handle an incoming request.
      *
@@ -15,12 +16,15 @@ class SuperBuyer
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        if ( Auth::check() &&  Auth::user()->account_type == 'super-buyer' ) {
+        if (Auth::check() &&  Auth::user()->account_type !== 'super_buyer') {
             return $next($request);
-        } else {
-            return back();
-        } 
+        }
+        
+        return redirect('super-buyer/login');
+        
     }
+
+
 }

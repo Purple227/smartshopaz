@@ -52,11 +52,29 @@
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="text" name="name" class="form-control" v-model="registration.name" id="lastname" required>
                                                     <label for="username"> Name</label>
+                                                    <p > @{{ registration.name.length > 3 ? 'Looking Good' : 'Name field is required' }} </p>
                                                 </div>
+
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="email" v-model="registration.email" name="email" class="form-control" id="useremail" required>
-                                                    <label for="useremail">Email</label> 
+                                                    <input type="email" v-model="registration.email" name="email" class="form-control" id="useremail" @change="emailMethod" required>
+                                                    <label for="useremail">Email</label>
+                                                    <p v-if="!$v.registration.email.$invalid"> @{{ utilities.email }} </p>
                                                 </div>
+
+
+                                                <div class="form-group form-group-custom mb-4">
+                                                    <input type="number" name="sponsor_code"  class="form-control" v-model="registration.sponsorCode" id="sponsor" @change="sponsorMethod" required>
+                                                    <label for="sponsor"> Sponsor ID</label>
+                                                    <p v-if="registration.sponsorCode != null"> @{{ utilities.sponsor }} </p>
+                                                </div>
+
+
+                                                <div class="form-group form-group-custom mb-4">
+                                                    <input type="number" name="ron_code"  class="form-control" v-model="registration.RONCode" id="sponsor" @change='RONCodeMethod' required>
+                                                    <label for="sponsor"> RON Code</label>
+                                                    <p v-if="registration.RONCode != null"> @{{ utilities.RONCode }} </p>
+                                                </div>
+
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="number" v-model="registration.phone" name="phone" class="form-control" id="phone" >
                                                     <label for="useremail">Phone Number</label> 
@@ -64,27 +82,25 @@
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="password" v-model="registration.password" name="password" class="form-control" id="password" required>
                                                     <label for="userpassword">Password</label>
+                                                    <p > @{{ registration.password.length >= 8 ? 'Looking Good' : 'Password must be upto 8 characters' }} </p>
                                                 </div>
                                                 
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="password" name="password_confirmation" v-model="registration.passwordConfirmation" class="form-control" id="confirm_password" required>
                                                     <label for="userpassword">Confirm Password <i id='message'></i></label>
-                                                </div>
-                                                
-                                                <div class="form-group form-group-custom mb-4">
-                                                    <input type="number" name="sponsor_id"  class="form-control" v-model="registration.sponsorCode" id="sponsor" required>
-                                                    <label for="sponsor"> Sponsor ID</label>
+                                                    @{{ registration.password == registration.passwordConfirmation ? 'Password match okay' : 'Not identical with password' }}
                                                 </div>
 
+
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="privacy" class="custom-control-input" id="term-conditionCheck" checked>
+                                                    <input type="checkbox" name="privacy" class="custom-control-input" id="term-conditionCheck" v-model="registration.privacy" checked>
                                                     <label class="custom-control-label font-weight-normal" for="term-conditionCheck">I accept <a href="terms-conditions" class="text-primary">Terms and Conditions</a></label>
                                                 </div>
                                                 <div class="mt-4">
 
                                                     <!-- <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button> -->
 
-                                                    <button class="btn btn-primary btn-block waves-effect waves-light"  @click="payWithPaystack" v-if="buttonLoader == false" :disabled="errorChecker"> Pay and Register</button>
+                                                    <button class="btn btn-primary btn-block waves-effect waves-light"  @click="payWithPaystack" v-if="buttonLoader == false" :disabled="$v.registration.$invalid == true || registration.privacy == false || utilities.sponsorStatus == false || utilities.RONCodeStatus == false || utilities.emailStatus == false"> Pay and Register</button>
 
 
                                                     <button class="btn btn-primary btn-block waves-effect waves-light"v-else> Please Wait </button>

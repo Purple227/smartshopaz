@@ -123,14 +123,6 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="validationCustom03"> RON Code</label>
-                                                    <input type="text" name="ron_code" class="form-control" id="validationCustom03" placeholder="RON Code" required>
-                                                    <div class="invalid-feedback">
-                                                        Please provide a valid Address.
-                                                    </div>
-                                                </div>
-
 
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">LGA</label>
@@ -139,6 +131,7 @@
                                                         Please provide a valid LGA.
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-6 mb-3">
                                                     <label>State</label>
                                                     <select class="custom-select" required name="state" >
@@ -149,6 +142,7 @@
                                                     </select>
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
+
                                                 <div class="col-md-6 mb-3">
                                                     <label>Country</label>
                                                     <select class="custom-select" required name="country">

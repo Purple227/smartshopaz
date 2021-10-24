@@ -7,32 +7,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Sponsor;
+use App\Models\RONCode;
 use App\Models\Profile;
+
 
 class UserController extends Controller
 {
     public function registerUI()
     {
-        if(Auth::check() && Auth::user()->account_type == 'super-buyer') {
-            return redirect()->route('super-buyer.home');
-        } else {
             return view('superbuyers.register');
-        }
     }
 
     public function loginUI()
     {
-        if(Auth::check() && Auth::user()->account_type == 'super-buyer') {
-            return redirect()->route('super-buyer.home');
-        } else {
             return view('superbuyers.login');
-        }
     }
 
-    public function register(Request $request)
+    public function superBuyerRegister(Request $request)
     {
         $validated = $request->validate([
-            'sponsor_id' => 'required',
+            'sponsor_code' => 'required',
             'name' => 'required',
             'email' => ['required', 'unique:users', 'email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -41,9 +36,28 @@ class UserController extends Controller
         $hashed_password = Hash::make($request->password);
         $request->merge([ 'password' => $hashed_password]);
 
+        $request->merge([ 'account_type' => 'super_buyer']);
+
+
+        $sponsor_code_used = Sponsor::where('sponsor_code', $request->sponsor_code)->first();
+        $sponsor_code_used->sponsor_code_counter = $sponsor_code_used->sponsor_code_counter + 1;
+        $sponsor_code_used->save();
+
+        $request->merge([ 'sponsor_id' => $sponsor_code_used->id]);
+
+
         $user = User::create($request->all());
 
         Auth::login($user);
+
+        $sponsor = new Sponsor;
+        $sponsor->user_id = $user->id;
+        $sponsor->sponsor_code = mt_rand(100000, 999999);
+        $sponsor->save();
+
+        $ron_code = RONCode::where('ron_code', $request->ron_code)->first();
+        $ron_code->status = true;
+        $ron_code->save();
 
         $request->session()->flash('status', 'Task was successful!');
         return $user;
@@ -58,7 +72,6 @@ class UserController extends Controller
             'L_G_A' => 'required',
             'state' => 'required',
             'country' => 'required',
-            'ron_code' => 'required',
         ]);
 
         $user = User::find( Auth::user()->id );
@@ -103,7 +116,7 @@ class UserController extends Controller
 
     public function checkSponsorCode(Request $request)
     {
-        $sponsor_code = Profile::where('sponsor_code', $request->sponsor_id)->first();
+        $sponsor_code = Sponsor::where('sponsor_code', $request->sponsor_code)->first();
 
         if ($sponsor_code == null) 
         {
@@ -118,7 +131,7 @@ class UserController extends Controller
         return 'Sponsor code match succesfully';
     }
 
-    public function checkRonCode()
+    public function checkRonCode(Request $request)
     {
         $ron_code = RonCode::where('ron_code', $request->ron_code)->first();
 
@@ -135,5 +148,18 @@ class UserController extends Controller
         return 'ron code match succesfully';
 
     }
+
+    public function checkEmail(Request $request)
+    {
+        $email = User::where('email', $request->email)->first();
+
+        if ($email == null) 
+        {
+            return 'Email available for used';
+        }
+
+        return response()->json('email taken by another user', 400);
+    }
+
 
 }
