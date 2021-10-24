@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Superbuyers | Smartshoppers Dashboard</title>
+    <title>Ranks | Smartshoppers Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Smartshoppers Admin CMS" name="description" />
     <meta content="Smartshoppers" name="author" />
@@ -31,10 +31,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -49,21 +49,21 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h4 class="page-title mb-1">Superbuyers</h4>
+                                <h4 class="page-title mb-1">Ranks</h4>
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Superbuyers</li>
+                                    <li class="breadcrumb-item active">Ranks</li>
                                 </ol>
                             </div>
-                            <!-- <div class="col-md-4">
+                            <div class="col-md-4">
                                 <div class="float-right">
                                     <div class="dropdown">
-                                        <a href="add-new-product" class="btn btn-dark btn-rounded " type="button">
-                                            <i class="mdi mdi-plus mr-1"></i> Add New Product
+                                        <a href="{{ route('add.catgory') }}" class="btn btn-dark btn-rounded " type="button">
+                                            <i class="mdi mdi-plus mr-1"></i> Add New Rank
                                         </a>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                     </div>
@@ -78,40 +78,60 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="header-title">Superbuyers</h4>
+                                        <h4 class="header-title">Ranks</h4>
                                         <p class="card-title-desc"></p>
 
+@if(Session::has('fail'))
                                         <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>oops! Could not add</b>
+                                            <b> {{ Session::get('fail') }} </b>
                                         </div>
+@endif
+
+
+
+@if(Session::has('status'))
                                         <div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>Added Successfully</b>
+                                            <b> {{ Session::get('status') }} </b>
                                         </div>
+@endif
 
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>Sponsor ID</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Level</th>
-                                                    <th>Orders</th>
-                                                    <th>Balance</th>
+                                                    <th>Rank Id</th>
+                                                    <th>Rank Name</th>
+                                                    <th>Icon</th>
+                                                    <th>Options</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
                                                 <tr>
-                                                    <td>SB-00011</td>
-                                                    <td>Angel</td>
-                                                    <td>abc@xyz</td>
-                                                    <td>Diamond</td>
-                                                    <td>5</td>
-                                                    <td>12,0000</td>
+                                                    @foreach ($list_ranks as $key => $rank)
+                                                    <td> {{  $key + 1 }} </td>
+                                                    <td> {{ $rank->name }} </td>
+                                                    <td><img src="{{ asset('storage/'.$rank->image) }}" alt="" width="35px"></td>
+                                                    <td>
+                                                        <div class="btn-group" role="group">
+
+                                                            <a href="{{ route('update.catgory', $rank->slug) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                <i class="mdi mdi-pencil"></i>
+                                                            </a>
+
+                                                            <form id="form" method="GET" action=" {{ route('destroy.rank', $rank->id) }} ">
+                                                                @csrf
+                                                            <button class="btn btn-danger btn-sm" type="submit" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                                <i class="mdi mdi-trash-can"></i>
+                                                            </button>
+                                                            </form>
+
+                                                        </div>
+                                                    </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -127,7 +147,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -135,7 +155,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
