@@ -47,7 +47,8 @@ const app = new Vue({
 
       buttonLoader: false,
       user: null,
-
+      searchProductResult: null,
+      searchProductQuery: ''
     }
   },
 
@@ -94,6 +95,7 @@ const app = new Vue({
     this.sponsorMethod()
     this.RONCodeMethod()
     this.emailMethod()
+    this.searchProductData()
   },
 
   methods: { //Method calibrace open
@@ -218,6 +220,14 @@ const app = new Vue({
       }
     },
 
+    searchProductData() {
+      if(this.searchProductQuery.length > 1) {
+        axios.get('search-product',{params: {search_query: this.searchProductQuery}})
+        .then(response => {
+          this.searchProductResult = response.data
+        });
+      }
+    },
 
   }, //Method calibrace close
 

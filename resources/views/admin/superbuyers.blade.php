@@ -97,12 +97,12 @@
                                             <tbody>
                                                 @foreach ($list_super_buyer as $key => $super_buyer)
                                                 <tr>
-                                                    <td> {{ $key + 1}} </td>
-                                                    <td> {{ $super_buyer->name }}</td>
-                                                    <td>{{ $super_buyer->email }}</td>
+                                                    <td> {{ $super_buyer->sponsor->sponsor_code }} </td>
+                                                    <td> {{ $super_buyer->name }} </td>
+                                                    <td> {{ $super_buyer->email }}</td>
                                                     <td>Diamond</td>
                                                     <td>5</td>
-                                                    <td>12,0000</td>
+                                                    <td>12,0000</td> 
                                                 </tr>
                                                 @endforeach
                                             </tbody>

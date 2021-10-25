@@ -2105,7 +2105,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         emailStatus: false
       },
       buttonLoader: false,
-      user: null
+      user: null,
+      searchProductResult: null,
+      searchProductQuery: ''
     };
   },
   validations: {
@@ -2142,6 +2144,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     this.sponsorMethod();
     this.RONCodeMethod();
     this.emailMethod();
+    this.searchProductData();
   },
   methods: {
     //Method calibrace open
@@ -2258,6 +2261,19 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         })["catch"](function (error) {
           self.utilities.emailStatus = false;
           self.utilities.email = error.response.data;
+        });
+      }
+    },
+    searchProductData: function searchProductData() {
+      var _this4 = this;
+
+      if (this.searchProductQuery.length > 1) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().get('search-product', {
+          params: {
+            search_query: this.searchProductQuery
+          }
+        }).then(function (response) {
+          _this4.searchProductResult = response.data;
         });
       }
     }

@@ -1,21 +1,17 @@
 
-                <div class="row">
+                <div id="app" class="row">
                   <div class="col-12 order-1 order-md-2">
                     <div class="website-search">
                       <div class="row no-gutters">
                         <div class="col-9 col-md-9 col-lg-9 col-xl-9">
                           <div class="search-input">
-                            <input class="no-round-input no-border" id="myInput" onkeyup="myFunction()" type="text" autocomplete="off" placeholder="What are you looking for?">
+                            <input class="no-round-input no-border" id="myInput" @change="searchProductData" onkeyup="myFunction()"  v-model="searchProductQuery" type="text" autocomplete="off" placeholder="What are you looking for?">
                           </div>
                           <div class="categories-select_box">
                             <ul id="myUL">
-                              <li><a href="product-single">Adele</a>  <span> in Category</span></li>
-                              <li><a href="#">Agnes</a>  <span> in Category</span></li>
-                              <li><a href="#">Billy</a>  <span> in Category</span></li>
-                              <li><a href="#">Bob</a>  <span> in Category</span></li>
-                              <li><a href="#">Calvin</a>  <span> in Category</span></li>
-                              <li><a href="#">Christina</a>  <span> in Category</span></li>
-                              <li><a href="#">Cindy</a>  <span> in Category</span></li>
+
+                              <li v-for="product in searchProductResult" :key="product.id"><a href="#"> @{{ product.title }}</a>  <span> in @{{ product.category == null ? '' : product.category.name }}</span></li>
+
                             </ul>
                           </div>
                         </div>

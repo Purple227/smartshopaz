@@ -130,7 +130,7 @@
                                             <div class="form-group ">
                                                 <label>Brand</label>
                                                 <select class="selectize form-control" id="siteID" class="abcd" name="brand_id">
-                                                     <option value="{ $product->brand == null ? null : $product->brand->id }}">{{ $product->brand == null ? 'select brand' : $product->brand->name }}</option>
+                                                     <option value="{{ $product->brand == null ? null : $product->brand->id }}">{{ $product->brand == null ? 'select brand' : $product->brand->name }}</option>
                                                     @foreach ($list_brands as $key => $brand)
                                                     <option value="{{ $brand->id }}"> {{ $brand->name }} </option>
                                                     @endforeach

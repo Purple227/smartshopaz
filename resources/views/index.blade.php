@@ -25,7 +25,7 @@
 <body>
 
     <div id="main">
-        <header class="coffee-2">
+        <header  class="coffee-2">
             @include('partials/main-topbar')
             @include('partials/main-desktop-nav')
             @include('partials/main-mobile-nav')
@@ -38,17 +38,9 @@
                                 <div class="department-menu d-flex justify-content-between align-items-center"><i class="fas fa-bars"></i>Categories<span><i class="arrow_carrot-up"></i></span></div>
                                 <div class="department-dropdown-menu down">
                                     <ul>
-                                        <li><a href="sub-categories"> <i class="icon-1"></i>Fresh Meat</a></li>
-                                        <li><a href="sub-categories"> <i class="icon-2"></i>Vegetables</a></li>
-                                        <li><a href="sub-categories"> <i class="icon-3"></i>Fruit & Nut Gifts</a></li>
-                                        <li><a href="sub-categories"> <i class="icon-4"></i>Fresh Berries</a></li>
-                                        <li><a href="sub-categories"> <i class="icon-5"></i>Ocean Foods</a></li>
-                                        <li><a href="sub-categories"><i class="icon-6"></i>Butter & Eggs</a></li>
-                                        <li><a href="sub-categories"><i class="icon-7"></i>Fastfood</a></li>
-                                        <li><a href="sub-categories"> <i class="icon-8"></i>Fresh Onion</a></li>
-                                        <li><a href="sub-categories"> <i class="icon-9"></i>Papayaya & Crisps</a></li>
-                                        <li><a href="sub-categories"><i class="icon-10"></i>Oatmeal</a></li>
-                                        <li><a href="sub-categories"> <i class="icon-11"></i>Fresh Bananas</a></li>
+                                        @foreach ($list_categories as $key => $category)
+                                        <li> <a href="sub-categories"> <i class="icon-11"> </i> {{ $category->name }} </a> </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -172,123 +164,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h1 class="title mx-auto">Today's Deals</h1>
+
+                        <h1 class="title mx-auto"> Latest Product</h1>
+
                     </div>
                     <div class="col-12">
                         <div id="tab">
                             <div id="tab-1">
                                 <div class="row no-gutters-sm">
-                                    <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product01.png" alt=""></a>
-                                            <h5 class="product-type">Oranges</h5>
-                                            <h3 class="product-name">Pure Pineapple</h3>
-                                            <h3 class="product-price">₦14.00
-                                                <del>₦35.00</del>
-                                            </h3>
-                                            <div class="product-select">
-                                                <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
-                                                <button class="add-to-cart round-icon-btn coffee"> <i class="icon_bag_alt"></i></button>
-                                                <button class="add-to-compare round-icon-btn coffee"> <i class="fas fa-random"></i></button>
-                                                <button class="quickview round-icon-btn coffee"><i class="far fa-eye"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product02.png" alt=""></a>
-                                            <h5 class="product-type">Oranges</h5>
-                                            <h3 class="product-name">Pure Pineapple</h3>
-                                            <h3 class="product-price">₦14.00
-                                                <del>₦35.00</del>
-                                            </h3>
-                                            <div class="product-select">
-                                                <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
-                                                <button class="add-to-cart round-icon-btn coffee"> <i class="icon_bag_alt"></i></button>
-                                                <button class="add-to-compare round-icon-btn coffee"> <i class="fas fa-random"></i></button>
-                                                <button class="quickview round-icon-btn coffee"><i class="far fa-eye"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product03.png" alt=""></a>
-                                            <h5 class="product-type">Oranges</h5>
-                                            <h3 class="product-name">Apple</h3>
-                                            <h3 class="product-price">₦30.00
-                                                <del>₦45.00</del>
-                                            </h3>
-                                            <div class="product-select">
-                                                <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
-                                                <button class="add-to-cart round-icon-btn coffee"> <i class="icon_bag_alt"></i></button>
-                                                <button class="add-to-compare round-icon-btn coffee"> <i class="fas fa-random"></i></button>
-                                                <button class="quickview round-icon-btn coffee"><i class="far fa-eye"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product04.png" alt=""></a>
-                                            <h5 class="product-type">Oranges</h5>
-                                            <h3 class="product-name">Pure Pineapple</h3>
-                                            <h3 class="product-price">₦14.00
-                                                <del>₦35.00</del>
-                                            </h3>
-                                            <div class="product-select">
-                                                <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
-                                                <button class="add-to-cart round-icon-btn coffee"> <i class="icon_bag_alt"></i></button>
-                                                <button class="add-to-compare round-icon-btn coffee"> <i class="fas fa-random"></i></button>
-                                                <button class="quickview round-icon-btn coffee"><i class="far fa-eye"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product05.png" alt=""></a>
-                                            <h5 class="product-type">Oranges</h5>
-                                            <h3 class="product-name">Pure Pineapple</h3>
-                                            <h3 class="product-price">₦14.00
-                                                <del>₦35.00</del>
-                                            </h3>
-                                            <div class="product-select">
-                                                <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
-                                                <button class="add-to-cart round-icon-btn coffee"> <i class="icon_bag_alt"></i></button>
-                                                <button class="add-to-compare round-icon-btn coffee"> <i class="fas fa-random"></i></button>
-                                                <button class="quickview round-icon-btn coffee"><i class="far fa-eye"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product06.png" alt=""></a>
-                                            <h5 class="product-type">Oranges</h5>
-                                            <h3 class="product-name">Pure Pineapple</h3>
-                                            <h3 class="product-price">₦14.00
-                                                <del>₦35.00</del>
-                                            </h3>
-                                            <div class="product-select">
-                                                <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
-                                                <button class="add-to-cart round-icon-btn coffee"> <i class="icon_bag_alt"></i></button>
-                                                <button class="add-to-compare round-icon-btn coffee"> <i class="fas fa-random"></i></button>
-                                                <button class="quickview round-icon-btn coffee"><i class="far fa-eye"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product07.png" alt=""></a>
-                                            <h5 class="product-type">Oranges</h5>
-                                            <h3 class="product-name">Apple</h3>
-                                            <h3 class="product-price">₦30.00
-                                                <del>₦45.00</del>
-                                            </h3>
-                                            <div class="product-select">
-                                                <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
-                                                <button class="add-to-cart round-icon-btn coffee"> <i class="icon_bag_alt"></i></button>
-                                                <button class="add-to-compare round-icon-btn coffee"> <i class="fas fa-random"></i></button>
-                                                <button class="quickview round-icon-btn coffee"><i class="far fa-eye"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                    @foreach ($list_product_latest as $key => $product)
                                     <div class="col-6 col-md-4 col-lg-3">
                                         <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product08.png" alt=""></a>
-                                            <h5 class="product-type">Oranges</h5>
-                                            <h3 class="product-name">Pure Pineapple</h3>
-                                            <h3 class="product-price">₦14.00
-                                                <del>₦35.00</del>
+                                            <h5 class="product-type">{{ $product->category == null ? '' : $product->category->name }}</h5>
+                                            <h3 class="product-name"> {{ $product->title }} </h3>
+                                            <h3 class="product-price"> ₦{{ $product->regular_price - ($product->discount / 100)  }}
+                                                <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
                                             </h3>
                                             <div class="product-select">
                                                 <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
@@ -298,6 +189,10 @@
                                             </div>
                                         </div>
                                     </div>
+                    @endforeach
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -359,6 +254,7 @@
         <!-- End banner group-->
         @include('partials/main-deal-of-week')
         <!-- End deak of the week v3-->
+
         <div class="home5-product-block">
             <div class="container">
                 <div class="row">
@@ -369,84 +265,20 @@
                                 <div class="mini-product_control"></div>
                             </div>
                             <div class="mini-product_bottom">
+
                                 <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product01.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product02.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product03.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product13.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product14.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
+                                    @foreach ($list_product_latest as $key => $product)
                                     <div class="mini-product coffee">
                                         <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
+                                        <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
+                                            <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
+                                                <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
                                             </p>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
-                                <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product13.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product14.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -457,84 +289,20 @@
                                 <div class="mini-product_control"></div>
                             </div>
                             <div class="mini-product_bottom">
+
                                 <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product04.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product05.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product06.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product13.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product14.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
+                                    @foreach ($list_product_latest as $key => $product)
                                     <div class="mini-product coffee">
                                         <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
+                                        <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
+                                            <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
+                                                <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
                                             </p>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
-                                <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product13.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product14.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -545,90 +313,27 @@
                                 <div class="mini-product_control"></div>
                             </div>
                             <div class="mini-product_bottom">
+
                                 <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product07.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product08.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product09.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product13.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product14.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
+                                    @foreach ($review_product as $key => $product)
                                     <div class="mini-product coffee">
                                         <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
+                                        <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
+                                            <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
+                                                <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
                                             </p>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
-                                <div class="mini-product_block">
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product13.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Fresh Met</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product14.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Coconut</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail">Venion</a>
-                                            <p>₦37.00
-                                                <del>₦45.00</del>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
         @include('partials/fab-button')
         <!-- End home5 product block-->
@@ -637,6 +342,7 @@
         @include('partials/main-footer')
         <!-- End footer-->
     </div>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/jquery.countdown.min.js"></script>

@@ -112,9 +112,9 @@
                                             <tbody>
                                                 <tr>
                                                     @foreach ($list_products as $key => $product)
-                                                    <td> {{ 'SS-'  }}</td>
+                                                    <td> {{ $key + 1  }}</td>
                                                     <td> {{ $product->title }} </td>
-                                                    <td>{{ $product->main_price }}</td>
+                                                    <td>{{ $product->regular_price }}</td>
                                                     <td>{{ $product->category == null ? 'select category' : $product->category->name }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group">

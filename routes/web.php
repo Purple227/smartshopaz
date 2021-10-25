@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Admin\RonCodeController;
 use App\Http\Controllers\Admin\SuperBuyerController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -21,9 +22,8 @@ use App\Http\Controllers\Admin\SuperBuyerController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search-product', [HomeController::class, 'search']);
 
 Route::get('/about', function () {
     return view('about-us');
