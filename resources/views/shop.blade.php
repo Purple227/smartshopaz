@@ -20,16 +20,19 @@
   </head>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <body>
+
+<div id="app">
+
     <div id="main">
       <header>
-      @include('inc/main-topbar.php')
-        @include('inc/main-desktop-nav.php')
-        @include('inc/main-mobile-nav.php')
+      @include('partials/main-topbar')
+        @include('partials/main-desktop-nav')
+        @include('partials/main-mobile-nav')
         <div class="navigation-filter"> 
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-12 col-lg-12 col-xl-12 order-1 order-md-2">
-                @include('inc/main-search.php')
+                @include('partials/main-search')
               </div>
             </div>
           </div>
@@ -57,17 +60,9 @@
                   </div>
                   <div class="department_bottom">
                     <ul>
-                      <li> <a class="department-link" href="categories">Fresh Meat</a></li>
-                      <li> <a class="department-link" href="categories">Vegetables</a></li>
-                      <li> <a class="department-link" href="categories">Fruit & Nut Gifts</a></li>
-                      <li> <a class="department-link" href="categories">Fresh Berries</a></li>
-                      <li> <a class="department-link" href="categories">Ocean Foods</a></li>
-                      <li> <a class="department-link" href="categories">Butter & Eggs</a></li>
-                      <li> <a class="department-link" href="categories">Fastfood</a></li>
-                      <li> <a class="department-link" href="categories">Fresh Onion</a></li>
-                      <li> <a class="department-link" href="categories">Papayaya & Crisps</a></li>
-                      <li> <a class="department-link" href="categories">Oatmeal</a></li>
-                      <li> <a class="department-link" href="categories">Fresh Bananas</a></li>
+                      @foreach ($list_categories as $key => $category)
+                        <li> <a href="sub-categories" class="department-link"> {{ $category->name }} </a> </li>
+                      @endforeach
                     </ul>
                   </div>
                 </div>
@@ -180,10 +175,13 @@
                               <option value="High to low price">High to low price</option>
                               <option value="Low to height price">Low to height</option>
                             </select>
-                            <select class="select-form" id="sort" name="">
-                              <option value="A-Z">Show 10</option>
-                              <option value="Z-A">Show 20</option>
-                              <option value="High to low price">Show 30</option>
+                            <select class="select-form" id="sort" name="" v-model="productPerPage">
+                              <option value="10">Show 10</option>
+                              <option value="20">Show 20</option>
+                              <option value="30">Show 30</option>
+                              <option value="40">Show 40</option>
+                              <option value="50">Show 50</option>
+                              <option value="60">Show 60</option>
                             </select>
                           </div>
                           <div class="view-method">
@@ -197,112 +195,19 @@
                   </div>
                   <div class="shop-products_bottom">
                     <div class="row no-gutters-sm">
-                      <div class="col-9 col-md-3">
-                        <div class="product">
-                          <div class="product-img_block"><a class="product-img" href="shop_detail"><img src="assets/images/product/product01.png" alt=""></a>
-                            
-                          </div>
-                          <div class="product-info_block">
-                            <h5 class="product-type">Oranges</h5><a class="product-name" href="shop__detail">Pure Pineapple</a>
-                            <h3 class="product-price">₦14.00 
-                              <del>₦35.00</del>
-                            </h3>
-                            <h5 class="product-rated"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i><span>(5)</span></h5>
-                            <p class="product-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor niam</p>
-                            <h5 class="product-avaiable">Avability: <span>5 In stock</span></h5>
-                            <button class="add-to-wishlist button-borderless"><i class="icon_heart_alt"></i></button>
-                          </div>
-                          <div class="product-select">
-                            <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                            <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                            
-                            <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
-                          </div>
-                          <div class="product-select_list">
-                            <p class="delivery-status">Free delivery</p>
-                            <h3 class="product-price"> 
-                              <del>₦35.00</del>₦14.00
-                            </h3>
-                            <button class="add-to-cart normal-btn outline">Add to Cart</button>
-                            
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-6 col-md-3">
-                        <div class="product">
-                          <div class="product-img_block"><a class="product-img" href="shop_detail"><img src="assets/images/product/product02.png" alt=""></a>
-                            
-                          </div>
-                          <div class="product-info_block">
-                            <h5 class="product-type">Oranges</h5><a class="product-name" href="shop__detail">apple</a>
-                            <h3 class="product-price">₦14.00 
-                              <del>₦35.00</del>
-                            </h3>
-                            <h5 class="product-rated"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i><span>(5)</span></h5>
-                            <p class="product-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor niam</p>
-                            <h5 class="product-avaiable">Avability: <span>5 In stock</span></h5>
-                            <button class="add-to-wishlist button-borderless"><i class="icon_heart_alt"></i></button>
-                          </div>
-                          <div class="product-select">
-                            <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                            <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                            
-                            <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
-                          </div>
-                          <div class="product-select_list">
-                            <p class="delivery-status">Free delivery</p>
-                            <h3 class="product-price"> 
-                              <del>₦35.00</del>₦14.00
-                            </h3>
-                            <button class="add-to-cart normal-btn outline">Add to Cart</button>
-                            
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-6 col-md-3">
-                        <div class="product">
-                          <div class="product-img_block"><a class="product-img" href="shop_detail"><img src="assets/images/product/product03.png" alt=""></a>
-                            
-                          </div>
-                          <div class="product-info_block">
-                            <h5 class="product-type">Oranges</h5><a class="product-name" href="shop__detail">Pure Pineapple</a>
-                            <h3 class="product-price">₦14.00 
-                              <del>₦35.00</del>
-                            </h3>
-                            <h5 class="product-rated"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i><span>(5)</span></h5>
-                            <p class="product-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor niam</p>
-                            <h5 class="product-avaiable">Avability: <span>5 In stock</span></h5>
-                            <button class="add-to-wishlist button-borderless"><i class="icon_heart_alt"></i></button>
-                          </div>
-                          <div class="product-select">
-                            <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                            <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                            
-                            <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
-                          </div>
-                          <div class="product-select_list">
-                            <p class="delivery-status">Free delivery</p>
-                            <h3 class="product-price"> 
-                              <del>₦35.00</del>₦14.00
-                            </h3>
-                            <button class="add-to-cart normal-btn outline">Add to Cart</button>
-                            
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-6 col-md-3">
+                     
+                      <div class="col-6 col-md-3" v-for="product in product" :key="product.id">
                         <div class="product">
                           <div class="product-img_block"><a class="product-img" href="shop_detail"><img src="assets/images/product/product04.png" alt=""></a>
                             
                           </div>
                           <div class="product-info_block">
-                            <h5 class="product-type">Oranges</h5><a class="product-name" href="shop__detail">Pure Pineapple</a>
-                            <h3 class="product-price">₦14.00 
-                              <del>₦35.00</del>
+                            <h5 class="product-type"> @{{ product.category == null ? '' : product.category.name }}</h5><a class="product-name" href="shop__detail"> @{{ product.title }} </a>
+                            <h3 class="product-price">₦@{{ product.regular_price - (product.discount / 100)  }}
+                              <del>₦ @{{ product.regular_price }} 00 </del>
                             </h3>
                             <h5 class="product-rated"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i><span>(5)</span></h5>
-                            <p class="product-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor niam</p>
-                            <h5 class="product-avaiable">Avability: <span>5 In stock</span></h5>
+                            <p class="product-describe"> @{{ product.description }} </p>
                             <button class="add-to-wishlist button-borderless"><i class="icon_heart_alt"></i></button>
                           </div>
                           <div class="product-select">
@@ -311,32 +216,36 @@
                             
                             <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
                           </div>
-                          <div class="product-select_list">
-                            <p class="delivery-status">Free delivery</p>
-                            <h3 class="product-price"> 
-                              <del>₦35.00</del>₦14.00
-                            </h3>
-                            <button class="add-to-cart normal-btn outline">Add to Cart</button>
-                            
-                          </div>
+                         
                         </div>
                       </div>
+
+
                     </div>
                   </div>
                   <div class="shop-pagination">
                     <ul>
-                      <li>
-                        <button class="no-round-btn smooth active">1</button>
+
+                      <li @click="getProduct(pagination.previousPageUrl)">
+                        <button class="no-round-btn smooth"> <i class="arrow_carrot-2left"></i></button>
                       </li>
+
                       <li>
-                        <button class="no-round-btn smooth">2</button>
+                        <button class="no-round-btn smooth"> @{{ pagination.to }}</button>
                       </li>
+
                       <li>
-                        <button class="no-round-btn smooth">3</button>
+                        <button class="no-round-btn smooth">OF</button>
                       </li>
+
                       <li>
+                        <button class="no-round-btn smooth"> @{{ pagination.total }} </button>
+                      </li>
+
+                      <li @click="getProduct(pagination.nextPageUrl)">
                         <button class="no-round-btn smooth"> <i class="arrow_carrot-2right"></i></button>
                       </li>
+
                     </ul>
                   </div>
                 </div>
@@ -360,10 +269,14 @@
         </div>
       </div>
       <!-- End partner-->
-      @include('inc/fab-button.php')
-      @include('inc/footer.php')
+      @include('partials/fab-button')
+      @include('partials/main-footer')
       <!-- End footer-->
     </div>
+
+</div>
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/jquery.countdown.min.js"></script>

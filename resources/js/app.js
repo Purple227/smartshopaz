@@ -45,10 +45,19 @@ const app = new Vue({
         emailStatus: false
       },
 
+      pagination: {
+        nextPageUrl: null,
+        previousPageUrl: null, 
+        to: null,
+        total: null,
+      },
+
       buttonLoader: false,
       user: null,
       searchProductResult: null,
-      searchProductQuery: ''
+      searchProductQuery: '',
+      product: null,
+      productPerPage: null
     }
   },
 
@@ -91,11 +100,20 @@ const app = new Vue({
 
   }, // Validation calibrace close
 
+
+  watch: {
+    // whenever question changes, this function will run
+    productPerPage: function () {
+      this.getProduct()
+    }
+  },
+
   mounted() {
     this.sponsorMethod()
     this.RONCodeMethod()
     this.emailMethod()
     this.searchProductData()
+    this.getProduct()
   },
 
   methods: { //Method calibrace open
@@ -104,7 +122,7 @@ const app = new Vue({
       let self = this;
       self.buttonLoader = true
       var handler = PaystackPop.setup({
-        key: "pk_test_2898da550ba0afd657e6e4ac70a983285d2af400",
+        key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
         email: this.registration.email,
         amount: 20000 * 100,
         currency: "NGN",
@@ -228,6 +246,26 @@ const app = new Vue({
         });
       }
     },
+
+  getProduct(api) {
+    let api_url = api || "product-api"
+    Vue.axios
+    .get(api_url, {
+      pagination: this.productPerPage
+    }).then((response) => {
+      this.product = response.data.data
+
+      this.pagination.nextPageUrl = response.data.next_page_url
+      this.pagination.previousPageUrl =  response.data.prev_page_url
+
+      this.pagination.to = response.data.to
+      this.pagination.total = response.data.total
+
+    }).catch(function (error) {
+      // Code here
+    })
+  },
+
 
   }, //Method calibrace close
 

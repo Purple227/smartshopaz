@@ -2104,10 +2104,18 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         email: null,
         emailStatus: false
       },
+      pagination: {
+        nextPageUrl: null,
+        previousPageUrl: null,
+        to: null,
+        total: null
+      },
       buttonLoader: false,
       user: null,
       searchProductResult: null,
-      searchProductQuery: ''
+      searchProductQuery: '',
+      product: null,
+      productPerPage: null
     };
   },
   validations: {
@@ -2140,11 +2148,18 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
 
   },
   // Validation calibrace close
+  watch: {
+    // whenever question changes, this function will run
+    productPerPage: function productPerPage() {
+      this.getProduct();
+    }
+  },
   mounted: function mounted() {
     this.sponsorMethod();
     this.RONCodeMethod();
     this.emailMethod();
     this.searchProductData();
+    this.getProduct();
   },
   methods: {
     //Method calibrace open
@@ -2152,7 +2167,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       var self = this;
       self.buttonLoader = true;
       var handler = PaystackPop.setup({
-        key: "pk_test_2898da550ba0afd657e6e4ac70a983285d2af400",
+        key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
         email: this.registration.email,
         amount: 20000 * 100,
         currency: "NGN",
@@ -2276,6 +2291,21 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           _this4.searchProductResult = response.data;
         });
       }
+    },
+    getProduct: function getProduct(api) {
+      var _this5 = this;
+
+      var api_url = api || "product-api";
+      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.get(api_url, {
+        pagination: this.productPerPage
+      }).then(function (response) {
+        _this5.product = response.data.data;
+        _this5.pagination.nextPageUrl = response.data.next_page_url;
+        _this5.pagination.previousPageUrl = response.data.prev_page_url;
+        _this5.pagination.to = response.data.to;
+        _this5.pagination.total = response.data.total;
+      })["catch"](function (error) {// Code here
+      });
     }
   } //Method calibrace close
 

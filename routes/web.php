@@ -24,6 +24,12 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search-product', [HomeController::class, 'search']);
+Route::get('/shop', [HomeController::class, 'shopUI'])->name('shop');
+
+Route::get('/product-api', [HomeController::class, 'ProductAPIs']);
+Route::get('/alpha-sort-product', [HomeController::class, 'ProductAlphabetAPIsSort']);
+Route::get('/price-sort-product', [HomeController::class, 'ProductPriceAPIsSort']);
+
 
 Route::get('/about', function () {
     return view('about-us');
