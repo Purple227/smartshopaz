@@ -40,11 +40,43 @@ class RankController extends Controller
             $rank->save();
     
             $request->session()->flash('status', 'Task was successful!');
-            return redirect()->route('list.rank');
+            return redirect()->route('admin.rank.list');
     }
 
-    public function rankListUI()
+    public function index()
     {
+        $list_ranks = Rank::all();
 
+        return view('admin.ranks', [
+            'list_ranks' => $list_ranks
+        ]);
     }
+
+    public function updateRankUI($slug)
+    {
+        $rank = Rank::where('slug', $slug)->first();
+        return view('admin.edit-rank',  ['rank' => $rank]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+        'name' => 'required',
+        ]);
+
+        $rank = Rank::find($id);
+
+        if ($request->file != null)
+        {
+        $path = $request->file('file')->store('public/images');
+        $rank->image = $path;
+        }
+
+        $rank->name = $request->name;
+        $rank->save();
+
+        $request->session()->flash('status', 'Task was successful!');
+        return redirect()->route('admin.rank.list');
+    }
+
 }

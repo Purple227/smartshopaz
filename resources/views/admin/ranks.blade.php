@@ -117,16 +117,9 @@
                                                     <td>
                                                         <div class="btn-group" role="group">
 
-                                                            <a href="{{ route('update.catgory', $rank->slug) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <a href="{{ route('admin.rank.edit', $rank->slug) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="mdi mdi-pencil"></i>
                                                             </a>
-
-                                                            <form id="form" method="GET" action=" {{ route('destroy.rank', $rank->id) }} ">
-                                                                @csrf
-                                                            <button class="btn btn-danger btn-sm" type="submit" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                                <i class="mdi mdi-trash-can"></i>
-                                                            </button>
-                                                            </form>
 
                                                         </div>
                                                     </td>

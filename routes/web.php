@@ -84,13 +84,13 @@ Route::get('/super-buyer', [SuperBuyerController::class, 'index'])->name('admin.
 Route::get('/delivery-fee', [DeliveryController::class, 'deliveryFeeUI'])->name('admin.delivery.fee');
 
 // Admin rank  
-Route::get('/rank', [RankController::class, 'addRankUI'])->name('admin.rank');
-Route::get('/rank', [RankController::class, 'addRankUI'])->name('admin.rank');
+Route::get('/add-rank', [RankController::class, 'addRankUI'])->name('admin.rank');
 Route::post('/rank', [RankController::class, 'store'])->name('admin.rank.store');
+Route::get('/list-rank', [RankController::class, 'index'])->name('admin.rank.list');
+Route::get('/edit-rank/{id}', [RankController::class, 'updateRankUI'])->name('admin.rank.edit');
+Route::patch('/edit-rank/{id}', [RankController::class, 'store'])->name('admin.rank.update');
 
 });
-
-
 
 Route::prefix('super-buyer')->group(function () {
 
