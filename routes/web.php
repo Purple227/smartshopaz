@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\RonCodeController;
 use App\Http\Controllers\Admin\SuperBuyerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DeliveryController;
-
+use App\Http\Controllers\Admin\RankController;
 
 
 /*
@@ -82,6 +82,12 @@ Route::get('/super-buyer', [SuperBuyerController::class, 'index'])->name('admin.
 
 // Admin delivery Fee 
 Route::get('/delivery-fee', [DeliveryController::class, 'deliveryFeeUI'])->name('admin.delivery.fee');
+
+// Admin rank  
+Route::get('/rank', [RankController::class, 'addRankUI'])->name('admin.rank');
+Route::get('/rank', [RankController::class, 'addRankUI'])->name('admin.rank');
+Route::post('/rank', [RankController::class, 'store'])->name('admin.rank.store');
+
 });
 
 

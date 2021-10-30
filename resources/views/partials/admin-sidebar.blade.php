@@ -154,7 +154,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="ranks" class="has-arrow waves-effect">
+                    <a href="{{ route('admin.rank') }}" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1"></div>
                         <span> Ranks </span>
                     </a>

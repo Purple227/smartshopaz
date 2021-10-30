@@ -108,7 +108,7 @@
                                         </div>
 @endif
 
-                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('post.rank') }} ">
+                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('admin.rank.store') }} ">
 
                                             @csrf
 
