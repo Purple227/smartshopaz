@@ -52,13 +52,13 @@
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="text" name="name" class="form-control" v-model="registration.name" id="lastname" required>
                                                     <label for="username"> Name</label>
-                                                    <p > @{{ registration.name.length > 3 ? 'Looking Good' : 'Name field is required' }} </p>
+                                                    <p  v-bind:class="{ 'text-success': registration.name.length > 3, 'text-danger': registration.name.length < 3 }"> @{{ registration.name.length > 3 ? 'Looking Good' : 'Name field is required' }} </>
                                                 </div>
 
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="email" v-model="registration.email" name="email" class="form-control" id="useremail" @change="emailMethod" required>
                                                     <label for="useremail">Email</label>
-                                                    <p v-if="!$v.registration.email.$invalid"> @{{ utilities.email }} </p>
+                                                    <p v-bind:class="{'text-success': !$v.registration.email.$invalid }" v-if="!$v.registration.email.$invalid"> @{{ utilities.email }} </p>
                                                 </div>
 
 
@@ -82,13 +82,13 @@
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="password" v-model="registration.password" name="password" class="form-control" id="password" required>
                                                     <label for="userpassword">Password</label>
-                                                    <p > @{{ registration.password.length >= 8 ? 'Looking Good' : 'Password must be upto 8 characters' }} </p>
+                                                    <p v-bind:class="{ 'text-success': registration.password.length >= 8, 'text-danger': registration.password.length < 8 }"> @{{ registration.password.length >= 8 ? 'Looking Good' : 'Password must be upto 8 characters' }} </p>
                                                 </div>
                                                 
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="password" name="password_confirmation" v-model="registration.passwordConfirmation" class="form-control" id="confirm_password" required>
                                                     <label for="userpassword">Confirm Password <i id='message'></i></label>
-                                                    @{{ registration.password == registration.passwordConfirmation ? 'Password match okay' : 'Not identical with password' }}
+                                                  <p v-bind:class="{ 'text-success': registration.password == registration.passwordConfirmation, 'text-danger': registration.password != registration.passwordConfirmation }"> @{{ registration.password == registration.passwordConfirmation ? 'Password match okay' : 'Not identical with password' }}</p> 
                                                 </div>
 
 
