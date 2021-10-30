@@ -136,6 +136,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="form-group ">
+                                                <label>Status</label>
+                                                <select class="selectize form-control" id="siteID" class="abcd" name="brand_id">
+                                                    <option value="">Select...</option>
+                                                    <option value="instock"> In stock </option>
+                                                    <option value="outstock"> Out of stock </option>
+                                                </select>
+                                            </div>
                                             <div class="row mb-3">
                                                 <div class="col-sm-12">
                                                     <div class="">

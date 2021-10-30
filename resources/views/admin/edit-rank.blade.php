@@ -119,6 +119,11 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="to-input">No. of People</label>
+                                                <input type="number" name="nop" value="{{ $rank->nop }}" class="form-control" id="to-input" placeholder="Number of People">
+                                            </div>
+
+                                            <div class="form-group">
                                                 <h4 class="header-title">Add Icon</h4>
 
                                                 <div>

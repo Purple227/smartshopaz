@@ -116,6 +116,10 @@
                                                 <label for="to-input">Rank Name</label>
                                                 <input type="text" name="name" class="form-control" id="to-input" placeholder="Name">
                                             </div>
+                                            <div class="form-group">
+                                                <label for="to-input">No. of People</label>
+                                                <input type="number" name="nop" class="form-control" id="to-input" placeholder="Number of People">
+                                            </div>
 
                                             <div class="form-group">
                                                 <h4 class="header-title">Add Icon</h4>
