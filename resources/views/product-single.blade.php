@@ -110,7 +110,7 @@
                   <div class="col-12 col-lg-6">
                     <div class="shop-detail_info">
                       <h5 class="product-type color-type">Oranges</h5>
-                      <h2 class="product-name">Pure Pineapple</h2>
+                      <h2 class="product-name">@{{singleProduct.title }}</h2>
                       <p class="product-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor </p><a class="product-more" href="#">View more <i class="arrow_carrot-2right"></i></a>
                       <p class="delivery-status">Free delivery</p>
                       <div class="price-rate">

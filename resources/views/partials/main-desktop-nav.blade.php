@@ -44,7 +44,7 @@
               <div class="col-2">
                 <div class="product-function d-flex align-items-center justify-content-end">
                   <div id="wishlist"><a class="function-icon icon_heart_alt" href=""></a></div>
-                  <div id="cart"><a class="function-icon icon_bag_alt" href=""><span>NGN150.00</span></a></div>
+                  <div id="cart"><a class="function-icon icon_bag_alt" href="/cart"><span>NGN @{{ sumInCart == null ? '0.00' : sumInCart}}</span></a></div>
                 </div>
               </div>
             </div>

@@ -169,12 +169,14 @@
                       <div class="col-md-12 col-xl-8">
                         <div class="product-option">
                           <div class="product-filter">
-                            <select class="select-form" id="sort" name="">
-                              <option value="A-Z">A to Z</option>
-                              <option value="Z-A">Z to A</option>
+
+                            <select class="select-form" id="sort" v-model="sortAlpha">
+                              <option value="A to Z">A to Z</option>
+                              <option value="Z - A">Z to A</option>
                               <option value="High to low price">High to low price</option>
                               <option value="Low to height price">Low to height</option>
                             </select>
+
                             <select class="select-form" id="sort" name="" v-model="productPerPage">
                               <option value="10">Show 10</option>
                               <option value="20">Show 20</option>
@@ -183,6 +185,7 @@
                               <option value="50">Show 50</option>
                               <option value="60">Show 60</option>
                             </select>
+
                           </div>
                           <div class="view-method">
                             <p class="active" id="grid-view"><i class="fas fa-th-large"></i></p>
@@ -207,14 +210,13 @@
                               <del>₦ @{{ product.regular_price }} 00 </del>
                             </h3>
                             <h5 class="product-rated"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i><span>(5)</span></h5>
-                            <p class="product-describe"> @{{ product.description }} </p>
+                            <p class="product-describe"> @{{ product.description.substring(0,25) }} </p>
                             <button class="add-to-wishlist button-borderless"><i class="icon_heart_alt"></i></button>
                           </div>
                           <div class="product-select">
                             <button class="add-to-wishlist round-icon-btn"> <i class="icon_heart_alt"></i></button>
-                            <button class="add-to-cart round-icon-btn">  <i class="icon_bag_alt"></i></button>
-                            
-                            <button class="quickview round-icon-btn"> <i class="far fa-eye"></i></button>
+                            <button class="add-to-cart round-icon-btn" @click="addToCart(product.id, product.regular_price - (product.discount / 100), product.title, 1, product.image)">  <i class="icon_bag_alt"></i></button>
+                            <button class="quickview round-icon-btn"> <i class="far fa-eye" @click="singleProductMethod(product.id)"></i></button>
                           </div>
                          
                         </div>

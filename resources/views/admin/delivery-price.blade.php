@@ -31,10 +31,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -76,7 +76,7 @@
                                             <div class="form-group row">
                                                 <label class="col-md-2 col-form-label">State</label>
                                                 <div class="col-md-10">
-                                                    <select class="form-control">
+                                                    <select class="form-control" name="">
                                                         <option>Abuja</option>
                                                         <option>lagos</option>
                                                         <option>Ekiti</option>
@@ -145,7 +145,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -153,7 +153,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

@@ -9,6 +9,8 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Admin\RonCodeController;
 use App\Http\Controllers\Admin\SuperBuyerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\DeliveryController;
+
 
 
 /*
@@ -29,12 +31,15 @@ Route::get('/shop', [HomeController::class, 'shopUI'])->name('shop');
 Route::get('/product-api', [HomeController::class, 'ProductAPIs']);
 Route::get('/alpha-sort-product', [HomeController::class, 'ProductAlphabetAPIsSort']);
 Route::get('/price-sort-product', [HomeController::class, 'ProductPriceAPIsSort']);
-
+Route::get('/single-product/{id}', [HomeController::class, 'singleProductAPIs']);
 
 Route::get('/about', function () {
     return view('about-us');
 });
 
+Route::get('/cart', function () {
+    return view('cart');
+});
 
 Route::prefix('admin')->group(function () {
 
@@ -75,6 +80,8 @@ Route::get('/list-ron-code', [RonCodeController::class, 'index'])->name('list.ro
 // Admin Super Buyer
 Route::get('/super-buyer', [SuperBuyerController::class, 'index'])->name('admin.list.super-buyer');
 
+// Admin delivery Fee 
+Route::get('/delivery-fee', [DeliveryController::class, 'deliveryFeeUI'])->name('admin.delivery.fee');
 });
 
 

@@ -20,19 +20,21 @@
   </head>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <body>
+<div id="app">
+
     <div id="main">
       <header>
-        @include('inc/main-topbar.php')
-        @include('inc/main-desktop-nav.php')
-        @include('inc/main-mobile-nav.php')
+        @include('partials/main-topbar')
+        @include('partials/main-desktop-nav')
+        @include('partials/main-mobile-nav')
         <div class="navigation-filter"> 
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-12 col-lg-4 col-xl-3 order-2 order-md-1">
-              @include('inc/main-categories.php')
+              @include('partials/main-categories')
               </div>
               <div class="col-12 col-md-12 col-lg-8 col-xl-9 order-1 order-md-2">
-              @include('inc/main-search.php')
+              @include('partials/main-search')
               </div>
             </div>
           </div>
@@ -110,45 +112,17 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr v-for="(item, index) in cart " :key="index">
                       <td class="product-iamge"> 
                         <div class="img-wrapper"><img src="assets/images/product/product03.png" alt="product image"></div>
                       </td>
-                      <td class="product-name">Pure Pineapple</td>
-                      <td class="product-price">NGN460.00</td>
+                      <td class="product-name"> @{{ item.name }}</td>
+                      <td class="product-price">NGN @{{ item.price }} </td>
                       <td class="product-quantity"> 
-                        <input class="quantity no-round-input" type="number" min="1" value="1">
+                        <input class="quantity no-round-input" type="number" min="1" v-model="item.count" @click="itemCounterMethod(item.id, item.count * item.price, item.name, item.count)" >
                       </td>
-                      <td class="product-total">NGN460.00</td>
-                      <td class="product-clear"> 
-                        <button class="no-round-btn"><i class="icon_close"></i></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="product-iamge"> 
-                        <div class="img-wrapper"><img src="assets/images/product/product02.png" alt="product image"></div>
-                      </td>
-                      <td class="product-name">American lobster</td>
-                      <td class="product-price">NGN460.00</td>
-                      <td class="product-quantity"> 
-                        <input class="quantity no-round-input" type="number" min="1" value="1">
-                      </td>
-                      <td class="product-total">NGN460.00</td>
-                      <td class="product-clear"> 
-                        <button class="no-round-btn"><i class="icon_close"></i></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="product-iamge"> 
-                        <div class="img-wrapper"><img src="assets/images/product/product05.png" alt="product image"></div>
-                      </td>
-                      <td class="product-name">Chrysanthemum</td>
-                      <td class="product-price">NGN460.00</td>
-                      <td class="product-quantity">
-                        <input class="quantity no-round-input" type="number" min="1" value="2">
-                      </td>
-                      <td class="product-total">NGN920.00</td>
-                      <td class="product-clear"> 
+                      <td class="product-total">NGN @{{ item.count * item.price  }}</td>
+                      <td class="product-clear"@click="removeFromCart(item.id)" > 
                         <button class="no-round-btn"><i class="icon_close"></i></button>
                       </td>
                     </tr>
@@ -204,11 +178,14 @@
         </div>
       </div>
       <!-- End shopping cart-->
-      @include('inc/fab-button.php')
-      @include('inc/main-partners.php')
+      @include('partials/fab-button')
+      @include('partials/main-partners')
       <!-- End partner-->
-    @include('inc/main-footer.php')
+    @include('partials/main-footer')
     </div>
+
+</div>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/jquery.countdown.min.js"></script>

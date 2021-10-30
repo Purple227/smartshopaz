@@ -57,7 +57,11 @@ const app = new Vue({
       searchProductResult: null,
       searchProductQuery: '',
       product: null,
-      productPerPage: null
+      productPerPage: 10,
+      sortAlpha: 'Sort By Alpha',
+      sumInCart: null,
+      cart: null,
+      singleProduct: null,
     }
   },
 
@@ -105,7 +109,16 @@ const app = new Vue({
     // whenever question changes, this function will run
     productPerPage: function () {
       this.getProduct()
-    }
+    },
+
+    searchProductQuery: function () {
+      this.searchProductData()
+    },
+
+    sortAlpha: function () {
+      this.getProduct()
+    },
+
   },
 
   mounted() {
@@ -114,6 +127,7 @@ const app = new Vue({
     this.emailMethod()
     this.searchProductData()
     this.getProduct()
+    this.cartMethod()
   },
 
   methods: { //Method calibrace open
@@ -248,10 +262,14 @@ const app = new Vue({
     },
 
   getProduct(api) {
-    let api_url = api || "product-api"
+    this.sortAlpha = this.sortAlpha == 'A to Z' ? 1 : 0;
+     let api_url = api || "product-api"
     Vue.axios
     .get(api_url, {
-      pagination: this.productPerPage
+      params: {
+      pagination: this.productPerPage,
+      alpha_sort: this.sortAlpha,
+      }
     }).then((response) => {
       this.product = response.data.data
 
@@ -266,6 +284,47 @@ const app = new Vue({
     })
   },
 
+  addToCart(ID, price, name, count, image)
+  {
+    let item = JSON.parse(window.localStorage.getItem("cartItem"));
+    item = item == null ? [] : JSON.parse(window.localStorage.getItem("cartItem"));
+    item.push({ id:ID, price: parseFloat(price), name: name, count: count, image:image })
+    window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
+    this.cartMethod();
+  },
+
+  removeFromCart(ID) {
+    let item = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
+    let index = item.findIndex(obj => obj.id == ID)
+    item.splice(index, 1);
+    window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
+    this.cartMethod();
+  },
+
+  cartMethod() {
+    this.cart = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
+    let allPrice =  this.cart == null ? null : this.cart.map(obj => obj.price );
+    this.sumInCart = allPrice == null ? null : allPrice.reduce((a, b) => a + b ,0)
+  },
+
+  singleProductMethod(ID) {
+    self = this
+      axios.get(`single-product/${ID}`)
+      .then(response => {
+        this.singleProduct = response.data
+      })
+  },
+
+  itemCounterMethod(ID, price, name, count) {
+    let item = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
+    let index = item.findIndex(obj => obj.id == ID)
+    item[index].id = ID
+    item[index].price = price
+    item[index].name = name
+    item[index].count = count
+    window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
+    this.cartMethod()
+  },
 
   }, //Method calibrace close
 

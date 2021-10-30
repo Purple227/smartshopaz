@@ -5,13 +5,13 @@
                       <div class="row no-gutters">
                         <div class="col-9 col-md-9 col-lg-9 col-xl-9">
                           <div class="search-input">
-                            <input class="no-round-input no-border" id="myInput" @change="searchProductData" onkeyup="myFunction()"  v-model="searchProductQuery" type="text" autocomplete="off" placeholder="What are you looking for?">
+                            <input class="no-round-input no-border" id="myInput" @change="searchProductData" v-model="searchProductQuery" type="text" autocomplete="off" placeholder="What are you looking for?" onkeyup="myFunction()" >
                           </div>
                           <div class="categories-select_box">
                             <ul id="myUL">
-
-                              <li v-for="product in searchProductResult" :key="product.id"><a href="#"> @{{ product.title }}</a>  <span> in @{{ product.category == null ? '' : product.category.name }} </span></li>
-
+                              <li v-for="(product, index) in searchProductResult" :key="index"> 
+                                <a href="#"> @{{ product.title }}</a>  <span> in @{{ product.category == null ? '' : product.category.name }} </span>
+                              </li>
                             </ul>
                           </div>
                         </div>
