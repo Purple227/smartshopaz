@@ -114,7 +114,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.delivery.fee') }}" class="waves-effect">
+                    <a href="delivery-price" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:repeat"></i></div>
                         <span>Delivery Price</span>
                     </a>
@@ -155,14 +155,21 @@
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div>
-                        <span> Rank </span>
+                    <a href="ranks" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"></div>
+                        <span> Ranks </span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('admin.rank') }}"> Add Rank</a></li>
                         <li><a href=" {{ route('admin.rank.list') }}"> List Ranks </a></li>
                     </ul>
+                </li>
+                
+                <li>
+                    <a href="incentive" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"></div>
+                        <span> Incentives </span>
+                    </a>
                 </li>
 
             </ul>
