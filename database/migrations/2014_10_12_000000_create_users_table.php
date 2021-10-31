@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('ron_code')->nullable();
             $table->boolean('policy')->default(false);
             $table->boolean('complete_registration')->default(false);
-            $table->string('account_type');
+            $table->string('account_type')->default('super-buyer');
 
             $table->rememberToken();
             $table->timestamps();

@@ -47,9 +47,9 @@
               <h1 class="title">Login</h1>
               <form>
                 <label for="user-name">Username or email address *</label>
-                <input class="no-round-input" id="user-name" type="text">
+                <input class="no-round-input" id="user-name" type="text" name="email">
                 <label for="password">Password *</label>
-                <input class="no-round-input" id="password" type="text">
+                <input class="no-round-input" id="password" type="password" name="password">
                 <div class="account-method">
                   <div class="account-save">
                     <input id="savepass" type="checkbox">
