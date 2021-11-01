@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('title')->nullable();
             $table->integer('sponsor_id')->nullable();
-            $table->string('ron_code')->nullable();
             $table->boolean('policy')->default(false);
             $table->boolean('complete_registration')->default(false);
             $table->string('account_type')->nullable();

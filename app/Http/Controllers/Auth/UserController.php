@@ -34,20 +34,23 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $hashed_password = Hash::make($request->password);
-        $request->merge([ 'password' => $hashed_password]);
-
-        $request->merge([ 'account_type' => 'super-buyer']);
-
-
         $sponsor_code_used = Sponsor::where('sponsor_code', $request->sponsor_code)->first();
         $sponsor_code_used->sponsor_code_counter = $sponsor_code_used->sponsor_code_counter + 1;
         $sponsor_code_used->save();
 
-        $request->merge([ 'sponsor_id' => $sponsor_code_used->id]);
 
-
-        $user = User::create($request->all());
+        $user = new User;
+        $user->name = $request->name;
+        $user->password = Hash::make($request->password);
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->policy = 1;
+        $user->complete_registration = 1;
+        $user->title = $request->title;
+        $user->account_type = 'super-buyer';
+        $user->sponsor_id = $sponsor_code_used->id;
+        $user->save();
 
         $sponsor = new Sponsor;
         $sponsor->user_id = $user->id;
