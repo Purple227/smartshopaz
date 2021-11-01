@@ -105,11 +105,11 @@ Route::get('/register', [UserController::class, 'registerUI'])->name('super-buye
 Route::get('/login', [UserController::class, 'loginUI'])->name('super-buyer.login');
 Route::post('/register', [UserController::class, 'superBuyerRegister'])->name('post.super-buyer.register');
 Route::post('/payment', [TransactionController::class, 'payment'])->name('post.super-buyer.register');
-Route::post('/complete-registration', [UserController::class, 'completeRegistration'])->name('post.super-buyer.complete-registration');
+Route::post('/complete-register', [UserController::class, 'completeRegistration'])->name('post.super-buyer.complete-registration');
 Route::get('/check-sponsor-code', [UserController::class, 'checkSponsorCode']);
 Route::get('/ron-code', [UserController::class, 'checkRonCode']);
 Route::get('/check-mail', [UserController::class, 'checkEmail']);
-
+Route::get('/user/{id}', [UserController::class, 'getUser']);
 });
 
 

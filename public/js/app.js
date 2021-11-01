@@ -2069,6 +2069,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
 /* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+var _registration;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
@@ -2086,15 +2090,23 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     return {
       registration: {
         title: null,
-        name: '',
+        firstName: '',
+        lastName: '',
         email: '',
+        userName: '',
         phone: null,
         password: '',
         passwordConfirmation: null,
         sponsorCode: '',
         RONCode: '',
         error: null,
-        privacy: null
+        privacy: null,
+        dateOfBirth: '',
+        gender: '',
+        address: '',
+        LGA: '',
+        state: '',
+        country: ''
       },
       utilities: {
         sponsor: null,
@@ -2102,7 +2114,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         RONCode: null,
         RONCodeStatus: false,
         email: null,
-        emailStatus: false
+        emailStatus: false,
+        sponsorUserDetail: null
       },
       pagination: {
         nextPageUrl: null,
@@ -2124,8 +2137,23 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
   },
   validations: {
     // Validation calibrace open
-    registration: {
-      name: {
+    registration: (_registration = {
+      firstName: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      userName: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      lastName: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      LGA: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      gender: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      country: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
       },
       email: {
@@ -2135,20 +2163,26 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       phone: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
       },
+      dateOfBirth: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
       sponsorCode: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
       },
       RONCode: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
       },
-      password: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required,
-        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.minLength)(8)
-      },
-      passwordConfirmation: {
-        sameAsPassword: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.sameAs)('password')
+      state: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
       }
-    } // RegistrationDetails calibrace closes
+    }, _defineProperty(_registration, "gender", {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+    }), _defineProperty(_registration, "password", {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required,
+      minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.minLength)(8)
+    }), _defineProperty(_registration, "passwordConfirmation", {
+      sameAsPassword: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.sameAs)('password')
+    }), _registration) // RegistrationDetails calibrace closes
 
   },
   // Validation calibrace close
@@ -2162,6 +2196,15 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     },
     sortAlpha: function sortAlpha() {
       this.getProduct();
+    },
+    'registration.email': function registrationEmail() {
+      this.emailMethod();
+    },
+    'registration.sponsorCode': function registrationSponsorCode() {
+      this.sponsorMethod();
+    },
+    'registration.RONCode': function registrationRONCode() {
+      this.RONCodeMethod();
     }
   },
   mounted: function mounted() {
@@ -2200,23 +2243,23 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       });
       handler.openIframe();
     },
-    saveTransaction: function saveTransaction(transactionId, userID, name) {
+    saveTransaction: function saveTransaction(transactionID, userID, name) {
       var self = this;
       vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("payment", {
         user_id: userID,
         amount: 20000,
         status: true,
-        transaction_id: transactionId,
+        transaction_id: transactionID,
         name: name
       }).then(function () {
         self.buttonLoader = false;
         window.location = '/super-buyer';
       })["catch"](function () {});
     },
-    registerSuperBuyer: function registerSuperBuyer(transactionId) {
+    registerSuperBuyer: function registerSuperBuyer(transactionID) {
       var self = this;
       vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post('register', {
-        name: this.registration.name,
+        name: this.registration.lastName + ' ' + this.registration.firstName,
         title: this.registration.title,
         phone: this.registration.phone,
         password: this.registration.password,
@@ -2224,10 +2267,28 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         sponsor_code: this.registration.sponsorCode,
         password_confirmation: this.registration.passwordConfirmation,
         privacy: this.registration.privacy,
-        ron_code: this.registration.RONCode
+        ron_code: this.registration.RONCode,
+        username: this.registration.userName
       }).then(function (response) {
         self.user = response.data;
-        self.saveTransaction(transactionId, response.data.id, response.data.name);
+        self.completeRegistration(transactionID, response.data.id, response.data.name);
+      })["catch"](function (error) {
+        self.buttonLoader = false;
+        self.registration.error = error.response.data.errors;
+      });
+    },
+    completeRegistration: function completeRegistration(transactionID, userID, name) {
+      var self = this;
+      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post('complete-register', {
+        date_of_birth: this.registration.dateOfBirth,
+        gender: this.registration.gender,
+        L_G_A: this.registration.LGA,
+        state: this.registration.state,
+        address: this.registration.address,
+        country: this.registration.country,
+        user_id: userID
+      }).then(function () {
+        self.saveTransaction(transactionID, userID, name);
       })["catch"](function (error) {
         self.buttonLoader = false;
         self.registration.error = error.response.data.errors;
@@ -2244,7 +2305,10 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             sponsor_code: this.registration.sponsorCode
           }
         }).then(function (response) {
-          _this.utilities.sponsor = response.data;
+          _this.utilities.sponsor = response.data.status_message;
+
+          _this.getUser(response.data.sponsor_detail.user_id);
+
           _this.utilities.sponsorStatus = true;
         })["catch"](function (error) {
           self.utilities.sponsorStatus = false;
@@ -2271,8 +2335,18 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         });
       }
     },
-    emailMethod: function emailMethod() {
+    getUser: function getUser(ID) {
       var _this3 = this;
+
+      self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("user/".concat(ID)).then(function (response) {
+        _this3.utilities.sponsorUserDetail = response.data;
+      })["catch"](function () {
+        self.utilities.sponsorUserDetail = 'Unknown Sponsor';
+      });
+    },
+    emailMethod: function emailMethod() {
+      var _this4 = this;
 
       self = this;
 
@@ -2282,8 +2356,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             email: this.registration.email
           }
         }).then(function (response) {
-          _this3.utilities.email = response.data;
-          _this3.utilities.emailStatus = true;
+          _this4.utilities.email = response.data;
+          _this4.utilities.emailStatus = true;
         })["catch"](function (error) {
           self.utilities.emailStatus = false;
           self.utilities.email = error.response.data;
@@ -2291,7 +2365,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     searchProductData: function searchProductData() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.searchProductQuery.length > 1) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().get('search-product', {
@@ -2299,12 +2373,12 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             search_query: this.searchProductQuery
           }
         }).then(function (response) {
-          _this4.searchProductResult = response.data;
+          _this5.searchProductResult = response.data;
         });
       }
     },
     getProduct: function getProduct(api) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.sortAlpha = this.sortAlpha == 'A to Z' ? 1 : 0;
       var api_url = api || "product-api";
@@ -2314,11 +2388,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           alpha_sort: this.sortAlpha
         }
       }).then(function (response) {
-        _this5.product = response.data.data;
-        _this5.pagination.nextPageUrl = response.data.next_page_url;
-        _this5.pagination.previousPageUrl = response.data.prev_page_url;
-        _this5.pagination.to = response.data.to;
-        _this5.pagination.total = response.data.total;
+        _this6.product = response.data.data;
+        _this6.pagination.nextPageUrl = response.data.next_page_url;
+        _this6.pagination.previousPageUrl = response.data.prev_page_url;
+        _this6.pagination.to = response.data.to;
+        _this6.pagination.total = response.data.total;
       })["catch"](function (error) {// Code here
       });
     },
@@ -2358,11 +2432,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }, 0);
     },
     singleProductMethod: function singleProductMethod(ID) {
-      var _this6 = this;
+      var _this7 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("single-product/".concat(ID)).then(function (response) {
-        _this6.singleProduct = response.data;
+        _this7.singleProduct = response.data;
       });
     },
     itemCounterMethod: function itemCounterMethod(ID, price, name, count) {

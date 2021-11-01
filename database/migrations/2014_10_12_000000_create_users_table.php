@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('username')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -26,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('ron_code')->nullable();
             $table->boolean('policy')->default(false);
             $table->boolean('complete_registration')->default(false);
-            $table->string('account_type')->default('super-buyer');
+            $table->string('account_type')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

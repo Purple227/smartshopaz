@@ -25,15 +25,23 @@ const app = new Vue({
 
     	registration: {
     		title: null,
-    		name: '',
+    		firstName: '',
+        lastName: '',
     		email: '',
+        userName: '',
     		phone: null,
     		password: '',
     		passwordConfirmation: null,
     		sponsorCode: '',
         RONCode: '',
         error: null,
-        privacy: null
+        privacy: null,
+        dateOfBirth: '',
+        gender: '',
+        address: '',
+        LGA: '',
+        state: '',
+        country: '',
       },
 
       utilities: {
@@ -42,7 +50,8 @@ const app = new Vue({
         RONCode: null,
         RONCodeStatus: false,
         email: null,
-        emailStatus: false
+        emailStatus: false,
+        sponsorUserDetail: null
       },
 
       pagination: {
@@ -70,7 +79,27 @@ const app = new Vue({
 
     registration: {
 
-      name: {
+      firstName: {
+        required,
+      },
+
+      userName: {
+        required
+      },
+      
+      lastName: {
+        required,
+      },
+
+      LGA: {
+        required
+      },
+
+      gender: {
+        required,
+      },
+
+      country: {
         required,
       },
 
@@ -83,12 +112,24 @@ const app = new Vue({
         required,
       },
 
+      dateOfBirth: {
+        required,
+      },
+
       sponsorCode: {
         required,
       },
 
       RONCode: {
         required,
+      },
+
+      state: {
+        required,
+      },
+
+      gender: {
+        required
       },
 
       password: {
@@ -118,6 +159,18 @@ const app = new Vue({
     sortAlpha: function () {
       this.getProduct()
     },
+
+    'registration.email': function () {
+      this.emailMethod()
+    },
+
+    'registration.sponsorCode': function () {
+      this.sponsorMethod()
+    },
+
+    'registration.RONCode': function () {
+      this.RONCodeMethod()
+    }
 
   },
 
@@ -161,7 +214,7 @@ const app = new Vue({
       handler.openIframe();
     },
 
-    saveTransaction(transactionId, userID, name) {
+    saveTransaction(transactionID, userID, name) {
     	let self = this;
       Vue.axios
       .post(
@@ -170,7 +223,7 @@ const app = new Vue({
           user_id: userID,
           amount: 20000,
           status: true,
-          transaction_id: transactionId,
+          transaction_id: transactionID,
           name: name
         }
         )
@@ -182,10 +235,10 @@ const app = new Vue({
     },
 
 
-    registerSuperBuyer(transactionId) {
+    registerSuperBuyer(transactionID) {
       let self = this
       Vue.axios.post('register', {
-        name: this.registration.name,
+        name: this.registration.lastName + ' ' + this.registration.firstName,
         title: this.registration.title,
         phone: this.registration.phone,
         password: this.registration.password,
@@ -193,11 +246,33 @@ const app = new Vue({
         sponsor_code: this.registration.sponsorCode,
         password_confirmation: this.registration.passwordConfirmation,
         privacy: this.registration.privacy,
-        ron_code: this.registration.RONCode
+        ron_code: this.registration.RONCode,
+        username: this.registration.userName
       })
       .then(function (response) {
        self.user = response.data
-       self.saveTransaction(transactionId, response.data.id, response.data.name);
+       self.completeRegistration(transactionID, response.data.id, response.data.name)
+     })
+      .catch(function (error) {
+        self.buttonLoader = false
+        self.registration.error = error.response.data.errors
+      });
+
+    },
+
+    completeRegistration(transactionID, userID, name) {
+      let self = this
+      Vue.axios.post('complete-register', {
+        date_of_birth: this.registration.dateOfBirth,
+        gender: this.registration.gender,
+        L_G_A: this.registration.LGA,
+        state: this.registration.state,
+        address: this.registration.address,
+        country: this.registration.country,
+        user_id: userID
+      })
+      .then(function () {
+        self.saveTransaction(transactionID, userID, name);
      })
       .catch(function (error) {
         self.buttonLoader = false
@@ -211,7 +286,8 @@ const app = new Vue({
       if(this.registration.sponsorCode.length > 2) {
         axios.get('check-sponsor-code',{params: {sponsor_code: this.registration.sponsorCode}})
         .then(response => {
-          this.utilities.sponsor = response.data
+          this.utilities.sponsor = response.data.status_message
+          this.getUser(response.data.sponsor_detail.user_id)
           this.utilities.sponsorStatus = true
         })
         .catch(function (error) {
@@ -236,6 +312,18 @@ const app = new Vue({
         });
       }
     },
+
+    getUser(ID) {
+      self = this
+        axios.get(`user/${ID}`)
+        .then(response => {
+          this.utilities.sponsorUserDetail = response.data
+        })
+        .catch(function () {
+          self.utilities.sponsorUserDetail = 'Unknown Sponsor'
+        });
+    },
+
 
     emailMethod() {
       self = this
