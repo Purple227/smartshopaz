@@ -39,12 +39,21 @@
                 </li>
 
                 <li>
-                    <a href="genealogy" class="waves-effect">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>
                         <span>Genealogy</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="genealogy">Black Opal</a></li>
+                        <li><a href="genealogy">Red Beryl</a></li>
+                        <li><a href="genealogy">Alexandrite</a></li>
+                        <li><a href="genealogy">Emerald</a></li>
+                        <li><a href="genealogy">Ruby</a></li>
+                        <li><a href="genealogy">Jadeite</a></li>
+                        <li><a href="genealogy">Diamond</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="my-downline" class="waves-effect">
@@ -81,7 +90,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="withdrawal" class="waves-effect">
+                    <a href="bank" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:grid"></i> -->
                         </div>
@@ -104,6 +113,16 @@
                         </div>
                         <span>Revenue</span>
                     </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <!-- <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div> -->
+                        <span> My Account </span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('my.account.code') }}"> My Profile</a></li>
+                        <li><a href=" {{ route('change.password.code') }}"> Change Password </a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="login" class="waves-effect">

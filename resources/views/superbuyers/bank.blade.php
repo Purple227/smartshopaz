@@ -107,10 +107,11 @@
                                 </div>
                             </div>
 
+
                             <div class="col-lg-4">
                                 <div class="card">
                                     <div class="card-header bg-transparent p-3">
-                                        <h5 class="header-title mb-0">Current Balance</h5>
+                                        <h5 class="header-title mb-0">Withdrawal</h5>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
@@ -128,10 +129,11 @@
                                     </ul>
                                 </div>
                             </div>
+
                             <div class="col-lg-4">
                                 <div class="card">
                                     <div class="card-header bg-transparent p-3">
-                                        <h5 class="header-title mb-0">Withdrawal</h5>
+                                        <h5 class="header-title mb-0">Current Balance</h5>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
