@@ -145,13 +145,6 @@
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="validationCustom05">RON Code</label>
-                                                    <input type="text" class="form-control" id="validationCustom05" placeholder="RON Code" value="3553545" readonly required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
                                                     <label for="validationCustom06">Sponsor ID</label>
                                                     <input type="text" class="form-control" id="validationCustom06" placeholder="Sponsor ID" value="122341" readonly required>
                                                     <div class="valid-feedback">

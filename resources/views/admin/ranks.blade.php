@@ -102,6 +102,7 @@
                                                 <tr>
                                                     <th>Rank Id</th>
                                                     <th>Rank Name</th>
+                                                    <th>No. of People</th>
                                                     <th>Icon</th>
                                                     <th>Options</th>
                                                 </tr>
@@ -113,6 +114,7 @@
                                                     @foreach ($list_ranks as $key => $rank)
                                                     <td> {{  $key + 1 }} </td>
                                                     <td> {{ $rank->name }} </td>
+                                                    <td>22</td>
                                                     <td><img src="{{ asset('storage/'.$rank->image) }}" alt="" width="35px"></td>
                                                     <td>
                                                         <div class="btn-group" role="group">

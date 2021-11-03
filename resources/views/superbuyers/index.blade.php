@@ -60,7 +60,7 @@
                                 <div class="float-right">
                                     <div class="dropdown">
                                         <a href="withdrawal" class="btn btn-light btn-rounded">
-                                            <i class="iconify" data-icon="uim:exit"></i> Withdrawal
+                                            <i class="iconify" data-icon="uim:exit"></i> Bank
                                         </a>
                                     </div>
                                 </div>
