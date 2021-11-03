@@ -98,6 +98,7 @@
                                             @csrf
 
                                             <div class="row">
+
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Date of Birth</label>
                                                     <input type="text" name="date_of_birth" class="form-control datepicker-here" data-range="true" data-multiple-dates-separator=" - " data-language="en" />
@@ -105,6 +106,7 @@
                                                         Please provide a valid Address.
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">Gender</label>
                                                     <select class="custom-select" required name="gender">

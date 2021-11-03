@@ -155,10 +155,10 @@
                 </li>
 
                 <li>
-                    <a href="ranks" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"></div>
-                        <span> Ranks </span>
-                    </a>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div>
+                        <span> Rank </span>
+                    </a> 
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('admin.rank') }}"> Add Rank</a></li>
                         <li><a href=" {{ route('admin.rank.list') }}"> List Ranks </a></li>
@@ -166,10 +166,14 @@
                 </li>
                 
                 <li>
-                    <a href="incentive" class="waves-effect">
+                    <a href="" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"></div>
-                        <span> Incentives </span>
+                        <span> Incentive </span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('admin.add.incentive') }}"> Add Incentive </a></li>
+                        <li><a href=" {{ route('admin.rank.list') }}"> List Incentive </a></li>
+                    </ul>
                 </li>
 
             </ul>

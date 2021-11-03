@@ -18,7 +18,7 @@ class SuperBuyer
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() &&  Auth::user()->account_type !== 'super-buyer') {
+        if (Auth::check() &&  Auth::user()->account_type == 'super-buyer') {
             return $next($request);
         }
         

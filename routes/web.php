@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\SuperBuyerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DeliveryController;
 use App\Http\Controllers\Admin\RankController;
-
+use App\Http\Controllers\Admin\IncentiveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +90,9 @@ Route::get('/list-rank', [RankController::class, 'index'])->name('admin.rank.lis
 Route::get('/edit-rank/{id}', [RankController::class, 'updateRankUI'])->name('admin.rank.edit');
 Route::patch('/edit-rank/{id}', [RankController::class, 'store'])->name('admin.rank.update');
 
+// Admin Incensive
+Route::get('/add-incentive', [IncentiveController::class, 'addIncentiveUI'])->name('admin.add.incentive');
+
 });
 
 Route::prefix('super-buyer')->group(function () {
@@ -102,11 +105,11 @@ Route::get('/register', [UserController::class, 'registerUI'])->name('super-buye
 Route::get('/login', [UserController::class, 'loginUI'])->name('super-buyer.login');
 Route::post('/register', [UserController::class, 'superBuyerRegister'])->name('post.super-buyer.register');
 Route::post('/payment', [TransactionController::class, 'payment'])->name('post.super-buyer.register');
-Route::post('/complete-registration', [UserController::class, 'completeRegistration'])->name('post.super-buyer.complete-registration');
+Route::post('/complete-register', [UserController::class, 'completeRegistration'])->name('post.super-buyer.complete-registration');
 Route::get('/check-sponsor-code', [UserController::class, 'checkSponsorCode']);
 Route::get('/ron-code', [UserController::class, 'checkRonCode']);
 Route::get('/check-mail', [UserController::class, 'checkEmail']);
-
+Route::get('/user/{id}', [UserController::class, 'getUser']);
 });
 
 
