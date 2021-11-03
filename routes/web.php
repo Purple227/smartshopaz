@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\RankController;
 use App\Http\Controllers\Admin\IncentiveController;
 use App\Http\Controllers\SuperBuyer\ProductController as SuperProductController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -113,6 +114,7 @@ Route::get('/ron-code', [UserController::class, 'checkRonCode']);
 Route::get('/check-mail', [UserController::class, 'checkEmail']);
 Route::get('/user/{id}', [UserController::class, 'getUser']);
 Route::get('/products', [SuperProductController::class, 'index'])->name('product.super-buyer');
+Route::get('/success', [UserController::class, 'registerInfo'])->name('super-buyer.register.success');
 
 });
 

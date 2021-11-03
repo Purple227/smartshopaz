@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
 
             $table->string('name');
             $table->string('username')->nullable();
+            $table->double('wallet', 8, 2 );
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -27,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->boolean('policy')->default(false);
             $table->boolean('complete_registration')->default(false);
             $table->string('account_type')->nullable();
+            $table->string('sponsor_code')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

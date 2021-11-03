@@ -229,7 +229,7 @@ const app = new Vue({
         )
       .then(() => {
         self.buttonLoader = false
-        window.location = '/super-buyer'
+        window.location = '/super-buyer/success'
       })
       .catch(function() {});
     },
