@@ -234,7 +234,6 @@ const app = new Vue({
       .catch(function() {});
     },
 
-
     registerSuperBuyer(transactionID) {
       let self = this
       Vue.axios.post('register', {
@@ -257,7 +256,6 @@ const app = new Vue({
         self.buttonLoader = false
         self.registration.error = error.response.data.errors
       });
-
     },
 
     completeRegistration(transactionID, userID, name) {

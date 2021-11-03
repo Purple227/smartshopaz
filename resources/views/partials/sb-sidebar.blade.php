@@ -17,10 +17,8 @@
                     </a>
                 </li>
 
-                @if ( Auth::user()->complete_registration == 1)
-
                 <li>
-                    <a href="products" class=" waves-effect">
+                    <a href="{{ route('product.super-buyer') }}" class=" waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:box"></i> -->
                         </div>
@@ -106,19 +104,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="login" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:padlock"></i> -->
-                        </div>
-                        <span>Logout</span>
-                    </a>
-                </li>
-
-                @endif
-
-
-                <li>
-                    <a href="login" class="waves-effect">
+                    <a href="logout" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:padlock"></i> -->
                         </div>

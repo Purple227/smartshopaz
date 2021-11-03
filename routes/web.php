@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DeliveryController;
 use App\Http\Controllers\Admin\RankController;
 use App\Http\Controllers\Admin\IncentiveController;
+use App\Http\Controllers\SuperBuyer\ProductController as SuperProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,7 @@ Route::get('/super-buyer', [SuperBuyerController::class, 'index'])->name('admin.
 
 // Admin delivery Fee 
 Route::get('/delivery-fee', [DeliveryController::class, 'deliveryFeeUI'])->name('admin.delivery.fee');
+Route::post('/delivery-fee', [DeliveryController::class, 'store'])->name('admin.delivery.fee');
 
 // Admin rank  
 Route::get('/add-rank', [RankController::class, 'addRankUI'])->name('admin.rank');
@@ -110,8 +112,9 @@ Route::get('/check-sponsor-code', [UserController::class, 'checkSponsorCode']);
 Route::get('/ron-code', [UserController::class, 'checkRonCode']);
 Route::get('/check-mail', [UserController::class, 'checkEmail']);
 Route::get('/user/{id}', [UserController::class, 'getUser']);
+Route::get('/products', [SuperProductController::class, 'index'])->name('product.super-buyer');
+
 });
 
-
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

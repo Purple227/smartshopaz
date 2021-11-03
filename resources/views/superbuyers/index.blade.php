@@ -1,4 +1,3 @@
-@if ( Auth::user()->complete_registration == 1)
 
 <!doctype html>
 <html lang="en">
@@ -446,9 +445,3 @@
 </body>
 
 </html>
-
-@else
-
-@include('superbuyers/register-stage2')
-
-@endif

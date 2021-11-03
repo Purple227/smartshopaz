@@ -31,18 +31,18 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/sb-topbar.php')
+        @include('partials/sb-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/sb-sidebar.php')
+        @include('partials/sb-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
-        <div class="main-content">
+        <div class="main-content" id="app">
 
-            <div class="page-content">
+            <div class="page-content" >
 
                 <!-- Page-Title -->
                 <div class="page-title-box">
@@ -75,16 +75,16 @@
 
                         <div class="row">
 
-                            <div class="col-md-6 col-xl-3">
+                            <div class="col-md-6 col-xl-3" v-for="product in product" :key="product.id">
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title font-size-16 mt-0">Product Title</h4>
-                                        <h6 class="card-subtitle font-14 text-muted">NGN 20,000</h6>
+                                        <h4 class="card-title font-size-16 mt-0"> @{{ product.title }} </h4>
+                                        <h6 class="card-subtitle font-14 text-muted">NGN @{{ product.super_buyer_price }} </h6>
                                     </div>
                                     <img class="img-fluid" src="../assets-dash/images/small/img-4.jpg" alt="Card image cap">
                                     <div class="card-body">
-                                        <p class="card-text">Description.</p>
+                                        <p class="card-text"> @{{ product.description.substring(0, 25) }} </p>
                                         <a href="#" class="card-link">SelectSizes</a>
                                         <a href="#" class="card-link">Add to cart</a>
                                     </div>
@@ -117,7 +117,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/sb-footer.php')
+            @include('partials/sb-footer')
         </div>
         <!-- end main content-->
 
@@ -125,13 +125,14 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/sb-rightbar.php')
+    @include('partials/sb-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>
