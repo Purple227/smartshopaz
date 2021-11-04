@@ -142,6 +142,18 @@
                         <span>Super Buyers</span>
                     </a>
                 </li>
+                <li>
+                    <a href="register-fee" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:sorting"></i></div>
+                        <span>Register Fee</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="bonuses" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:chart"></i></div>
+                        <span>Bonuses</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
