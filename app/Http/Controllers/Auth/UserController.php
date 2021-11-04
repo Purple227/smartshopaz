@@ -21,13 +21,12 @@ class UserController extends Controller
 
     public function loginUI()
     {
-            session()->flush();
+            session()->forget('registration_info');
             return view('superbuyers.login');
     }
 
     public function superBuyerRegister(Request $request)
     {
-
         $validated = $request->validate([
             'sponsor_code' => 'required',
             'name' => 'required',

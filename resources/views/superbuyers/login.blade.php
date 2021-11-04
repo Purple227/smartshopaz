@@ -40,7 +40,6 @@
                                     <h5 class="mb-5 text-center">Sign in to continue</h5>
 
                                         <form id="form" class="form-horizontal" method="POST" action=" {{ route('login') }} ">
-
                                             @csrf
 
                                         <div class="row">
