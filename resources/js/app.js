@@ -229,11 +229,10 @@ const app = new Vue({
         )
       .then(() => {
         self.buttonLoader = false
-        window.location = '/super-buyer'
+        window.location = '/super-buyer/success'
       })
       .catch(function() {});
     },
-
 
     registerSuperBuyer(transactionID) {
       let self = this
@@ -257,7 +256,6 @@ const app = new Vue({
         self.buttonLoader = false
         self.registration.error = error.response.data.errors
       });
-
     },
 
     completeRegistration(transactionID, userID, name) {

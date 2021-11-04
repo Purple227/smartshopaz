@@ -114,7 +114,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="delivery-price" class="waves-effect">
+                    <a href="{{ route('admin.delivery.fee') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:repeat"></i></div>
                         <span>Delivery Price</span>
                     </a>

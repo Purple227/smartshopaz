@@ -18,11 +18,25 @@ class DeliveryController extends Controller
     public function store(Request $request)
     {
         $check_delivery_table = Delivery::count();
-        $delivery = $check_delivery_table == 1 ? new Delivery : Delivery::find(1);
+        $delivery = $check_delivery_table == 1 ? Delivery::find(1) : new Delivery;
+
+        if ($request->state != null) {
         $delivery->state = $request->state;
-        $delivery->price_state = $request->state_price;
+        }
+
+        if ($request->state_price != null) {
+        $delivery->state_price = $request->state_price;
+        }
+
+        if ($request->weight != null) {
         $delivery->weight = $request->weight;
+        }
+
+        if ($request->weight_price != null) {
         $delivery->weight_price = $request->weight_price;
+        }
+        
+        $delivery->save();
         return redirect()->route('admin.delivery.fee');
 
     }

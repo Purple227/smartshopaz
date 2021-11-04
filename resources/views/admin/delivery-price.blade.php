@@ -69,18 +69,53 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="">
 
+                                    <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('admin.delivery.fee') }} ">
+                                     @csrf
                                             <h4 class="header-title">Delivery Price (by State)</h4>
 
                                             <div class="form-group row">
                                                 <label class="col-md-2 col-form-label">State</label>
                                                 <div class="col-md-10">
-                                                    <select class="form-control" name="">
-                                                        <option>Abuja</option>
-                                                        <option>lagos</option>
-                                                        <option>Ekiti</option>
-                                                        <option>Ondo</option>
+                                                    <select class="form-control" name="state">
+                                                    <option disabled selected> {{ $delivery == null ? 'Select State' : $delivery->state }}</option>
+    <option value="Abia">Abia</option>
+    <option value="Adamawa">Adamawa</option>
+    <option value="Akwa Ibom">Akwa Ibom</option>
+    <option value="Anambra">Anambra</option>
+    <option value="Bauchi">Bauchi</option>
+    <option value="Bayelsa">Bayelsa</option>
+    <option value="Benue">Benue</option>
+    <option value="Borno">Borno</option>
+    <option value="Cross Rive">Cross River</option>
+    <option value="Delta">Delta</option>
+    <option value="Ebonyi">Ebonyi</option>
+    <option value="Edo">Edo</option>
+    <option value="Ekiti">Ekiti</option>
+    <option value="Enugu">Enugu</option>
+    <option value="FCT">Federal Capital Territory</option>
+    <option value="Gombe">Gombe</option>
+    <option value="Imo">Imo</option>
+    <option value="Jigawa">Jigawa</option>
+    <option value="Kaduna">Kaduna</option>
+    <option value="Kano">Kano</option>
+    <option value="Katsina">Katsina</option>
+    <option value="Kebbi">Kebbi</option>
+    <option value="Kogi">Kogi</option>
+    <option value="Kwara">Kwara</option>
+    <option value="Lagos">Lagos</option>
+    <option value="Nasarawa">Nasarawa</option>
+    <option value="Niger">Niger</option>
+    <option value="Ogun">Ogun</option>
+    <option value="Ondo">Ondo</option>
+    <option value="Osun">Osun</option>
+    <option value="Oyo">Oyo</option>
+    <option value="Plateau">Plateau</option>
+    <option value="Rivers">Rivers</option>
+    <option value="Sokoto">Sokoto</option>
+    <option value="Taraba">Taraba</option>
+    <option value="Yobe">Yobe</option>
+    <option value="Zamfara">Zamfara</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -88,12 +123,13 @@
                                             <div class="form-group row">
                                                 <label for="example-text-input" class="col-md-2 col-form-label">Amount (Naira)</label>
                                                 <div class="col-md-10">
-                                                    <input class="form-control" type="text" value="12000" id="example-text-input">
+                                                    <input class="form-control" name="state_price" type="number" min="1" value="{{$delivery == null ? 0.00 : $delivery->state_price }}" id="example-text-input">
                                                 </div>
                                             </div>
+
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
-                                                    <a href="" class="btn btn-primary waves-effect waves-light"> <span>Submit</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </a>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Submit</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
                                                 </div>
                                             </div>
 
@@ -109,25 +145,27 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <form action="">
-                                            <h4 class="header-title">Delivery Price (by weight)</h4>
+                                    <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('admin.delivery.fee') }} ">
+                                     @csrf
+                                     
+                                     <h4 class="header-title">Delivery Price (by weight)</h4>
 
                                             <div class="form-group row">
                                                 <label for="example-text-input" class="col-md-2 col-form-label">Weight(24kg)</label>
                                                 <div class="col-md-10">
-                                                    <input class="form-control" type="number" value="42" id="example-text-input">
+                                                    <input class="form-control" name="weight" type="number" value="{{ $delivery == null ? 0.00 : $delivery->weight }}" id="example-text-input">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="example-text-input" class="col-md-2 col-form-label">Amount (Naira)</label>
                                                 <div class="col-md-10">
-                                                    <input class="form-control" type="text" value="12000" id="example-text-input">
+                                                    <input class="form-control" name="weight_price" type="number" value="{{ $delivery == null ? 0.00 : $delivery->weight_price }}" id="example-text-input">
                                                 </div>
                                             </div>
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
-                                                    <a href="" class="btn btn-primary waves-effect waves-light"> <span>Submit</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </a>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Submit</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
                                                 </div>
                                             </div>
                                         </form>

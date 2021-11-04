@@ -41,30 +41,37 @@
 
                     <div class="card">
                         <ul class="list-group list-group-flush">
+
                             <li class="list-group-item row">
                                 <div class="col-md-6"><b>Full Name</b></div>
-                                <div class="col-md-6">Helen Abawulo</div>
+                                <div class="col-md-6"> {{ Session::get('registration_info.name') }} </div>
                             </li>
+
                             <li class="list-group-item row">
                                 <div class="col-md-6"><b>Username</b></div>
-                                <div class="col-md-6">HelAba234</div>
+                                <div class="col-md-6"> {{ Session::get('registration_info.username') }} </div>
                             </li>
+
                             <li class="list-group-item row">
                                 <div class="col-md-6"><b>Member ID </b></div>
-                                <div class="col-md-6">SB345636</div>
+                                <div class="col-md-6"> {{ Session::get('registration_info_sponsor_code')  }}</div>
                             </li>
+
                             <li class="list-group-item row">
                                 <div class="col-md-6"><b>Email </b></div>
-                                <div class="col-md-6">Helen@gmail.com</div>
+                                <div class="col-md-6">{{ Session::get('registration_info.email') }}  </div>
                             </li>
+
                             <li class="list-group-item row">
                                 <div class="col-md-6"><b>Password </b></div>
-                                <div class="col-md-6">Helen123</div>
+                                <div class="col-md-6"> {{ Session::get('registration_info_password') }} </div>
                             </li>
+
                             <li class="list-group-item row text-center">
                                 <a href="#" class="card-link"><i class="mdi mdi-content-copy"></i> Copy</a>
-                                <a href="#" class="card-link text-success">Done <i class="mdi mdi-check-all"></i></a>
+                                <a href="{{ route('super-buyer.login') }}" class="card-link text-success">Done <i class="mdi mdi-check-all"></i></a>
                             </li>
+                            
                         </ul>
 
                     </div>

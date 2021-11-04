@@ -21,6 +21,7 @@ class UserController extends Controller
 
     public function loginUI()
     {
+            session()->flush();
             return view('superbuyers.login');
     }
 
@@ -48,18 +49,26 @@ class UserController extends Controller
         $user->policy = 1;
         $user->complete_registration = 1;
         $user->title = $request->title;
+        $user->wallet = 20000.00;
         $user->account_type = 'super-buyer';
         $user->sponsor_id = $sponsor_code_used->id;
         $user->save();
 
         $sponsor = new Sponsor;
         $sponsor->user_id = $user->id;
-        $sponsor->sponsor_code = 'SP'.''.mt_rand(100000, 999999);
+        $sponsor->sponsor_code = 'SB'.''.mt_rand(100000, 999999);
         $sponsor->save();
 
         $ron_code = RONCode::where('ron_code', $request->ron_code)->first();
         $ron_code->status = true;
         $ron_code->save();
+
+        $request->session()->put('registration_info', $user);
+        $request->session()->put('registration_info_password', $request->password);
+        $request->session()->put('registration_info_sponsor_code', $sponsor->sponsor_code);
+        
+
+
 
         $request->session()->flash('status', 'Task was successful!');
         return $user;
@@ -82,7 +91,7 @@ class UserController extends Controller
 
         $request->merge([ 'user_id' => $request->user_id ]);
 
-        $profile = Profile::create($request->all());
+        $profile = Profile::create($request->all());        
 
         $request->session()->flash('status', 'Task was successful!');
         return 'registration completed succesfully';
@@ -93,7 +102,6 @@ class UserController extends Controller
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect()->route('home');
@@ -113,7 +121,7 @@ class UserController extends Controller
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
-        ]);
+        ]);        
     }
 
     public function checkSponsorCode(Request $request)
@@ -179,6 +187,15 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->first();
         return $user;
+    }
+
+    public function registerInfo(Request $request)
+    {
+        if ($request->session()->missing('registration_info')) 
+        {
+            return redirect()->route('super-buyer.home');
+        }
+        return view('superbuyers.success');
     }
 
 

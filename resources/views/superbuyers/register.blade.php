@@ -101,15 +101,13 @@
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
-                                            <label for="usernam">DOB</label><br>
                                             <input type="date" name="date_of_birth" class="form-control datepicker-here" v-model="registration.dateOfBirth" data-range="true" data-multiple-dates-separator=" - " data-language="en" />
                                             <p v-bind:class="{ 'text-success': registration.dateOfBirth.length > 3, 'text-danger': registration.dateOfBirth.length < 3 }"> @{{ registration.dateOfBirth.length > 3 ? 'Looking Good' : 'Date Of Birth field is required' }} </>
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
-                                            <label for="username"> Gender </label>
+                                            <label for="username" v-if="registration.gender.length <= 3"> Gender </label>
                                             <select class="custom-select" required v-model="registration.gender">
-                                                <option>Select Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                             </select>
@@ -130,9 +128,8 @@
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
-                                            <label for="username"> State </label>
+                                            <label for="username" v-if="registration.state <= 3" > State </label>
                                             <select class="custom-select" required v-model="registration.state">
-                                                <option disabled selected>--Select State--</option>
                                                 <option value="Abia">Abia</option>
                                                 <option value="Adamawa">Adamawa</option>
                                                 <option value="Akwa Ibom">Akwa Ibom</option>
@@ -176,12 +173,10 @@
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
-                                            <label for="username"> Country </label>
-                                            <select class="custom-select" required v-model="registration.country">
-                                                <option>Select Country</option>
+                                        <label for="username" v-if="registration.country.length <= 3"> Select Country </label>
+                                            <select class="custom-select" v-model="registration.country">
                                                 <option value="Nigeria"> Nigeria</option>
                                             </select>
-
                                             <p v-bind:class="{ 'text-success': registration.country.length > 3, 'text-danger': registration.country.length < 3 }"> @{{ registration.country.length > 3 ? 'Looking Good' : 'Country  field is required' }} </>
                                         </div>
 

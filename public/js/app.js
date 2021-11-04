@@ -2253,7 +2253,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         name: name
       }).then(function () {
         self.buttonLoader = false;
-        window.location = '/super-buyer';
+        window.location = '/super-buyer/success';
       })["catch"](function () {});
     },
     registerSuperBuyer: function registerSuperBuyer(transactionID) {

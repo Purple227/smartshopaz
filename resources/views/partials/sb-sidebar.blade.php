@@ -17,10 +17,8 @@
                     </a>
                 </li>
 
-                @if ( Auth::user()->complete_registration == 1)
-
                 <li>
-                    <a href="products" class=" waves-effect">
+                    <a href="{{ route('product.super-buyer') }}" class=" waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:box"></i> -->
                         </div>
@@ -55,6 +53,7 @@
                         <li><a href="genealogy">Diamond</a></li>
                     </ul>
                 </li>
+                
                 <li>
                     <a href="my-downline" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
@@ -63,6 +62,7 @@
                         <span>Downline</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="downline" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
@@ -71,6 +71,7 @@
                         <span>All Downline Details</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="generation-view" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
@@ -89,6 +90,7 @@
                         <span>Direct Downline</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="bank" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
@@ -98,6 +100,7 @@
                         <span>Bank</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="support" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
@@ -106,6 +109,7 @@
                         <span>Support</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="revenue" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
@@ -114,6 +118,7 @@
                         <span>Revenue</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <!-- <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div> -->
@@ -124,20 +129,9 @@
                         <li><a href=" {{ route('change.password.code') }}"> Change Password </a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="login" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:padlock"></i> -->
-                        </div>
-                        <span>Logout</span>
-                    </a>
-                </li>
-
-                @endif
-
 
                 <li>
-                    <a href="login" class="waves-effect">
+                    <a href="logout" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:padlock"></i> -->
                         </div>
