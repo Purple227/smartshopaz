@@ -47,10 +47,10 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
-        $product->main_price = $request->main_price == null ? $request->multiple_main_price : $request->main_price;
-        $product->regular_price = $request->regular_price == null ? $request->multiple_regular_price : $request->regular_price;
-        $product->super_buyer_price = $request->super_buyer_price == null ? $request->multiple_super_buyer_price : $request->super_buyer_price;
-        $product->weight = $request->weight == null ? $request->multiple_weight : $request->weight;
+        $product->main_price = $request->main_price;
+        $product->regular_price = $request->regular_price;
+        $product->super_buyer_price = $request->super_buyer_price;
+        $product->weight = $request->weight;
         $product->description = $request->description;
         $product->variation_name = $request->variation_name;
         $product->slug = $unique_slug;
