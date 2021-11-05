@@ -2169,9 +2169,6 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required,
         email: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.email
       },
-      phone: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
-      },
       dateOfBirth: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
       },
@@ -2292,7 +2289,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         privacy: this.registration.privacy,
         ron_code: this.registration.RONCode,
         username: this.registration.userName,
-        wallet: this.registerInfo == "" ? 20000 : this.registerInfo.register_fee
+        wallet: this.registerFee
       }).then(function (response) {
         self.user = response.data;
         self.completeRegistration(transactionID, response.data.id, response.data.name);

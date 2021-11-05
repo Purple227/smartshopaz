@@ -117,10 +117,6 @@ const app = new Vue({
         required,
         email,
       },
-      
-      phone: {
-        required,
-      },
 
       dateOfBirth: {
         required,
@@ -272,7 +268,7 @@ const app = new Vue({
         privacy: this.registration.privacy,
         ron_code: this.registration.RONCode,
         username: this.registration.userName,
-        wallet: this.registerInfo == "" ? 20000 : this.registerInfo.register_fee 
+        wallet: this.registerFee
       })
       .then(function (response) {
        self.user = response.data
