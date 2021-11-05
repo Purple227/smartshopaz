@@ -44,6 +44,14 @@ const app = new Vue({
         country: '',
       },
 
+			productMultiOption: [{
+				variationName: null,
+				weight: null,
+				mainPrice: null,
+        regularPrice: null,
+        superBuyerPrice: null
+			}],
+
       utilities: {
         sponsor: null,
         sponsorStatus: false,
@@ -71,6 +79,8 @@ const app = new Vue({
       sumInCart: null,
       cart: null,
       singleProduct: null,
+      registerFee: null,
+      registerPercent: null
     }
   },
 
@@ -181,9 +191,24 @@ const app = new Vue({
     this.searchProductData()
     this.getProduct()
     this.cartMethod()
+    this.getSetSuperBuyerDetail()
   },
 
   methods: { //Method calibrace open
+
+    addMultiOption() {
+      this.productMultiOption.push({
+				variationName: null,
+				weight: null,
+				mainPrice: null,
+        regularPrice: null,
+        superBuyerPrice: null
+			})
+    },
+
+    removeMultiOption(index) {
+      this.productMultiOption.splice(index, 1)
+    },
 
     payWithPaystack() {
       let self = this;
@@ -191,7 +216,7 @@ const app = new Vue({
       var handler = PaystackPop.setup({
         key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
         email: this.registration.email,
-        amount: 20000 * 100,
+        amount: this.registerFee * 100,
         currency: "NGN",
         ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
         metadata: {
@@ -208,7 +233,7 @@ const app = new Vue({
         },
         onClose: function() {
           alert("window closed");
-          
+          self.buttonLoader = false
         },
       });
       handler.openIframe();
@@ -246,7 +271,8 @@ const app = new Vue({
         password_confirmation: this.registration.passwordConfirmation,
         privacy: this.registration.privacy,
         ron_code: this.registration.RONCode,
-        username: this.registration.userName
+        username: this.registration.userName,
+        wallet: this.registerInfo == "" ? 20000 : this.registerInfo.register_fee 
       })
       .then(function (response) {
        self.user = response.data
@@ -322,6 +348,14 @@ const app = new Vue({
         });
     },
 
+    getSetSuperBuyerDetail() {
+      self = this
+        axios.get(`register-detail`)
+        .then(response => {
+          this.registerFee = response.data.register_fee
+          this.registerPercent = response.data.register_fee_percentage
+        })
+    },
 
     emailMethod() {
       self = this

@@ -2108,6 +2108,13 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         state: '',
         country: ''
       },
+      productMultiOption: [{
+        variationName: null,
+        weight: null,
+        mainPrice: null,
+        regularPrice: null,
+        superBuyerPrice: null
+      }],
       utilities: {
         sponsor: null,
         sponsorStatus: false,
@@ -2132,7 +2139,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       sortAlpha: 'Sort By Alpha',
       sumInCart: null,
       cart: null,
-      singleProduct: null
+      singleProduct: null,
+      registerFee: null,
+      registerPercent: null
     };
   },
   validations: {
@@ -2214,16 +2223,29 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     this.searchProductData();
     this.getProduct();
     this.cartMethod();
+    this.getSetSuperBuyerDetail();
   },
   methods: {
     //Method calibrace open
+    addMultiOption: function addMultiOption() {
+      this.productMultiOption.push({
+        variationName: null,
+        weight: null,
+        mainPrice: null,
+        regularPrice: null,
+        superBuyerPrice: null
+      });
+    },
+    removeMultiOption: function removeMultiOption(index) {
+      this.productMultiOption.splice(index, 1);
+    },
     payWithPaystack: function payWithPaystack() {
       var self = this;
       self.buttonLoader = true;
       var handler = PaystackPop.setup({
         key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
         email: this.registration.email,
-        amount: 20000 * 100,
+        amount: this.registerFee * 100,
         currency: "NGN",
         ref: "" + Math.floor(Math.random() * 1000000000 + 1),
         // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
@@ -2239,6 +2261,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         },
         onClose: function onClose() {
           alert("window closed");
+          self.buttonLoader = false;
         }
       });
       handler.openIframe();
@@ -2268,7 +2291,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         password_confirmation: this.registration.passwordConfirmation,
         privacy: this.registration.privacy,
         ron_code: this.registration.RONCode,
-        username: this.registration.userName
+        username: this.registration.userName,
+        wallet: this.registerInfo == "" ? 20000 : this.registerInfo.register_fee
       }).then(function (response) {
         self.user = response.data;
         self.completeRegistration(transactionID, response.data.id, response.data.name);
@@ -2345,8 +2369,17 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         self.utilities.sponsorUserDetail = 'Unknown Sponsor';
       });
     },
-    emailMethod: function emailMethod() {
+    getSetSuperBuyerDetail: function getSetSuperBuyerDetail() {
       var _this4 = this;
+
+      self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("register-detail").then(function (response) {
+        _this4.registerFee = response.data.register_fee;
+        _this4.registerPercent = response.data.register_fee_percentage;
+      });
+    },
+    emailMethod: function emailMethod() {
+      var _this5 = this;
 
       self = this;
 
@@ -2356,8 +2389,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             email: this.registration.email
           }
         }).then(function (response) {
-          _this4.utilities.email = response.data;
-          _this4.utilities.emailStatus = true;
+          _this5.utilities.email = response.data;
+          _this5.utilities.emailStatus = true;
         })["catch"](function (error) {
           self.utilities.emailStatus = false;
           self.utilities.email = error.response.data;
@@ -2365,7 +2398,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     searchProductData: function searchProductData() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.searchProductQuery.length > 1) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().get('search-product', {
@@ -2373,12 +2406,12 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             search_query: this.searchProductQuery
           }
         }).then(function (response) {
-          _this5.searchProductResult = response.data;
+          _this6.searchProductResult = response.data;
         });
       }
     },
     getProduct: function getProduct(api) {
-      var _this6 = this;
+      var _this7 = this;
 
       this.sortAlpha = this.sortAlpha == 'A to Z' ? 1 : 0;
       var api_url = api || "product-api";
@@ -2388,11 +2421,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           alpha_sort: this.sortAlpha
         }
       }).then(function (response) {
-        _this6.product = response.data.data;
-        _this6.pagination.nextPageUrl = response.data.next_page_url;
-        _this6.pagination.previousPageUrl = response.data.prev_page_url;
-        _this6.pagination.to = response.data.to;
-        _this6.pagination.total = response.data.total;
+        _this7.product = response.data.data;
+        _this7.pagination.nextPageUrl = response.data.next_page_url;
+        _this7.pagination.previousPageUrl = response.data.prev_page_url;
+        _this7.pagination.to = response.data.to;
+        _this7.pagination.total = response.data.total;
       })["catch"](function (error) {// Code here
       });
     },
@@ -2432,11 +2465,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }, 0);
     },
     singleProductMethod: function singleProductMethod(ID) {
-      var _this7 = this;
+      var _this8 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("single-product/".concat(ID)).then(function (response) {
-        _this7.singleProduct = response.data;
+        _this8.singleProduct = response.data;
       });
     },
     itemCounterMethod: function itemCounterMethod(ID, price, name, count) {

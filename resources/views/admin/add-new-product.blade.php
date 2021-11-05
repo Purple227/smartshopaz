@@ -56,6 +56,7 @@
 
 <body data-topbar="colored">
 
+
     <!-- Begin page -->
     <div id="layout-wrapper">
 
@@ -68,7 +69,7 @@
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
-        <div class="main-content">
+        <div class="main-content" id="app">
 
             <div class="page-content">
 
@@ -193,45 +194,56 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            @verbatim
                                             <div class="types" id="Typemulti" style="display: none;">
-                                                <div class="row">
+                                                <div class="row" v-for="(multi, index) in productMultiOption" :key="index">
+                                                <p> {{ index+1 }}</p>
+                                                <div class="col-md-1 mb-2">
+                                                        <p @click="addMultiOption"> add </p>
+                                                        <p @click="removeMultiOption(index)" v-if='index >= 1' >  remove </p>
+                                                    </div>
+
                                                     <div class="col-md-3 mb-3">
                                                         <label for="validationCustom01">Variation Name</label>
-                                                        <input type="text" name="variation_name" class="form-control" id="validationCustom01" placeholder="e.g: Adidas" value="">
+                                                        <input type="text" name="variation_name" v-model="multi.variationName" class="form-control" id="validationCustom01" placeholder="e.g: Adidas" value="">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label for="validationCustom01">Weight(kg)</label>
-                                                        <input type="number" name="multiple_weight" class="form-control" id="validationCustom01" placeholder="e.g 20" value="">
+                                                        <input type="number" name="multiple_weight" v-model="multi.weight" class="form-control" id="validationCustom01" placeholder="e.g 20" value="">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 mb-3">
                                                         <label for="validationCustom01">Main Price(₦)</label>
-                                                        <input type="number" name="multiple_main_price" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="">
+                                                        <input type="number" name="multiple_main_price" v-model="multi.mainPrice" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 mb-3">
                                                         <label for="validationCustom02">Regular Price(₦)</label>
-                                                        <input type="number" name="multiple_regular_price" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" >
+                                                        <input type="number" name="multiple_regular_price" v-model="multi.regularPrice" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" >
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-2 mb-3">
                                                         <label for="validationCustom02">SuperBuyers Price(₦)</label>
-                                                        <input type="number" name="multiple_super_buyer_price" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="">
+                                                        <input type="number" name="multiple_super_buyer_price" v-model="multi.superBuyerPrice" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="">
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
+                                            @endverbatim
                                             <div class="form-group">
                                                 <textarea class="summernote" name="description"> </textarea>
                                             </div>
@@ -289,6 +301,7 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>
