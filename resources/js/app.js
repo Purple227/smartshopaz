@@ -44,6 +44,14 @@ const app = new Vue({
         country: '',
       },
 
+			productMultiOption: [{
+				variationName: null,
+				weight: null,
+				mainPrice: null,
+        regularPrice: null,
+        superBuyerPrice: null
+			}],
+
       utilities: {
         sponsor: null,
         sponsorStatus: false,
@@ -184,6 +192,20 @@ const app = new Vue({
   },
 
   methods: { //Method calibrace open
+
+    addMultiOption() {
+      this.productMultiOption.push({
+				variationName: null,
+				weight: null,
+				mainPrice: null,
+        regularPrice: null,
+        superBuyerPrice: null
+			})
+    },
+
+    removeMultiOption(index) {
+      this.productMultiOption.splice(index, 1)
+    },
 
     payWithPaystack() {
       let self = this;

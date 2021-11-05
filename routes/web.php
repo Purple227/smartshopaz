@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DeliveryController;
 use App\Http\Controllers\Admin\RankController;
 use App\Http\Controllers\Admin\IncentiveController;
 use App\Http\Controllers\SuperBuyer\ProductController as SuperProductController;
+use App\Http\Controllers\Admin\RegisterFeeController;
 
 
 /*
@@ -85,6 +86,11 @@ Route::get('/super-buyer', [SuperBuyerController::class, 'index'])->name('admin.
 // Admin delivery Fee 
 Route::get('/delivery-fee', [DeliveryController::class, 'deliveryFeeUI'])->name('admin.delivery.fee');
 Route::post('/delivery-fee', [DeliveryController::class, 'store'])->name('admin.delivery.fee');
+
+// Admin register Fee 
+Route::get('/register-fee', [RegisterFeeController::class, 'index'])->name('admin.register.fee');
+Route::post('/registry-fee', [RegisterFeeController::class, 'store'])->name('admin.register.fee');
+
 
 // Admin rank  
 Route::get('/add-rank', [RankController::class, 'addRankUI'])->name('admin.rank');

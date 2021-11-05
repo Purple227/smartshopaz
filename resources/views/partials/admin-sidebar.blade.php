@@ -143,7 +143,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="register-fee" class="waves-effect">
+                    <a href="{{ route('admin.register.fee') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:sorting"></i></div>
                         <span>Register Fee</span>
                     </a>

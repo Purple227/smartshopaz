@@ -81,20 +81,22 @@
                                     <div class="card-body">
                                         <h3>The current Registeration fee is <code>NGN 20,000</code> and the shared monthly link bonus that will be share is <code>1600</code>.</h3>
 
-                                        <form id="form">
-                                            <div class="form-group">
+                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('admin.register.fee') }} ">
+                                     @csrf
+                                     
+                                     <div class="form-group">
                                                 <label for="to-input">Registration fee</label>
-                                                <input type="number" class="form-control" id="to-input" placeholder="Title">
+                                                <input type="number" name="register_fee" class="form-control" id="to-input" value="{{ $register_fee == null ? 0.00 : $register_fee->register_fee }}"  placeholder="Registration Fee">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Monthly link bonus Percentage(%)</label>
-                                                <input type="number" class="form-control" placeholder="Discount" />
+                                                <input type="number" name="register_fee_percentage" value="{{ $register_fee == null ? 0.00 : $register_fee->register_fee_percentage }}"  class="form-control" placeholder="Discount" />
                                             </div>
 
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
-                                                    <button class="btn btn-primary waves-effect waves-light"> <span>Update</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Update</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
                                                 </div>
                                             </div>
 

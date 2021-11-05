@@ -2108,6 +2108,13 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         state: '',
         country: ''
       },
+      productMultiOption: [{
+        variationName: null,
+        weight: null,
+        mainPrice: null,
+        regularPrice: null,
+        superBuyerPrice: null
+      }],
       utilities: {
         sponsor: null,
         sponsorStatus: false,
@@ -2217,6 +2224,18 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
   },
   methods: {
     //Method calibrace open
+    addMultiOption: function addMultiOption() {
+      this.productMultiOption.push({
+        variationName: null,
+        weight: null,
+        mainPrice: null,
+        regularPrice: null,
+        superBuyerPrice: null
+      });
+    },
+    removeMultiOption: function removeMultiOption(index) {
+      this.productMultiOption.splice(index, 1);
+    },
     payWithPaystack: function payWithPaystack() {
       var self = this;
       self.buttonLoader = true;
