@@ -51,7 +51,7 @@
                             <div class="col-md-8">
                                 <h4 class="page-title mb-1">Admin List</h4>
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
                                     <li class="breadcrumb-item active">Admin List</li>
                                 </ol>
                             </div>
