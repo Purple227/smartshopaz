@@ -17,18 +17,18 @@ class RegisterFeeController extends Controller
     public function store(Request $request)
     {
         $check_register_fee_table = RegisterFee::count();
-        $register_fee = $check_delivery_table == 1 ? Delivery::find(1) : new Delivery;
+        $register_fee = $check_register_fee_table == 1 ? RegisterFee::find(1) : new RegisterFee ;
 
         if ($request->register_fee != null) {
         $register_fee->register_fee = $request->register_fee;
         }
 
         if ($request->register_fee_percentage != null) {
-        $delivery->register_fee_percentage = $request->register_fee_percentage;
+        $register_fee->register_fee_percentage = $request->register_fee_percentage;
         }
         
-        $delivery->save();
-        return redirect()->route('admin.delivery.fee');
+        $register_fee->save();
+        return redirect()->route('admin.register.fee');
 
     }
 

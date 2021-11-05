@@ -81,8 +81,9 @@
                                     <div class="card-body">
                                         <h3>The current Registeration fee is <code>NGN 20,000</code> and the shared monthly link bonus that will be share is <code>1600</code>.</h3>
 
-                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('admin.register.fee') }} ">
-                                     @csrf
+                                        <form id="form" method="POST" action=" {{ route('admin.register.fee.post') }}">
+
+                                         @csrf
                                      
                                      <div class="form-group">
                                                 <label for="to-input">Registration fee</label>
@@ -100,9 +101,8 @@
                                                 </div>
                                             </div>
 
-
-
                                         </form>
+
                                     </div>
                                 </div>
                             </div> <!-- end col -->

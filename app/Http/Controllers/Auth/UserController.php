@@ -48,7 +48,7 @@ class UserController extends Controller
         $user->policy = 1;
         $user->complete_registration = 1;
         $user->title = $request->title;
-        $user->wallet = 20000.00;
+        $user->wallet = $request->wallet;
         $user->account_type = 'super-buyer';
         $user->sponsor_id = $sponsor_code_used->id;
         $user->save();

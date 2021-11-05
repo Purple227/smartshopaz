@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\RankController;
 use App\Http\Controllers\Admin\IncentiveController;
 use App\Http\Controllers\SuperBuyer\ProductController as SuperProductController;
 use App\Http\Controllers\Admin\RegisterFeeController;
+use App\Http\Controllers\SuperBuyer\RegisterFeeController as SuperRegisterFeeController;
 
 
 /*
@@ -89,7 +90,7 @@ Route::post('/delivery-fee', [DeliveryController::class, 'store'])->name('admin.
 
 // Admin register Fee 
 Route::get('/register-fee', [RegisterFeeController::class, 'index'])->name('admin.register.fee');
-Route::post('/registry-fee', [RegisterFeeController::class, 'store'])->name('admin.register.fee');
+Route::post('/registry-fee', [RegisterFeeController::class, 'store'])->name('admin.register.fee.post');
 
 
 // Admin rank  
@@ -121,7 +122,7 @@ Route::get('/check-mail', [UserController::class, 'checkEmail']);
 Route::get('/user/{id}', [UserController::class, 'getUser']);
 Route::get('/products', [SuperProductController::class, 'index'])->name('product.super-buyer');
 Route::get('/success', [UserController::class, 'registerInfo'])->name('super-buyer.register.success');
-
+Route::get('/register-detail', [SuperRegisterFeeController::class, 'RegisterFeedetailAPIs']);
 });
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');
