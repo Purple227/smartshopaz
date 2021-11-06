@@ -26,8 +26,8 @@ class CreateProductsTable extends Migration
             $table->integer('weight')->nullable();
             $table->text('description');
             $table->string('image')->nullable();
-            $table->string('variation_name')->nullable();
             $table->string('slug');
+            $table->string('stock')->nullable();
 
             $table->timestamps();
         });

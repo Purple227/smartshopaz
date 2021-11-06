@@ -53,6 +53,15 @@ class UserController extends Controller
         $user->sponsor_id = $sponsor_code_used->id;
         $user->save();
 
+         
+/*
+        $get_sponsored_user = User::where('sponsor_id', $sponsor_code_used->id)->get();
+
+        Flight::where('active', 1)
+        ->where('destination', 'San Diego')
+        ->update(['delayed' => 1]);
+*/
+
         $sponsor = new Sponsor;
         $sponsor->user_id = $user->id;
         $sponsor->sponsor_code = 'SB'.''.mt_rand(100000, 999999);

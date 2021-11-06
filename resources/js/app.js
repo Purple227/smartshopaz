@@ -69,6 +69,18 @@ const app = new Vue({
         total: null,
       },
 
+      productForm: {
+        title: '',
+        discount: '',
+        categoryID: null,
+        brandID: '',
+        stock: '',
+        mainPrice: '',
+        regularPrice: '',
+        superBuyerPrice: '',
+        description: '',
+      },
+
       buttonLoader: false,
       user: null,
       searchProductResult: null,
@@ -80,7 +92,9 @@ const app = new Vue({
       cart: null,
       singleProduct: null,
       registerFee: null,
-      registerPercent: null
+      registerPercent: null,
+      adminCategory: null,
+      adminBrand: null,
     }
   },
 
@@ -188,6 +202,8 @@ const app = new Vue({
     this.getProduct()
     this.cartMethod()
     this.getSetSuperBuyerDetail()
+    this.getAdminBrand()
+    this.getAdminCategory()
   },
 
   methods: { //Method calibrace open
@@ -255,6 +271,30 @@ const app = new Vue({
       .catch(function() {});
     },
 
+    saveProduct() {
+    	let self = this;
+      Vue.axios
+      .post(
+        "save-product",
+        {
+          title: this.productForm.title,
+          discount : this.productForm.discount,
+          category_id: this.productForm.categoryID,
+          brand_id: this.productForm.brandID,
+          main_price: this.productForm.mainPrice,
+          regular_price: this.productForm.regularPrice,
+          super_buyer_price: this.productForm.superBuyerPrice,
+          weight: this.productForm.weight,
+          description: this.productForm.stock
+        }
+        )
+      .then(() => {
+        self.buttonLoader = false
+        window.location = '/super-buyer/success'
+      })
+      .catch(function() {});
+    },
+
     registerSuperBuyer(transactionID) {
       let self = this
       Vue.axios.post('register', {
@@ -268,7 +308,8 @@ const app = new Vue({
         privacy: this.registration.privacy,
         ron_code: this.registration.RONCode,
         username: this.registration.userName,
-        wallet: this.registerFee
+        wallet: this.registerFee,
+        register_percentage: this.registerPercent
       })
       .then(function (response) {
        self.user = response.data
@@ -350,6 +391,22 @@ const app = new Vue({
         .then(response => {
           this.registerFee = response.data.register_fee
           this.registerPercent = response.data.register_fee_percentage
+        })
+    },
+
+    getAdminCategory() {
+      self = this
+        axios.get(`list-categories-api`)
+        .then(response => {
+          this.adminCategory = response.data
+        })
+    },
+
+    getAdminBrand() {
+      self = this
+        axios.get(`list-brands-api`)
+        .then(response => {
+          this.adminBrand = response.data
         })
     },
 

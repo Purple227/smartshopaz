@@ -80,8 +80,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <h5>Welcome Back Username!</h5>
-                                                <p class="text-muted">Last Sign In: 22/10/2021</p>
-                                                <p class="text-primary">My Sponsor ID: 22312</p>
+                                                <p class="text-primary">My Sponsor ID: {{ Auth::user()->sponsor_code }} </p>
 
                                                 <div class="mt-4">
                                                     <!-- <a href="#" class="btn btn-primary btn-sm">View more <i class="mdi mdi-arrow-right ml-1"></i></a> -->

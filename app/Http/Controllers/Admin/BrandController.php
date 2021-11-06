@@ -86,6 +86,9 @@ class BrandController extends Controller
         return view('admin.edit-brand',  ['brand' => $brand]);
     }
 
-
+    public function getBrandAPIs()
+    {
+        return $list_brands = Brand::all();
+    }
 
 }

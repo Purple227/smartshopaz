@@ -58,6 +58,7 @@ Route::get('/list-categories', [CategryController::class, 'index'])->name('list.
 Route::get('/delete-category/{id}', [CategryController::class, 'destroy'])->name('destroy.category');
 Route::patch('/update-category/{id}', [CategryController::class, 'update'])->name('patch.category');
 Route::get('/update-category/{slug}', [CategryController::class, 'updateCategoryUI'])->name('update.catgory'); 
+Route::get('/list-categories-api', [CategryController::class, 'getCategoryAPIs']);
 
 // Admin brand section
 Route::get('/add-brand', [BrandController::class, 'addBrandUI'])->name('add.brand');
@@ -66,7 +67,7 @@ Route::get('/list-brands', [BrandController::class, 'index'])->name('list.brand'
 Route::get('/delete-brand/{id}', [BrandController::class, 'destroy'])->name('destroy.brand');
 Route::patch('/update-brand/{id}', [BrandController::class, 'update'])->name('patch.brand');
 Route::get('/update-brand/{slug}', [BrandController::class, 'updateBrandUI'])->name('update.brand'); 
-
+Route::get('/list-brands-api', [BrandController::class, 'getBrandAPIs']);
 
 // Admin product section
 Route::get('/add-product', [ProductController::class, 'addProductUI'])->name('add.product');
