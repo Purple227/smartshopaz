@@ -58,7 +58,7 @@
 
 
     <!-- Begin page -->
-    <div id="layout-wrapper">
+    <div id="layout-wrapper" id="app">
 
         @include('partials/admin-topbar')
 
@@ -69,7 +69,8 @@
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
-        <div class="main-content" id="app">
+        
+        <div class="main-content"> 
 
             <div class="page-content">
 
@@ -109,46 +110,49 @@
                                             @endforeach
 @endif
 
-
                                         <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('post.product') }} ">
 
                                             @csrf
 
                                             <div class="form-group">
                                                 <label for="to-input">Product Name</label>
-                                                <input type="text" name="title" class="form-control" id="to-input" placeholder="Title">
+                                                <input type="text" name="title" v-model="productForm.title" class="form-control" id="to-input" placeholder="Title">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Discount(%)</label>
-                                                <input type="number" name="discount" class="form-control" placeholder="Discount" />
+                                                <input type="number" v-model="productForm.discount" name="discount" class="form-control" placeholder="Discount" />
                                             </div>
+
                                             <div class="form-group ">
                                                 <label>Categories</label>
                                                 <select class="selectize form-control" name="category_id">
-                                                    <option value="">Select...</option>
+                                                <option value="">Select...</option>
                                                     @foreach ($list_categories as $key => $category)
                                                     <option value=" {{ $category->id }} "> {{ $category->name }} </option>
                                                      @endforeach
-                                                </select>
+                                               </select>
                                             </div>
+
                                             <div class="form-group ">
                                                 <label>Brand</label>
                                                 <select class="selectize form-control" id="siteID" class="abcd" name="brand_id">
-                                                    <option value="">Select...</option>
+                                                <option value="">Select...</option>
                                                     @foreach ($list_brands as $key => $brand)
                                                     <option value="{{ $brand->id }}"> {{ $brand->name }} </option>
                                                     @endforeach
                                                 </select>
                                             </div>
+
                                             <div class="form-group ">
                                                 <label>Status</label>
-                                                <select class="selectize form-control" id="siteID" class="abcd" name="brand_id">
+                                                <select class="selectize form-control" id="siteID" class="abcd" name="brand_id" v-model="productForm.stock">
                                                     <option value="">Select...</option>
                                                     <option value="instock"> In stock </option>
                                                     <option value="outstock"> Out of stock </option>
                                                 </select>
                                             </div>
+
                                             <div class="row mb-3">
                                                 <div class="col-sm-12">
                                                     <div class="">
@@ -164,39 +168,42 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="row types" id="Typesingle">
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom01">Main Price(₦)</label>
-                                                    <input type="number" name="main_price" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="" >
+                                                    <input type="number" name="main_price" v-model="productForm.mainPrice" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="" >
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom02">Regular Price(₦)</label>
-                                                    <input type="number" name="regular_price" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" >
+                                                    <input type="number" name="regular_price" v-model="productForm.regularPrice" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" >
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom02">SuperBuyers Price(₦)</label>
-                                                    <input type="number" name="super_buyer_price" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="" >
+                                                    <input type="number" name="super_buyer_price" v-model="productForm.superBuyerPrice" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="" >
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-3 mb-3">
                                                     <label for="validationCustom01">Weight(kg)</label>
-                                                    <input type="number" name="weight" class="form-control" id="validationCustom01" placeholder="Weight" value="">
+                                                    <input type="number" v-model="productForm.weight" name="weight" class="form-control" id="validationCustom01" placeholder="Weight" value="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            @verbatim
-                                            <div class="types" id="Typemulti" style="display: none;">
+@verbatim
+                                            <div class="types" id="Typemulti" style="display: none;" v-if="false">
                                                 <div class="row" v-for="(multi, index) in productMultiOption" :key="index">
                                                 <p> {{ index+1 }}</p>
                                                 <div class="col-md-1 mb-2">
@@ -243,9 +250,9 @@
 
                                                 </div>
                                             </div>
-                                            @endverbatim
+@endverbatim
                                             <div class="form-group">
-                                                <textarea class="summernote" name="description"> </textarea>
+                                                <textarea class="summernote" name="description" v-model="productForm.description"> </textarea>
                                             </div>
 
                                             <div class="form-group">

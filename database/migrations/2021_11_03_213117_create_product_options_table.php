@@ -15,6 +15,12 @@ class CreateProductOptionsTable extends Migration
     {
         Schema::create('product_options', function (Blueprint $table) {
             $table->id();
+
+            $table->string('variation_name')->nullable();
+            $table->double('main_price', 8, 2 );
+            $table->double('regular_price', 8, 2 )->nullable();
+            $table->double('super_buyer_price', 8, 2 )->nullable();
+
             $table->timestamps();
         });
     }

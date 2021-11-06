@@ -87,4 +87,9 @@ class CategryController extends Controller
         return view('admin.edit-category',  ['category' => $category]);
     }
 
+    public function getCategoryAPIs()
+    {
+        return $list_categories = Category::all();
+    }
+
 }

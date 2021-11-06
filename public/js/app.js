@@ -2130,6 +2130,17 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         to: null,
         total: null
       },
+      productForm: {
+        title: '',
+        discount: '',
+        categoryID: null,
+        brandID: '',
+        stock: '',
+        mainPrice: '',
+        regularPrice: '',
+        superBuyerPrice: '',
+        description: ''
+      },
       buttonLoader: false,
       user: null,
       searchProductResult: null,
@@ -2141,7 +2152,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       cart: null,
       singleProduct: null,
       registerFee: null,
-      registerPercent: null
+      registerPercent: null,
+      adminCategory: null,
+      adminBrand: null
     };
   },
   validations: {
@@ -2221,6 +2234,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     this.getProduct();
     this.cartMethod();
     this.getSetSuperBuyerDetail();
+    this.getAdminBrand();
+    this.getAdminCategory();
   },
   methods: {
     //Method calibrace open
@@ -2276,6 +2291,23 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         window.location = '/super-buyer/success';
       })["catch"](function () {});
     },
+    saveProduct: function saveProduct() {
+      var self = this;
+      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("save-product", {
+        title: this.productForm.title,
+        discount: this.productForm.discount,
+        category_id: this.productForm.categoryID,
+        brand_id: this.productForm.brandID,
+        main_price: this.productForm.mainPrice,
+        regular_price: this.productForm.regularPrice,
+        super_buyer_price: this.productForm.superBuyerPrice,
+        weight: this.productForm.weight,
+        description: this.productForm.stock
+      }).then(function () {
+        self.buttonLoader = false;
+        window.location = '/super-buyer/success';
+      })["catch"](function () {});
+    },
     registerSuperBuyer: function registerSuperBuyer(transactionID) {
       var self = this;
       vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post('register', {
@@ -2289,7 +2321,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         privacy: this.registration.privacy,
         ron_code: this.registration.RONCode,
         username: this.registration.userName,
-        wallet: this.registerFee
+        wallet: this.registerFee,
+        register_percentage: this.registerPercent
       }).then(function (response) {
         self.user = response.data;
         self.completeRegistration(transactionID, response.data.id, response.data.name);
@@ -2375,8 +2408,24 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         _this4.registerPercent = response.data.register_fee_percentage;
       });
     },
-    emailMethod: function emailMethod() {
+    getAdminCategory: function getAdminCategory() {
       var _this5 = this;
+
+      self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-categories-api").then(function (response) {
+        _this5.adminCategory = response.data;
+      });
+    },
+    getAdminBrand: function getAdminBrand() {
+      var _this6 = this;
+
+      self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-brands-api").then(function (response) {
+        _this6.adminBrand = response.data;
+      });
+    },
+    emailMethod: function emailMethod() {
+      var _this7 = this;
 
       self = this;
 
@@ -2386,8 +2435,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             email: this.registration.email
           }
         }).then(function (response) {
-          _this5.utilities.email = response.data;
-          _this5.utilities.emailStatus = true;
+          _this7.utilities.email = response.data;
+          _this7.utilities.emailStatus = true;
         })["catch"](function (error) {
           self.utilities.emailStatus = false;
           self.utilities.email = error.response.data;
@@ -2395,7 +2444,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     searchProductData: function searchProductData() {
-      var _this6 = this;
+      var _this8 = this;
 
       if (this.searchProductQuery.length > 1) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().get('search-product', {
@@ -2403,12 +2452,12 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             search_query: this.searchProductQuery
           }
         }).then(function (response) {
-          _this6.searchProductResult = response.data;
+          _this8.searchProductResult = response.data;
         });
       }
     },
     getProduct: function getProduct(api) {
-      var _this7 = this;
+      var _this9 = this;
 
       this.sortAlpha = this.sortAlpha == 'A to Z' ? 1 : 0;
       var api_url = api || "product-api";
@@ -2418,11 +2467,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           alpha_sort: this.sortAlpha
         }
       }).then(function (response) {
-        _this7.product = response.data.data;
-        _this7.pagination.nextPageUrl = response.data.next_page_url;
-        _this7.pagination.previousPageUrl = response.data.prev_page_url;
-        _this7.pagination.to = response.data.to;
-        _this7.pagination.total = response.data.total;
+        _this9.product = response.data.data;
+        _this9.pagination.nextPageUrl = response.data.next_page_url;
+        _this9.pagination.previousPageUrl = response.data.prev_page_url;
+        _this9.pagination.to = response.data.to;
+        _this9.pagination.total = response.data.total;
       })["catch"](function (error) {// Code here
       });
     },
@@ -2462,11 +2511,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }, 0);
     },
     singleProductMethod: function singleProductMethod(ID) {
-      var _this8 = this;
+      var _this10 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("single-product/".concat(ID)).then(function (response) {
-        _this8.singleProduct = response.data;
+        _this10.singleProduct = response.data;
       });
     },
     itemCounterMethod: function itemCounterMethod(ID, price, name, count) {

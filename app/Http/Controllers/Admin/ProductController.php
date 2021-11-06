@@ -52,9 +52,20 @@ class ProductController extends Controller
         $product->super_buyer_price = $request->super_buyer_price;
         $product->weight = $request->weight;
         $product->description = $request->description;
-        $product->variation_name = $request->variation_name;
         $product->slug = $unique_slug;
+        $product->stock = $request->stock;
         $product->save();
+
+/*
+        $b = $request->basket;
+        for ($i=0; $i < count($b) ; $i++) { 
+            $tag = $order->tags()->create([
+                'name' => $b[$i] ['name'],
+                'count' => $b[$i] ['count'],
+                'price' => $b[$i] ['price'],
+            ]);
+        }
+*/
 
         $request->session()->flash('status', 'Task was successful!');
         return redirect()->route('list.product');
