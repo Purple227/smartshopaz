@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Revenue | Smartshoppers Dashboard</title>
+    <title>Downlines | Superbuyers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Smartshoppers Admin CMS" name="description" />
     <meta content="Smartshoppers" name="author" />
@@ -16,12 +16,12 @@
 
     <!-- Responsive datatable examples -->
     <link href="../assets-dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets-dash/libs/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
     <link href="../assets-dash/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
     <link href="../assets-dash/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets-dash/css/tree.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="../assets-dash/css/app.min.css" rel="stylesheet" type="text/css" />
 
@@ -36,6 +36,7 @@
 
         <!-- ========== Left Sidebar Start ========== -->
         @include('../partials/sb-sidebar.php')
+        <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
         <!-- Start right Content here -->
@@ -49,17 +50,17 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h4 class="page-title mb-1">Revenue</h4>
+                                <h4 class="page-title mb-1"> All Downlines</h4>
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Revenue</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
+                                    <li class="breadcrumb-item active">All Dowlines</li>
                                 </ol>
                             </div>
                             <!-- <div class="col-md-4">
                                 <div class="float-right">
                                     <div class="dropdown">
-                                        <a href="add-new-product" class="btn btn-dark btn-rounded " type="button">
-                                            <i class="mdi mdi-plus mr-1"></i> Add New Product
+                                        <a href="" class="btn btn-dark btn-rounded " type="button">
+                                            <i class="mdi mdi-plus mr-1"></i> Add New Post
                                         </a>
                                     </div>
                                 </div>
@@ -73,74 +74,59 @@
                 <div class="page-content-wrapper">
                     <div class="container-fluid">
 
-                    <div class="card">
-                                    <div class="card-body">
-
-                                        <h4 class="header-title">Rank Progress</h4>
-                                        <p class="card-title-desc"></p>
-
-                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th> S/N</th>
-                                                    <th>Member (ID)</th>
-                                                    <th>Name</th>
-                                                    <th>Rank</th>
-                                                    <th>Qualification Date</th>
-                                                    <th>Total Number of downlines</th>
-                                                    <th>Total group sales</th>
-                                                </tr>
-                                            </thead>
-
-
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>SB-23453323</td>
-                                                    <td>helen</td>
-                                                    <td>Diamond</td>
-                                                    <td>2/3/2021</td>
-                                                    <td> 10</td>
-                                                    <td>20</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
+                        <div class="row">
+                            <div class="col-12">
 
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="header-title">Biweekly performance bonus</h4>
+                                        <h4 class="header-title">All Downline Details</h4>
                                         <p class="card-title-desc"></p>
+
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b>oops! </b>
+                                        </div>
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b>Added Successfully</b>
+                                        </div>
 
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>S/N</th>
-                                                    <th>Bonus receive Date</th>
-                                                    <th>level</th>
-                                                    <th>percentage</th>
-                                                    <th>remark</th>
-                                                    <th>Amount</th>
+                                                    <th>s/n</th>
+                                                    <th>Member ID</th>
+                                                    <th>Name</th>
+                                                    <th>Position</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Date joined</th>
+                                                    <th>Amount Paid</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
                                                 <tr>
-                                                    <td>WSB-8662</td>
-                                                    <td>12/08/2021</td>
-                                                    <td>Diamond</td>
-                                                    <td>10%</td>
-                                                    <td>purchase of 50,000</td>
-                                                    <td>₦135,000</td>
+                                                    <td>0</td>
+                                                    <td>SB-0001</td>
+                                                    <td>Helen</td>
+                                                    <td>Alexandrite</td>
+                                                    <td>abc@superbuyers.com</td>
+                                                    <td>0800000</td>
+                                                    <td>12/10/2021</td>
+                                                    <th>20,000</th>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+
+
+
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
 
                     </div>
                     <!-- end container-fluid -->
@@ -188,14 +174,26 @@
     <!-- Responsive examples -->
     <script src="../assets-dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../assets-dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-    <script src="../assets-dash/libs/air-datepicker/js/datepicker.min.js"></script>
-    <script src="../assets-dash/libs/air-datepicker/js/i18n/datepicker.en.js"></script>
 
     <!-- Datatable init js -->
     <script src="../assets-dash/js/pages/datatables.init.js"></script>
 
     <script src="../assets-dash/js/app.js"></script>
+    <script src="../assets-dash/js/tree.js"></script>
     <script src="../assets-dash/js/iconify.min.js"></script>
+    <script>
+        $(function() {
+            $('.genealogy-tree ul').hide();
+            $('.genealogy-tree>ul').show();
+            $('.genealogy-tree ul.active').show();
+            $('.genealogy-tree li').on('click', function(e) {
+                var children = $(this).find('> ul');
+                if (children.is(":visible")) children.hide('fast').removeClass('active');
+                else children.show('fast').addClass('active');
+                e.stopPropagation();
+            });
+        });
+    </script>
 
 </body>
 

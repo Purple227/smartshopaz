@@ -55,16 +55,16 @@
                 </li>
                 
                 <li>
-                    <a href="my-downline" class="waves-effect">
+                    <a href="direct-downline" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>
-                        <span>Downline</span>
+                        <span>Direct Downline</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="downline" class="waves-effect">
+                    <a href="all-downline-details" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>

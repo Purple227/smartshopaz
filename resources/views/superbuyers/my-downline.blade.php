@@ -232,7 +232,7 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                    <h5>View Hierarchy</h5>
+                                        <h5>View Hierarchy</h5>
                                         <div class="row">
                                             <div class="body genealogy-body genealogy-scroll text-center">
                                                 <div class="genealogy-tree">
@@ -255,7 +255,7 @@
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
-                                                                                Me (click to see people under )
+                                                                                    Me (click to see people under )
                                                                                 </div>
                                                                             </div>
                                                                         </div>
