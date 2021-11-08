@@ -98,7 +98,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="header-title mb-4">Info</h5>
-                                        <div class="media">
+                                        <!-- <div class="media">
                                             <div class="media-body">
                                                 <p class="text-muted mb-2">Grand Total</p>
                                                 <h4>₦ 0</h4>
@@ -106,7 +106,7 @@
                                             <div dir="ltr" class="ml-2">
                                                 <input data-plugin="knob" data-width="56" data-height="56" data-linecap=round data-displayInput=false data-fgColor="#f15959" value="56" data-skin="tron" data-angleOffset="56" data-readOnly=true data-thickness=".17" />
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <hr>
                                         <div class="media">
                                             <div class="media-body">

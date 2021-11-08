@@ -31,7 +31,7 @@
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:grid"></i> -->
                         </div>
-                        <span class="badge badge-pill badge-primary float-right">0</span>
+                        <!-- <span class="badge badge-pill badge-primary float-right">0</span> -->
                         <span>Orders</span>
                     </a>
                 </li>
@@ -86,7 +86,7 @@
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:star-half-alt"></i> -->
                         </div>
-                        <span class="badge badge-pill badge-primary float-right">1</span>
+                        <!-- <span class="badge badge-pill badge-primary float-right">1</span> -->
                         <span>Direct Downline</span>
                     </a>
                 </li>
@@ -96,7 +96,7 @@
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:grid"></i> -->
                         </div>
-                        <span class="badge badge-pill badge-primary float-right">0</span>
+                        <!-- <span class="badge badge-pill badge-primary float-right">0</span> -->
                         <span>Bank</span>
                     </a>
                 </li>
