@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Edit Blog Posts | Smartshoppers Dashboard</title>
+    <title> Change Password | Smartshoppers Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Smartshoppers Admin CMS" name="description" />
     <meta content="Smartshoppers" name="author" />
@@ -33,10 +33,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/sb-topbar.php')
+        @include('partials/sb-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/sb-sidebar.php')
+        @include('partials/sb-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -51,11 +51,11 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h4 class="page-title mb-1">Blog</h4>
+                                <h4 class="page-title mb-1">Password</h4>
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Blog</a></li>
-                                    <li class="breadcrumb-item active">Edit Post</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Password</a></li>
+                                    <li class="breadcrumb-item active"> Change Password</li>
                                 </ol>
                             </div>
                         </div>
@@ -78,27 +78,27 @@
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom06">Current Password</label>
-                                                    <input type="password" class="form-control" id="validationCustom06" placeholder="RON Code" value="fsfesfew3432">
+                                                    <input type="password" class="form-control" id="validationCustom06" placeholder="Current Password" value="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom07">New password</label>
-                                                    <input type="password" class="form-control" id="validationCustom07" placeholder="RON Code" value="fsfesfew3432">
+                                                    <input type="password" class="form-control" id="validationCustom07" placeholder="New Password" value="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom08">Confirm New password</label>
-                                                    <input type="password" class="form-control" id="validationCustom08" placeholder="Sponsor ID" value="Otsdfwe221to">
+                                                    <input type="password" class="form-control" id="validationCustom08" placeholder="Confirm Password" value="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Update</button>
+                                            <button class="btn btn-primary" type="submit"> Update</button>
                                         </form>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/sb-footer.php')
+            @include('partials/sb-footer')
         </div>
         <!-- end main content-->
 
@@ -121,7 +121,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/sb-rightbar.php')
+    @include('partials/sb-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

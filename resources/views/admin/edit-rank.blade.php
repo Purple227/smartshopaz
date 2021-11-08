@@ -119,8 +119,13 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="to-input"> Level</label>
+                                                <input type="number" name="level" value="{{ $rank->level }}" class="form-control" id="to-input" placeholder="Number of People">
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="to-input">No. of People</label>
-                                                <input type="number" name="nop" value="{{ $rank->nop }}" class="form-control" id="to-input" placeholder="Number of People">
+                                                <input type="number" name="no_of_people" value="{{ $rank->no_of_people }}" class="form-control" id="to-input" placeholder="Number of People">
                                             </div>
 
                                             <div class="form-group">
@@ -142,7 +147,7 @@
                                                 </div>
                                             </div>
 
-    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Add</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
+    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span> Update </span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
 
                                         </form>
                                     </div>

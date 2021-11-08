@@ -17,6 +17,7 @@ class CreateRanksTable extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('no_of_people');
             $table->string('slug')->unique();
             $table->string('image')->nullable();
 

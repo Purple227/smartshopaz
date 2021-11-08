@@ -100,12 +100,13 @@
                                     <div class="card-body">
 
 @if ($errors->any())
+@foreach ($errors->all() as $error)
+
                                         <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            @foreach ($errors->all() as $error)
                                             <b>oops! {{ $error }} </b>
-                                            @endforeach
                                         </div>
+@endforeach
 @endif
 
                                         <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('admin.rank.store') }} ">
@@ -116,9 +117,15 @@
                                                 <label for="to-input">Rank Name</label>
                                                 <input type="text" name="name" class="form-control" id="to-input" placeholder="Name">
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="to-input">Level</label>
+                                                <input type="number" min="1" max="7" name="level" class="form-control" id="to-input" placeholder="Rank Level">
+                                            </div>
+
                                             <div class="form-group">
                                                 <label for="to-input">No. of People</label>
-                                                <input type="number" name="nop" class="form-control" id="to-input" placeholder="Number of People">
+                                                <input type="number" name="no_of_people" class="form-control" id="to-input" placeholder="Number of People">
                                             </div>
 
                                             <div class="form-group">

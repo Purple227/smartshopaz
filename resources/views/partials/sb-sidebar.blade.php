@@ -126,7 +126,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{-- route('my.account.code') --}}"> My Profile</a></li>
-                        <li><a href=" {{-- route('change.password.code') --}}"> Change Password </a></li>
+                        <li><a href=" {{ route('change.password.super-buyer') }}"> Change Password </a></li>
                     </ul>
                 </li>
 

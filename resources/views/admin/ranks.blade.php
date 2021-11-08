@@ -58,7 +58,7 @@
                             <div class="col-md-4">
                                 <div class="float-right">
                                     <div class="dropdown">
-                                        <a href="{{ route('add.catgory') }}" class="btn btn-dark btn-rounded " type="button">
+                                        <a href="{{ route('admin.rank') }}" class="btn btn-dark btn-rounded " type="button">
                                             <i class="mdi mdi-plus mr-1"></i> Add New Rank
                                         </a>
                                     </div>
@@ -103,6 +103,7 @@
                                                     <th>Rank Id</th>
                                                     <th>Rank Name</th>
                                                     <th>No. of People</th>
+                                                    <th> Level </th>
                                                     <th>Icon</th>
                                                     <th>Options</th>
                                                 </tr>
@@ -114,7 +115,8 @@
                                                     @foreach ($list_ranks as $key => $rank)
                                                     <td> {{  $key + 1 }} </td>
                                                     <td> {{ $rank->name }} </td>
-                                                    <td>22</td>
+                                                    <td> {{ $rank->no_of_people }} </td>
+                                                    <td> {{ $rank->level }} </td>
                                                     <td><img src="{{ asset('storage/'.$rank->image) }}" alt="" width="35px"></td>
                                                     <td>
                                                         <div class="btn-group" role="group">

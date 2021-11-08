@@ -21,6 +21,8 @@ class RankController extends Controller
 
         $validated = $request->validate([
             'name' => 'required',
+            'no_of_people' => 'required',
+            'level' => 'required',
             ]);
     
             $random = Str::random(4);
@@ -37,6 +39,9 @@ class RankController extends Controller
     
             $rank->name = $request->name;
             $rank->slug = $unique_slug;
+            $rank->level = $request->level;
+            $rank->no_of_people = $request->no_of_people;
+            $rank->image = $request->image;
             $rank->save();
     
             $request->session()->flash('status', 'Task was successful!');
@@ -46,7 +51,6 @@ class RankController extends Controller
     public function index()
     {
         $list_ranks = Rank::all();
-
         return view('admin.ranks', [
             'list_ranks' => $list_ranks
         ]);
@@ -61,8 +65,10 @@ class RankController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-        'name' => 'required',
-        ]);
+            'name' => 'required',
+            'no_of_people' => 'required',
+            'level' => 'required',
+            ]);
 
         $rank = Rank::find($id);
 
@@ -73,6 +79,9 @@ class RankController extends Controller
         }
 
         $rank->name = $request->name;
+        $rank->level = $request->level;
+        $rank->no_of_people = $request->no_of_people;
+        $rank->image = $request->image;
         $rank->save();
 
         $request->session()->flash('status', 'Task was successful!');

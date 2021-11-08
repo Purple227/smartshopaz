@@ -99,7 +99,7 @@ Route::get('/add-rank', [RankController::class, 'addRankUI'])->name('admin.rank'
 Route::post('/rank', [RankController::class, 'store'])->name('admin.rank.store');
 Route::get('/list-rank', [RankController::class, 'index'])->name('admin.rank.list');
 Route::get('/edit-rank/{id}', [RankController::class, 'updateRankUI'])->name('admin.rank.edit');
-Route::patch('/edit-rank/{id}', [RankController::class, 'store'])->name('admin.rank.update');
+Route::patch('/edit-rank/{id}', [RankController::class, 'update'])->name('admin.rank.update');
 
 // Admin Incensive
 Route::get('/add-incentive', [IncentiveController::class, 'addIncentiveUI'])->name('admin.add.incentive');
@@ -124,6 +124,9 @@ Route::get('/user/{id}', [UserController::class, 'getUser']);
 Route::get('/products', [SuperProductController::class, 'index'])->name('product.super-buyer');
 Route::get('/success', [UserController::class, 'registerInfo'])->name('super-buyer.register.success');
 Route::get('/register-detail', [SuperRegisterFeeController::class, 'RegisterFeedetailAPIs']);
+Route::get('/change-password', [UserController::class, 'updatePasswordUI'])->name('change.password.super-buyer');
+Route::post('/change-password', [UserController::class, 'updatePassword'])->name('change.password.post.super-buyer');
+
 });
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');

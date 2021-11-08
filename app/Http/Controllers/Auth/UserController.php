@@ -53,15 +53,6 @@ class UserController extends Controller
         $user->sponsor_id = $sponsor_code_used->id;
         $user->save();
 
-         
-/*
-        $get_sponsored_user = User::where('sponsor_id', $sponsor_code_used->id)->get();
-
-        Flight::where('active', 1)
-        ->where('destination', 'San Diego')
-        ->update(['delayed' => 1]);
-*/
-
         $sponsor = new Sponsor;
         $sponsor->user_id = $user->id;
         $sponsor->sponsor_code = 'SB'.''.mt_rand(100000, 999999);
@@ -74,9 +65,25 @@ class UserController extends Controller
         $request->session()->put('registration_info', $user);
         $request->session()->put('registration_info_password', $request->password);
         $request->session()->put('registration_info_sponsor_code', $sponsor->sponsor_code);
+
+        $get_sponsored_user = User::where('sponsor_id', $sponsor_code_used->id)->get();
+
+        foreach ($get_sponsored_user as $user) 
+        {
+            if ($user->id == $sponsor_code_used) 
+            {
+                
+            }
+        }
+
+        $sponsor_user_level = $get_sponsored_user->count();
+
+        $monthly_link_bonus = $request->register_percentage / 100 * $request->wallet;
+        $shared_bonus = $sponsor_user_level <= 15625 ? 15 / 100 * $monthly_link_bonus : 10 / 100 * $monthly_link_bonus;
         
-
-
+        Flight::where('active', 1)
+        ->where('destination', 'San Diego')
+        ->update(['delayed' => 1]);
 
         $request->session()->flash('status', 'Task was successful!');
         return $user;
@@ -206,5 +213,13 @@ class UserController extends Controller
         return view('superbuyers.success');
     }
 
+    public function updatePasswordUI()
+    {
+        return view('superbuyers.change-password');
+    }
 
+    public function updatePassword()
+    {
+        
+    }
 }
