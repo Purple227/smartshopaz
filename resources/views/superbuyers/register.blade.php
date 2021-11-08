@@ -46,9 +46,8 @@
                                     <div class="col-md-12">
 
                                         <div class="form-group form-group-custom mb-4">
-                                            <label for="title"> Title</label>
-                                            <input type="text" name="title" class="form-control" id="title" v-model="registration.title">
-
+                                            <input type="text" name="title" class="form-control" id="title" v-model="registration.title" required>
+                                            <label for="username"> Title</label>
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
@@ -95,8 +94,9 @@
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
+                                            
+                                            <input type="number" v-model="registration.phone" name="phone" class="form-control" id="phone" required>
                                             <label for="phone">Phone Number</label>
-                                            <input type="number" v-model="registration.phone" name="phone" class="form-control" id="phone">
 
                                         </div>
 

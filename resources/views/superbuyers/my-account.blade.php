@@ -153,14 +153,14 @@
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom07">New password</label>
-                                                    <input type="password" class="form-control" id="validationCustom07" placeholder="RON Code" value="fsfesfew3432">
+                                                    <input type="password" class="form-control" id="validationCustom07" placeholder="New Password" value="fsfesfew3432">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom08">Confirm New password</label>
-                                                    <input type="password" class="form-control" id="validationCustom08" placeholder="Sponsor ID" value="Otsdfwe221to">
+                                                    <input type="password" class="form-control" id="validationCustom08" placeholder="Confirm Password" value="Otsdfwe221to">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
