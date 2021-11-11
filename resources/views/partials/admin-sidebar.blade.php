@@ -5,8 +5,11 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
+
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Basic</li>
+
+@if(Auth::user()->account_type != 'ron')
 
                 <li>
                     <a href="index" class="waves-effect">
@@ -100,13 +103,6 @@
                 </li>
 
                 <li>
-                    <a href="subcategories" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layer-group"></i></div>
-                        <span>Sub Categories</span>
-                    </a>
-                </li>
-
-                <li>
                     <a href="orders" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:grid"></i></div>
                         <span class="badge badge-pill badge-primary float-right">07</span>
@@ -156,13 +152,12 @@
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div>
-                        <span> RON Code </span>
-                    </a>
+                        <span> Incentive </span>
+                    </a> 
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('add.ron.code') }}"> Add RON code</a></li>
-                        <li><a href=" {{ route('list.ron.code') }}"> List of RON Codes </a></li>
+                    <li><a href="{{ route('admin.add.incentive') }}"> Add Incentive </a></li>
                     </ul>
                 </li>
 
@@ -176,18 +171,18 @@
                         <li><a href=" {{ route('admin.rank.list') }}"> List Ranks </a></li>
                     </ul>
                 </li>
-                
+@else 
                 <li>
-                    <a href="" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1"></div>
-                        <span> Incentive </span>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div>
+                        <span> RON Code </span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('admin.add.incentive') }}"> Add Incentive </a></li>
-                        <li><a href=" {{ route('admin.rank.list') }}"> List Incentive </a></li>
+                        <li><a href="{{ route('add.ron.code') }}"> Add RON code</a></li>
+                        <li><a href=" {{ route('list.ron.code') }}"> List of RON Codes </a></li>
                     </ul>
                 </li>
-
+@endif
             </ul>
 
         </div>

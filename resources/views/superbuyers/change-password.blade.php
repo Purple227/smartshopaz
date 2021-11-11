@@ -74,25 +74,43 @@
                                     <div class="card-body">
                                         <h4 class="header-title">Information</h4>
 
-                                        <form class="needs-validation" novalidate>
-                                            <div class="row">
+
+                                        @if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b>oops! {{ $error }} </b>
+                                       </div>
+                                        @endforeach
+                                       @endif
+
+
+                                        @if(Session::has('status'))
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b> {{ Session::get('status') }} </b>
+                                        </div>
+@endif                           
+                                        <form method="POST" action="{{ route('update.password') }}">
+                                        @csrf 
+                                              <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom06">Current Password</label>
-                                                    <input type="password" class="form-control" id="validationCustom06" placeholder="Current Password" value="">
+                                                    <input type="password" name="current_password" class="form-control" id="validationCustom06" placeholder="Current Password" value="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom07">New password</label>
-                                                    <input type="password" class="form-control" id="validationCustom07" placeholder="New Password" value="">
+                                                    <input type="password" name="new_password" class="form-control" id="validationCustom07" placeholder="New Password" value="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom08">Confirm New password</label>
-                                                    <input type="password" class="form-control" id="validationCustom08" placeholder="Confirm Password" value="">
+                                                    <input type="password" name="new_confirm_password" class="form-control" id="validationCustom08" placeholder="Confirm Password" value="">
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>

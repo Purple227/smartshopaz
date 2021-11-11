@@ -1,3 +1,5 @@
+@if(Auth::user()->ron != 1)
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -141,3 +143,5 @@
 </body>
 
 </html>
+
+@endif

@@ -67,7 +67,7 @@ class RankController extends Controller
         $validated = $request->validate([
             'name' => 'required',
             'no_of_people' => 'required',
-            'level' => 'required',
+            'level' => ['required', 'unique:ranks'],
             ]);
 
         $rank = Rank::find($id);

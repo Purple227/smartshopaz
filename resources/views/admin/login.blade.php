@@ -38,14 +38,24 @@
                             <div class="card-body p-4">
                                 <div class="p-2">
                                     <h5 class="mb-5 text-center">Sign in to continue</h5>
-                                    <form class="form-horizontal" action="./">
+
+                                        <form id="form" class="form-horizontal" method="POST" action=" {{ route('login') }} ">
+                                            @csrf
 
                                         <div class="row">
                                             <div class="col-md-12">
+
+
+                                                @if ($errors->any())
+                                                @foreach ($errors->all() as $error)
                                                 <div class="alert alert-danger alert-dismissible">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                    Incorrect <b>Password</b>
+                                                    oops! <b> {{ $error }} </b>
                                                 </div>
+                                                 @endforeach
+                                                 @endif
+
+
                                                 <div class="form-group form-group-custom mb-4">
                                                     <input type="email" class="form-control" id="email" required>
                                                     <label for="username">Email</label>
@@ -72,9 +82,7 @@
                                                 <div class="mt-4">
                                                     <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In</button>
                                                 </div>
-                                                <div class="mt-4 text-center">
-                                                    <a href="register.html" class="text-muted"><i class="mdi mdi-account-circle mr-1"></i> Create an account</a>
-                                                </div>
+                          
                                             </div>
                                         </div>
                                     </form>

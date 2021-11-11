@@ -172,6 +172,7 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
+    
     <!-- JAVASCRIPT -->
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

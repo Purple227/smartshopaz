@@ -11,6 +11,7 @@ use App\Models\Sponsor;
 use App\Models\RONCode;
 use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
+use App\Rules\MatchOldPassword;
 
 class UserController extends Controller
 {
@@ -58,6 +59,10 @@ class UserController extends Controller
         $sponsor->sponsor_code = 'SB'.''.mt_rand(100000, 999999);
         $sponsor->save();
 
+        $update_sponsor_id = User::find($user->id);
+        $update_sponsor_id->sponsor_code = $sponsor->sponsor_code;
+        $update_sponsor_id->save();
+
         $ron_code = RONCode::where('ron_code', $request->ron_code)->first();
         $ron_code->status = true;
         $ron_code->save();
@@ -66,12 +71,13 @@ class UserController extends Controller
         $request->session()->put('registration_info_password', $request->password);
         $request->session()->put('registration_info_sponsor_code', $sponsor->sponsor_code);
 
+        
+        /*
         $get_sponsored_user = User::where('sponsor_id', $sponsor_code_used->id)->get();
         $sponsor_user_level = $get_sponsored_user->count();
 
         $monthly_link_bonus = $request->register_percentage / 100 * $request->wallet;
         $shared_bonus = $sponsor_user_level <= 15625 ? 15 / 100 * $monthly_link_bonus : 10 / 100 * $monthly_link_bonus;
-
 
         DB::table('users')->where('sponsor_id', $sponsor_code_used->id)
         ->lazyById()->each(function ($sponsor_user) {
@@ -79,6 +85,8 @@ class UserController extends Controller
                 ->where('sponsor_id', $sponsor_user->id)
                 ->update(['wallet' => true]);
         });
+
+        */
 
         $request->session()->flash('status', 'Task was successful!');
         return $user;
@@ -110,13 +118,10 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        return redirect()->route('home');
+        return redirect()->back();
     }
-
 
     public function authenticate(Request $request)
     {
@@ -127,7 +132,14 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            if (Auth::user()->account_type == 'super-buyer') 
+            {
             return redirect()->route('super-buyer.home');
+            } elseif(Auth::user()->account_type == 'ron') {
+            return redirect()->route('list.ron.code');
+            } else {
+                return redirect()->route('admin.home');
+            }
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
@@ -213,8 +225,16 @@ class UserController extends Controller
         return view('superbuyers.change-password');
     }
 
-    public function updatePassword()
+    public function updatePassword(Request $request)
     {
-        
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+   
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        $request->session()->flash('status', 'Task was successful!');
+        return redirect()->back();
     }
 }

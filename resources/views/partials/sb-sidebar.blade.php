@@ -27,7 +27,7 @@
                 </li>
 
                 <li>
-                    <a href="orders" class="waves-effect">
+                    <a href=" {{ route('super-buyer.index') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:grid"></i> -->
                         </div>
@@ -55,7 +55,7 @@
                 </li>
                 
                 <li>
-                    <a href="direct-downline" class="waves-effect">
+                    <a href="{{ route('super-buyer.downline') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>
@@ -64,16 +64,7 @@
                 </li>
 
                 <li>
-                    <a href="all-downline-details" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
-                        </div>
-                        <span>All Downline Details</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="generation-view" class="waves-effect">
+                    <a href="{{ route('super-buyer.all-downline') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:record-audio"></i> -->
                         </div>
@@ -82,17 +73,7 @@
                 </li>
 
                 <li>
-                    <a href="users-list" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:star-half-alt"></i> -->
-                        </div>
-                        <!-- <span class="badge badge-pill badge-primary float-right">1</span> -->
-                        <span>Direct Downline</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="bank" class="waves-effect">
+                    <a href="{{ route('super-buyer.bank') }} " class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:grid"></i> -->
                         </div>
@@ -102,7 +83,7 @@
                 </li>
 
                 <li>
-                    <a href="support" class="waves-effect">
+                    <a href=" {{ route('super-buyer.support') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
                         </div>
@@ -111,7 +92,7 @@
                 </li>
 
                 <li>
-                    <a href="revenue" class="waves-effect">
+                    <a href=" {{ route('super-buyer.revenue') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
                         </div>
@@ -119,19 +100,22 @@
                     </a>
                 </li>
 
+
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <!-- <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div> -->
-                        <span> My Account </span>
+                        <div class="d-inline-block icons-sm mr-1">
+                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
+                        </div>
+                        <span>My Account </span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{-- route('my.account.code') --}}"> My Profile</a></li>
-                        <li><a href=" {{ route('change.password.super-buyer') }}"> Change Password </a></li>
+                    <li><a href=" {{ route('change.password.super-buyer') }}"> Change Password </a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="logout" class="waves-effect">
+                    <a href="{{ route('logout') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:padlock"></i> -->
                         </div>

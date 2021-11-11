@@ -33,7 +33,7 @@
         <div class="mobile-menu_logo text-center d-flex justify-content-center align-items-center"><a href="./"><img src="assets/images/logo.png" width="150px" alt=""></a></div>
       </div>
       <div class="col-3">
-        <div class="mobile-product_function d-flex align-items-center justify-content-end"><a class="function-icon icon_heart_alt" href="wishlist"></a><a class="function-icon icon_bag_alt" href="shop_cart"></a></div>
+        <div class="mobile-product_function d-flex align-items-center justify-content-end"><a class="function-icon icon_heart_alt" href="wishlist"></a><a class="function-icon icon_bag_alt" href="/cart"></a></div>
       </div>
     </div>
   </div>

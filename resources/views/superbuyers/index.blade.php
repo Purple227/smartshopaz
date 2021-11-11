@@ -59,7 +59,7 @@
                             <div class="col-md-4">
                                 <div class="float-right">
                                     <div class="dropdown">
-                                        <a href="withdrawal" class="btn btn-light btn-rounded">
+                                        <a href=" {{ route('super-buyer.bank') }}" class="btn btn-light btn-rounded">
                                             <i class="iconify" data-icon="uim:exit"></i> Bank
                                         </a>
                                     </div>

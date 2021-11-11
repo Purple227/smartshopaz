@@ -87,8 +87,10 @@
                                                     <th>Sponsor ID</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
+                                                    {{--
                                                     <th>Level</th>
                                                     <th>Orders</th>
+                                                    --}}
                                                     <th>Balance</th>
                                                 </tr>
                                             </thead>
@@ -100,9 +102,11 @@
                                                     <td> {{ $super_buyer->sponsor->sponsor_code }} </td>
                                                     <td> {{ $super_buyer->name }} </td>
                                                     <td> {{ $super_buyer->email }}</td>
+                                                    {{--
                                                     <td>Diamond</td>
-                                                    <td>5</td>
-                                                    <td>12,0000</td> 
+                                                    <td> 1 </td>
+                                                    --}}
+                                                    <td> {{ $super_buyer->wallet }}</td> 
                                                 </tr>
                                                 @endforeach
                                             </tbody>
