@@ -55,8 +55,8 @@
                                                  @endif
 
                                                 <div class="form-group form-group-custom mb-4">
-                                                    <input type="email" class="form-control" name="email" id="email" required>
-                                                    <label for="username">Email</label>
+                                                    <input type="text" class="form-control" name="username" id="email" required>
+                                                    <label for="username"> Username </label>
                                                 </div>
 
                                                 <div class="form-group form-group-custom mb-4">

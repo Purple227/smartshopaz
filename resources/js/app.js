@@ -59,7 +59,9 @@ const app = new Vue({
         RONCodeStatus: false,
         email: null,
         emailStatus: false,
-        sponsorUserDetail: null
+        sponsorUserDetail: null,
+        userName: null,
+        userNameStatus: false
       },
 
       pagination: {
@@ -184,6 +186,10 @@ const app = new Vue({
       this.emailMethod()
     },
 
+    'registration.userName': function () {
+      this.userNameMethod()
+    },
+
     'registration.sponsorCode': function () {
       this.sponsorMethod()
     },
@@ -204,6 +210,7 @@ const app = new Vue({
     this.getSetSuperBuyerDetail()
     this.getAdminBrand()
     this.getAdminCategory()
+    this.userNameMethod()
   },
 
   methods: { //Method calibrace open
@@ -421,6 +428,21 @@ const app = new Vue({
         .catch(function (error) {
           self.utilities.emailStatus = false
           self.utilities.email = error.response.data
+        });
+      }
+    },
+
+    userNameMethod() {
+      self = this
+      if(this.registration.userName.length > 2) {
+        axios.get('check-username',{params: {username: this.registration.userName}})
+        .then(response => {
+          this.utilities.userName = response.data
+          this.utilities.userNameStatus = true
+        })
+        .catch(function (error) {
+          self.utilities.userNameStatus = false
+          self.utilities.userName = error.response.data
         });
       }
     },

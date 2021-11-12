@@ -2122,7 +2122,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         RONCodeStatus: false,
         email: null,
         emailStatus: false,
-        sponsorUserDetail: null
+        sponsorUserDetail: null,
+        userName: null,
+        userNameStatus: false
       },
       pagination: {
         nextPageUrl: null,
@@ -2219,6 +2221,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     'registration.email': function registrationEmail() {
       this.emailMethod();
     },
+    'registration.userName': function registrationUserName() {
+      this.userNameMethod();
+    },
     'registration.sponsorCode': function registrationSponsorCode() {
       this.sponsorMethod();
     },
@@ -2236,6 +2241,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     this.getSetSuperBuyerDetail();
     this.getAdminBrand();
     this.getAdminCategory();
+    this.userNameMethod();
   },
   methods: {
     //Method calibrace open
@@ -2443,8 +2449,27 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         });
       }
     },
-    searchProductData: function searchProductData() {
+    userNameMethod: function userNameMethod() {
       var _this8 = this;
+
+      self = this;
+
+      if (this.registration.userName.length > 2) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().get('check-username', {
+          params: {
+            username: this.registration.userName
+          }
+        }).then(function (response) {
+          _this8.utilities.userName = response.data;
+          _this8.utilities.userNameStatus = true;
+        })["catch"](function (error) {
+          self.utilities.userNameStatus = false;
+          self.utilities.userName = error.response.data;
+        });
+      }
+    },
+    searchProductData: function searchProductData() {
+      var _this9 = this;
 
       if (this.searchProductQuery.length > 1) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().get('search-product', {
@@ -2452,12 +2477,12 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             search_query: this.searchProductQuery
           }
         }).then(function (response) {
-          _this8.searchProductResult = response.data;
+          _this9.searchProductResult = response.data;
         });
       }
     },
     getProduct: function getProduct(api) {
-      var _this9 = this;
+      var _this10 = this;
 
       this.sortAlpha = this.sortAlpha == 'A to Z' ? 1 : 0;
       var api_url = api || "product-api";
@@ -2467,11 +2492,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           alpha_sort: this.sortAlpha
         }
       }).then(function (response) {
-        _this9.product = response.data.data;
-        _this9.pagination.nextPageUrl = response.data.next_page_url;
-        _this9.pagination.previousPageUrl = response.data.prev_page_url;
-        _this9.pagination.to = response.data.to;
-        _this9.pagination.total = response.data.total;
+        _this10.product = response.data.data;
+        _this10.pagination.nextPageUrl = response.data.next_page_url;
+        _this10.pagination.previousPageUrl = response.data.prev_page_url;
+        _this10.pagination.to = response.data.to;
+        _this10.pagination.total = response.data.total;
       })["catch"](function (error) {// Code here
       });
     },
@@ -2511,11 +2536,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }, 0);
     },
     singleProductMethod: function singleProductMethod(ID) {
-      var _this10 = this;
+      var _this11 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("single-product/".concat(ID)).then(function (response) {
-        _this10.singleProduct = response.data;
+        _this11.singleProduct = response.data;
       });
     },
     itemCounterMethod: function itemCounterMethod(ID, price, name, count) {

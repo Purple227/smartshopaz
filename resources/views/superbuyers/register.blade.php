@@ -51,12 +51,6 @@
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
-                                            <input type="text" name="name" class="form-control" v-model="registration.userName" id="lastname" required>
-                                            <label for="username">User Name</label>
-                                            <p v-bind:class="{ 'text-success': registration.userName.length > 3, 'text-danger': registration.userName.length < 3 }"> @{{ registration.userName.length > 3 ? 'Looking Good' : 'Name field is required' }} </>
-                                        </div>
-
-                                        <div class="form-group form-group-custom mb-4">
                                             <input type="text" name="name" class="form-control" v-model="registration.firstName" id="lastname" required>
                                             <label for="username">First Name</label>
                                             <p v-bind:class="{ 'text-success': registration.firstName.length > 3, 'text-danger': registration.firstName.length < 3 }"> @{{ registration.firstName.length > 3 ? 'Looking Good' : 'Name field is required' }} </>
@@ -73,7 +67,6 @@
                                             <label for="useremail">Email</label>
                                             <p v-bind:class="{'text-success': !$v.registration.email.$invalid }" v-if="!$v.registration.email.$invalid"> @{{ utilities.email }} </p>
                                         </div>
-
 
                                         <div class="form-group form-group-custom mb-4">
                                             <input type="text" name="sponsor_code" class="form-control" v-model="registration.sponsorCode" id="sponsor" @change="sponsorMethod" required>
@@ -181,6 +174,12 @@
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
+                                            <input type="text" v-model="registration.userName" name="username" class="form-control" id="useremail" @change="userNameMethod" required>
+                                            <label for="useremail">Username</label>
+                                            <p v-bind:class="{'text-success': !$v.registration.userName.$invalid }" v-if="!$v.registration.userName.$invalid"> @{{ utilities.userName }} </p>
+                                        </div>
+
+                                        <div class="form-group form-group-custom mb-4">
                                             <input type="password" v-model="registration.password" name="password" class="form-control" id="password" required>
                                             <label for="userpassword">Password</label>
                                             <p v-bind:class="{ 'text-success': registration.password.length >= 8, 'text-danger': registration.password.length < 8 }"> @{{ registration.password.length >= 8 ? 'Looking Good' : 'Password must be upto 8 characters' }} </p>
@@ -201,7 +200,7 @@
 
                                             <!-- <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button> -->
 
-                                            <button class="btn btn-primary btn-block waves-effect waves-light" @click="payWithPaystack" v-if="buttonLoader == false" :disabled="$v.registration.$invalid == true || registration.privacy == false || utilities.sponsorStatus == false || utilities.RONCodeStatus == false || utilities.emailStatus == false"> Pay and Register</button>
+                                            <button class="btn btn-primary btn-block waves-effect waves-light" @click="payWithPaystack" v-if="buttonLoader == false" :disabled="$v.registration.$invalid == true || registration.privacy == false || utilities.sponsorStatus == false || utilities.RONCodeStatus == false || utilities.emailStatus == false || utilities.userNameStatus == false"> Pay and Register</button>
 
 
                                             <button class="btn btn-primary btn-block waves-effect waves-light" v-else> Please Wait </button>

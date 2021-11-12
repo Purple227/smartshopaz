@@ -130,6 +130,7 @@ Route::post('/complete-register', [UserController::class, 'completeRegistration'
 Route::get('/check-sponsor-code', [UserController::class, 'checkSponsorCode']);
 Route::get('/ron-code', [UserController::class, 'checkRonCode']);
 Route::get('/check-mail', [UserController::class, 'checkEmail']);
+Route::get('/check-username', [UserController::class, 'checkUserName']);
 Route::get('/user/{id}', [UserController::class, 'getUser']);
 Route::get('/products', [SuperProductController::class, 'index'])->name('product.super-buyer')->middleware('super.buyer');
 Route::get('/success', [UserController::class, 'registerInfo'])->name('super-buyer.register.success');

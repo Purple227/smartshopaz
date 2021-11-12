@@ -28,17 +28,10 @@ class UserController extends Controller
 
     public function superBuyerRegister(Request $request)
     {
-        $validated = $request->validate([
-            'sponsor_code' => 'required',
-            'name' => 'required',
-            'email' => ['required', 'unique:users', 'email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
 
         $sponsor_code_used = Sponsor::where('sponsor_code', $request->sponsor_code)->first();
         $sponsor_code_used->sponsor_code_counter = $sponsor_code_used->sponsor_code_counter + 1;
         $sponsor_code_used->save();
-
 
         $user = new User;
         $user->name = $request->name;
@@ -59,9 +52,9 @@ class UserController extends Controller
         $sponsor->sponsor_code = 'SB'.''.mt_rand(100000, 999999);
         $sponsor->save();
 
-        $update_sponsor_id = User::find($user->id);
-        $update_sponsor_id->sponsor_code = $sponsor->sponsor_code;
-        $update_sponsor_id->save();
+        $update_user = User::find($user->id);
+        $update_user->sponsor_code = $sponsor->sponsor_code;
+        $update_user->save();
 
         $ron_code = RONCode::where('ron_code', $request->ron_code)->first();
         $ron_code->status = true;
@@ -69,8 +62,8 @@ class UserController extends Controller
 
         $request->session()->put('registration_info', $user);
         $request->session()->put('registration_info_password', $request->password);
-        $request->session()->put('registration_info_sponsor_code', $sponsor->sponsor_code);
-
+        $request->session()->put('registration_info_member_id', $sponsor->sponsor_code);
+        $request->session()->put('registration_info_sponsor_reference_id', $sponsor_code_used->sponsor_code);
         
         /*
         $get_sponsored_user = User::where('sponsor_id', $sponsor_code_used->id)->get();
@@ -126,7 +119,7 @@ class UserController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'username' => ['required'],
             'password' => ['required'],
         ]);
 
@@ -193,7 +186,7 @@ class UserController extends Controller
         return response()->json('email taken by another user', 400);
     }
 
-    public function checkUsername(Request $request)
+    public function checkUserName(Request $request)
     {
         $username = User::where('username', $request->username)->first();
 
