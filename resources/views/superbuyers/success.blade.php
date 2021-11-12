@@ -54,7 +54,12 @@
 
                             <li class="list-group-item row">
                                 <div class="col-md-6"><b>Member ID </b></div>
-                                <div class="col-md-6"> {{ Session::get('registration_info_sponsor_code')  }}</div>
+                                <div class="col-md-6"> {{ Session::get('registration_info_member_id')  }}</div>
+                            </li>
+
+                            <li class="list-group-item row">
+                                <div class="col-md-6"><b>Sponsor ID </b></div>
+                                <div class="col-md-6"> {{ Session::get('registration_info_sponsor_reference_id')  }}</div>
                             </li>
 
                             <li class="list-group-item row">

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Sponsor;
-use App\Models\RONCode;
+use App\Models\RonCode;
 use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
 use App\Rules\MatchOldPassword;
@@ -56,7 +56,7 @@ class UserController extends Controller
         $update_user->sponsor_code = $sponsor->sponsor_code;
         $update_user->save();
 
-        $ron_code = RONCode::where('ron_code', $request->ron_code)->first();
+        $ron_code = RonCode::where('ron_code', $request->ron_code)->first();
         $ron_code->status = true;
         $ron_code->save();
 
