@@ -28,8 +28,10 @@
 
 <body data-topbar="colored">
 
+<div id="app">
     <!-- Begin page -->
     <div id="layout-wrapper">
+
 
 
         @include('partials/sb-topbar')
@@ -414,7 +416,12 @@
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
 
+
+
+</div>
+
         <!-- JAVASCRIPT -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
         <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>

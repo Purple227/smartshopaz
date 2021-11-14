@@ -15,6 +15,13 @@ class DeliveryController extends Controller
         return view('admin.delivery-price', ['delivery' => $delivery]);
     }
 
+    public function getDeliveryFeeAPIs()
+    {
+        $delivery = Delivery::first();
+        $delivery = $delivery == null ? 0 : $delivery;
+        return $delivery;
+    }
+
     public function store(Request $request)
     {
         $check_delivery_table = Delivery::count();
@@ -38,7 +45,6 @@ class DeliveryController extends Controller
         
         $delivery->save();
         return redirect()->route('admin.delivery.fee');
-
     }
 
 }

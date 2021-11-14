@@ -18,23 +18,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr v-for="(item, index) in cart" :key="index">
                             <td data-th="Product">
                                 <div class="row">
                                     <div class="col-md-3 text-left">
                                         <img src="https://via.placeholder.com/250x250/5fa9f8/ffffff" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
                                     </div>
                                     <div class="col-md-9 text-left mt-sm-2">
-                                        <h6>Product Name</h6>
-                                        <p class="font-weight-light">Brand &amp; Name</p>
+                                        <h6> @{{ item.name }} </h6>
                                     </div>
                                 </div>
                             </td>
-                            <td data-th="Price">$49.00</td>
+                            <td data-th="Price">₦ @{{ item.count * item.price }}</td>
                             <td data-th="Quantity">
-                                <input type="number" class="form-control form-control-sm text-center" value="1">
+                                <input type="number" class="form-control form-control-sm text-center" min="1" v-model="item.count" @change="itemCounterMethod(item.id, item.price, item.name, item.count)">
                             </td>
-                            <td class="actions" data-th="">
+                            <td class="actions" data-th="" @click="removeFromCart(item.id)" >
                                 <div class="text-right">
                                     <button class="btn btn-white bg-white btn-md mb-2">
                                         <i class="fas fa-trash"></i>
@@ -46,8 +45,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                <a href="checkout" class="btn btn-primary waves-effect waves-light">Checkout</a>
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal" >Close</button>
+                <a href="checkout" class="btn btn-primary waves-effect waves-light" data-dismiss="modal" v-if="cart.length != 0" @click="cartCheckout('{{Auth::user()->id }}', '{{ Auth::user()->name }}', '{{ Auth::user()->email }}', sumInCart + deliveryFee, '{{ Auth::user()->account_type}}', '{{ Auth::user()->phone}}', sumInCart, itemInCart)">Checkout</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

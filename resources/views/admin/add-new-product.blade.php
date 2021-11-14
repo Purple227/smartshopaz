@@ -146,7 +146,7 @@
 
                                             <div class="form-group ">
                                                 <label>Status</label>
-                                                <select class="selectize form-control" id="siteID" class="abcd" name="brand_id" v-model="productForm.stock">
+                                                <select class="selectize form-control" id="siteID" class="abcd" name="stock" v-model="productForm.stock">
                                                     <option value="">Select...</option>
                                                     <option value="instock"> In stock </option>
                                                     <option value="outstock"> Out of stock </option>
@@ -161,10 +161,10 @@
                                                             <input type="radio" id="custominlineRadio1" name="type" class="custom-control-input" value="single" checked>
                                                             <label class="custom-control-label" for="custominlineRadio1">Single Option</label>
                                                         </div>
-                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                        <!--div class="custom-control custom-radio custom-control-inline" v-if="false">
                                                             <input type="radio" id="custominlineRadio2" name="type" class="custom-control-input" value="multi">
                                                             <label class="custom-control-label" for="custominlineRadio2">Multiple options</label>
-                                                        </div>
+                                                        </div-->
                                                     </div>
                                                 </div>
                                             </div>

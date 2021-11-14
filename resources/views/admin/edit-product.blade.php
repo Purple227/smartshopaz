@@ -138,7 +138,7 @@
                                             </div>
                                             <div class="form-group ">
                                                 <label>Status</label>
-                                                <select class="selectize form-control" id="siteID" class="abcd" name="brand_id">
+                                                <select class="selectize form-control" id="siteID" class="abcd" name="stock">
                                                     <option value="">Select...</option>
                                                     <option value="instock"> In stock </option>
                                                     <option value="outstock"> Out of stock </option>
@@ -152,10 +152,10 @@
                                                             <input type="radio" id="custominlineRadio1" name="type" class="custom-control-input" value="single" checked>
                                                             <label class="custom-control-label" for="custominlineRadio1">Single Option</label>
                                                         </div>
-                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                        <!--div class="custom-control custom-radio custom-control-inline">
                                                             <input type="radio" id="custominlineRadio2" name="type" class="custom-control-input" value="multi">
                                                             <label class="custom-control-label" for="custominlineRadio2">Multiple options</label>
-                                                        </div>
+                                                        </div-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,7 +189,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="types" id="Typemulti" style="display: none;">
+                                            <!--div class="types" id="Typemulti" style="display: none;">
                                                 <div class="row">
                                                     <div class="col-md-3 mb-3">
                                                         <label for="validationCustom01">Variation Name</label>
@@ -227,7 +227,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div-->
                                             <div class="form-group">
 <textarea class="summernote" name="description"> {{$product->description}} </textarea>
                                             </div>

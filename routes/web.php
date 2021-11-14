@@ -133,6 +133,7 @@ Route::get('/check-mail', [UserController::class, 'checkEmail']);
 Route::get('/check-username', [UserController::class, 'checkUserName']);
 Route::get('/user/{id}', [UserController::class, 'getUser']);
 Route::get('/products', [SuperProductController::class, 'index'])->name('product.super-buyer')->middleware('super.buyer');
+Route::get('/products-super-buyer', [SuperProductController::class, 'products']);
 Route::get('/success', [UserController::class, 'registerInfo'])->name('super-buyer.register.success');
 Route::get('/register-detail', [SuperRegisterFeeController::class, 'RegisterFeedetailAPIs']);
 Route::get('/change-password', [UserController::class, 'updatePasswordUI'])->name('change.password.super-buyer')->middleware('super.buyer');
@@ -144,7 +145,7 @@ Route::get('/all-downline', [GenealogyController::class, 'allDownLine'])->name('
 Route::get('/bank', [SuperBuyerTransaction::class, 'bank'])->name('super-buyer.bank')->middleware('super.buyer');
 Route::get('/support', [PagesController::class, 'support'])->name('super-buyer.support')->middleware('super.buyer');
 Route::get('/revenue', [SuperBuyerTransaction::class, 'revenue'])->name('super-buyer.revenue')->middleware('super.buyer');
-
+Route::get('/delivery-fee-api', [DeliveryController::class, 'getDeliveryFeeAPIs']);
 });
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');

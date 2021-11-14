@@ -2069,10 +2069,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
 /* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
-var _registration;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
@@ -2156,12 +2152,15 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       registerFee: null,
       registerPercent: null,
       adminCategory: null,
-      adminBrand: null
+      adminBrand: null,
+      superBuyerProduct: null,
+      deliveryFee: null,
+      itemInCart: null
     };
   },
   validations: {
     // Validation calibrace open
-    registration: (_registration = {
+    registration: {
       firstName: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
       },
@@ -2195,15 +2194,15 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       },
       state: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      password: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required,
+        minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.minLength)(8)
+      },
+      passwordConfirmation: {
+        sameAsPassword: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.sameAs)('password')
       }
-    }, _defineProperty(_registration, "gender", {
-      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
-    }), _defineProperty(_registration, "password", {
-      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required,
-      minLength: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.minLength)(8)
-    }), _defineProperty(_registration, "passwordConfirmation", {
-      sameAsPassword: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.sameAs)('password')
-    }), _registration) // RegistrationDetails calibrace closes
+    } // RegistrationDetails calibrace closes
 
   },
   // Validation calibrace close
@@ -2222,7 +2221,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       this.emailMethod();
     },
     'registration.userName': function registrationUserName() {
-      this.userNameMethod();
+      this.usernameMethod();
     },
     'registration.sponsorCode': function registrationSponsorCode() {
       this.sponsorMethod();
@@ -2242,6 +2241,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     this.getAdminBrand();
     this.getAdminCategory();
     this.userNameMethod();
+    this.productSuperBuyer();
+    this.getDeliveryFee();
+    this.cartItemCount();
   },
   methods: {
     //Method calibrace open
@@ -2284,16 +2286,62 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       });
       handler.openIframe();
     },
-    saveTransaction: function saveTransaction(transactionID, userID, name) {
+    placeOrder: function placeOrder(transactionID, userID, name, totalPrice, accountType, payment, quantity) {
+      var orderDetail = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
+
       var self = this;
       vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("payment", {
         user_id: userID,
-        amount: 20000,
+        total_price: totalPrice,
+        account_type: accountType,
+        payment: payment,
+        quantity: quantity,
+        payment_method: 'card',
+        order_detail: orderDetail
+      }).then(function () {
+        self.saveTransaction(transactionID, userID, name, true);
+      })["catch"](function () {});
+    },
+    cartCheckout: function cartCheckout(userID, name, email, totalPrice, accountType, phone, payment, quantity) {
+      var self = this;
+      var handler = PaystackPop.setup({
+        key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
+        email: email,
+        amount: totalPrice * 100,
+        currency: "NGN",
+        ref: "" + Math.floor(Math.random() * 1000000000 + 1),
+        // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+        metadata: {
+          custom_fields: [{
+            display_name: "Mobile_number",
+            variable_name: "mobile_number",
+            value: phone
+          }]
+        },
+        callback: function callback(response) {
+          self.placeOrder(response.reference, userID, name, totalPrice, accountType, payment, quantity);
+        },
+        onClose: function onClose() {
+          alert("window closed");
+        }
+      });
+      handler.openIframe();
+    },
+    saveTransaction: function saveTransaction(transactionID, userID, name, redirectLink) {
+      var self = this;
+      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("payment", {
+        user_id: userID,
+        amount: this.registerFee,
         status: true,
         transaction_id: transactionID,
         name: name
       }).then(function () {
         self.buttonLoader = false;
+
+        if (redirectLink == true) {
+          window.location = '/super-buyer/orders';
+        }
+
         window.location = '/super-buyer/success';
       })["catch"](function () {});
     },
@@ -2414,24 +2462,40 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         _this4.registerPercent = response.data.register_fee_percentage;
       });
     },
-    getAdminCategory: function getAdminCategory() {
+    getDeliveryFee: function getDeliveryFee() {
       var _this5 = this;
 
       self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-categories-api").then(function (response) {
-        _this5.adminCategory = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("delivery-fee-api").then(function (response) {
+        _this5.deliveryFee = response.data;
       });
     },
-    getAdminBrand: function getAdminBrand() {
+    getAdminCategory: function getAdminCategory() {
       var _this6 = this;
 
       self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-categories-api").then(function (response) {
+        _this6.adminCategory = response.data;
+      });
+    },
+    getAdminBrand: function getAdminBrand() {
+      var _this7 = this;
+
+      self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-brands-api").then(function (response) {
-        _this6.adminBrand = response.data;
+        _this7.adminBrand = response.data;
+      });
+    },
+    productSuperBuyer: function productSuperBuyer() {
+      var _this8 = this;
+
+      self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("products-super-buyer").then(function (response) {
+        _this8.superBuyerProduct = response.data;
       });
     },
     emailMethod: function emailMethod() {
-      var _this7 = this;
+      var _this9 = this;
 
       self = this;
 
@@ -2441,8 +2505,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             email: this.registration.email
           }
         }).then(function (response) {
-          _this7.utilities.email = response.data;
-          _this7.utilities.emailStatus = true;
+          _this9.utilities.email = response.data;
+          _this9.utilities.emailStatus = true;
         })["catch"](function (error) {
           self.utilities.emailStatus = false;
           self.utilities.email = error.response.data;
@@ -2450,7 +2514,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     userNameMethod: function userNameMethod() {
-      var _this8 = this;
+      var _this10 = this;
 
       self = this;
 
@@ -2460,8 +2524,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             username: this.registration.userName
           }
         }).then(function (response) {
-          _this8.utilities.userName = response.data;
-          _this8.utilities.userNameStatus = true;
+          _this10.utilities.userName = response.data;
+          _this10.utilities.userNameStatus = true;
         })["catch"](function (error) {
           self.utilities.userNameStatus = false;
           self.utilities.userName = error.response.data;
@@ -2469,7 +2533,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     searchProductData: function searchProductData() {
-      var _this9 = this;
+      var _this11 = this;
 
       if (this.searchProductQuery.length > 1) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().get('search-product', {
@@ -2477,12 +2541,12 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             search_query: this.searchProductQuery
           }
         }).then(function (response) {
-          _this9.searchProductResult = response.data;
+          _this11.searchProductResult = response.data;
         });
       }
     },
     getProduct: function getProduct(api) {
-      var _this10 = this;
+      var _this12 = this;
 
       this.sortAlpha = this.sortAlpha == 'A to Z' ? 1 : 0;
       var api_url = api || "product-api";
@@ -2492,11 +2556,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           alpha_sort: this.sortAlpha
         }
       }).then(function (response) {
-        _this10.product = response.data.data;
-        _this10.pagination.nextPageUrl = response.data.next_page_url;
-        _this10.pagination.previousPageUrl = response.data.prev_page_url;
-        _this10.pagination.to = response.data.to;
-        _this10.pagination.total = response.data.total;
+        _this12.product = response.data.data;
+        _this12.pagination.nextPageUrl = response.data.next_page_url;
+        _this12.pagination.previousPageUrl = response.data.prev_page_url;
+        _this12.pagination.to = response.data.to;
+        _this12.pagination.total = response.data.total;
       })["catch"](function (error) {// Code here
       });
     },
@@ -2513,6 +2577,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
 
       this.cartMethod();
+      this.cartItemCount();
     },
     removeFromCart: function removeFromCart(ID) {
       var item = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
@@ -2524,23 +2589,34 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
 
       this.cartMethod();
+      this.cartItemCount();
     },
     cartMethod: function cartMethod() {
       this.cart = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
 
       var allPrice = this.cart == null ? null : this.cart.map(function (obj) {
-        return obj.price;
+        return obj.count * obj.price;
       });
       this.sumInCart = allPrice == null ? null : allPrice.reduce(function (a, b) {
         return a + b;
       }, 0);
     },
+    cartItemCount: function cartItemCount() {
+      this.cart = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
+
+      var allItem = this.cart == null ? null : this.cart.map(function (obj) {
+        return obj.count;
+      });
+      this.itemInCart = allItem == null ? null : allItem.reduce(function (a, b) {
+        return parseInt(a) + parseInt(b);
+      }, 0);
+    },
     singleProductMethod: function singleProductMethod(ID) {
-      var _this11 = this;
+      var _this13 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("single-product/".concat(ID)).then(function (response) {
-        _this11.singleProduct = response.data;
+        _this13.singleProduct = response.data;
       });
     },
     itemCounterMethod: function itemCounterMethod(ID, price, name, count) {
@@ -2556,6 +2632,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
 
       this.cartMethod();
+      this.cartItemCount();
     }
   } //Method calibrace close
 

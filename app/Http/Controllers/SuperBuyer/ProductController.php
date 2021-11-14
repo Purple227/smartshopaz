@@ -13,5 +13,11 @@ class ProductController extends Controller
         
         return view('superbuyers.products');
     }
+
+    public function products()
+    {
+        $products = Product::where('super_buyer_price', '!=', null)->get();
+        return $products;
+    }
     
 }

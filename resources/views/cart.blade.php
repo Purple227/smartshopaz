@@ -112,17 +112,17 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(item, index) in cart " :key="index">
+                    <tr v-for="(item, index) in cart" :key="index">
                       <td class="product-iamge"> 
                         <div class="img-wrapper"><img src="assets/images/product/product03.png" alt="product image"></div>
                       </td>
                       <td class="product-name"> @{{ item.name }}</td>
-                      <td class="product-price">NGN @{{ item.price }} </td>
+                      <td class="product-price">₦ @{{ item.price }} </td>
                       <td class="product-quantity"> 
-                        <input class="quantity no-round-input" type="number" min="1" v-model="item.count" @click="itemCounterMethod(item.id, item.count * item.price, item.name, item.count)" >
+                        <input class="quantity no-round-input" type="number" min="1" v-model="item.count" @click="itemCounterMethod(item.id, item.count * item.price, item.name, item.count)">
                       </td>
-                      <td class="product-total">NGN @{{ item.count * item.price  }}</td>
-                      <td class="product-clear"@click="removeFromCart(item.id)" > 
+                      <td class="product-total">₦ @{{ item.count * item.price  }}</td>
+                      <td class="product-clear" @click="removeFromCart(item.id)"> 
                         <button class="no-round-btn"><i class="icon_close"></i></button>
                       </td>
                     </tr>

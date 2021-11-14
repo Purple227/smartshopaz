@@ -24,12 +24,17 @@
     <!-- App Css-->
     <link href="../assets-dash/css/app.min.css" rel="stylesheet" type="text/css" />
 
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
 </head>
 
 <body data-topbar="colored">
 
     <!-- Begin page -->
-    <div id="layout-wrapper">
+<div id="app">
+
+
+    <div id="layout-wrapper" >
 
         @include('partials/sb-topbar')
 
@@ -40,7 +45,7 @@
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
-        <div class="main-content" id="app">
+        <div class="main-content">
 
             <div class="page-content" >
 
@@ -75,7 +80,7 @@
 
                         <div class="row">
 
-                            <div class="col-md-6 col-xl-3" v-for="product in product" :key="product.id">
+                            <div class="col-md-6 col-xl-3" v-for="product in superBuyerProduct" :key="product.id">
 
                                 <div class="card">
                                     <div class="card-body">
@@ -85,8 +90,9 @@
                                     <img class="img-fluid" src="../assets-dash/images/small/img-4.jpg" alt="Card image cap">
                                     <div class="card-body">
                                         <p class="card-text"> @{{ product.description.substring(0, 25) }} </p>
-                                        <a href="#" class="card-link">SelectSizes</a>
-                                        <a href="#" class="card-link">Add to cart</a>
+                                        <!-- a href="#" class="card-link">SelectSizes</a n-->
+                                        <a href="#" class="card-link" v-if="cart == null ? false : cart.some(check => check.id === product.id)" @click="removeFromCart(product.id)">Remove from cart</a>
+                                        <a href="#" class="card-link" @click="addToCart(product.id, product.super_buyer_price , product.title, 1, product.image)" v-else>Add to cart</a>
                                     </div>
                                 </div>
 
@@ -130,6 +136,8 @@
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
+
+</div>
 
     <!-- JAVASCRIPT -->
     <script src="{{ asset('js/app.js') }}" defer></script>

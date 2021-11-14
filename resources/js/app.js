@@ -4,6 +4,7 @@ window.Vue = require('vue');
 
 import Vue from 'vue/dist/vue.js';
 
+
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 Vue.use(VueAxios, axios);
@@ -97,6 +98,9 @@ const app = new Vue({
       registerPercent: null,
       adminCategory: null,
       adminBrand: null,
+      superBuyerProduct: null,
+      deliveryFee: null,
+      itemInCart: null
     }
   },
 
@@ -150,10 +154,6 @@ const app = new Vue({
         required,
       },
 
-      gender: {
-        required
-      },
-
       password: {
         required,
         minLength: minLength(8)
@@ -187,7 +187,7 @@ const app = new Vue({
     },
 
     'registration.userName': function () {
-      this.userNameMethod()
+      this.usernameMethod()
     },
 
     'registration.sponsorCode': function () {
@@ -211,6 +211,9 @@ const app = new Vue({
     this.getAdminBrand()
     this.getAdminCategory()
     this.userNameMethod()
+    this.productSuperBuyer()
+    this.getDeliveryFee()
+    this.cartItemCount()
   },
 
   methods: { //Method calibrace open
@@ -258,14 +261,63 @@ const app = new Vue({
       handler.openIframe();
     },
 
-    saveTransaction(transactionID, userID, name) {
+    placeOrder(transactionID,userID, name, totalPrice, accountType, payment, quantity) {
+      let orderDetail = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
     	let self = this;
       Vue.axios
       .post(
         "payment",
         {
           user_id: userID,
-          amount: 20000,
+          total_price: totalPrice,
+          account_type: accountType,
+          payment: payment,
+          quantity: quantity,
+          payment_method: 'card',
+          order_detail: orderDetail
+        }
+        )
+      .then(() => {
+        self.saveTransaction(transactionID, userID, name, true)
+      })
+      .catch(function() {});
+    },
+
+    cartCheckout(userID, name, email, totalPrice, accountType, phone, payment, quantity) {
+      let self = this;
+      var handler = PaystackPop.setup({
+        key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
+        email: email,
+        amount: totalPrice * 100,
+        currency: "NGN",
+        ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+        metadata: {
+          custom_fields: [
+          {
+            display_name: "Mobile_number",
+            variable_name: "mobile_number",
+            value: phone,
+          },
+          ],
+        },
+        callback: function(response) {
+          self.placeOrder(response.reference, userID, name, totalPrice, accountType, payment, quantity)
+        },
+        onClose: function() {
+          alert("window closed");
+        },
+      });
+      handler.openIframe();
+    },
+
+    saveTransaction(transactionID, userID, name, redirectLink) {
+    	let self = this;
+      Vue.axios
+      .post(
+        "payment",
+        {
+          user_id: userID,
+          amount: this.registerFee,
           status: true,
           transaction_id: transactionID,
           name: name
@@ -273,6 +325,9 @@ const app = new Vue({
         )
       .then(() => {
         self.buttonLoader = false
+        if(redirectLink == true) {
+          window.location = '/super-buyer/orders'
+        }
         window.location = '/super-buyer/success'
       })
       .catch(function() {});
@@ -365,7 +420,6 @@ const app = new Vue({
       }
     },
 
-
     RONCodeMethod() {
       self = this
       if(this.registration.RONCode.length > 2) {
@@ -401,6 +455,14 @@ const app = new Vue({
         })
     },
 
+    getDeliveryFee() {
+      self = this
+        axios.get(`delivery-fee-api`)
+        .then(response => {
+          this.deliveryFee = response.data
+        })
+    },
+
     getAdminCategory() {
       self = this
         axios.get(`list-categories-api`)
@@ -414,6 +476,14 @@ const app = new Vue({
         axios.get(`list-brands-api`)
         .then(response => {
           this.adminBrand = response.data
+        })
+    },
+
+    productSuperBuyer() {
+      self = this
+        axios.get(`products-super-buyer`)
+        .then(response => {
+          this.superBuyerProduct = response.data
         })
     },
 
@@ -486,6 +556,7 @@ const app = new Vue({
     item.push({ id:ID, price: parseFloat(price), name: name, count: count, image:image })
     window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
     this.cartMethod();
+    this.cartItemCount()
   },
 
   removeFromCart(ID) {
@@ -494,12 +565,19 @@ const app = new Vue({
     item.splice(index, 1);
     window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
     this.cartMethod();
+    this.cartItemCount()
   },
 
   cartMethod() {
     this.cart = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
-    let allPrice =  this.cart == null ? null : this.cart.map(obj => obj.price );
+    let allPrice =  this.cart == null ? null : this.cart.map(obj => obj.count * obj.price  );
     this.sumInCart = allPrice == null ? null : allPrice.reduce((a, b) => a + b ,0)
+  },
+
+  cartItemCount() {
+    this.cart = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
+    let allItem =  this.cart == null ? null : this.cart.map(obj => obj.count);
+    this.itemInCart = allItem == null ? null : allItem.reduce((a, b) => parseInt(a) + parseInt(b) ,0)
   },
 
   singleProductMethod(ID) {
@@ -519,9 +597,11 @@ const app = new Vue({
     item[index].count = count
     window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
     this.cartMethod()
+    this.cartItemCount()
   },
 
   }, //Method calibrace close
+    
 
 });
 
