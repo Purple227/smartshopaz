@@ -31,10 +31,8 @@
 <body data-topbar="colored">
 
     <!-- Begin page -->
-<div id="app">
 
-
-    <div id="layout-wrapper" >
+    <div id="layout-wrapper">
 
         @include('partials/sb-topbar')
 
@@ -47,7 +45,7 @@
         <!-- ============================================================== -->
         <div class="main-content">
 
-            <div class="page-content" >
+            <div class="page-content">
 
                 <!-- Page-Title -->
                 <div class="page-title-box">
@@ -137,39 +135,34 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
-</div>
-
     <!-- JAVASCRIPT -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
+
+    <script  src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>
-    <script src="../assets-dash/libs/simplebar/simplebar.min.js"></script>
-    <script src="../assets-dash/libs/node-waves/waves.min.js"></script>
+    <script  src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>
+    <script  src="../assets-dash/libs/simplebar/simplebar.min.js"></script>
+    <script  src="../assets-dash/libs/node-waves/waves.min.js"></script>
 
     <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
 
-    <!-- Required datatable js -->
-    <script src="../assets-dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <!-- Buttons examples -->
-    <script src="../assets-dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="../assets-dash/libs/jszip/jszip.min.js"></script>
-    <script src="../assets-dash/libs/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../assets-dash/libs/pdfmake/build/vfs_fonts.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-    <!-- Responsive examples -->
-    <script src="../assets-dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <!-- datepicker -->
+    <script  src="../assets-dash/libs/air-datepicker/js/datepicker.min.js"></script>
+    <script src="../assets-dash/libs/air-datepicker/js/i18n/datepicker.en.js"></script>
 
-    <!-- Datatable init js -->
-    <script src="../assets-dash/js/pages/datatables.init.js"></script>
+    <!-- apexcharts -->
+    <script src="../assets-dash/libs/apexcharts/apexcharts.min.js"></script>
+
+    <script  src="../assets-dash/libs/jquery-knob/jquery.knob.min.js"></script>
+
+    <!-- Jq vector map -->
+    <script src="../assets-dash/libs/jqvmap/jquery.vmap.min.js"></script>
+    <script src="../assets-dash/libs/jqvmap/maps/jquery.vmap.usa.js"></script>
+
+    <script src="../assets-dash/js/pages/dashboard.init.js"></script>
 
     <script src="../assets-dash/js/app.js"></script>
-    <script src="../assets-dash/js/iconify.min.js"></script>
+    <script  src="../assets-dash/js/iconify.min.js"></script>
 
 </body>
 

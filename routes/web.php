@@ -139,6 +139,7 @@ Route::get('/register-detail', [SuperRegisterFeeController::class, 'RegisterFeed
 Route::get('/change-password', [UserController::class, 'updatePasswordUI'])->name('change.password.super-buyer')->middleware('super.buyer');
 Route::post('/change-password', [UserController::class, 'updatePassword'])->name('change.password.post.super-buyer');
 Route::get('/orders', [OrderController::class, 'index'])->name('super-buyer.index')->middleware('super.buyer');
+Route::get('/order-process/{id}', [OrderController::class, 'showOrder'])->name('super-buyer.order-process')->middleware('super.buyer');
 Route::get('/genealogy/{slug}', [GenealogyController::class, 'genealogy'])->name('genealogy')->middleware('super.buyer');
 Route::get('/direct-downline', [GenealogyController::class, 'directDownline'])->name('super-buyer.downline')->middleware('super.buyer');
 Route::get('/all-downline', [GenealogyController::class, 'allDownLine'])->name('super-buyer.all-downline')->middleware('super.buyer');
@@ -146,6 +147,7 @@ Route::get('/bank', [SuperBuyerTransaction::class, 'bank'])->name('super-buyer.b
 Route::get('/support', [PagesController::class, 'support'])->name('super-buyer.support')->middleware('super.buyer');
 Route::get('/revenue', [SuperBuyerTransaction::class, 'revenue'])->name('super-buyer.revenue')->middleware('super.buyer');
 Route::get('/delivery-fee-api', [DeliveryController::class, 'getDeliveryFeeAPIs']);
+Route::post('/place-order', [OrderController::class, 'placeOrder']);
 });
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');

@@ -26,6 +26,8 @@
     <!-- App Css-->
     <link href="../assets-dash/css/app.min.css" rel="stylesheet" type="text/css" />
 
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
 </head>
 
 <body data-topbar="colored">
@@ -146,6 +148,7 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>

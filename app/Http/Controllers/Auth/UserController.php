@@ -28,7 +28,6 @@ class UserController extends Controller
 
     public function superBuyerRegister(Request $request)
     {
-
         $sponsor_code_used = Sponsor::where('sponsor_code', $request->sponsor_code)->first();
         $sponsor_code_used->sponsor_code_counter = $sponsor_code_used->sponsor_code_counter + 1;
         $sponsor_code_used->save();
@@ -78,7 +77,6 @@ class UserController extends Controller
                 ->where('sponsor_id', $sponsor_user->id)
                 ->update(['wallet' => true]);
         });
-
         */
 
         $request->session()->flash('status', 'Task was successful!');

@@ -16,7 +16,7 @@ class ProductController extends Controller
 
     public function products()
     {
-        $products = Product::where('super_buyer_price', '!=', null)->get();
+        $products = Product::where('super_buyer_price', '!=', null)->paginate(8);
         return $products;
     }
     

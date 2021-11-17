@@ -78,6 +78,7 @@
                                                     <th>Order Id</th>
                                                     <th>Total Price</th>
                                                     <th>Order Status</th>
+                                                    <th> Quantity </th>
                                                     <th>Payment</th>
                                                     <th>Order Placed On</th>
                                                     <th>Options</th>
@@ -86,18 +87,21 @@
 
 
                                             <tbody>
+                                            @foreach ($placed_order as $key => $order)
                                                 <tr>
-                                                    <td>SOR-00011</td>
-                                                    <td>Abdul</td>
-                                                    <td>Superbuyer</td>
-                                                    <td>₦135,000</td>
-                                                    <td class="badge badge-soft-primary"> In Progress</td>
-                                                    <td>Online</td>
-                                                    <td>23 May 2021</td>
+                                                
+                                                    <td>SOR {{ $order->order_unique_id }} </td>
+                                                    <td> {{ $order->total_price }}</td>
+                                                    <td class="badge badge-soft-primary"> Progress</td>
+                                                    <td> {{ $order->quantity}}
+                                                    <td>₦{{ $order->payment }}</td>
+                                                    <td> {{ $order->created_at }}</td>
                                                     <td>
-                                                        <a href="order-process"><i class="iconify" data-icon="uim:refresh"></i> View Order</a>
+                                                        <a href="{{ route('super-buyer.order-process', $order->id) }}"><i class="iconify" data-icon="uim:refresh"></i> View Order</a>
                                                     </td>
+                                                   
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -128,6 +132,7 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>

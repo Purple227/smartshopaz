@@ -2081,7 +2081,7 @@ vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().use(vuelidate__WEBPACK_IM
 var PaystackPop = window.PaystackPop;
 
 var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
-  el: '#app',
+  el: '#layout-wrapper',
   data: function data() {
     return {
       registration: {
@@ -2154,8 +2154,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       adminCategory: null,
       adminBrand: null,
       superBuyerProduct: null,
-      deliveryFee: null,
-      itemInCart: null
+      deliveryFee: '',
+      itemInCart: ''
     };
   },
   validations: {
@@ -2208,13 +2208,13 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
   // Validation calibrace close
   watch: {
     // whenever question changes, this function will run
-    productPerPage: function productPerPage() {
+    'productPerPage': function productPerPage() {
       this.getProduct();
     },
-    searchProductQuery: function searchProductQuery() {
+    'searchProductQuery': function searchProductQuery() {
       this.searchProductData();
     },
-    sortAlpha: function sortAlpha() {
+    'sortAlpha': function sortAlpha() {
       this.getProduct();
     },
     'registration.email': function registrationEmail() {
@@ -2237,13 +2237,13 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     this.searchProductData();
     this.getProduct();
     this.cartMethod();
-    this.getSetSuperBuyerDetail();
     this.getAdminBrand();
     this.getAdminCategory();
     this.userNameMethod();
     this.productSuperBuyer();
     this.getDeliveryFee();
     this.cartItemCount();
+    this.getSetSuperBuyerDetail();
   },
   methods: {
     //Method calibrace open
@@ -2290,7 +2290,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       var orderDetail = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
 
       var self = this;
-      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("payment", {
+      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("place-order", {
         user_id: userID,
         total_price: totalPrice,
         account_type: accountType,
@@ -2299,7 +2299,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         payment_method: 'card',
         order_detail: orderDetail
       }).then(function () {
-        self.saveTransaction(transactionID, userID, name, true);
+        window.localStorage.removeItem('cartItem');
+        self.saveTransaction(transactionID, userID, name, 1);
       })["catch"](function () {});
     },
     cartCheckout: function cartCheckout(userID, name, email, totalPrice, accountType, phone, payment, quantity) {
@@ -2340,9 +2341,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
 
         if (redirectLink == true) {
           window.location = '/super-buyer/orders';
+        } else {
+          window.location = '/super-buyer/success';
         }
-
-        window.location = '/super-buyer/success';
       })["catch"](function () {});
     },
     saveProduct: function saveProduct() {
@@ -2491,7 +2492,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("products-super-buyer").then(function (response) {
-        _this8.superBuyerProduct = response.data;
+        _this8.superBuyerProduct = response.data.data;
+        _this8.pagination.nextPageUrl = response.data.next_page_url;
+        _this8.pagination.previousPageUrl = response.data.prev_page_url;
+        _this8.pagination.to = response.data.to;
+        _this8.pagination.total = response.data.total;
       });
     },
     emailMethod: function emailMethod() {

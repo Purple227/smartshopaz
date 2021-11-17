@@ -16,6 +16,7 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "postscribe": "^2.0.8",
         "vue": "^2.6.14",
         "vue-axios": "^3.3.7",
         "vuelidate": "^0.7.6"

@@ -19,10 +19,13 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->integer('order_unique_id');
             $table->double('total_price', 8, 2 );
-            $table->sting('account_type');
+            $table->string('account_type');
             $table->double('payment', 8, 2 );
             $table->integer('quantity');
             $table->string('payment_method');
+            $table->string('phone');
+            $table->string('name');
+            $table->string('status')->default('pending');
 
             $table->timestamps();
         });

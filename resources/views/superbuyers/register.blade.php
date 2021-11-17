@@ -23,7 +23,7 @@
 
 <body class="bg-primary bg-pattern">
 
-    <div class="account-pages my-1 pt-sm-" id="app">
+    <div class="account-pages my-1 pt-sm-" id="layout-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -224,7 +224,7 @@
     <!-- end Account pages -->
 
     <!-- JAVASCRIPT -->
-
+    
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
@@ -238,6 +238,7 @@
 
     <script src="../assets-dash/js/app.js"></script>
     <script src="../assets-dash/js/iconify.min.js"></script>
+    
     <script>
         $('#password, #confirm_password').on('keyup', function() {
             if ($('#password').val() == $('#confirm_password').val()) {
@@ -246,7 +247,6 @@
                 $('#message')('Passwords are not Matching').css('color', 'red');
         });
     </script>
-
 
 </body>
 
