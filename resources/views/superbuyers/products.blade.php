@@ -80,7 +80,7 @@
 
                             <div class="col-md-6 col-xl-3" v-for="product in superBuyerProduct" :key="product.id">
 
-                                <div class="card">
+                                <!-- <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title font-size-16 mt-0"> @{{ product.title }} </h4>
                                         <h6 class="card-subtitle font-14 text-muted">NGN @{{ product.super_buyer_price }} </h6>
@@ -88,10 +88,19 @@
                                     <img class="img-fluid" src="../assets-dash/images/small/img-4.jpg" alt="Card image cap">
                                     <div class="card-body">
                                         <p class="card-text"> @{{ product.description.substring(0, 25) }} </p>
-                                        <!-- a href="#" class="card-link">SelectSizes</a n-->
+                                        <a href="#" class="card-link">SelectSizes</a>
                                         <a href="#" class="card-link" v-if="cart == null ? false : cart.some(check => check.id === product.id)" @click="removeFromCart(product.id)">Remove from cart</a>
                                         <a href="#" class="card-link" @click="addToCart(product.id, product.super_buyer_price , product.title, 1, product.image)" v-else>Add to cart</a>
                                     </div>
+                                </div> -->
+                                <div class="card">
+                                <a href="product-detail">
+                                    <img class="img-fluid" src="../assets-dash/images/small/img-4.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title font-size-16 mt-0">@{{ product.title }}</h4>
+                                        <h6 class="card-subtitle font-14 text-muted">NGN @{{ product.super_buyer_price }} </h6>
+                                    </div>
+                                    </a>
                                 </div>
 
                             </div><!-- end col -->

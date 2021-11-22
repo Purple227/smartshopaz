@@ -6,7 +6,6 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">Basic</li>
 
                 <li>
                     <a href="index" class="waves-effect">
@@ -14,6 +13,52 @@
                             <!-- <i class="iconify" data-icon="uim:bag"></i> -->
                         </div>
                         <span>Home</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <div class="d-inline-block icons-sm mr-1">
+                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
+                        </div>
+                        <span>Genealogy</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="genealogy">Black Opal</a></li>
+                        <li><a href="genealogy">Red Beryl</a></li>
+                        <li><a href="genealogy">Alexandrite</a></li>
+                        <li><a href="genealogy">Emerald</a></li>
+                        <li><a href="genealogy">Ruby</a></li>
+                        <li><a href="genealogy">Jadeite</a></li>
+                        <li><a href="genealogy">Diamond</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{{ route('super-buyer.downline') }}" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1">
+                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
+                        </div>
+                        <span>Direct Downline</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('super-buyer.all-downline') }}" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1">
+                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
+                        </div>
+                        <span>All Downline Details</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{{ route('super-buyer.generation-view') }}" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1">
+                            <!-- <i class="iconify" data-icon="uim:record-audio"></i> -->
+                        </div>
+                        <span>Generation View</span>
                     </a>
                 </li>
 
@@ -35,42 +80,8 @@
                         <span>Orders</span>
                     </a>
                 </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
-                        </div>
-                        <span>Genealogy</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="genealogy">Black Opal</a></li>
-                        <li><a href="genealogy">Red Beryl</a></li>
-                        <li><a href="genealogy">Alexandrite</a></li>
-                        <li><a href="genealogy">Emerald</a></li>
-                        <li><a href="genealogy">Ruby</a></li>
-                        <li><a href="genealogy">Jadeite</a></li>
-                        <li><a href="genealogy">Diamond</a></li>
-                    </ul>
-                </li>
                 
-                <li>
-                    <a href="{{ route('super-buyer.downline') }}" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
-                        </div>
-                        <span>Direct Downline</span>
-                    </a>
-                </li>
 
-                <li>
-                    <a href="{{ route('super-buyer.all-downline') }}" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:record-audio"></i> -->
-                        </div>
-                        <span>Generation View</span>
-                    </a>
-                </li>
 
                 <li>
                     <a href="{{ route('super-buyer.bank') }} " class="waves-effect">

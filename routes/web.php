@@ -143,6 +143,7 @@ Route::get('/order-process/{id}', [OrderController::class, 'showOrder'])->name('
 Route::get('/genealogy/{slug}', [GenealogyController::class, 'genealogy'])->name('genealogy')->middleware('super.buyer');
 Route::get('/direct-downline', [GenealogyController::class, 'directDownline'])->name('super-buyer.downline')->middleware('super.buyer');
 Route::get('/all-downline', [GenealogyController::class, 'allDownLine'])->name('super-buyer.all-downline')->middleware('super.buyer');
+Route::get('/generation-view', [GenealogyController::class, 'generationView'])->name('super-buyer.generation-view')->middleware('super.buyer');
 Route::get('/bank', [SuperBuyerTransaction::class, 'bank'])->name('super-buyer.bank')->middleware('super.buyer');
 Route::get('/support', [PagesController::class, 'support'])->name('super-buyer.support')->middleware('super.buyer');
 Route::get('/revenue', [SuperBuyerTransaction::class, 'revenue'])->name('super-buyer.revenue')->middleware('super.buyer');

@@ -24,6 +24,11 @@ class GenealogyController extends Controller
 
     public function allDownLine()
     {
+        return view('superbuyers.all-downline-details');
+    }
+
+    public function generationView()
+    {
         return view('superbuyers.downline');
     }
     
