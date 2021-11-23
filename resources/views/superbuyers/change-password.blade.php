@@ -82,9 +82,9 @@
                                         <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                             <b>oops! {{ $error }} </b>
-                                       </div>
+                                        </div>
                                         @endforeach
-                                       @endif
+                                        @endif
 
 
                                         @if(Session::has('status'))
@@ -92,10 +92,10 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                             <b> {{ Session::get('status') }} </b>
                                         </div>
-@endif                           
+                                        @endif
                                         <form method="POST" action="{{ route('update.password') }}">
-                                        @csrf 
-                                              <div class="row">
+                                            @csrf
+                                            <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom06">Current Password</label>
                                                     <input type="password" name="current_password" class="form-control" id="validationCustom06" placeholder="Current Password" value="">
