@@ -47,7 +47,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal" >Close</button>
-                <a href="checkout" class="btn btn-primary waves-effect waves-light" data-dismiss="modal" v-if="cart != null" @click="cartCheckout('{{Auth::user()->id }}', '{{ Auth::user()->name }}', '{{ Auth::user()->email }}', sumInCart + deliveryFee, '{{ Auth::user()->account_type}}', '{{ Auth::user()->phone}}', sumInCart, itemInCart)">Checkout</a>
+                <a href="checkout" class="btn btn-primary waves-effect waves-light" data-dismiss="modal" v-if="cart != 0" @click="cartCheckout('{{Auth::user()->id }}', '{{ Auth::user()->name }}', '{{ Auth::user()->email }}', sumInCart + deliveryFee, '{{ Auth::user()->account_type}}', '{{ Auth::user()->phone}}', sumInCart, itemInCart)">Checkout</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

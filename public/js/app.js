@@ -2155,7 +2155,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       adminBrand: null,
       superBuyerProduct: null,
       deliveryFee: '',
-      itemInCart: ''
+      itemInCart: '',
+      ageStatus: false
     };
   },
   validations: {
@@ -2638,6 +2639,22 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
 
       this.cartMethod();
       this.cartItemCount();
+    },
+    ageChecker: function ageChecker(birthday) {
+      // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
+      var optimizedBirthday = birthday.replace(/-/g, "/"); //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
+
+      var myBirthday = new Date(optimizedBirthday); // set current day on 01:00:00 hours GMT+0100 (CET)
+
+      var currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00'; // calculate age comparing current date and borthday
+
+      var myAge = ~~((Date.now(currentDate) - myBirthday) / 31557600000);
+
+      if (myAge < 18) {
+        this.ageStatus = false;
+      } else {
+        this.ageStatus = true;
+      }
     }
   } //Method calibrace close
 

@@ -94,7 +94,7 @@
                                     </div>
                                 </div> -->
                                 <div class="card">
-                                <a href="product-detail">
+                                <a :href="'/super-buyer/product-super-buyer/'+product.slug">
                                     <img class="img-fluid" src="../assets-dash/images/small/img-4.jpg" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title font-size-16 mt-0">@{{ product.title }}</h4>

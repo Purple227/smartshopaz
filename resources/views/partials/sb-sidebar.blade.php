@@ -8,7 +8,7 @@
             <ul class="metismenu list-unstyled" id="side-menu">
 
                 <li>
-                    <a href="index" class="waves-effect">
+                    <a href="{{ route('super-buyer.home') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:bag"></i> -->
                         </div>

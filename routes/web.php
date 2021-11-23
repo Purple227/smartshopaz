@@ -134,6 +134,7 @@ Route::get('/check-username', [UserController::class, 'checkUserName']);
 Route::get('/user/{id}', [UserController::class, 'getUser']);
 Route::get('/products', [SuperProductController::class, 'index'])->name('product.super-buyer')->middleware('super.buyer');
 Route::get('/products-super-buyer', [SuperProductController::class, 'products']);
+Route::get('/product-super-buyer/{slug}', [SuperProductController::class, 'singleProduct'])->name('single.product');
 Route::get('/success', [UserController::class, 'registerInfo'])->name('super-buyer.register.success');
 Route::get('/register-detail', [SuperRegisterFeeController::class, 'RegisterFeedetailAPIs']);
 Route::get('/change-password', [UserController::class, 'updatePasswordUI'])->name('change.password.super-buyer')->middleware('super.buyer');

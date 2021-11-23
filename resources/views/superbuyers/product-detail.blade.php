@@ -8,21 +8,24 @@
     <meta content="Smartshoppers Admin CMS" name="description" />
     <meta content="Smartshoppers" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets-dash/images/favicon.ico">
-
+    <link rel="shortcut icon" href="{{ asset('assets-dash/images/favicon.ico') }}">
+    <!-- Plugins css -->
+    <link href="{{ asset('assets-dash/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- DataTables -->
-    <link href="../assets-dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets-dash/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- <link href="../assets-dash/libs/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css" /> -->
 
     <!-- Responsive datatable examples -->
-    <link href="../assets-dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/libs/summernote/summernote-bs4.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
-    <link href="../assets-dash/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="../assets-dash/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="../assets-dash/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/css/app.min.css')  }}" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -40,7 +43,7 @@
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
-        <div class="main-content" id="app">
+        <div class="main-content">
 
             <div class="page-content">
 
@@ -75,23 +78,18 @@
 
                         <div class="card">
                             <div class="card-body">
-
+<!--
                                 <h4 class="header-title">With controls</h4>
                                 <p class="card-title-desc">Adding in the previous and next controls:</p>
-
+-->
                                 <div class="row">
 
                                     <div class="col-md-6">
                                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner" role="listbox">
+
                                                 <div class="carousel-item active">
-                                                    <img class="d-block img-fluid mx-auto" src="../assets-dash/images/small/img-4.jpg" alt="First slide">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img class="d-block img-fluid mx-auto" src="../assets-dash/images/small/img-5.jpg" alt="Second slide">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img class="d-block img-fluid mx-auto" src="../assets-dash/images/small/img-6.jpg" alt="Third slide">
+                                                    <img class="d-block img-fluid mx-auto" src="{{ asset('assets-dash/images/small/img-4.jpg') }}" alt="First slide">
                                                 </div>
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -107,12 +105,12 @@
 
                                     <div class="col-md-6">
                                         <!-- end col -->
-                                        <p class="text-primary">category</p>
-                                        <h3 class="">NGN @{{ product.title }}</h3>
-                                        <h5>NGN @{{ product.super_buyer_price }}</h5>
+                                        <p class="text-primary"> {{ $single_product->category->name }}</p>
+                                        <h3 class=""> {{ $single_product->title }}</h3>
+                                        <h5>NGN {{ $single_product->super_buyer_price }}</h5>
                                         <!-- <li class="list-group-item"> -->
                                         <label class="sr-onl text-primary" for="inlineFormInputName2">Description</label>
-                                        <p>@{{ product.description.substring(0, 25) }}</p>
+                                        <p> {{ $single_product->description }}</p>
                                         <div class="media my-2">
 
                                             <div class="media-body">
@@ -127,8 +125,8 @@
                                                         </select>
                                                     </div>
 
-
-                                                    <button type="submit" class="btn btn-primary mt-3 mt-sm-0" @click="addToCart(product.id, product.super_buyer_price , product.title, 1, product.image)" v-else>Add to cart</button>
+                                                    <button type="submit" class="btn btn-primary mt-3 mt-sm-0" v-if="cart == null ? false : cart.some(check => check.id === '{{$single_product->id}}')" @click="removeFromCart('{{$single_product->id}}')"> Remove From Cart </button>
+                                                    <button type="submit" class="btn btn-primary mt-3 mt-sm-0" @click="addToCart( '{{$single_product->id}}', '{{$single_product->super_buyer_price}}' , '{{$single_product->title}}', 1, '{{$single_product->image}}')" v-else> Add to cart </button>
                                                 </form>
                                             </div>
                                             <div class="icons-lg ml-2 align-self-center">
@@ -173,35 +171,35 @@
 
     <!-- JAVASCRIPT -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
-    <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>
-    <script src="../assets-dash/libs/simplebar/simplebar.min.js"></script>
-    <script src="../assets-dash/libs/node-waves/waves.min.js"></script>
+    <script src="{{ asset('assets-dash/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/node-waves/waves.min.js') }}"></script>
 
     <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
 
     <!-- Required datatable js -->
-    <script src="../assets-dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <!-- Buttons examples -->
-    <script src="../assets-dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="../assets-dash/libs/jszip/jszip.min.js"></script>
-    <script src="../assets-dash/libs/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../assets-dash/libs/pdfmake/build/vfs_fonts.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
     <!-- Responsive examples -->
-    <script src="../assets-dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
     <!-- Datatable init js -->
-    <script src="../assets-dash/js/pages/datatables.init.js"></script>
+    <script src="{{ asset('assets-dash/js/pages/datatables.init.js') }}"></script>
 
-    <script src="../assets-dash/js/app.js"></script>
-    <script src="../assets-dash/js/iconify.min.js"></script>
+    <script src="{{ asset('assets-dash/js/app.js') }}"></script>
+    <script src="{{ asset('assets-dash/js/iconify.min.js') }}"></script>
 
 </body>
 

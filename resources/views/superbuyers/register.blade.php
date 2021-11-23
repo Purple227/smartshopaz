@@ -94,8 +94,8 @@
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
-                                            <input type="date" name="date_of_birth" class="form-control datepicker-here" v-model="registration.dateOfBirth" data-range="true" data-multiple-dates-separator=" - " data-language="en" />
-                                            <p v-bind:class="{ 'text-success': registration.dateOfBirth.length > 3, 'text-danger': registration.dateOfBirth.length < 3 }"> @{{ registration.dateOfBirth.length > 3 ? 'Looking Good' : 'Date Of Birth field is required' }} </>
+                                            <input type="date" name="date_of_birth" class="form-control datepicker-here" v-model="registration.dateOfBirth" data-range="true" data-multiple-dates-separator=" - " data-language="en" @change="ageChecker(registration.dateOfBirth)"/>
+                                            <p v-bind:class="{ 'text-success': ageStatus, 'text-danger': ageStatus }"> @{{ ageStatus ? 'Looking Good' : 'You Must Be 18yrs Plus' }} </>
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
@@ -200,9 +200,7 @@
 
                                             <!-- <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button> -->
 
-                                            <button class="btn btn-primary btn-block waves-effect waves-light" @click="payWithPaystack" v-if="buttonLoader == false" :disabled="$v.registration.$invalid == true || registration.privacy == false || utilities.sponsorStatus == false || utilities.RONCodeStatus == false || utilities.emailStatus == false || utilities.userNameStatus == false"> Pay and Register</button>
-
-
+                                            <button class="btn btn-primary btn-block waves-effect waves-light" @click="payWithPaystack" v-if="buttonLoader == false" :disabled="$v.registration.$invalid == true || registration.privacy == false || utilities.sponsorStatus == false || utilities.RONCodeStatus == false || utilities.emailStatus == false || utilities.userNameStatus == false || ageStatus == false"> Pay and Register</button>
                                             <button class="btn btn-primary btn-block waves-effect waves-light" v-else> Please Wait </button>
 
                                         </div>

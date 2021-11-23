@@ -72,7 +72,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- item-->
-                    <a class="dropdown-item" href="change-password"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Change Password</a>
+                    <a class="dropdown-item" href="{{ route('change.password.super-buyer') }}"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Change Password</a>
                     <!-- <a class="dropdown-item" href="login"><i class="mdi mdi-lock font-size-16 align-middle mr-1"></i> Lock screen</a> -->
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
