@@ -44,15 +44,15 @@
                                             <div class="col-md-12">
                                                 <div class="alert alert-warning alert-dismissible">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                                    Enter your <b>Email</b> and instructions will be sent to you!
+                                                    Enter your <b>Username</b> and instructions will be sent to you!
                                                 </div>
 
                                                 <div class="form-group form-group-custom mt-5">
-                                                    <input type="email" class="form-control" id="useremail" required>
-                                                    <label for="useremail">Email</label>
+                                                    <input type="text" class="form-control" id="useremail" required>
+                                                    <label for="useremail">Username</label>
                                                 </div>
                                                 <div class="mt-4">
-                                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Send Email</button>
+                                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Reset Password</button>
                                                 </div>
                                                 
                                             </div>
