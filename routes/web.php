@@ -152,6 +152,7 @@ Route::get('/delivery-fee-api', [DeliveryController::class, 'getDeliveryFeeAPIs'
 Route::post('/place-order', [OrderController::class, 'placeOrder']);
 Route::get('/forgot-password', [UserController::class, 'forgetPasswordUI'])->name('forgot.password.super-buyer');
 Route::post('/send-reset-password', [UserController::class, 'sendResetPassword']);
+Route::post('/customer-support', [PagesController::class, 'sendSupport'])->name('super-buyer.customer.support');
 });
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');

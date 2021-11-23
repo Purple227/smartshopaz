@@ -83,7 +83,28 @@
                                         <h4 class="header-title">complete the form below to send a support ticket</h4>
                                         <p class="card-title-desc"></p>
 
-                                        <form class="needs-validation" novalidate>
+                                        @if ($errors->any())
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            @foreach ($errors->all() as $error)
+                                            <b>oops! {{ $error }} </b>
+                                            @endforeach
+                                        </div>
+                                        @endif
+
+
+
+                                        @if(Session::has('status'))
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b> {{ Session::get('status') }} </b>
+                                        </div>
+                                        @endif
+
+
+                                        <form class="needs-validation" method="POST" action=" {{ route('super-buyer.customer.support') }}">
+
+                                        @csrf
 
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
@@ -117,7 +138,7 @@
                                                 </div>
                                             </div> -->
                                             <!-- <button class="btn btn-primary" type="submit">Complete</button> -->
-                                            <a href="success" class="btn btn-primary" type="submit"> Send </a>
+                                            <button class="btn btn-primary" type="submit"> Send </button>
                                         </form>
                                     </div>
                                 </div>
@@ -147,7 +168,7 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
-    
+
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\SuperBuyer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\Support;
 
 class PagesController extends Controller
 {
@@ -21,7 +23,14 @@ class PagesController extends Controller
             'message' => 'required'
         ]);
 
-        
 
+        $notify_info = $request->all();
+        $notify_info = (object) $notify_info;
+        
+        Notification::route('mail',$request->email)
+          ->notify(new Support( $notify_info));
+
+        $request->session()->flash('status', 'Support Email Sent Succesfully!');
+        return redirect()->back();
     }
 }
