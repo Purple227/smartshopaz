@@ -60,7 +60,9 @@ const app = new Vue({
                 emailStatus: false,
                 sponsorUserDetail: null,
                 userName: null,
-                userNameStatus: false
+                userNameStatus: false,
+                resetPassword: null,
+                passwordResetEmailSender: null
             },
 
             pagination: {
@@ -168,7 +170,7 @@ const app = new Vue({
 
 
     watch: {
-        // whenever question changes, this function will run
+        // whenever each variable changes, this function will run
         'productPerPage': function() {
             this.getProduct()
         },
@@ -326,6 +328,22 @@ const app = new Vue({
                     }
                 })
                 .catch(function() {});
+        },
+
+        sendResetpassword() {
+            let self = this;
+            Vue.axios
+                .post(
+                    "send-reset-password", {
+                        username: this.registration.userName,
+                    }
+                )
+                .then(() => {
+                    self.utilities.passwordResetEmailSender = true
+                })
+                .catch(function() {
+                    self.utilities.passwordResetEmailSender = false
+                });
         },
 
         saveProduct() {
@@ -510,10 +528,12 @@ const app = new Vue({
                     .then(response => {
                         this.utilities.userName = response.data
                         this.utilities.userNameStatus = true
+                        this.utilities.resetPassword = false;
                     })
                     .catch(function(error) {
                         self.utilities.userNameStatus = false
                         self.utilities.userName = error.response.data
+                        self.utilities.resetPassword = true;
                     });
             }
         },

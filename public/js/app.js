@@ -2120,7 +2120,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         emailStatus: false,
         sponsorUserDetail: null,
         userName: null,
-        userNameStatus: false
+        userNameStatus: false,
+        resetPassword: null,
+        passwordResetEmailSender: null
       },
       pagination: {
         nextPageUrl: null,
@@ -2208,7 +2210,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
   },
   // Validation calibrace close
   watch: {
-    // whenever question changes, this function will run
+    // whenever each variable changes, this function will run
     'productPerPage': function productPerPage() {
       this.getProduct();
     },
@@ -2346,6 +2348,16 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           window.location = '/super-buyer/success';
         }
       })["catch"](function () {});
+    },
+    sendResetpassword: function sendResetpassword() {
+      var self = this;
+      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("send-reset-password", {
+        username: this.registration.userName
+      }).then(function () {
+        self.utilities.passwordResetEmailSender = true;
+      })["catch"](function () {
+        self.utilities.passwordResetEmailSender = false;
+      });
     },
     saveProduct: function saveProduct() {
       var self = this;
@@ -2532,9 +2544,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         }).then(function (response) {
           _this10.utilities.userName = response.data;
           _this10.utilities.userNameStatus = true;
+          _this10.utilities.resetPassword = false;
         })["catch"](function (error) {
           self.utilities.userNameStatus = false;
           self.utilities.userName = error.response.data;
+          self.utilities.resetPassword = true;
         });
       }
     },

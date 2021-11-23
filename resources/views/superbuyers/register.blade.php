@@ -175,7 +175,7 @@
 
                                         <div class="form-group form-group-custom mb-4">
                                             <input type="text" v-model="registration.userName" name="username" class="form-control" id="useremail" @change="userNameMethod" required>
-                                            <label for="useremail">Username</label>
+                                            <label for="useremail"> Username </label>
                                             <p v-bind:class="{'text-success': !$v.registration.userName.$invalid }" v-if="!$v.registration.userName.$invalid"> @{{ utilities.userName }} </p>
                                         </div>
 

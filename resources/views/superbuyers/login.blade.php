@@ -73,7 +73,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="text-md-right mt-3 mt-md-0">
-                                                            <a href="forgot-password" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                                            <a href="{{ route('forgot.password.super-buyer') }}" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
                                                         </div>
                                                     </div>
                                                 </div>

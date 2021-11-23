@@ -150,6 +150,8 @@ Route::get('/support', [PagesController::class, 'support'])->name('super-buyer.s
 Route::get('/revenue', [SuperBuyerTransaction::class, 'revenue'])->name('super-buyer.revenue')->middleware('super.buyer');
 Route::get('/delivery-fee-api', [DeliveryController::class, 'getDeliveryFeeAPIs']);
 Route::post('/place-order', [OrderController::class, 'placeOrder']);
+Route::get('/forgot-password', [UserController::class, 'forgetPasswordUI'])->name('forgot.password.super-buyer');
+Route::post('/send-reset-password', [UserController::class, 'sendResetPassword']);
 });
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');

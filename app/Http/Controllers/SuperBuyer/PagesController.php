@@ -11,4 +11,17 @@ class PagesController extends Controller
     {
         return view('superbuyers.support');
     }
+
+    public function sendSupport(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'member_id' => 'required',
+            'email' => 'required',
+            'message' => 'required'
+        ]);
+
+        
+
+    }
 }

@@ -88,23 +88,23 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Member ID</label>
-                                                    <input type="text" class="form-control " readonly required />
+                                                    <input type="text" name="member_id" value="{{ Auth::user()->sponsor_code }}" class="form-control " readonly required />
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Name</label>
-                                                    <input type="text" class="form-control " required />
+                                                    <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" readonly required />
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">Email</label>
-                                                    <input type="email" class="form-control " required />
+                                                    <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly required />
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Phone Number</label>
-                                                    <input type="number" class="form-control" id="validationCustom03" required>
+                                                    <input type="number" name="phone" class="form-control" value="{{ Auth::user()->phone }}" id="validationCustom03" required>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <label for="validationCustom04">Message</label>
-                                                    <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                                                    <textarea class="form-control" name="message" id="" cols="30" rows="10"></textarea>
                                                 </div>
                                             </div>
                                             <!-- <div class="form-group">
@@ -117,7 +117,7 @@
                                                 </div>
                                             </div> -->
                                             <!-- <button class="btn btn-primary" type="submit">Complete</button> -->
-                                            <a href="success" class="btn btn-primary" type="submit">Send</a>
+                                            <a href="success" class="btn btn-primary" type="submit"> Send </a>
                                         </form>
                                     </div>
                                 </div>

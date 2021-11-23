@@ -12,6 +12,8 @@ use App\Models\RonCode;
 use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
 use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ResetPassword;
 
 class UserController extends Controller
 {
@@ -82,6 +84,11 @@ class UserController extends Controller
         $request->session()->flash('status', 'Task was successful!');
         return $user;
     }
+
+    public function monthlyLinkBonus($user_id)
+    {
+        
+    } 
 
     public function completeRegistration(Request $request)
     {
@@ -228,4 +235,24 @@ class UserController extends Controller
         $request->session()->flash('status', 'Task was successful!');
         return redirect()->back();
     }
+
+    public function forgetPasswordUI()
+    {
+        return view('superbuyers.forgot-password');
+    }
+
+    public function sendResetPassword(Request $request)
+    {
+        $new_generated_password = mt_rand(100000, 999999);
+        $user = User::where('username',$request->username)->first();
+        $user->password = Hash::make($new_generated_password);
+        $user->save();
+        
+        Notification::route('mail','purple.is.social227@gmail.com')
+        ->notify(new ResetPassword( $new_generated_password, $user ));
+
+        return 'Password update succesfull';
+
+    }
+
 }
