@@ -50,6 +50,7 @@
                                                     <input type="text" class="form-control" v-model="registration.userName" id="useremail" @change="userNameMethod" required>
                                                     <label for="useremail">Username</label>
                                                     <p :class="{ 'text-success': utilities.resetPassword == true, 'text-danger': utilities.resetPassword == false }" v-if="utilities.resetPassword != null"> @{{ utilities.resetPassword ? 'You Good To Go' : 'Incorrect Username' }} </p>
+                                                    Enter your <b>Username</b> and instructions will be sent to you!
                                                 </div>
 
                                                 <div class="mt-4">

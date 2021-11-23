@@ -1,213 +1,287 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <title>Index</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <meta name="keywords" content="smartshoppers, smartshoppers, smartshoppaz, free shopping, online shopping, online shopping nigeria, best online shops in nigeria, wholesalers in nigeria,  retailers in nigeria, best wholesaler, best wholesalers in nigeria">
-    <meta name="author" content="Smartshoppers | Development Team">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/custom_bootstrap.css">
-    <link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/elegant.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/scroll.css">
-    <link rel="stylesheet" href="assets/css/icomoon.css">
-    <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
-    <link rel="shortcut icon" href="assets/images/shortcut_logo.png">
-  </head>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <body>
-    <div id="main">
-    <header>
-        @include('inc/main-topbar.php')
-        @include('inc/main-desktop-nav.php')
-        @include('inc/main-mobile-nav.php')
-        <div class="navigation-filter"> 
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-12 col-lg-4 col-xl-3 order-2 order-md-1">
-              @include('inc/main-categories.php')
-              </div>
-              <div class="col-12 col-md-12 col-lg-8 col-xl-9 order-1 order-md-2">
-              @include('inc/main-search.php')
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-      <!-- End header-->
-      <div class="ogami-breadcrumb">
-        <div class="container">
-          <ul>
-            <li> <a class="breadcrumb-link" href=""> <i class="fas fa-home"></i></a></li>
-            <li> <a class="breadcrumb-link" href="cart">Cart</a></li>
-            <li> <a class="breadcrumb-link active" href="index">Checkout</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- End breadcrumb-->
-      <div class="order-step">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="order-step_block">
-                <div class="row no-gutters">
-                  <div class="col-4 col-md-4">
-                    <div class="step-block step-block--1">
-                      <div class="step">
-                        <h2>Shopping Cart</h2><span>01</span>
-                      </div>
+
+<head>
+    <meta charset="utf-8" />
+    <title> Checkout | Smartshoppers Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Smartshoppers Admin CMS" name="description" />
+    <meta content="Smartshoppers" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../assets-dash/images/favicon.ico">
+
+    <!-- DataTables -->
+    <link href="../assets-dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets-dash/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets-dash/libs/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="../assets-dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets-dash/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap Css -->
+    <link href="../assets-dash/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="../assets-dash/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="../assets-dash/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
+</head>
+
+<body data-topbar="colored">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        @include('partials/sb-topbar')
+
+        <!-- ========== Left Sidebar Start ========== -->
+        @include('partials/sb-sidebar')
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+
+                <!-- Page-Title -->
+                <div class="page-title-box">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h4 class="page-title mb-1">Checkout</h4>
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Cart</a></li>
+                                    <li class="breadcrumb-item active"> Checkout</li>
+                                </ol>
+                            </div>
+                        </div>
+
                     </div>
-                  </div>
-                  <div class="col-4 col-md-4">
-                    <div class="step-block active">
-                      <div class="step">
-                        <h2>Check Out</h2><span>02</span>
-                      </div>
+                </div>
+                <!-- end page title end breadcrumb -->
+
+                <div class="page-content-wrapper">
+                    <div class="container-fluid">
+
+                    <div class="row">
+                            <div class="col-md-8">
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">SHIPPING DETAILS</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <form class="needs-validation" novalidate>
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustom03">Receiver's First Name</label>
+                                                    <input type="text" class="form-control" id="validationCustom03" placeholder="First Name" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid Name.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustom03">Receiver's Last Name</label>
+                                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Last Name" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid Name.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustom03">Phone Number</label>
+                                                    <input type="number" class="form-control" id="validationCustom03" placeholder="Phone" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid Phone Number.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="validationCustom04">Address</label>
+                                                    <input type="text" class="form-control" id="validationCustom04" placeholder="LGA" required>
+                                                    <div class="invalid-feedback">
+                                                        Please provide a valid LGA.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label>State</label>
+                                                    <select class="custom-select" required>
+                                                        <option value="">Select State</option>
+                                                        <option value="abia">Abia</option>
+                                                        <option value="Adamawa">Adamawa</option>
+                                                        <option value="Akwa Ibom">Akwa Ibom</option>
+                                                        <option value="Anambra">Anambra</option>
+                                                        <option value="Bauchi">Bauchi</option>
+                                                        <option value="Bayelsa">Bayelsa</option>
+                                                        <option value="Benue">Benue</option>
+                                                        <option value="Borno">Borno</option>
+                                                        <option value="Cross River">Cross River</option>
+                                                        <option value="Delta">Delta</option>
+                                                        <option value="Ebonyi">Ebonyi</option>
+                                                        <option value="Edo">Edo</option>
+                                                        <option value="Ekiti">Ekiti</option>
+                                                        <option value="Enugu">Enugu</option>
+                                                        <option value="FCT">Federal Capital Territory</option>
+                                                        <option value="Gombe">Gombe</option>
+                                                        <option value="Imo">Imo</option>
+                                                        <option value="Jigawa">Jigawa</option>
+                                                        <option value="Kaduna">Kaduna</option>
+                                                        <option value="Kano">Kano</option>
+                                                        <option value="Katsina">Katsina</option>
+                                                        <option value="Kebbi">Kebbi</option>
+                                                        <option value="Kogi">Kogi</option>
+                                                        <option value="Kwara">Kwara</option>
+                                                        <option value="Lagos">Lagos</option>
+                                                        <option value="Nasarawa">Nasarawa</option>
+                                                        <option value="Niger">Niger</option>
+                                                        <option value="Ogun">Ogun</option>
+                                                        <option value="Ondo">Ondo</option>
+                                                        <option value="Osun">Osun</option>
+                                                        <option value="Oyo">Oyo</option>
+                                                        <option value="Plateau">Plateau</option>
+                                                        <option value="Rivers">Rivers</option>
+                                                        <option value="Sokoto">Sokoto</option>
+                                                        <option value="Taraba">Taraba</option>
+                                                        <option value="Yobe">Yobe</option>
+                                                        <option value="Zamfara">Zamfara</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Example invalid custom select feedback</div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label>Country</label>
+                                                    <select class="custom-select" required>
+                                                        <option value="nigeria">Nigeria</option>
+                                                    </select>
+                                                    <!-- <div class="invalid-feedback">Example invalid custom select feedback</div> -->
+                                                </div>
+                                                <div class="col-md-12 mb-3 text-primary">
+                                                    <label>Payment Method</label>
+                                                    <select class="custom-select" required>
+                                                    <option value="online">Online - Card</option>
+                                                        <option value="">Bank Transfer</option>
+                                                        
+                                                    </select>
+                                                    <div class="invalid-feedback">Example invalid custom select feedback</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="invalidCheck" required>
+                                                    <label class="custom-control-label" for="invalidCheck">Agree to terms and conditions</label>
+                                                    <div class="invalid-feedback">
+                                                        You must agree before submitting.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <button class="btn btn-primary" type="submit">Complete</button> -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                            <div class="col-md-4">
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Cart</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="shoppingCart" class="table table-condensed table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:40%">Product</th>
+                                                    <th style="width:25%">Quantity</th>
+                                                    <th style="width:35%">Amount(₦)</th>
+                                                    <!-- <th style="width:16%"></th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-th="Product">
+                                                        <h6 class="text-primary">Product Name</h6>
+                                                    </td>
+                                                    <td data-th="Quantity">
+                                                        <input type="number" class="form-control form-control-sm text-center" value="1" readonly>
+                                                    </td>
+                                                    <td data-th="Price">49.00</td>
+                                                    <!-- <td class="actions" data-th="">
+                                                        <div class="text-right">
+                                                            <button class="btn btn-white bg-white btn-md mb-2">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td> -->
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Subtotal(₦):</td>
+                                                    <td>12,000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Tax(7.5%):</td>
+                                                    <td>2,300</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Total(₦):</td>
+                                                    <td>2,342,134</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button class="btn btn-primary btn-block" type="submit">Proceed to Payment</button>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
                     </div>
-                  </div>
-                  <div class="col-4 col-md-4">
-                    <div class="step-block">
-                      <div class="step">
-                        <h2>Order Completed</h2><span>03</span>
-                      </div>
-                    </div>
-                  </div>
+                    <!-- end container-fluid -->
                 </div>
-              </div>
+                <!-- end page-content-wrapper -->
             </div>
-          </div>
+            <!-- End Page-content -->
+
+
+            @include('partials/sb-footer')
         </div>
-      </div>
-      <!-- End order step-->
-      <div class="shop-checkout">
-        <div class="container">
-          <form action="" method="post">
-            <div class="row">
-              <div class="col-12 col-lg-8">
-                <h2 class="form-title">Billing details</h2>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputFirstName">First Name*</label>
-                    <input class="no-round-input-bg" id="inputFirstName" type="text" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputLastName">Last Name*</label>
-                    <input class="no-round-input-bg" id="inputLastName" type="text" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputCompanyName">Company name (optional)</label>
-                  <input class="no-round-input-bg" id="inputCompanyName" type="text">
-                </div>
-                <div class="form-group">
-                  <label for="inputCountry">Country*</label>
-                  <select class="no-round-input-bg" id="inputContry">
-                    <option value="1">Vietnam</option>
-                    <option value="2">USA</option>
-                    <option value="3">Italy</option>
-                    <option value="4">China</option>
-                    <option value="5">Japan</option>
-                    <option value="6">Russia</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="inputStreet">Street address*</label>
-                  <input class="no-round-input-bg" id="inputStreet" type="text" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputZip">Postcode / ZIP (optional)</label>
-                  <input class="no-round-input-bg" id="inputZip" type="text">
-                </div>
-                <div class="form-group">
-                  <label for="inputCity">Town / City*</label>
-                  <input class="no-round-input-bg" id="inputCity" type="text" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputPhone">Phone*</label>
-                  <input class="no-round-input-bg" id="inputPhone" type="text" required>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail">Email address *</label>
-                  <input class="no-round-input-bg" id="inputEmail" type="email" required>
-                </div>
-                <h2 class="form-title">Shipping Address</h2>
-                <div class="form-group">
-                  <input id="differentAddress" type="checkbox">
-                  <label for="differentAddress">Ship to a different address?</label>
-                </div>
-                <div class="form-group">
-                  <label for="inputNote">Order notes (optional)</label>
-                  <textarea class="textarea-form-bg" id="inputNote" name="" cols="30" rows="7"></textarea>
-                </div>
-              </div>
-              <div class="col-12 col-md-6 col-lg-4">
-                <h2 class="form-title">Your order</h2>
-                <div class="shopping-cart">
-                  <div class="cart-total_block">
-                    <table class="table">
-                      <colgroup>
-                        <col span="1" style="width: 50%">
-                        <col span="1" style="width: 50%">
-                      </colgroup>
-                      <tbody>
-                        <tr>
-                          <th class="name">Australian Kiwi × <span>1</span></th>
-                          <td class="price black" style="border-top: 0">$169.00</td>
-                        </tr>
-                        <tr>
-                          <th>SUBTOTAL</th>
-                          <td class="price">$169.00</td>
-                        </tr>
-                        <tr>
-                          <th>SHIPPING</th>
-                          <td>
-                            <p>Free shipping</p>
-                            <p>Calculate shipping</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th>TOTAL</th>
-                          <td class="total">$169.00</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="form-group">
-                    <input type="radio" name="paymethod" id="shipping" value="option1" checked>
-                    <label for="shipping">Cash on delivery</label>
-                  </div>
-                  <div class="form-group">
-                    <input type="radio" name="paymethod" id="paypal" value="option2">
-                    <label for="paypal">Paypal</label>
-                  </div>
-                  <button class="normal-btn submit-btn">Place order</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <!-- End partner-->
-      @include('inc/fab-button.php')
-      @include('inc/main-footer.php')
-      <!-- End footer-->
+        <!-- end main content-->
+
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="assets/js/jquery.countdown.min.js"></script>
-    <script src="assets/js/slick.min.js"></script>
-    <script src="assets/js/jquery.easing.js"></script>
-    <script src="assets/js/jquery.scrollUp.min.js"></script>
-    <script src="assets/js/jquery.zoom.min.js"></script>
-    <script src="assets/js/parallax.js"></script>
-    <script src="assets/js/jquery.fancybox.js"></script>
-    <script src="assets/js/numscroller-1.0.js"></script>
-    <script src="assets/js/vanilla-tilt.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script></script>
-  </body>
+    <!-- END layout-wrapper -->
+
+    <!-- Right Sidebar -->
+    @include('partials/sb-rightbar')
+    <!-- /Right-bar -->
+
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <!-- JAVASCRIPT -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
+    <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>
+    <script src="../assets-dash/libs/simplebar/simplebar.min.js"></script>
+    <script src="../assets-dash/libs/node-waves/waves.min.js"></script>
+
+    <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
+
+    <script src="../assets-dash/libs/air-datepicker/js/datepicker.min.js"></script>
+    <script src="../assets-dash/libs/air-datepicker/js/i18n/datepicker.en.js"></script>
+    <!-- Summernote js -->
+    <script src="../assets-dash/libs/summernote/summernote-bs4.min.js"></script>
+
+    <!-- email summernote init -->
+    <script src="../assets-dash/js/pages/email-summernote.init.js"></script>
+
+    <script src="../assets-dash/js/app.js"></script>
+    <script src="../assets-dash/js/iconify.min.js"></script>
+
+</body>
+
 </html>
