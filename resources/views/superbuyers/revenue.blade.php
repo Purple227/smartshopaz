@@ -137,7 +137,152 @@
                                                     <td>Diamond</td>
                                                     <td>10%</td>
                                                     <td>purchase of 50,000</td>
-                                                    <td>₦135,000</td>
+                                                    <td>₦35,000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Monthly Fulfillment bonus</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/N</th>
+                                                    <th>Bonus receivd Date</th>
+                                                    <th>level</th>
+                                                    <th>percentage</th>
+                                                    <th>remark</th>
+                                                    <th>Amount</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>WSB-8662</td>
+                                                    <td>12/08/2021</td>
+                                                    <td>Diamond</td>
+                                                    <td>10%</td>
+                                                    <td>purchase of 50,000</td>
+                                                    <td>₦3,000</td>
+                                                    <td>₦43,000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Monthly Rank bonus</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/N</th>
+                                                    <th>Bonus receivd Date</th>
+                                                    <th>level</th>
+                                                    <th>percentage</th>
+                                                    <th>remark</th>
+                                                    <th>Amount</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>WSB-8662</td>
+                                                    <td>12/08/2021</td>
+                                                    <td>Diamond</td>
+                                                    <td>10%</td>
+                                                    <td>purchase of 50,000</td>
+                                                    <td>₦12,000</td>
+                                                    <td>₦72,000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Monthly Link bonus</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/N</th>
+                                                    <th>Bonus receivd Date</th>
+                                                    <th>level</th>
+                                                    <th>percentage</th>
+                                                    <th>remark</th>
+                                                    <th>Amount</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>WSB-8662</td>
+                                                    <td>12/08/2021</td>
+                                                    <td>Diamond</td>
+                                                    <td>10%</td>
+                                                    <td>purchase of 50,000</td>
+                                                    <td>₦4,000</td>
+                                                    <td>₦63,000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Monthly Spur</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/N</th>
+                                                    <th>Incentive receive Date</th>
+                                                    <th>level</th>
+                                                    <th>percentage</th>
+                                                    <th>remark</th>
+                                                    <th>Amount Rolled Over</th>
+                                                    <th>Total Amount</th>
+                                                    <th>Incentive cashout</th>
+                                                    <th>Balance</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>WSB-8662</td>
+                                                    <td>12/08/2021</td>
+                                                    <td>Diamond</td>
+                                                    <td>10%</td>
+                                                    <td>purchase of 50,000</td>
+                                                    <td>₦2,000</td>
+                                                    <td>Car</td>
+                                                    <th>5,000</th>
+                                                    <td>₦38,000</td>
                                                 </tr>
                                             </tbody>
                                         </table>
