@@ -105,6 +105,8 @@ const app = new Vue({
             deliveryFee: '',
             itemInCart: '',
             ageStatus: false,
+            dropdownToggle: false,
+            dropdownToggles: false,
             geneationDownlineIndex: 0,
             sidebarChecker: false
         }

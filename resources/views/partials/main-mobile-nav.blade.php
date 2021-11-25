@@ -18,7 +18,7 @@
                   </ul>
                 </li>
                 <li class="toggleable"> <a class="menu-item" href="">Sell On Smartshoppers</a></li>
-                        <li class="toggleable"><a class="menu-item" href="superbuyers">Superbuyers</a></li>
+                        <li class="toggleable"><a class="menu-item" href="super-buyer">Superbuyers</a></li>
               </ul>
             </div>
             <div class="mobile-login">

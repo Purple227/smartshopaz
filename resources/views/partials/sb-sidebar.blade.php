@@ -17,14 +17,14 @@
                     </a>
                 </li>
 
-                <li>
+                <li @click='dropdownToggle=!dropdownToggle'>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>
                         <span>Genealogy</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
+                    <ul class=" sub-menu " v-bind:class="{ 'mm-show': dropdownToggle }" aria-expanded="false">
                         <li><a href="genealogy">Black Opal</a></li>
                         <li><a href="genealogy">Red Beryl</a></li>
                         <li><a href="genealogy">Alexandrite</a></li>
@@ -113,14 +113,14 @@
                     </a>
                 </li>
 
-                <li>
+                <li @click='dropdownToggles=!dropdownToggles'>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:flip-v-alt"></i> -->
                         </div>
                         <span>My Account </span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
+                    <ul class="sub-menu" v-bind:class="{ 'mm-show': dropdownToggles }" aria-expanded="false">
                         <li><a href=" {{ route('change.password.super-buyer') }}"> Change Password </a></li>
                     </ul>
                 </li>
