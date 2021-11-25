@@ -108,6 +108,7 @@ const app = new Vue({
             dropdownToggle: false,
             dropdownToggles: false,
             geneationDownlineIndex: 0,
+            sidebarChecker: false
         }
     },
 
@@ -226,9 +227,14 @@ const app = new Vue({
 
     methods: { //Method calibrace open
 
-        sidebarToggle() {
-            document.body.classList.add('sidebar-enable')
+        showSidebar() {
+            if (this.sidebarChecker == false) {
+                document.body.classList.add('sidebar-enable')
+            } else {
+                document.body.classList.add('')
+            }
         },
+
 
         getDirectDownline(id) {
             let taken_id = id || null

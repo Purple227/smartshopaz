@@ -239,7 +239,7 @@
                                                     <ul>
                                                         <li>
                                                             <a href="javascript:void(0);">
-                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="" -->
                                                                     <div class="member-image">
                                                                         <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                         <div class="member-details">
@@ -252,7 +252,7 @@
                                                                 <li>
 
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[0]" @click="[getDirectDownline(user.id), updateGenerationView()]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -265,7 +265,7 @@
                                                                     <ul>
                                                                         <li>
                                                                             <a href="javascript:void(0);" v-for="(user, index) in directDowline[geneationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView()]">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                                <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                                     <div class="member-image">
                                                                                         <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                         <div class="member-details">
@@ -277,7 +277,7 @@
                                                                         </li>
                                                               
                                                                         <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -289,7 +289,7 @@
                                 
 
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -301,7 +301,7 @@
 
 
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -313,7 +313,7 @@
 
 
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -326,7 +326,7 @@
 
 
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -338,7 +338,7 @@
 
 
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -349,7 +349,7 @@
                                                                     </a>
 
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -361,7 +361,7 @@
 
 
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -373,7 +373,7 @@
                                                                     
                                                                     
                                                                     <a href="javascript:void(0);" v-if="false" @click="[getDirectDownline(user.id), updateGenerationView() ]">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                        <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
@@ -387,170 +387,7 @@
 
                                                                     </ul>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0);">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                            <div class="member-image">
-                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                <div class="member-details">
-                                                                                    user 2
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            John Doe
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            John Doe
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            John Doe
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    John Doe
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
+                                                               
                                                             </ul>
                                                         </li>
                                                     </ul>
