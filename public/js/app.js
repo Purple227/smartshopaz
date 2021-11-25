@@ -2161,7 +2161,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       deliveryFee: '',
       itemInCart: '',
       ageStatus: false,
-      geneationDownlineIndex: 0
+      geneationDownlineIndex: 0,
+      sidebarChecker: false
     };
   },
   validations: {
@@ -2254,8 +2255,12 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
   },
   methods: {
     //Method calibrace open
-    sidebarToggle: function sidebarToggle() {
-      document.body.classList.add('sidebar-enable');
+    showSidebar: function showSidebar() {
+      if (this.sidebarChecker == false) {
+        document.body.classList.add('sidebar-enable');
+      } else {
+        document.body.classList.add('');
+      }
     },
     getDirectDownline: function getDirectDownline(id) {
       var _this = this;
