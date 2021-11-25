@@ -99,8 +99,8 @@
 
 
                                             <tbody>
+                                            @foreach ($direct_down_line as $key => $direct_down_line)
                                                 <tr>
-                                                @foreach ($direct_down_line as $key => $direct_down_line)
                                                     <td> {{ $key +1 }}</td>
                                                     <td> {{ $direct_down_line->sponsor_code }}</td>
                                                     <td> {{ $direct_down_line->name }}</td>

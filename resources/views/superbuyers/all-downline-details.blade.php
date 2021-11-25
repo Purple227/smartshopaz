@@ -25,6 +25,8 @@
     <!-- App Css-->
     <link href="../assets-dash/css/app.min.css" rel="stylesheet" type="text/css" />
 
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
 </head>
 
 <body data-topbar="colored">
@@ -32,10 +34,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/sb-topbar.php')
+        @include('partials/sb-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/sb-sidebar.php')
+        @include('partials/sb-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -50,7 +52,7 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h4 class="page-title mb-1"> All Downlines</h4>
+                                <h4 class="page-title mb-1">All Downlines</h4>
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
                                     <li class="breadcrumb-item active">All Dowlines</li>
@@ -80,43 +82,32 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="header-title">All Downline Details</h4>
+                                        <h4 class="header-title">Direct Downline Details</h4>
                                         <p class="card-title-desc"></p>
-
-                                        <div class="alert alert-danger alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>oops! </b>
-                                        </div>
-                                        <div class="alert alert-success alert-dismissible">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <b>Added Successfully</b>
-                                        </div>
 
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>S/N</th>
+                                                    <th>s/n</th>
                                                     <th>Member ID</th>
                                                     <th>Name</th>
-                                                    <th>Position</th>
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
                                                     <th>Date joined</th>
-                                                    <th>Amount Paid</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
+                                            @foreach ($direct_down_line as $key => $direct_down_line)
                                                 <tr>
-                                                    <td>0</td>
-                                                    <td>SB-0001</td>
-                                                    <td>Helen</td>
-                                                    <td>Alexandrite</td>
-                                                    <td>abc@superbuyers.com</td>
-                                                    <td>0800000</td>
-                                                    <td>12/10/2021</td>
-                                                    <th>20,000</th>
+                                                    <td> {{ $key +1 }}</td>
+                                                    <td> {{ $direct_down_line->sponsor_code }}</td>
+                                                    <td> {{ $direct_down_line->name }}</td>
+                                                    <td> {{ $direct_down_line->email }} </td>
+                                                    <td> {{ $direct_down_line->phone }}</td>
+                                                    <td> {{ $direct_down_line->created_at }} </td>
+                                                @endforeach
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -136,7 +127,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/sb-footer.php')
+            @include('partials/sb-footer')
         </div>
         <!-- end main content-->
 
@@ -144,13 +135,16 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/sb-rightbar.php')
+    @include('partials/sb-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
+
     <!-- JAVASCRIPT -->
+    
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>

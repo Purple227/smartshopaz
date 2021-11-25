@@ -10,15 +10,16 @@ use Illuminate\Notifications\Notification;
 class Support extends Notification
 {
     use Queueable;
+    public $data;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -41,9 +42,12 @@ class Support extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Customer Complain')
+                    ->line('Customer Support')
+                    ->line('Below are the customer details')
+                    ->line('Name:' . ' ' . $this)
+                    ->action('Click here to access smartshoppers', url('https://smartshoppers.com.ng'))
+                    ->line('Regards smartshoppers!');
     }
 
     /**

@@ -6,6 +6,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">basic</li>
 
                 <li>
                     <a href="{{ route('super-buyer.home') }}" class="waves-effect">
@@ -33,6 +34,7 @@
                         <li><a href="genealogy">Diamond</a></li>
                     </ul>
                 </li>
+
 
                 <li>
                     <a href="{{ route('super-buyer.downline') }}" class="waves-effect">
@@ -80,7 +82,7 @@
                         <span>Orders</span>
                     </a>
                 </li>
-                
+
 
 
                 <li>
@@ -111,8 +113,6 @@
                     </a>
                 </li>
 
-
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
@@ -121,7 +121,7 @@
                         <span>My Account </span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                    <li><a href=" {{ route('change.password.super-buyer') }}"> Change Password </a></li>
+                        <li><a href=" {{ route('change.password.super-buyer') }}"> Change Password </a></li>
                     </ul>
                 </li>
 

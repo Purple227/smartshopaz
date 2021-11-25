@@ -24,7 +24,9 @@ class GenealogyController extends Controller
 
     public function allDownLine()
     {
-        return view('superbuyers.all-downline-details');
+        $sponsor = Sponsor::where('user_id', Auth::user()->id)->first();
+        $direct_down_line = User::where('sponsor_id', $sponsor->id)->get();
+        return view('superbuyers.all-downline-details', ['direct_down_line' => $direct_down_line]);
     }
 
     public function generationView()
@@ -32,6 +34,12 @@ class GenealogyController extends Controller
         return view('superbuyers.downline');
     }
     
+    public function directDownLineAPIs(Request $request)
+    {
+        $id = $request->id == null ?  Auth::user()->id : $request->id;
+        $sponsor = Sponsor::where('user_id', $id)->first();
+        $direct_down_line = User::where('sponsor_id', $sponsor->id)->get();
+        return $direct_down_line;
+    }
 
-    
 }

@@ -243,222 +243,148 @@
                                                                     <div class="member-image">
                                                                         <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                         <div class="member-details">
-                                                                            Smartshoppers
+                                                                            {{ Auth::user()->name}}
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </a>
-                                                            <ul class="active">
+                                                            <ul>
                                                                 <li>
-                                                                    <a href="javascript:void(0);">
+
+                                                                    <a href="javascript:void(0);" v-for="(user, index) in directDowline[0]" @click="[getDirectDownline(user.id), updateGenerationView()]">
                                                                         <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
-                                                                                user 1
+                                                                                @{{ user.name }} 
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </a>
+
                                                                     <ul>
                                                                         <li>
-                                                                            <a href="javascript:void(0);">
+                                                                            <a href="javascript:void(0);" v-for="(user, index) in directDowline[geneationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView()]">
                                                                                 <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
                                                                                     <div class="member-image">
                                                                                         <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                         <div class="member-details">
-                                                                                            user 1-1
+                                                                                            @{{user.name}}
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </a>
                                                                         </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            user 1-2
-                                                                                        </div>
-                                                                                    </div>
+                                                              
+                                                                        <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ user.name }} 
                                                                                 </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            user 1-3
-                                                                                        </div>
-                                                                                    </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                
+
+                                                                    <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ user.name }} 
                                                                                 </div>
-                                                                            </a>
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    user 1-3-1
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    user 1-3-2
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    user 1-3-3
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            user 1-4
-                                                                                        </div>
-                                                                                    </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+
+                                                                    <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ user.name }} 
                                                                                 </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            user 1-5
-                                                                                        </div>
-                                                                                    </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+
+                                                                    <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ user.name }} 
                                                                                 </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            user 1-6
-                                                                                        </div>
-                                                                                    </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+
+
+                                                                    <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ user.name }} 
                                                                                 </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0);">
-                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                    <div class="member-image">
-                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                        <div class="member-details">
-                                                                                            user 1-7
-                                                                                        </div>
-                                                                                    </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+
+                                                                    <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ user.name }} 
                                                                                 </div>
-                                                                            </a>
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    user 1-7-1
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    user 1-7-2
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                    <ul>
-                                                                                        <li>
-                                                                                            <a href="javascript:void(0);">
-                                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                                    <div class="member-image">
-                                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                        <div class="member-details">
-                                                                                                            user 1-7-2-1
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="javascript:void(0);">
-                                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                                    <div class="member-image">
-                                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                        <div class="member-details">
-                                                                                                            user 1-7-2-2
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="javascript:void(0);">
-                                                                                                <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                                    <div class="member-image">
-                                                                                                        <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                        <div class="member-details">
-                                                                                                            user 1-7-2-3
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0);">
-                                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                                            <div class="member-image">
-                                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                                <div class="member-details">
-                                                                                                    user 1-7-3
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+                                                                    <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ user.name }} 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+
+                                                                    <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ user.name }} 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                    
+                                                                    
+                                                                    <a href="javascript:void(0);" v-if="false" @click="[getDirectDownline(user.id), updateGenerationView() ]">
+                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
+                                                                            <div class="member-image">
+                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
+                                                                                <div class="member-details">
+                                                                                @{{ 'No Downlist User Available' }} 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+
+
+
                                                                     </ul>
                                                                 </li>
                                                                 <li>

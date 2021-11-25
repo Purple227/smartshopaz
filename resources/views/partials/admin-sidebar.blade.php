@@ -9,7 +9,7 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Basic</li>
 
-@if(Auth::user()->account_type != 'ron')
+                @if(Auth::user()->account_type != 'ron')
 
                 <li>
                     <a href="index" class="waves-effect">
@@ -152,26 +152,26 @@
                 </li>
 
                 <li>
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div>
                         <span> Incentive </span>
-                    </a> 
+                    </a>
                     <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="{{ route('admin.add.incentive') }}"> Add Incentive </a></li>
+                        <li><a href="{{ route('admin.add.incentive') }}"> Add Incentive </a></li>
                     </ul>
                 </li>
 
                 <li>
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div>
                         <span> Rank </span>
-                    </a> 
+                    </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('admin.rank') }}"> Add Rank</a></li>
                         <li><a href=" {{ route('admin.rank.list') }}"> List Ranks </a></li>
                     </ul>
                 </li>
-@else 
+                @else
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><i class="iconify" data-icon="uim:layers-alt"></i></div>
@@ -182,7 +182,7 @@
                         <li><a href=" {{ route('list.ron.code') }}"> List of RON Codes </a></li>
                     </ul>
                 </li>
-@endif
+                @endif
             </ul>
 
         </div>

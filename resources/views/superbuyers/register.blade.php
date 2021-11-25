@@ -222,7 +222,6 @@
     <!-- end Account pages -->
 
     <!-- JAVASCRIPT -->
-    
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>

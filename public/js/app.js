@@ -2102,7 +2102,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         address: '',
         LGA: '',
         state: '',
-        country: ''
+        country: '',
+        paymentMethod: null
       },
       productMultiOption: [{
         variationName: null,
@@ -2111,6 +2112,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         regularPrice: null,
         superBuyerPrice: null
       }],
+      directDowline: [],
       utilities: {
         sponsor: null,
         sponsorStatus: false,
@@ -2158,7 +2160,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       superBuyerProduct: null,
       deliveryFee: '',
       itemInCart: '',
-      ageStatus: false
+      ageStatus: false,
+      geneationDownlineIndex: 0
     };
   },
   validations: {
@@ -2234,6 +2237,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     }
   },
   mounted: function mounted() {
+    this.getDirectDownline();
     this.sponsorMethod();
     this.RONCodeMethod();
     this.emailMethod();
@@ -2250,6 +2254,25 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
   },
   methods: {
     //Method calibrace open
+    sidebarToggle: function sidebarToggle() {
+      document.body.classList.add('sidebar-enable');
+    },
+    getDirectDownline: function getDirectDownline(id) {
+      var _this = this;
+
+      var taken_id = id || null;
+      self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('direct-downline-api', {
+        params: {
+          id: taken_id
+        }
+      }).then(function (response) {
+        _this.directDowline.push(response.data);
+      })["catch"](function () {});
+    },
+    updateGenerationView: function updateGenerationView() {
+      this.geneationDownlineIndex++;
+    },
     addMultiOption: function addMultiOption() {
       this.productMultiOption.push({
         variationName: null,
@@ -2299,7 +2322,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         account_type: accountType,
         payment: payment,
         quantity: quantity,
-        payment_method: 'card',
+        payment_method: paymentMethod,
         order_detail: orderDetail
       }).then(function () {
         window.localStorage.removeItem('cartItem');
@@ -2390,7 +2413,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         ron_code: this.registration.RONCode,
         username: this.registration.userName,
         wallet: this.registerFee,
-        register_percentage: this.registerPercent
+        register_percentage: this.registerPercent,
+        address: this.registration.address
       }).then(function (response) {
         self.user = response.data;
         self.completeRegistration(transactionID, response.data.id, response.data.name);
@@ -2417,7 +2441,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       });
     },
     sponsorMethod: function sponsorMethod() {
-      var _this = this;
+      var _this2 = this;
 
       self = this;
 
@@ -2427,11 +2451,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             sponsor_code: this.registration.sponsorCode
           }
         }).then(function (response) {
-          _this.utilities.sponsor = response.data.status_message;
+          _this2.utilities.sponsor = response.data.status_message;
 
-          _this.getUser(response.data.sponsor_detail.user_id);
+          _this2.getUser(response.data.sponsor_detail.user_id);
 
-          _this.utilities.sponsorStatus = true;
+          _this2.utilities.sponsorStatus = true;
         })["catch"](function (error) {
           self.utilities.sponsorStatus = false;
           self.utilities.sponsor = error.response.data;
@@ -2439,7 +2463,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     RONCodeMethod: function RONCodeMethod() {
-      var _this2 = this;
+      var _this3 = this;
 
       self = this;
 
@@ -2449,8 +2473,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             ron_code: this.registration.RONCode
           }
         }).then(function (response) {
-          _this2.utilities.RONCode = response.data;
-          _this2.utilities.RONCodeStatus = true;
+          _this3.utilities.RONCode = response.data;
+          _this3.utilities.RONCodeStatus = true;
         })["catch"](function (error) {
           self.utilities.RONCodeStatus = false;
           self.utilities.RONCode = error.response.data;
@@ -2458,62 +2482,62 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     getUser: function getUser(ID) {
-      var _this3 = this;
+      var _this4 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("user/".concat(ID)).then(function (response) {
-        _this3.utilities.sponsorUserDetail = response.data;
+        _this4.utilities.sponsorUserDetail = response.data;
       })["catch"](function () {
         self.utilities.sponsorUserDetail = 'Unknown Sponsor';
       });
     },
     getSetSuperBuyerDetail: function getSetSuperBuyerDetail() {
-      var _this4 = this;
-
-      self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("register-detail").then(function (response) {
-        _this4.registerFee = response.data.register_fee;
-        _this4.registerPercent = response.data.register_fee_percentage;
-      });
-    },
-    getDeliveryFee: function getDeliveryFee() {
       var _this5 = this;
 
       self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("delivery-fee-api").then(function (response) {
-        _this5.deliveryFee = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("register-detail").then(function (response) {
+        _this5.registerFee = response.data.register_fee;
+        _this5.registerPercent = response.data.register_fee_percentage;
       });
     },
-    getAdminCategory: function getAdminCategory() {
+    getDeliveryFee: function getDeliveryFee() {
       var _this6 = this;
 
       self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-categories-api").then(function (response) {
-        _this6.adminCategory = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("delivery-fee-api").then(function (response) {
+        _this6.deliveryFee = response.data;
       });
     },
-    getAdminBrand: function getAdminBrand() {
+    getAdminCategory: function getAdminCategory() {
       var _this7 = this;
 
       self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-brands-api").then(function (response) {
-        _this7.adminBrand = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-categories-api").then(function (response) {
+        _this7.adminCategory = response.data;
       });
     },
-    productSuperBuyer: function productSuperBuyer() {
+    getAdminBrand: function getAdminBrand() {
       var _this8 = this;
 
       self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-brands-api").then(function (response) {
+        _this8.adminBrand = response.data;
+      });
+    },
+    productSuperBuyer: function productSuperBuyer() {
+      var _this9 = this;
+
+      self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("products-super-buyer").then(function (response) {
-        _this8.superBuyerProduct = response.data.data;
-        _this8.pagination.nextPageUrl = response.data.next_page_url;
-        _this8.pagination.previousPageUrl = response.data.prev_page_url;
-        _this8.pagination.to = response.data.to;
-        _this8.pagination.total = response.data.total;
+        _this9.superBuyerProduct = response.data.data;
+        _this9.pagination.nextPageUrl = response.data.next_page_url;
+        _this9.pagination.previousPageUrl = response.data.prev_page_url;
+        _this9.pagination.to = response.data.to;
+        _this9.pagination.total = response.data.total;
       });
     },
     emailMethod: function emailMethod() {
-      var _this9 = this;
+      var _this10 = this;
 
       self = this;
 
@@ -2523,8 +2547,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             email: this.registration.email
           }
         }).then(function (response) {
-          _this9.utilities.email = response.data;
-          _this9.utilities.emailStatus = true;
+          _this10.utilities.email = response.data;
+          _this10.utilities.emailStatus = true;
         })["catch"](function (error) {
           self.utilities.emailStatus = false;
           self.utilities.email = error.response.data;
@@ -2532,7 +2556,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     userNameMethod: function userNameMethod() {
-      var _this10 = this;
+      var _this11 = this;
 
       self = this;
 
@@ -2542,9 +2566,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             username: this.registration.userName
           }
         }).then(function (response) {
-          _this10.utilities.userName = response.data;
-          _this10.utilities.userNameStatus = true;
-          _this10.utilities.resetPassword = false;
+          _this11.utilities.userName = response.data;
+          _this11.utilities.userNameStatus = true;
+          _this11.utilities.resetPassword = false;
         })["catch"](function (error) {
           self.utilities.userNameStatus = false;
           self.utilities.userName = error.response.data;
@@ -2553,7 +2577,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     searchProductData: function searchProductData() {
-      var _this11 = this;
+      var _this12 = this;
 
       if (this.searchProductQuery.length > 1) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().get('search-product', {
@@ -2561,12 +2585,12 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             search_query: this.searchProductQuery
           }
         }).then(function (response) {
-          _this11.searchProductResult = response.data;
+          _this12.searchProductResult = response.data;
         });
       }
     },
     getProduct: function getProduct(api) {
-      var _this12 = this;
+      var _this13 = this;
 
       this.sortAlpha = this.sortAlpha == 'A to Z' ? 1 : 0;
       var api_url = api || "product-api";
@@ -2576,11 +2600,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           alpha_sort: this.sortAlpha
         }
       }).then(function (response) {
-        _this12.product = response.data.data;
-        _this12.pagination.nextPageUrl = response.data.next_page_url;
-        _this12.pagination.previousPageUrl = response.data.prev_page_url;
-        _this12.pagination.to = response.data.to;
-        _this12.pagination.total = response.data.total;
+        _this13.product = response.data.data;
+        _this13.pagination.nextPageUrl = response.data.next_page_url;
+        _this13.pagination.previousPageUrl = response.data.prev_page_url;
+        _this13.pagination.to = response.data.to;
+        _this13.pagination.total = response.data.total;
       })["catch"](function (error) {// Code here
       });
     },
@@ -2632,11 +2656,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }, 0);
     },
     singleProductMethod: function singleProductMethod(ID) {
-      var _this13 = this;
+      var _this14 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("single-product/".concat(ID)).then(function (response) {
-        _this13.singleProduct = response.data;
+        _this14.singleProduct = response.data;
       });
     },
     itemCounterMethod: function itemCounterMethod(ID, price, name, count) {

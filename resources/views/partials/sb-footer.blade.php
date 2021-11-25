@@ -1,4 +1,3 @@
-
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -34,7 +33,7 @@
                             <td data-th="Quantity">
                                 <input type="number" class="form-control form-control-sm text-center" min="1" v-model="item.count" @change="itemCounterMethod(item.id, item.price, item.name, item.count)">
                             </td>
-                            <td class="actions" data-th="" @click="removeFromCart(item.id)" >
+                            <td class="actions" data-th="" @click="removeFromCart(item.id)">
                                 <div class="text-right">
                                     <button class="btn btn-white bg-white btn-md mb-2">
                                         <i class="fas fa-trash"></i>
@@ -46,8 +45,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal" >Close</button>
-                <a href="checkout" class="btn btn-primary waves-effect waves-light" data-dismiss="modal" v-if="cart != 0" @click="cartCheckout('{{Auth::user()->id }}', '{{ Auth::user()->name }}', '{{ Auth::user()->email }}', sumInCart + deliveryFee, '{{ Auth::user()->account_type}}', '{{ Auth::user()->phone}}', sumInCart, itemInCart)">Checkout</a>
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <a href="{{route('super-buyer.checkout')}}" class="btn btn-primary waves-effect waves-light" v-if="cart != 0">Checkout</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

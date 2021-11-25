@@ -185,10 +185,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-    @include('../partials/sb-topbar.php')
+    @include('partials/sb-topbar')
 
 <!-- ========== Left Sidebar Start ========== -->
-@include('../partials/sb-sidebar.php')
+@include('partials/sb-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -333,7 +333,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/sb-footer.php')
+            @include('partials/sb-footer')
         </div>
         <!-- end main content-->
 
@@ -341,7 +341,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/sb-rightbar.php')
+    @include('partials/sb-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

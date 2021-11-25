@@ -23,7 +23,7 @@
                 </a>
             </div>
 
-            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn" @click="sidebarToggle">
                 <i class="mdi mdi-backburger"></i>
             </button>
 

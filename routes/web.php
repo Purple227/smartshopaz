@@ -153,6 +153,8 @@ Route::post('/place-order', [OrderController::class, 'placeOrder']);
 Route::get('/forgot-password', [UserController::class, 'forgetPasswordUI'])->name('forgot.password.super-buyer');
 Route::post('/send-reset-password', [UserController::class, 'sendResetPassword']);
 Route::post('/customer-support', [PagesController::class, 'sendSupport'])->name('super-buyer.customer.support');
+Route::get('/direct-downline-api', [GenealogyController::class, 'directDownLineAPIs']);
+Route::get('/checkout', [OrderController::class, 'checkoutUI'])->name('super-buyer.checkout');
 });
 
 Route::post('/login', [UserController::class, 'authenticate'])->name('login');

@@ -41,6 +41,7 @@ const app = new Vue({
                 LGA: '',
                 state: '',
                 country: '',
+                paymentMethod: null
             },
 
             productMultiOption: [{
@@ -50,6 +51,8 @@ const app = new Vue({
                 regularPrice: null,
                 superBuyerPrice: null
             }],
+
+            directDowline: [],
 
             utilities: {
                 sponsor: null,
@@ -101,7 +104,8 @@ const app = new Vue({
             superBuyerProduct: null,
             deliveryFee: '',
             itemInCart: '',
-            ageStatus: false
+            ageStatus: false,
+            geneationDownlineIndex: 0,
         }
     },
 
@@ -202,6 +206,7 @@ const app = new Vue({
     },
 
     mounted() {
+        this.getDirectDownline()
         this.sponsorMethod()
         this.RONCodeMethod()
         this.emailMethod()
@@ -218,6 +223,24 @@ const app = new Vue({
     },
 
     methods: { //Method calibrace open
+
+        sidebarToggle() {
+            document.body.classList.add('sidebar-enable')
+        },
+
+        getDirectDownline(id) {
+            let taken_id = id || null
+            self = this
+            axios.get('direct-downline-api', { params: { id: taken_id } })
+                .then(response => {
+                    this.directDowline.push(response.data)
+                })
+                .catch(function() {});
+        },
+
+        updateGenerationView() {
+            this.geneationDownlineIndex++;
+        },
 
         addMultiOption() {
             this.productMultiOption.push({
@@ -271,7 +294,7 @@ const app = new Vue({
                         account_type: accountType,
                         payment: payment,
                         quantity: quantity,
-                        payment_method: 'card',
+                        payment_method: paymentMethod,
                         order_detail: orderDetail
                     }
                 )
@@ -383,7 +406,8 @@ const app = new Vue({
                     ron_code: this.registration.RONCode,
                     username: this.registration.userName,
                     wallet: this.registerFee,
-                    register_percentage: this.registerPercent
+                    register_percentage: this.registerPercent,
+                    address: this.registration.address
                 })
                 .then(function(response) {
                     self.user = response.data
@@ -502,7 +526,6 @@ const app = new Vue({
 
                     this.pagination.to = response.data.to
                     this.pagination.total = response.data.total
-
                 })
         },
 

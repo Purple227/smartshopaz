@@ -24,6 +24,9 @@ class OrderController extends Controller
         $order = new Order;
         $order->user_id = Auth::user()->id;
         $order->total_price = $request->total_price;
+        $order->address = $request->address;
+        $order->state = $request->state;
+        $order->country = $request->country;
         $order->quantity = $request->quantity;
         $order->account_type = Auth::user()->account_type;
         $order->phone = Auth::user()->phone;
@@ -52,5 +55,10 @@ class OrderController extends Controller
         $placed_order = Order::where('id', $id)->first();
         $order_products = ProductOrder::where('order_id', $id)->get();
         return view('superbuyers.order-process', ['placed_order' => $placed_order, 'order_products' => $order_products]);
+    }
+
+    public function checkoutUI()
+    {
+        return view('superbuyers.checkout');
     }
 }

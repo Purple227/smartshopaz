@@ -82,36 +82,36 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Receiver's First Name</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" placeholder="First Name" required>
+                                                    <input type="text" class="form-control" v-model="registration.firstName" id="validationCustom03" placeholder="First Name" required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Name.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Receiver's Last Name</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Last Name" required>
+                                                    <input type="text" class="form-control" id="validationCustom03" v-model="registration.lastName" placeholder="Last Name" required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Name.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Phone Number</label>
-                                                    <input type="number" class="form-control" id="validationCustom03" placeholder="Phone" required>
+                                                    <input type="number" class="form-control" v-model="registration.phone == null ? '{{ Auth::user()->phone}}' : registration.phone" id="validationCustom03" placeholder="Phone" required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Phone Number.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">Address</label>
-                                                    <input type="text" class="form-control" id="validationCustom04" placeholder="LGA" required>
+                                                    <input type="text" class="form-control" v-model="registration.address == null ? '{{ Auth::user()->address}}' : registration.address" id="validationCustom04" placeholder="LGA" required>
                                                     <div class="invalid-feedback">
-                                                        Please provide a valid LGA.
+                                                        Please provide a valid Address.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label>State</label>
-                                                    <select class="custom-select" required>
-                                                        <option value="">Select State</option>
+                                                    <select class="custom-select" required v-model="registration.state == null ? registration.state = '{{ Auth::user()->state }}' : registration.state">
+                                                        <option value="registration.phone"> lol </option>
                                                         <option value="abia">Abia</option>
                                                         <option value="Adamawa">Adamawa</option>
                                                         <option value="Akwa Ibom">Akwa Ibom</option>
@@ -161,7 +161,7 @@
                                                 </div>
                                                 <div class="col-md-12 mb-3 text-primary">
                                                     <label>Payment Method</label>
-                                                    <select class="custom-select" required>
+                                                    <select class="custom-select" v-model="registration.paymentMethod" required>
                                                     <option value="online">Online - Card</option>
                                                         <option value="">Bank Transfer</option>
                                                         
@@ -169,15 +169,7 @@
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="invalidCheck" required>
-                                                    <label class="custom-control-label" for="invalidCheck">Agree to terms and conditions</label>
-                                                    <div class="invalid-feedback">
-                                                        You must agree before submitting.
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                             <!-- <button class="btn btn-primary" type="submit">Complete</button> -->
                                         </form>
                                     </div>
@@ -200,14 +192,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <tr v-for="(item, index) in cart" :key="index">>
                                                     <td data-th="Product">
-                                                        <h6 class="text-primary">Product Name</h6>
+                                                        <h6 class="text-primary"> @{{ item.name }}</h6>
                                                     </td>
                                                     <td data-th="Quantity">
-                                                        <input type="number" class="form-control form-control-sm text-center" value="1" readonly>
+                                                        <input type="number" class="form-control form-control-sm text-center" :value="item.count" readonly>
                                                     </td>
-                                                    <td data-th="Price">49.00</td>
+                                                    <td data-th="Price">@{{ item.price }}</td>
                                                     <!-- <td class="actions" data-th="">
                                                         <div class="text-right">
                                                             <button class="btn btn-white bg-white btn-md mb-2">
@@ -219,21 +211,22 @@
                                                 <tr>
                                                     <td></td>
                                                     <td>Subtotal(₦):</td>
-                                                    <td>12,000</td>
+                                                    <td> 
+                                                        @{{ sumInCart  }}</td>
                                                 </tr>
-                                                <tr>
+                                                <!--tr>
                                                     <td></td>
                                                     <td>Tax(7.5%):</td>
                                                     <td>2,300</td>
-                                                </tr>
+                                                </tr -->
                                                 <tr>
                                                     <td></td>
                                                     <td>Total(₦):</td>
-                                                    <td>2,342,134</td>
+                                                    <td> @{{ sumInCart + deliveryFee }} </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-primary btn-block" type="submit">Proceed to Payment</button>
+                                        <button class="btn btn-primary btn-block" type="submit" @click="cartCheckout('{{Auth::user()->id }}', '{{ Auth::user()->name }}', '{{ Auth::user()->email }}', sumInCart + deliveryFee, '{{ Auth::user()->account_type}}', '{{ Auth::user()->phone}}', sumInCart, itemInCart, )" >Proceed to Payment</button>
                                     </div>
                                 </div>
                             </div> <!-- end col -->
