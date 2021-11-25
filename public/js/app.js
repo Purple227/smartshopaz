@@ -2161,6 +2161,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       deliveryFee: '',
       itemInCart: '',
       ageStatus: false,
+      dropdownToggle: false,
+      dropdownToggles: false,
       geneationDownlineIndex: 0
     };
   },

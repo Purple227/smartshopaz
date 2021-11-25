@@ -117,7 +117,7 @@
                 <div class="our-benefits ">
                     <div class="row">
                         <div class="col-6 col-md-3 text-center">
-                            <a href="superbuyers/">
+                            <a href="super-buyer">
                                 <div class="benefit-detail boderless  align-items-center"><img class="benefit-img" src="assets/images/icons/superbuyer.png" alt="">
                                     <h5 class="benefit-title">Super Buyers</h5>
                                 </div>
