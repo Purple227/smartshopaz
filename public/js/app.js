@@ -2230,13 +2230,16 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       this.emailMethod();
     },
     'registration.userName': function registrationUserName() {
-      this.usernameMethod();
+      this.userNameMethod();
     },
     'registration.sponsorCode': function registrationSponsorCode() {
       this.sponsorMethod();
     },
     'registration.RONCode': function registrationRONCode() {
       this.RONCodeMethod();
+    },
+    'registration.dateOfBirth': function registrationDateOfBirth() {
+      this.ageChecker();
     }
   },
   mounted: function mounted() {
@@ -2258,11 +2261,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
   methods: {
     //Method calibrace open
     showSidebar: function showSidebar() {
-      if (this.sidebarChecker == false) {
-        document.body.classList.add('sidebar-enable');
-      } else {
-        document.body.classList.add('');
-      }
+      document.body.classList.add('sidebar-enable');
     },
     getDirectDownline: function getDirectDownline(id) {
       var _this = this;
@@ -2686,7 +2685,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       this.cartItemCount();
     },
     ageChecker: function ageChecker(birthday) {
-      // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
+      console.log('tipping'); // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
+
       var optimizedBirthday = birthday.replace(/-/g, "/"); //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
 
       var myBirthday = new Date(optimizedBirthday); // set current day on 01:00:00 hours GMT+0100 (CET)

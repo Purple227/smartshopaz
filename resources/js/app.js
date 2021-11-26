@@ -195,7 +195,7 @@ const app = new Vue({
         },
 
         'registration.userName': function() {
-            this.usernameMethod()
+            this.userNameMethod()
         },
 
         'registration.sponsorCode': function() {
@@ -204,6 +204,10 @@ const app = new Vue({
 
         'registration.RONCode': function() {
             this.RONCodeMethod()
+        },
+
+        'registration.dateOfBirth': function() {
+            this.ageChecker()
         }
 
     },
@@ -228,11 +232,7 @@ const app = new Vue({
     methods: { //Method calibrace open
 
         showSidebar() {
-            if (this.sidebarChecker == false) {
-                document.body.classList.add('sidebar-enable')
-            } else {
-                document.body.classList.add('')
-            }
+            document.body.classList.add('sidebar-enable')
         },
 
 
@@ -652,7 +652,8 @@ const app = new Vue({
         },
 
         ageChecker(birthday) {
-            // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
+            console.log('tipping')
+                // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
             var optimizedBirthday = birthday.replace(/-/g, "/");
 
             //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
@@ -672,6 +673,5 @@ const app = new Vue({
         }
 
     }, //Method calibrace close
-
 
 });
