@@ -45,7 +45,11 @@ class Support extends Notification
                     ->subject('Customer Complain')
                     ->line('Customer Support')
                     ->line('Below are the customer details')
-                    ->line('Name:' . ' ' . $this)
+                    ->line('Member_ID:' . ' ' . $this->data->member_id)
+                    ->line('Name:' . ' ' . $this->data->name)
+                    ->line('Email:' . ' ' . $this->data->email)
+                    ->line('Phone:' . ' ' . $this->data->phone)
+                    ->line($this->data->message)
                     ->action('Click here to access smartshoppers', url('https://smartshoppers.com.ng'))
                     ->line('Regards smartshoppers!');
     }

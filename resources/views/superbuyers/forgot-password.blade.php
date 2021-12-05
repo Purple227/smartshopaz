@@ -54,8 +54,8 @@
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit" :disabled="utilities.resetPassword == null || utilities.resetPassword == false" v-if="utilities.passwordResetEmailSender == null" @click="sendResetpassword"> Send Email </button>
-                                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit" disabled v-else> @{{ utilities.passwordResetEmailSender ? 'Credential Reset Succesfully Please Contact Administrator' : 'Credentials Reset Failed Please try Again' }} </button>
+                                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit" :disabled="utilities.resetPassword == null || utilities.resetPassword == false" v-if="utilities.passwordResetEmailSender == null" @click="sendResetpassword"> @{{buttonLoader ? 'Please wait' : 'Send Email' }} </button>
+                                                    <button class="btn btn-primary btn-block waves-effect waves-light" type="submit" disabled v-else> @{{ utilities.passwordResetEmailSender ? 'Credential Reset Succesfully. Please Check Your Mail Box Or Contact The Administrator' : 'Credentials Reset Failed Please try Again' }} </button>
                                                 </div>
                                                 
                                             </div>

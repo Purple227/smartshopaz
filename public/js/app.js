@@ -2069,6 +2069,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
 /* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.esm.js");
@@ -2135,13 +2137,19 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       productForm: {
         title: '',
         discount: '',
-        categoryID: null,
+        category: null,
         brandID: '',
         stock: '',
         mainPrice: '',
         regularPrice: '',
         superBuyerPrice: '',
         description: ''
+      },
+      order: {
+        name: null,
+        address: null,
+        stat: null,
+        phone: null
       },
       buttonLoader: false,
       user: null,
@@ -2164,7 +2172,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       dropdownToggle: false,
       dropdownToggles: false,
       geneationDownlineIndex: 0,
-      sidebarChecker: false
+      sidebarChecker: false,
+      superbuyerSingleProduct: null,
+      selectedVariation: null
     };
   },
   validations: {
@@ -2237,12 +2247,14 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     },
     'registration.RONCode': function registrationRONCode() {
       this.RONCodeMethod();
-    },
-    'registration.dateOfBirth': function registrationDateOfBirth() {
-      this.ageChecker();
     }
+    /*         'registration.dateOfBirth': function() {
+                this.ageChecker()
+            } */
+
   },
   mounted: function mounted() {
+    this.getSuperBuyerSingleProduct();
     this.getDirectDownline();
     this.sponsorMethod();
     this.RONCodeMethod();
@@ -2257,14 +2269,31 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     this.getDeliveryFee();
     this.cartItemCount();
     this.getSetSuperBuyerDetail();
+    this.ageChecker();
+    this.getAdminCategory();
+    this.getAdminBrand();
   },
   methods: {
     //Method calibrace open
+    getSuperBuyerSingleProduct: function getSuperBuyerSingleProduct() {
+      var _this = this;
+
+      var currentURI = window.location.href;
+      var lastSegment = currentURI.split("/").pop();
+      self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/single-product-superbuyer', {
+        params: {
+          slug: lastSegment
+        }
+      }).then(function (response) {
+        _this.superbuyerSingleProduct = response.data;
+      })["catch"](function () {});
+    },
     showSidebar: function showSidebar() {
       document.body.classList.add('sidebar-enable');
     },
     getDirectDownline: function getDirectDownline(id) {
-      var _this = this;
+      var _this2 = this;
 
       var taken_id = id || null;
       self = this;
@@ -2273,7 +2302,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           id: taken_id
         }
       }).then(function (response) {
-        _this.directDowline.push(response.data);
+        _this2.directDowline.push(response.data);
       })["catch"](function () {});
     },
     updateGenerationView: function updateGenerationView() {
@@ -2299,6 +2328,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         email: this.registration.email,
         amount: this.registerFee * 100,
         currency: "NGN",
+        firstname: this.registration.firstName,
+        lastname: this.registration.lastName,
         ref: "" + Math.floor(Math.random() * 1000000000 + 1),
         // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
         metadata: {
@@ -2318,79 +2349,57 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       });
       handler.openIframe();
     },
-    placeOrder: function placeOrder(transactionID, userID, name, totalPrice, accountType, payment, quantity) {
+    placeOrder: function placeOrder(transactionID, userID, totalPrice, payment, quantity) {
+      var _Vue$axios$post;
+
       var orderDetail = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
 
       var self = this;
-      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("place-order", {
+      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("place-order", (_Vue$axios$post = {
         user_id: userID,
         total_price: totalPrice,
-        account_type: accountType,
         payment: payment,
         quantity: quantity,
-        payment_method: paymentMethod,
-        order_detail: orderDetail
-      }).then(function () {
+        order_detail: orderDetail,
+        address: this.order.address,
+        state: this.order.state,
+        name: this.order.name,
+        phone: this.order.phone
+      }, _defineProperty(_Vue$axios$post, "user_id", userID), _defineProperty(_Vue$axios$post, "amount", totalPrice), _defineProperty(_Vue$axios$post, "status", true), _defineProperty(_Vue$axios$post, "transaction_id", transactionID), _defineProperty(_Vue$axios$post, "name", this.order.name), _defineProperty(_Vue$axios$post, "transaction_type", 'order_payment'), _Vue$axios$post)).then(function () {
         window.localStorage.removeItem('cartItem');
-        self.saveTransaction(transactionID, userID, name, 1);
+        self.buttonLoader = false;
+        window.location = '/super-buyer/orders';
       })["catch"](function () {});
     },
-    cartCheckout: function cartCheckout(userID, name, email, totalPrice, accountType, phone, payment, quantity) {
-      var self = this;
-      var handler = PaystackPop.setup({
-        key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
-        email: email,
-        amount: totalPrice * 100,
-        currency: "NGN",
-        ref: "" + Math.floor(Math.random() * 1000000000 + 1),
-        // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-        metadata: {
-          custom_fields: [{
-            display_name: "Mobile_number",
-            variable_name: "mobile_number",
-            value: phone
-          }]
-        },
-        callback: function callback(response) {
-          self.placeOrder(response.reference, userID, name, totalPrice, accountType, payment, quantity);
-        },
-        onClose: function onClose() {
-          alert("window closed");
-        }
-      });
-      handler.openIframe();
-    },
-    saveTransaction: function saveTransaction(transactionID, userID, name, redirectLink) {
+    saveTransactionRegister: function saveTransactionRegister(transactionID, userID, name) {
       var self = this;
       vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("payment", {
         user_id: userID,
         amount: this.registerFee,
         status: true,
         transaction_id: transactionID,
-        name: name
+        name: name,
+        transaction_type: 'registration_fee'
       }).then(function () {
         self.buttonLoader = false;
-
-        if (redirectLink == true) {
-          window.location = '/super-buyer/orders';
-        } else {
-          window.location = '/super-buyer/success';
-        }
+        window.location = '/super-buyer/success';
       })["catch"](function () {});
     },
     sendResetpassword: function sendResetpassword() {
       var self = this;
+      self.buttonLoader = true;
       vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("send-reset-password", {
         username: this.registration.userName
       }).then(function () {
         self.utilities.passwordResetEmailSender = true;
       })["catch"](function () {
         self.utilities.passwordResetEmailSender = false;
+        self.buttonLoader = false;
       });
     },
     saveProduct: function saveProduct() {
       var self = this;
-      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("save-product", {
+      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post("add-product", {
         title: this.productForm.title,
         discount: this.productForm.discount,
         category_id: this.productForm.categoryID,
@@ -2399,10 +2408,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         regular_price: this.productForm.regularPrice,
         super_buyer_price: this.productForm.superBuyerPrice,
         weight: this.productForm.weight,
-        description: this.productForm.stock
+        description: this.productForm.stock,
+        multi_product_option: this.productMultiOption
       }).then(function () {
         self.buttonLoader = false;
-        window.location = '/super-buyer/success';
+        window.location = '/admin/list-products';
       })["catch"](function () {});
     },
     registerSuperBuyer: function registerSuperBuyer(transactionID) {
@@ -2420,34 +2430,21 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         username: this.registration.userName,
         wallet: this.registerFee,
         register_percentage: this.registerPercent,
-        address: this.registration.address
-      }).then(function (response) {
-        self.user = response.data;
-        self.completeRegistration(transactionID, response.data.id, response.data.name);
-      })["catch"](function (error) {
-        self.buttonLoader = false;
-        self.registration.error = error.response.data.errors;
-      });
-    },
-    completeRegistration: function completeRegistration(transactionID, userID, name) {
-      var self = this;
-      vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default().axios.post('complete-register', {
+        address: this.registration.address,
         date_of_birth: this.registration.dateOfBirth,
-        gender: this.registration.gender,
         L_G_A: this.registration.LGA,
         state: this.registration.state,
-        address: this.registration.address,
-        country: this.registration.country,
-        user_id: userID
-      }).then(function () {
-        self.saveTransaction(transactionID, userID, name);
+        country: this.registration.country
+      }).then(function (response) {
+        self.user = response.data;
+        self.saveTransactionRegister(transactionID, response.data.id, response.data.name);
       })["catch"](function (error) {
         self.buttonLoader = false;
         self.registration.error = error.response.data.errors;
       });
     },
     sponsorMethod: function sponsorMethod() {
-      var _this2 = this;
+      var _this3 = this;
 
       self = this;
 
@@ -2457,11 +2454,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             sponsor_code: this.registration.sponsorCode
           }
         }).then(function (response) {
-          _this2.utilities.sponsor = response.data.status_message;
+          _this3.utilities.sponsor = response.data.status_message;
 
-          _this2.getUser(response.data.sponsor_detail.user_id);
+          _this3.getUser(response.data.sponsor_detail.user_id);
 
-          _this2.utilities.sponsorStatus = true;
+          _this3.utilities.sponsorStatus = true;
         })["catch"](function (error) {
           self.utilities.sponsorStatus = false;
           self.utilities.sponsor = error.response.data;
@@ -2469,7 +2466,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     RONCodeMethod: function RONCodeMethod() {
-      var _this3 = this;
+      var _this4 = this;
 
       self = this;
 
@@ -2479,8 +2476,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             ron_code: this.registration.RONCode
           }
         }).then(function (response) {
-          _this3.utilities.RONCode = response.data;
-          _this3.utilities.RONCodeStatus = true;
+          _this4.utilities.RONCode = response.data;
+          _this4.utilities.RONCodeStatus = true;
         })["catch"](function (error) {
           self.utilities.RONCodeStatus = false;
           self.utilities.RONCode = error.response.data;
@@ -2488,62 +2485,62 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     getUser: function getUser(ID) {
-      var _this4 = this;
+      var _this5 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("user/".concat(ID)).then(function (response) {
-        _this4.utilities.sponsorUserDetail = response.data;
+        _this5.utilities.sponsorUserDetail = response.data;
       })["catch"](function () {
         self.utilities.sponsorUserDetail = 'Unknown Sponsor';
       });
     },
     getSetSuperBuyerDetail: function getSetSuperBuyerDetail() {
-      var _this5 = this;
-
-      self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("register-detail").then(function (response) {
-        _this5.registerFee = response.data.register_fee;
-        _this5.registerPercent = response.data.register_fee_percentage;
-      });
-    },
-    getDeliveryFee: function getDeliveryFee() {
       var _this6 = this;
 
       self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("delivery-fee-api").then(function (response) {
-        _this6.deliveryFee = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("register-detail").then(function (response) {
+        _this6.registerFee = response.data.register_fee;
+        _this6.registerPercent = response.data.register_fee_percentage;
       });
     },
-    getAdminCategory: function getAdminCategory() {
+    getDeliveryFee: function getDeliveryFee() {
       var _this7 = this;
 
       self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-categories-api").then(function (response) {
-        _this7.adminCategory = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("delivery-fee-api").then(function (response) {
+        _this7.deliveryFee = response.data;
       });
     },
-    getAdminBrand: function getAdminBrand() {
+    getAdminCategory: function getAdminCategory() {
       var _this8 = this;
 
       self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-brands-api").then(function (response) {
-        _this8.adminBrand = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-categories-api").then(function (response) {
+        _this8.adminCategory = response.data;
       });
     },
-    productSuperBuyer: function productSuperBuyer() {
+    getAdminBrand: function getAdminBrand() {
       var _this9 = this;
 
       self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("list-brands-api").then(function (response) {
+        _this9.adminBrand = response.data;
+      });
+    },
+    productSuperBuyer: function productSuperBuyer() {
+      var _this10 = this;
+
+      self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("products-super-buyer").then(function (response) {
-        _this9.superBuyerProduct = response.data.data;
-        _this9.pagination.nextPageUrl = response.data.next_page_url;
-        _this9.pagination.previousPageUrl = response.data.prev_page_url;
-        _this9.pagination.to = response.data.to;
-        _this9.pagination.total = response.data.total;
+        _this10.superBuyerProduct = response.data.data;
+        _this10.pagination.nextPageUrl = response.data.next_page_url;
+        _this10.pagination.previousPageUrl = response.data.prev_page_url;
+        _this10.pagination.to = response.data.to;
+        _this10.pagination.total = response.data.total;
       });
     },
     emailMethod: function emailMethod() {
-      var _this10 = this;
+      var _this11 = this;
 
       self = this;
 
@@ -2553,8 +2550,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             email: this.registration.email
           }
         }).then(function (response) {
-          _this10.utilities.email = response.data;
-          _this10.utilities.emailStatus = true;
+          _this11.utilities.email = response.data;
+          _this11.utilities.emailStatus = true;
         })["catch"](function (error) {
           self.utilities.emailStatus = false;
           self.utilities.email = error.response.data;
@@ -2562,7 +2559,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     userNameMethod: function userNameMethod() {
-      var _this11 = this;
+      var _this12 = this;
 
       self = this;
 
@@ -2572,9 +2569,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             username: this.registration.userName
           }
         }).then(function (response) {
-          _this11.utilities.userName = response.data;
-          _this11.utilities.userNameStatus = true;
-          _this11.utilities.resetPassword = false;
+          _this12.utilities.userName = response.data;
+          _this12.utilities.userNameStatus = true;
+          _this12.utilities.resetPassword = false;
         })["catch"](function (error) {
           self.utilities.userNameStatus = false;
           self.utilities.userName = error.response.data;
@@ -2583,7 +2580,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }
     },
     searchProductData: function searchProductData() {
-      var _this12 = this;
+      var _this13 = this;
 
       if (this.searchProductQuery.length > 1) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().get('search-product', {
@@ -2591,12 +2588,12 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
             search_query: this.searchProductQuery
           }
         }).then(function (response) {
-          _this12.searchProductResult = response.data;
+          _this13.searchProductResult = response.data;
         });
       }
     },
     getProduct: function getProduct(api) {
-      var _this13 = this;
+      var _this14 = this;
 
       this.sortAlpha = this.sortAlpha == 'A to Z' ? 1 : 0;
       var api_url = api || "product-api";
@@ -2606,11 +2603,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
           alpha_sort: this.sortAlpha
         }
       }).then(function (response) {
-        _this13.product = response.data.data;
-        _this13.pagination.nextPageUrl = response.data.next_page_url;
-        _this13.pagination.previousPageUrl = response.data.prev_page_url;
-        _this13.pagination.to = response.data.to;
-        _this13.pagination.total = response.data.total;
+        _this14.product = response.data.data;
+        _this14.pagination.nextPageUrl = response.data.next_page_url;
+        _this14.pagination.previousPageUrl = response.data.prev_page_url;
+        _this14.pagination.to = response.data.to;
+        _this14.pagination.total = response.data.total;
       })["catch"](function (error) {// Code here
       });
     },
@@ -2662,11 +2659,11 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       }, 0);
     },
     singleProductMethod: function singleProductMethod(ID) {
-      var _this14 = this;
+      var _this15 = this;
 
       self = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("single-product/".concat(ID)).then(function (response) {
-        _this14.singleProduct = response.data;
+        _this15.singleProduct = response.data;
       });
     },
     itemCounterMethod: function itemCounterMethod(ID, price, name, count) {
@@ -2685,21 +2682,52 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       this.cartItemCount();
     },
     ageChecker: function ageChecker(birthday) {
-      console.log('tipping'); // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
+      if (this.registration.dateOfBirth != null) {
+        // Condition calibrace open
+        console.log('insane'); // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
 
-      var optimizedBirthday = birthday.replace(/-/g, "/"); //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
+        var optimizedBirthday = birthday.replace(/-/g, "/"); //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
 
-      var myBirthday = new Date(optimizedBirthday); // set current day on 01:00:00 hours GMT+0100 (CET)
+        var myBirthday = new Date(optimizedBirthday); // set current day on 01:00:00 hours GMT+0100 (CET)
 
-      var currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00'; // calculate age comparing current date and borthday
+        var currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00'; // calculate age comparing current date and borthday
 
-      var myAge = ~~((Date.now(currentDate) - myBirthday) / 31557600000);
+        var myAge = ~~((Date.now(currentDate) - myBirthday) / 31557600000);
+        console.log(myAge);
 
-      if (myAge < 18) {
-        this.ageStatus = false;
-      } else {
-        this.ageStatus = true;
-      }
+        if (myAge < 18) {
+          this.ageStatus = false;
+        } else {
+          this.ageStatus = true;
+        }
+      } //Condition calibrace close
+
+    },
+    hollaCheckout: function hollaCheckout(userID, email, totalPrice, payment, quantity) {
+      var self = this;
+      var handler = PaystackPop.setup({
+        key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
+        email: email,
+        amount: totalPrice * 100,
+        firstname: this.order.name,
+        currency: "NGN",
+        ref: "" + Math.floor(Math.random() * 1000000000 + 1),
+        // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+        metadata: {
+          custom_fields: [{
+            display_name: "Mobile_number",
+            variable_name: "mobile_number",
+            value: this.order.phone
+          }]
+        },
+        callback: function callback(response) {
+          self.placeOrder(response.reference, userID, totalPrice, payment, quantity);
+        },
+        onClose: function onClose() {
+          alert("window closed");
+        }
+      });
+      handler.openIframe();
     }
   } //Method calibrace close
 

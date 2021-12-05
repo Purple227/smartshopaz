@@ -100,7 +100,7 @@
                                 <div class="card">
                                     <div class="card-body">
 
-
+{{--
 @if ($errors->any())
                                             @foreach ($errors->all() as $error)
                                         <div class="alert alert-danger alert-dismissible">
@@ -109,10 +109,8 @@
                                         </div>
                                             @endforeach
 @endif
+--}}
 
-                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('post.product') }} ">
-
-                                            @csrf
 
                                             <div class="form-group">
                                                 <label for="to-input">Product Name</label>
@@ -126,22 +124,18 @@
 
                                             <div class="form-group ">
                                                 <label>Categories</label>
-                                                <select class="selectize form-control" name="category_id">
-                                                <option value="">Select...</option>
-                                                    @foreach ($list_categories as $key => $category)
-                                                    <option value=" {{ $category->id }} "> {{ $category->name }} </option>
-                                                     @endforeach
+                                                <select class="selectize form-control" v-model="productForm.category">
+                                                    <option :value="null" disabled>Select Category</option>
+                                                    <option v-for="category in adminCategory" :value="category.id"> @{{ category.name}} </option>
                                                </select>
                                             </div>
 
                                             <div class="form-group ">
                                                 <label>Brand</label>
-                                                <select class="selectize form-control" id="siteID" class="abcd" name="brand_id">
-                                                <option value="">Select...</option>
-                                                    @foreach ($list_brands as $key => $brand)
-                                                    <option value="{{ $brand->id }}"> {{ $brand->name }} </option>
-                                                    @endforeach
-                                                </select>
+                                                <select class="selectize form-control" v-model="productForm.brandID">
+                                                    <option :value="null" disabled>Select Brand</option>
+                                                    <option v-for="brand in adminBrand" :value="brand.id"> @{{ brand.name}} </option>
+                                               </select>
                                             </div>
 
                                             <div class="form-group ">
@@ -161,10 +155,10 @@
                                                             <input type="radio" id="custominlineRadio1" name="type" class="custom-control-input" value="single" checked>
                                                             <label class="custom-control-label" for="custominlineRadio1">Single Option</label>
                                                         </div>
-                                                        <!--div class="custom-control custom-radio custom-control-inline" v-if="false">
+                                                        <div class="custom-control custom-radio custom-control-inline">
                                                             <input type="radio" id="custominlineRadio2" name="type" class="custom-control-input" value="multi">
                                                             <label class="custom-control-label" for="custominlineRadio2">Multiple options</label>
-                                                        </div-->
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,10 +196,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-@verbatim
-                                            <div class="types" id="Typemulti" style="display: none;" v-if="false">
+
+                                            <div class="types" id="Typemulti" style="display: none;">
                                                 <div class="row" v-for="(multi, index) in productMultiOption" :key="index">
-                                                <p> {{ index+1 }}</p>
+                                                <p> @{{ index+1 }}</p>
                                                 <div class="col-md-1 mb-2">
                                                         <p @click="addMultiOption"> add </p>
                                                         <p @click="removeMultiOption(index)" v-if='index >= 1' >  remove </p>
@@ -250,9 +244,10 @@
 
                                                 </div>
                                             </div>
-@endverbatim
+
                                             <div class="form-group">
-                                                <textarea class="summernote" name="description" v-model="productForm.description"> </textarea>
+                                            <label for="to-input"> Product Description </label>
+                                                <textarea  name="description" v-model="productForm.description" class="form-control" rows="3"> </textarea>
                                             </div>
 
                                             <div class="form-group">
@@ -261,7 +256,7 @@
                                                 <div>
                                                     <div class="dropzone">
                                                         <div class="fallback">
-                                                            <input type="file" name="file" id="image" multiple="" class="d-none" onchange="image_select()">
+                                                            <input type="file" name="file" id="image" multiple="" class="d-none" @change="fileUpload">
                                                             <button class="btn btn-sm btn-primary" type="button" onclick="document.getElementById('image').click()">Choose Images</button>
                                                             <div class="card-body d-flex flex-wrap justify-content-start" id="container">
                                                                 <!-- image preview -->
@@ -273,13 +268,9 @@
 
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
-    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Add</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
+    <button type="submit" class="btn btn-primary waves-effect waves-light" @click="saveProduct"> <span>Add</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
                                                 </div>
                                             </div>
-
-
-
-                                        </form>
                                     </div>
                                 </div>
                             </div> <!-- end col -->
@@ -309,6 +300,7 @@
 
     <!-- JAVASCRIPT -->
     
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>

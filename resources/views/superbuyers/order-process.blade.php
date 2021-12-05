@@ -93,7 +93,6 @@
                                                     <th>Product Name</th>
                                                     <th>Price</th>
                                                     <th>Quantity</th>
-                                                    <th>Payment Mode</th>
                                                 </tr>
                                             </thead>
 
@@ -105,7 +104,6 @@
                                                     <td>{{ $order->product_name }}</td>
                                                     <td>₦{{ $order->price }} </td>
                                                     <td> {{ $order->quantity }}</td>
-                                                    <td> {{ 'Card' }}</td>
                                                 </tr>
                                                 @endforeach
                                                 <tr>

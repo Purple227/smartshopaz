@@ -53,7 +53,7 @@
                                 <div class="col-md-8">
                                     <h4 class="page-title mb-1">Dashboard</h4>
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item active">Welcome to smartshoppers Dashboard</li>
+                                        <li class="breadcrumb-item active">Welcome to Smartshoppers Superbuyers Dashboard</li>
                                     </ol>
                                 </div>
                                 <div class="col-md-4">
@@ -80,7 +80,8 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <h5>Welcome Back {{ Auth::user()->username }}</h5>
-                                                    <p class="text-primary">My Sponsor ID: {{ Auth::user()->sponsor_code }} </p>
+                                                    <!--<p class="text-primary">My Sponsor ID: {{ Auth::user()->sponsor_code }} </p>-->
+                                                    <p class="text-primary">Last Login: {{ Auth::user()->last_login }} </p>
 
                                                     <div class="mt-4">
                                                         <!-- <a href="#" class="btn btn-primary btn-sm">View more <i class="mdi mdi-arrow-right ml-1"></i></a> -->
@@ -97,7 +98,7 @@
                                     </div>
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="header-title mb-4">Info</h5>
+                                            <!--<h5 class="header-title mb-4">Info</h5>-->
                                             <!-- <div class="media">
                                             <div class="media-body">
                                                 <p class="text-muted mb-2">Grand Total</p>
@@ -107,7 +108,7 @@
                                                 <input data-plugin="knob" data-width="56" data-height="56" data-linecap=round data-displayInput=false data-fgColor="#f15959" value="56" data-skin="tron" data-angleOffset="56" data-readOnly=true data-thickness=".17" />
                                             </div>
                                         </div> -->
-                                            <hr>
+                                            <!--<hr>-->
                                             <div class="media">
                                                 <div class="media-body">
                                                     <p class="text-muted">Total Number of Downlines</p>
@@ -115,20 +116,9 @@
                                                 </div>
 
                                                 <div class="align-self-end ml-2">
-                                                    <!-- <a href="#" class="btn btn-primary btn-sm">View more</a> -->
                                                 </div>
                                             </div>
-                                            <hr>
-                                            <div class="media">
-                                                <div class="media-body">
-                                                    <p class="text-muted">Bi-weeekly Performance Bonus Summary</p>
-                                                    <h5 class="mb-0">₦ 0</h5>
-                                                </div>
-
-                                                <div class="align-self-end ml-2">
-                                                    <!-- <a href="#" class="btn btn-primary btn-sm">View more</a> -->
-                                                </div>
-                                            </div>
+                                            <!--<hr>-->
                                         </div>
                                     </div>
                                 </div>
@@ -136,9 +126,32 @@
                                 <div class="col-lg-4">
                                     <div class="card">
                                         <div class="card-header bg-transparent p-3">
-                                            <h5 class="header-title mb-0">Info</h5>
+                                            <!--<h5 class="header-title mb-0">Info</h5>-->
                                         </div>
                                         <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <div class="media my-2">
+                                                    <div class="media-body">
+                                                        <p class="text-muted mb-2">Bi-weeekly Performance Bonus Summary</p>
+                                                        <h5 class="mb-0">₦ 0</h5>
+                                                    </div>
+                                                    <div class="icons-lg ml-2 align-self-center">
+                                                        <!-- <i class="uim uim-box"></i> -->
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="media my-2">
+
+                                                    <div class="media-body">
+                                                        <p class="text-muted mb-2">Monthly Fulfilment Bonus</p>
+                                                        <h5 class="mb-0">₦ 0</h5>
+                                                    </div>
+                                                    <div class="icons-lg ml-2 align-self-center">
+                                                        <!-- <i class="uim uim-layer-group"></i> -->
+                                                    </div>
+                                                </div>
+                                            </li>
                                             <li class="list-group-item">
                                                 <div class="media my-2">
 
@@ -162,6 +175,16 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-header bg-transparent p-3">
+                                            <!--<h5 class="header-title mb-0">Info</h5>-->
+                                        </div>
+                                        <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
                                                 <div class="media my-2">
                                                     <div class="media-body">
@@ -181,27 +204,6 @@
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <!-- <i class="uim uim-box"></i> -->
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card">
-                                        <div class="card-header bg-transparent p-3">
-                                            <h5 class="header-title mb-0">Info</h5>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <div class="media my-2">
-
-                                                    <div class="media-body">
-                                                        <p class="text-muted mb-2">Monthly Fulfilment Bonus</p>
-                                                        <h5 class="mb-0">₦ 0</h5>
-                                                    </div>
-                                                    <div class="icons-lg ml-2 align-self-center">
-                                                        <!-- <i class="uim uim-layer-group"></i> -->
                                                     </div>
                                                 </div>
                                             </li>
@@ -227,17 +229,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <div class="media my-2">
-                                                    <div class="media-body">
-                                                        <p class="text-muted mb-2">Total Number of Downlines</p>
-                                                        <h5 class="mb-0">₦ 0</h5>
-                                                    </div>
-                                                    <div class="icons-lg ml-2 align-self-center">
-                                                        <!-- <i class="uim uim-box"></i> -->
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>

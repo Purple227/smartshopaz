@@ -60,18 +60,19 @@
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" data-toggle="modal" data-target="#myModal">My Cart(@{{ itemInCart }})</button>
                 <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="mdi mdi-tune"></i>
+                    <i class="mdi mdi-bell-alert-outline"></i>
                 </button>
             </div>
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="rounded-circle header-profile-use ti-user"></i>
-                    <span class="d-none d-sm-inline-block ml-1">User</span>
+                    <span class="d-none d-sm-inline-block ml-1"> {{ Auth::user()->username }} </span>
                     <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- item-->
+                    <a class="dropdown-item" href="{{ route('super-buyer.user.profile') }}"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Profile </a>
                     <a class="dropdown-item" href="{{ route('change.password.super-buyer') }}"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Change Password</a>
                     <!-- <a class="dropdown-item" href="login"><i class="mdi mdi-lock font-size-16 align-middle mr-1"></i> Lock screen</a> -->
                     <div class="dropdown-divider"></div>

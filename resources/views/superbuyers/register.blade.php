@@ -62,40 +62,11 @@
                                             <p v-bind:class="{ 'text-success': registration.lastName.length > 3, 'text-danger': registration.lastName.length < 3 }"> @{{ registration.lastName.length > 3 ? 'Looking Good' : 'Name field is required' }} </>
                                         </div>
 
-                                        <div class="form-group form-group-custom mb-4">
-                                            <input type="email" v-model="registration.email" name="email" class="form-control" id="useremail" @change="emailMethod" required>
-                                            <label for="useremail">Email</label>
-                                            <p v-bind:class="{'text-success': !$v.registration.email.$invalid }" v-if="!$v.registration.email.$invalid"> @{{ utilities.email }} </p>
-                                        </div>
-
-                                        <div class="form-group form-group-custom mb-4">
-                                            <input type="text" name="sponsor_code" class="form-control" v-model="registration.sponsorCode" id="sponsor" @change="sponsorMethod" required>
-                                            <label for="sponsor"> Sponsor ID</label>
-                                            <p v-if="registration.sponsorCode != null"> @{{ utilities.sponsor }} </p>
-                                        </div>
-
-
-                                        <div class="form-group form-group-custom mb-4" v-if='utilities.sponsorUserDetail != null'>
-                                            <input type="text" name="sponsor_code" class="form-control" v-model="utilities.sponsorUserDetail.name" id="sponsor" disabled>
-
-                                        </div>
-
-                                        <div class="form-group form-group-custom mb-4">
-                                            <input type="number" name="ron_code" class="form-control" v-model="registration.RONCode" id="sponsor" @change='RONCodeMethod' required>
-                                            <label for="sponsor"> RON Code</label>
-                                            <p v-if="registration.RONCode != null"> @{{ utilities.RONCode }} </p>
-                                        </div>
-
-                                        <div class="form-group form-group-custom mb-4">
-                                            
-                                            <input type="number" v-model="registration.phone" name="phone" class="form-control" id="phone" required>
-                                            <label for="phone">Phone Number</label>
-
-                                        </div>
+                                        
 
                                         <div class="form-group form-group-custom mb-4">
                                             <input type="date" name="date_of_birth" class="form-control datepicker-here" v-model="registration.dateOfBirth" data-range="true" data-multiple-dates-separator=" - " data-language="en" @change="ageChecker(registration.dateOfBirth)"/>
-                                            <p v-bind:class="{ 'text-success': ageStatus, 'text-danger': ageStatus }"> @{{ ageStatus ? 'Looking Good' : 'You Must Be 18yrs Plus' }} </>
+                                            <p v-bind:class="{ 'text-success': ageStatus == true, 'text-danger': ageStatus == false }"> @{{ ageStatus ? 'Looking Good' : 'You Must Be 18yrs+' }} </>
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
@@ -106,6 +77,21 @@
                                             </select>
 
                                             <p v-bind:class="{ 'text-success': registration.gender.length > 3, 'text-danger': registration.gender.length < 3 }"> @{{ registration.gender.length > 3 ? 'Looking Good' : 'Name field is required' }} </>
+                                        </div>
+                                        
+                                        <div class="form-group form-group-custom mb-4">
+                                            <input type="email" v-model="registration.email" name="email" class="form-control" id="useremail" @change="emailMethod" required>
+                                            <label for="useremail">Email</label>
+                                            <!--<p v-bind:class="{'text-success': !$v.registration.email.$invalid }" v-if="!$v.registration.email.$invalid"> @{{ utilities.email }} </p>-->
+                                        </div>
+
+                                        
+
+                                        <div class="form-group form-group-custom mb-4">
+                                            
+                                            <input type="number" v-model="registration.phone" name="phone" class="form-control" id="phone" required>
+                                            <label for="phone">Phone Number</label>
+
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
@@ -190,6 +176,24 @@
                                             <label for="userpassword">Confirm Password <i id='message'></i></label>
                                             <p v-bind:class="{ 'text-success': registration.password == registration.passwordConfirmation, 'text-danger': registration.password != registration.passwordConfirmation }"> @{{ registration.password == registration.passwordConfirmation ? 'Password match okay' : 'Not identical with password' }}</p>
                                         </div>
+                                        
+                                        <div class="form-group form-group-custom mb-4">
+                                            <input type="text" name="sponsor_code" class="form-control" v-model="registration.sponsorCode" id="sponsor" @change="sponsorMethod" required>
+                                            <label for="sponsor"> Sponsor ID</label>
+                                            <p v-if="registration.sponsorCode != null" v-bind:class="{ 'text-success': registration.sponsorCode == true, 'text-danger': registration.sponsorCode == false }"> @{{ registration.sponsorCode == false ? 'Sponsor ID not valid' :  utilities.sponsor }} </p>
+                                        </div>
+
+
+                                        <div class="form-group form-group-custom mb-4" v-if='utilities.sponsorUserDetail != null'>
+                                            <input type="text" name="sponsor_code" class="form-control" v-model="utilities.sponsorUserDetail.name" id="sponsor" disabled>
+
+                                        </div>
+
+                                        <div class="form-group form-group-custom mb-4">
+                                            <input type="number" name="ron_code" class="form-control" v-model="registration.RONCode" id="sponsor" @change='RONCodeMethod' required>
+                                            <label for="sponsor"> RON Code</label>
+                                            <p v-if="registration.RONCode != null"> @{{ utilities.RONCode }} </p>
+                                        </div>
 
 
                                         <div class="custom-control custom-checkbox">
@@ -199,8 +203,7 @@
                                         <div class="mt-4">
 
                                             <!-- <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button> -->
-
-                                            <button class="btn btn-primary btn-block waves-effect waves-light" @click="payWithPaystack" v-if="buttonLoader == false" :disabled="$v.registration.$invalid == true || registration.privacy == false || utilities.sponsorStatus == false || utilities.RONCodeStatus == false || utilities.emailStatus == false || utilities.userNameStatus == false || ageStatus == false"> Pay and Register</button>
+                                            <button class="btn btn-primary btn-block waves-effect waves-light" @click="payWithPaystack" v-if="buttonLoader == false" :disabled="$v.registration.$invalid == true || registration.privacy == false || utilities.sponsorStatus == false || utilities.RONCodeStatus == false || utilities.userNameStatus == false || ageStatus == false"> Pay and Register</button>
                                             <button class="btn btn-primary btn-block waves-effect waves-light" v-else> Please Wait </button>
 
                                         </div>

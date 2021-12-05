@@ -45,7 +45,9 @@ class ResetPassword extends Notification
     {
         return (new MailMessage)
                     ->subject(' Reset Password request')
-                    ->line('Newly reset password for user with email:' . ' ' .$this->data->email)
+                    ->line('Hi' . ' ' .$this->data->name)
+                    ->line('Member_ID:' . ' ' .$this->data->sponsor_code)
+                    ->line('Phone:' . ' ' .$this->data->phone)
                     ->line('newly reset password is: ' . ' ' . $this->password)
                     ->action('Click here to access smartshoppers', url('https://smartshoppers.com.ng'))
                     ->line('Regards smartshoppers!');

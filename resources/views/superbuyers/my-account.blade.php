@@ -32,10 +32,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/sb-topbar.php')
+        @include('partials/sb-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/sb-sidebar.php')
+        @include('partials/sb-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -85,32 +85,26 @@
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustom09">Title</label>
-                                                    <input type="text" class="form-control" id="validationCustom09" placeholder="Title" value="MR" required>
+                                                    <input type="text" class="form-control" id="validationCustom09" placeholder="Title" value="{{ Auth::user()->title }}" readonly required>
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
-                                                    <label for="validationCustom01">First Name</label>
-                                                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+                                                    <label for="validationCustom01">Name</label>
+                                                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" readonly value="{{ Auth::user()->name }}" required>
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <label for="validationCustom02">Last Name</label>
-                                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" readonly required>
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </div>
+                                              
                                                 <div class="col-md-4 mb-3">
                                                     <label for="validationCustomUsername">Email</label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                         </div>
-                                                        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Email" aria-describedby="inputGroupPrepend" value="abc@xyz" readonly required>
+                                                        <input type="text" class="form-control" id="validationCustomUsername" placeholder="Email" aria-describedby="inputGroupPrepend" value="{{ Auth::user()->email }}" readonly required>
                                                         <div class="invalid-feedback">
                                                             Please choose a username.
                                                         </div>
@@ -122,7 +116,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="inputGroupPrepend">+234</span>
                                                         </div>
-                                                        <input type="number" class="form-control" id="validationCustom10" placeholder="Phone" aria-describedby="inputGroupPrepend" value="abc@xyz" readonly required>
+                                                        <input type="number" class="form-control" id="validationCustom10" placeholder="Phone" aria-describedby="inputGroupPrepend" value="{{ Auth::user()->phone }}" readonly required>
                                                         <div class="invalid-feedback">
                                                             Please choose a username.
                                                         </div>
@@ -130,7 +124,7 @@
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Date of Birth</label>
-                                                    <input type="text" class="form-control datepicker-here" data-range="true" data-multiple-dates-separator=" - " data-language="en" />
+                                                    <input type="text" class="form-control datepicker-here" data-range="true" readonly value="{{ Auth::user()->date_of_birth }}" data-multiple-dates-separator=" - " data-language="en" />
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Address.
                                                     </div>
@@ -138,45 +132,30 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">Gender</label>
                                                     <select class="custom-select" required>
-                                                        <option>Select Gender</option>
-                                                        <option value="male">Male</option>
-                                                        <option value="male">Female</option>
+                                                        <option selected> {{ Auth::user()->gender }}</option>
                                                     </select>
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom06">Sponsor ID</label>
-                                                    <input type="text" class="form-control" id="validationCustom06" placeholder="Sponsor ID" value="122341" readonly required>
+                                                    <input type="text" class="form-control" id="validationCustom06" placeholder="Sponsor ID" value="{{ Auth::user()->sponsor_code }}" readonly required>
                                                     <div class="valid-feedback">
                                                         Looks good!
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="validationCustom07">New password</label>
-                                                    <input type="password" class="form-control" id="validationCustom07" placeholder="New Password" value="fsfesfew3432">
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="validationCustom08">Confirm New password</label>
-                                                    <input type="password" class="form-control" id="validationCustom08" placeholder="Confirm Password" value="Otsdfwe221to">
-                                                    <div class="valid-feedback">
-                                                        Looks good!
-                                                    </div>
-                                                </div>
+                                               
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Address</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Address" required>
+                                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Address" value="{{Auth::user()->address }}" readonly required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Address.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">LGA</label>
-                                                    <input type="text" class="form-control" id="validationCustom04" placeholder="LGA" required>
+                                                    <input type="text" class="form-control" id="validationCustom04" placeholder="LGA" value="{{ Auth::user()->LGA }}" readonly required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid LGA.
                                                     </div>
@@ -184,23 +163,19 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label>State</label>
                                                     <select class="custom-select" required>
-                                                        <option value="">Select State</option>
-                                                        <option value="abia">Abia</option>
-                                                        <option value="adamawa">Adamawa</option>
-                                                        <option value="Akwa Ibom">Montana</option>
+                                                        <option selected> {{ Auth::user()->state }} </option>
                                                     </select>
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label>Country</label>
                                                     <select class="custom-select" required>
-                                                        <option value="">Select Country</option>
-                                                        <option value="nigeria">Nigeria</option>
+                                                        <option selected> {{ Auth::user()->country }} </option>
                                                     </select>
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Update</button>
+                                            <button class="btn btn-primary" type="submit" disabled>Update</button>
                                         </form>
                                     </div>
                                 </div>
@@ -215,7 +190,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/sb-footer.php')
+            @include('partials/sb-footer')
         </div>
         <!-- end main content-->
 
@@ -223,13 +198,14 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/sb-rightbar.php')
+    @include('partials/sb-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>

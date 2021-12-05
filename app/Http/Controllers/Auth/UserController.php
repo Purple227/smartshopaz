@@ -10,13 +10,18 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Sponsor;
 use App\Models\RonCode;
 use App\Models\Profile;
+use App\Models\Revenue;
 use Illuminate\Support\Facades\DB;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\ResetPassword;
+use DateTime;
 
 class UserController extends Controller
 {
+
+private $direct_downline_array;
+
     public function registerUI()
     {
             return view('superbuyers.register');
@@ -40,6 +45,11 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->date_of_birth = $request->date_of_birth;
+        $user->LGA = $request->L_G_A;
+        $user->gender = $request->gender;
+        $user->country = $request->country;
+        $user->state = $request->state;
         $user->policy = 1;
         $user->complete_registration = 1;
         $user->title = $request->title;
@@ -59,59 +69,46 @@ class UserController extends Controller
 
         $ron_code = RonCode::where('ron_code', $request->ron_code)->first();
         $ron_code->status = true;
-        $ron_code->save();
+        $ron_code->save(); 
 
+        $sponsor_user_details = User::find($sponsor_code_used->id);
         $request->session()->put('registration_info', $user);
         $request->session()->put('registration_info_password', $request->password);
         $request->session()->put('registration_info_member_id', $sponsor->sponsor_code);
         $request->session()->put('registration_info_sponsor_reference_id', $sponsor_code_used->sponsor_code);
+        $request->session()->put('sponsor_details', $sponsor_user_details);
         
-        /*
-        $get_sponsored_user = User::where('sponsor_id', $sponsor_code_used->id)->get();
-        $sponsor_user_level = $get_sponsored_user->count();
 
         $monthly_link_bonus = $request->register_percentage / 100 * $request->wallet;
-        $shared_bonus = $sponsor_user_level <= 15625 ? 15 / 100 * $monthly_link_bonus : 10 / 100 * $monthly_link_bonus;
 
-        DB::table('users')->where('sponsor_id', $sponsor_code_used->id)
-        ->lazyById()->each(function ($sponsor_user) {
-            DB::table('users')
-                ->where('sponsor_id', $sponsor_user->id)
-                ->update(['wallet' => true]);
-        });
-        */
+        $this->userToGetMonthlyLinkBonus($sponsor_code_used->id);
 
+        $percentage_shared = 15 / 100 * $monthly_link_bonus;
+        $count_users = count($this->direct_downline_array);
+        $share_monthly_link_bonus = $percentage_shared / $count_users;
+
+        foreach ($this->direct_downline_array as $value) {
+            $insert_revenue = Revenue::create([
+                'unique_id' => 'WSB-'.''.mt_rand(1000, 9999),
+                'level' => 'Black Opal',
+                'percentage' => 15,
+                'amount' => $share_monthly_link_bonus,
+                'user_id' => $value
+            ]);
+          }
+ 
         $request->session()->flash('status', 'Task was successful!');
         return $user;
     }
 
-    public function monthlyLinkBonus($user_id)
+    public function userToGetMonthlyLinkBonus($sponsor_id)
     {
+        $get_sponsored_user = User::where('sponsor_id', $sponsor_id)->get();
         
+        foreach ($get_sponsored_user as $user) {
+            $this->direct_downline_array[] = $user->id;
+        }
     } 
-
-    public function completeRegistration(Request $request)
-    {
-        $validated = $request->validate([
-            'date_of_birth' => 'required',
-            'gender' => 'required',
-            'address' => 'required',
-            'L_G_A' => 'required',
-            'state' => 'required',
-            'country' => 'required',
-        ]);
-
-        $user = User::find( $request->user_id );
-        $user->complete_registration = 1;
-        $user->save();
-
-        $request->merge([ 'user_id' => $request->user_id ]);
-
-        $profile = Profile::create($request->all());        
-
-        $request->session()->flash('status', 'Task was successful!');
-        return 'registration completed succesfully';
-    }
 
     public function logout(Request $request)
     {
@@ -132,6 +129,8 @@ class UserController extends Controller
             $request->session()->regenerate();
             if (Auth::user()->account_type == 'super-buyer') 
             {
+            Auth::user()->last_login = new DateTime();
+            Auth::user()->save();
             return redirect()->route('super-buyer.home');
             } elseif(Auth::user()->account_type == 'ron') {
             return redirect()->route('list.ron.code');
@@ -248,11 +247,16 @@ class UserController extends Controller
         $user->password = Hash::make($new_generated_password);
         $user->save();
         
-        Notification::route('mail','purple.is.social227@gmail.com')
+        Notification::route('mail',$user->email)
         ->notify(new ResetPassword( $new_generated_password, $user ));
 
         return 'Password update succesfull';
 
+    }
+
+    public function userProfile()
+    {
+        return view('superbuyers.my-account');
     }
 
 }

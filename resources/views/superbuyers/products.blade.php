@@ -98,7 +98,7 @@
                                     <img class="img-fluid" src="../assets-dash/images/small/img-4.jpg" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title font-size-16 mt-0">@{{ product.title }}</h4>
-                                        <h6 class="card-subtitle font-14 text-muted">NGN @{{ product.super_buyer_price }} </h6>
+                                        <h6 class="card-subtitle font-14 text-muted">NGN @{{ product.super_buyer_price - (product.discount / 100)  }} </h6>
                                     </div>
                                     </a>
                                 </div>
@@ -146,7 +146,6 @@
 
     <!-- JAVASCRIPT -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
     <script  src="../assets-dash/libs/jquery/jquery.min.js"></script>
     <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script  src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>

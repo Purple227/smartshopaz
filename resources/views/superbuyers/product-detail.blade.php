@@ -105,12 +105,12 @@
 
                                     <div class="col-md-6">
                                         <!-- end col -->
-                                        <p class="text-primary"> {{ $single_product->category->name }}</p>
-                                        <h3 class=""> {{ $single_product->title }}</h3>
-                                        <h5>NGN {{ $single_product->super_buyer_price }}</h5>
+                                        <p class="text-primary"> {{-- $single_product->category->name == null ? 'Category' : $single_product->category->name --}}</p>
+                                        <h3 class=""> @{{ superbuyerSingleProduct.single_product.title }}</h3>
+                                        <h5> NGN @{{ selectedVariation ==null ? superbuyerSingleProduct.single_product.super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100) : superbuyerSingleProduct.product_variety[selectedVariation].super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100)}} </h5>
                                         <!-- <li class="list-group-item"> -->
                                         <label class="sr-onl text-primary" for="inlineFormInputName2">Description</label>
-                                        <p> {{ $single_product->description }}</p>
+                                        <p> @{{ superbuyerSingleProduct.single_product.description }}</p>
                                         <div class="media my-2">
 
                                             <div class="media-body">
@@ -118,15 +118,15 @@
                                                     <input type="number" value="1500" class="d-none">
 
                                                     <div class="mt-3 mt-sm-0 mr-sm-3" id="inlineFormInputName2">
-                                                        <select class="form-control">
-                                                            <option>Select</option>
-                                                            <option value="">SUV</option>
-                                                            <option value="">Vacation</option>
+                                                        <select class="form-control" v-model="selectedVariation">
+                                                        <option :value="null" disabled> Select Variation </option>
+                                                            <option v-for="(product, index) in superbuyerSingleProduct.product_variety" :value="index"> @{{ product.variation_name }}</option>                                                            
                                                         </select>
                                                     </div>
 
-                                                    <button type="submit" class="btn btn-primary mt-3 mt-sm-0" v-if="cart == null ? false : cart.some(check => check.id === '{{$single_product->id}}')" @click="removeFromCart('{{$single_product->id}}')"> Remove From Cart </button>
-                                                    <button type="submit" class="btn btn-primary mt-3 mt-sm-0" @click="addToCart( '{{$single_product->id}}', '{{$single_product->super_buyer_price}}' , '{{$single_product->title}}', 1, '{{$single_product->image}}')" v-else> Add to cart </button>
+                                                    <button type="button"  class="btn btn-primary mt-3 mt-sm-0" v-if="cart == null ? false : cart.some(check => check.id ==   superbuyerSingleProduct.single_product.id)" @click="removeFromCart(selectedVariation ==null ? superbuyerSingleProduct.single_product.id : superbuyerSingleProduct.product_variety[selectedVariation].id)"> Remove From Cart </button>
+                                                    <button type="button"  class="btn btn-primary mt-3 mt-sm-0" @click="addToCart( selectedVariation == null ? superbuyerSingleProduct.single_product.id : superbuyerSingleProduct.product_variety[selectedVariation].id,selectedVariation ==null ? superbuyerSingleProduct.single_product.super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100) : superbuyerSingleProduct.product_variety[selectedVariation].super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100),selectedVariation == null ? superbuyerSingleProduct.single_product.title + '(Default)' :superbuyerSingleProduct.single_product.title + '(' + superbuyerSingleProduct.product_variety[selectedVariation].variation_name + ')', 1, superbuyerSingleProduct.single_product.image)" v-else> Add To Cart </button>
+
                                                 </form>
                                             </div>
                                             <div class="icons-lg ml-2 align-self-center">
@@ -134,8 +134,6 @@
                                             </div>
                                         </div>
                                         <!-- </li> -->
-
-
 
                                         <div>
 

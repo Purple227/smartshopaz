@@ -17,9 +17,11 @@ class CreateProductOptionsTable extends Migration
             $table->id();
 
             $table->string('variation_name')->nullable();
+            $table->string('weight')->nullable();
             $table->double('main_price', 8, 2 );
             $table->double('regular_price', 8, 2 )->nullable();
             $table->double('super_buyer_price', 8, 2 )->nullable();
+            $table->string('product_id')->nullable();
 
             $table->timestamps();
         });

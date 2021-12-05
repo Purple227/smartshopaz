@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->boolean('complete_registration')->default(false);
             $table->string('account_type')->nullable();
             $table->string('sponsor_code')->nullable();
+            $table->double('monthly_link_bonus', 8, 2 )->nullable();
 
             $table->rememberToken();
             $table->timestamps();

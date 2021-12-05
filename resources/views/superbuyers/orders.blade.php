@@ -97,7 +97,7 @@
                                                     <td>₦{{ $order->payment }}</td>
                                                     <td> {{ $order->created_at }}</td>
                                                     <td>
-                                                        <a href="{{ route('super-buyer.order-process', $order->id) }}"><i class="iconify" data-icon="uim:refresh"></i> View Order</a>
+                                                        <a href="{{ route('super-buyer.order-process', $order->slug) }}"><i class="iconify" data-icon="uim:refresh"></i> View Order</a>
                                                     </td>
                                                    
                                                 </tr>

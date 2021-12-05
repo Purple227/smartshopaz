@@ -27,7 +27,7 @@ class PagesController extends Controller
         $notify_info = $request->all();
         $notify_info = (object) $notify_info;
         
-        Notification::route('mail',$request->email)
+        Notification::route('mail',['smartshopers1@gmail.com', 'reachoutnetworking@gmail.com'])
           ->notify(new Support( $notify_info));
 
         $request->session()->flash('status', 'Support Email Sent Succesfully!');

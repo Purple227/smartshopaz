@@ -95,6 +95,7 @@
                     <div class="container-fluid">
 
                     <div class="row">
+                         
                             <div class="col-xl-4">
                                 <div class="card">
                                     <div class="card-body">
@@ -184,44 +185,59 @@
                                     <div class="card-body">
                                     <h1>Withdraw</h1>
 
+@if ($errors->any())
+@foreach ($errors->all() as $error)
                                         <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            Not Successful
+                                            <b>oops! {{ $error }} </b>
                                         </div>
+@endforeach
+@endif
+
+
+
+@if(Session::has('status'))
                                         <div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            Successful
+                                            <b> {{ Session::get('status') }} </b>
                                         </div>
+@endif
+
+
+@if(Session::has('fail'))
                                         <div class="alert alert-warning alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            You need to make atleast 10k before withdrawal
+                                            {{ Session::get('fail') }}
                                         </div>
-                                        <form id="form">
+@endif
+
+                                     <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('super-buyer.bank.request') }}">
+                                     @csrf
                                             <div class="form-group">
                                                 <label for="to-input">How much do you want to withdraw</label>
-                                                <input type="number" class="form-control" id="to-input" placeholder="Amount" required>
+                                                <input type="number" name="amount" class="form-control" id="to-input" placeholder="Amount" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Balance (Naira)</label>
-                                                <input type="number" class="form-control" value="0" readonly />
+                                                <input type="number"  class="form-control" value="0" readonly />
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Account Number (Nigeria)</label>
-                                                <input type="number" class="form-control" value="0" readonly />
+                                                <input type="number" name="acc_no" class="form-control" value="0"/>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Password</label>
-                                                <input type="password" class="form-control" placeholder="password" required />
+                                                <input type="password" name="password" class="form-control" placeholder="password" required />
                                             </div>
 
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
                                                     <!-- <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-save"></i></button>
                                                     <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-trash-alt"></i></button> -->
-                                                    <button class="btn btn-primary waves-effect waves-light"> <span>Proceed</span> </button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Proceed</span> </button>
                                                 </div>
                                             </div>
 
@@ -251,12 +267,14 @@
 
                                             <tbody>
                                                 <tr>
-                                                    <td>WSB-8662</td>
-                                                    <td class="badge badge-soft-primary"> waiting</td>
-                                                    <td>12/08/2021</td>
-                                                    <td>₦135,000</td>
-                                                    <td>₦200,000</td>
+                                                @foreach ($my_withdrawal as $key => $withdrawal)
+                                                    <td> {{$withdrawal->transaction_id }}  </td>
+                                                    <td class=" {{ $withdrawal->status == true ? 'badge badge-soft-success' :  'badge badge-soft-primary' }}"> {{$withdrawal->status == true ? 'Approved' : 'Waiting' }} </td>
+                                                    <td> {{ $withdrawal->created_at }} </td>
+                                                    <td>₦{{ $withdrawal->amount }}</td>
+                                                    <td>₦{{-- --}}</td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

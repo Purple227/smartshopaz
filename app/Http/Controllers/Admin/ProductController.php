@@ -11,6 +11,8 @@ use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductOption;
+
 
 class ProductController extends Controller
 {
@@ -28,7 +30,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
         'title' => 'required',
-        'main_price' => 'required_if:multiple_main_price,==,null',
+        'main_price' => 'required_if:multi_product_option,==,null',
         'description' => 'required',
         ]);
 
@@ -56,16 +58,17 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->save();
 
-/*
-        $b = $request->basket;
+        $b = $request->multi_product_option;
         for ($i=0; $i < count($b) ; $i++) { 
-            $tag = $order->tags()->create([
-                'name' => $b[$i] ['name'],
-                'count' => $b[$i] ['count'],
-                'price' => $b[$i] ['price'],
+            $save_multiple_option = ProductOption::create([
+                'variation_name' => $b[$i] ['variationName'],
+                'main_price' => $b[$i] ['mainPrice'],
+                'regular_price' => $b[$i] ['regularPrice'],
+                'super_buyer_price' => $b[$i] ['superBuyerPrice'],
+                'weight' => $b[$i] ['weight'],
+                'product_id' => $product->id
             ]);
         }
-*/
 
         $request->session()->flash('status', 'Task was successful!');
         return redirect()->route('list.product');

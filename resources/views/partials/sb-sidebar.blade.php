@@ -6,7 +6,6 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">basic</li>
 
                 <li>
                     <a href="{{ route('super-buyer.home') }}" class="waves-effect">
@@ -121,6 +120,7 @@
                         <span>My Account </span>
                     </a>
                     <ul class="sub-menu" v-bind:class="{ 'mm-show': dropdownToggles }" aria-expanded="false">
+                    <li><a href="{{ route('super-buyer.user.profile') }}"> Profile </a></li>
                         <li><a href=" {{ route('change.password.super-buyer') }}"> Change Password </a></li>
                     </ul>
                 </li>

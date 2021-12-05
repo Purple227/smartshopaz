@@ -33,8 +33,8 @@
                             </div>
                         </div>
 
-                        <h1 class="mt-5 text-uppercase text-white font-weight-bold mb-3">CONGRATULATION</h1>
-                        <h5 class="text-white-50">Registration was successful, you can now access your dashboard</h5>
+                        <h1 class="mt-5 text-uppercase text-white font-weight-bold mb-3">CONGRATULATIONS!</h1>
+                        <h5 class="text-white-50">Registration was successful, you can now access your dashboard.</h5>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -60,6 +60,11 @@
                             <li class="list-group-item row">
                                 <div class="col-md-6"><b>Sponsor ID </b></div>
                                 <div class="col-md-6"> {{ Session::get('registration_info_sponsor_reference_id')  }}</div>
+                            </li>
+                            
+                            <li class="list-group-item row">
+                                <div class="col-md-6"><b>Sponsor Name </b></div>
+                                <div class="col-md-6"> {{ Session::get('sponsor_details.name')  }}</div>
                             </li>
 
                             <li class="list-group-item row">

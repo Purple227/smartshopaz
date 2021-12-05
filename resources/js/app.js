@@ -78,13 +78,20 @@ const app = new Vue({
             productForm: {
                 title: '',
                 discount: '',
-                categoryID: null,
+                category: null,
                 brandID: '',
                 stock: '',
                 mainPrice: '',
                 regularPrice: '',
                 superBuyerPrice: '',
                 description: '',
+            },
+
+            order: {
+                name: null,
+                address: null,
+                stat: null,
+                phone: null,
             },
 
             buttonLoader: false,
@@ -108,7 +115,9 @@ const app = new Vue({
             dropdownToggle: false,
             dropdownToggles: false,
             geneationDownlineIndex: 0,
-            sidebarChecker: false
+            sidebarChecker: false,
+            superbuyerSingleProduct: null,
+            selectedVariation: null
         }
     },
 
@@ -206,13 +215,14 @@ const app = new Vue({
             this.RONCodeMethod()
         },
 
-        'registration.dateOfBirth': function() {
-            this.ageChecker()
-        }
+        /*         'registration.dateOfBirth': function() {
+                    this.ageChecker()
+                } */
 
     },
 
     mounted() {
+        this.getSuperBuyerSingleProduct()
         this.getDirectDownline()
         this.sponsorMethod()
         this.RONCodeMethod()
@@ -227,14 +237,28 @@ const app = new Vue({
         this.getDeliveryFee()
         this.cartItemCount()
         this.getSetSuperBuyerDetail()
+        this.ageChecker()
+        this.getAdminCategory()
+        this.getAdminBrand()
     },
 
     methods: { //Method calibrace open
 
+        getSuperBuyerSingleProduct() {
+            let currentURI = window.location.href
+            const lastSegment = currentURI.split("/").pop();
+            self = this
+            axios.get('/api/single-product-superbuyer', { params: { slug: lastSegment } })
+                .then(response => {
+                    this.superbuyerSingleProduct = response.data
+                })
+                .catch(function() {});
+        },
+
+
         showSidebar() {
             document.body.classList.add('sidebar-enable')
         },
-
 
         getDirectDownline(id) {
             let taken_id = id || null
@@ -272,6 +296,8 @@ const app = new Vue({
                 email: this.registration.email,
                 amount: this.registerFee * 100,
                 currency: "NGN",
+                firstname: this.registration.firstName,
+                lastname: this.registration.lastName,
                 ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                 metadata: {
                     custom_fields: [{
@@ -291,7 +317,7 @@ const app = new Vue({
             handler.openIframe();
         },
 
-        placeOrder(transactionID, userID, name, totalPrice, accountType, payment, quantity) {
+        placeOrder(transactionID, userID, totalPrice, payment, quantity) {
             let orderDetail = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
             let self = this;
             Vue.axios
@@ -299,46 +325,30 @@ const app = new Vue({
                     "place-order", {
                         user_id: userID,
                         total_price: totalPrice,
-                        account_type: accountType,
                         payment: payment,
                         quantity: quantity,
-                        payment_method: paymentMethod,
-                        order_detail: orderDetail
+                        order_detail: orderDetail,
+                        address: this.order.address,
+                        state: this.order.state,
+                        name: this.order.name,
+                        phone: this.order.phone,
+                        user_id: userID,
+                        amount: totalPrice,
+                        status: true,
+                        transaction_id: transactionID,
+                        name: this.order.name,
+                        transaction_type: 'order_payment'
                     }
                 )
                 .then(() => {
                     window.localStorage.removeItem('cartItem')
-                    self.saveTransaction(transactionID, userID, name, 1)
+                    self.buttonLoader = false
+                    window.location = '/super-buyer/orders'
                 })
                 .catch(function() {});
         },
 
-        cartCheckout(userID, name, email, totalPrice, accountType, phone, payment, quantity) {
-            let self = this;
-            var handler = PaystackPop.setup({
-                key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
-                email: email,
-                amount: totalPrice * 100,
-                currency: "NGN",
-                ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-                metadata: {
-                    custom_fields: [{
-                        display_name: "Mobile_number",
-                        variable_name: "mobile_number",
-                        value: phone,
-                    }, ],
-                },
-                callback: function(response) {
-                    self.placeOrder(response.reference, userID, name, totalPrice, accountType, payment, quantity)
-                },
-                onClose: function() {
-                    alert("window closed");
-                },
-            });
-            handler.openIframe();
-        },
-
-        saveTransaction(transactionID, userID, name, redirectLink) {
+        saveTransactionRegister(transactionID, userID, name) {
             let self = this;
             Vue.axios
                 .post(
@@ -348,21 +358,19 @@ const app = new Vue({
                         status: true,
                         transaction_id: transactionID,
                         name: name,
+                        transaction_type: 'registration_fee'
                     }
                 )
                 .then(() => {
                     self.buttonLoader = false
-                    if (redirectLink == true) {
-                        window.location = '/super-buyer/orders'
-                    } else {
-                        window.location = '/super-buyer/success'
-                    }
+                    window.location = '/super-buyer/success'
                 })
                 .catch(function() {});
         },
 
         sendResetpassword() {
             let self = this;
+            self.buttonLoader = true
             Vue.axios
                 .post(
                     "send-reset-password", {
@@ -374,6 +382,7 @@ const app = new Vue({
                 })
                 .catch(function() {
                     self.utilities.passwordResetEmailSender = false
+                    self.buttonLoader = false
                 });
         },
 
@@ -381,7 +390,7 @@ const app = new Vue({
             let self = this;
             Vue.axios
                 .post(
-                    "save-product", {
+                    "add-product", {
                         title: this.productForm.title,
                         discount: this.productForm.discount,
                         category_id: this.productForm.categoryID,
@@ -390,12 +399,13 @@ const app = new Vue({
                         regular_price: this.productForm.regularPrice,
                         super_buyer_price: this.productForm.superBuyerPrice,
                         weight: this.productForm.weight,
-                        description: this.productForm.stock
+                        description: this.productForm.stock,
+                        multi_product_option: this.productMultiOption
                     }
                 )
                 .then(() => {
                     self.buttonLoader = false
-                    window.location = '/super-buyer/success'
+                    window.location = '/admin/list-products'
                 })
                 .catch(function() {});
         },
@@ -415,37 +425,20 @@ const app = new Vue({
                     username: this.registration.userName,
                     wallet: this.registerFee,
                     register_percentage: this.registerPercent,
-                    address: this.registration.address
+                    address: this.registration.address,
+                    date_of_birth: this.registration.dateOfBirth,
+                    L_G_A: this.registration.LGA,
+                    state: this.registration.state,
+                    country: this.registration.country,
                 })
                 .then(function(response) {
                     self.user = response.data
-                    self.completeRegistration(transactionID, response.data.id, response.data.name)
+                    self.saveTransactionRegister(transactionID, response.data.id, response.data.name);
                 })
                 .catch(function(error) {
                     self.buttonLoader = false
                     self.registration.error = error.response.data.errors
                 });
-        },
-
-        completeRegistration(transactionID, userID, name) {
-            let self = this
-            Vue.axios.post('complete-register', {
-                    date_of_birth: this.registration.dateOfBirth,
-                    gender: this.registration.gender,
-                    L_G_A: this.registration.LGA,
-                    state: this.registration.state,
-                    address: this.registration.address,
-                    country: this.registration.country,
-                    user_id: userID
-                })
-                .then(function() {
-                    self.saveTransaction(transactionID, userID, name);
-                })
-                .catch(function(error) {
-                    self.buttonLoader = false
-                    self.registration.error = error.response.data.errors
-                });
-
         },
 
         sponsorMethod() {
@@ -652,25 +645,56 @@ const app = new Vue({
         },
 
         ageChecker(birthday) {
-            console.log('tipping')
-                // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
-            var optimizedBirthday = birthday.replace(/-/g, "/");
+            if (this.registration.dateOfBirth != null) { // Condition calibrace open
+                console.log('insane')
+                    // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
+                var optimizedBirthday = birthday.replace(/-/g, "/");
 
-            //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
-            var myBirthday = new Date(optimizedBirthday);
+                //set date based on birthday at 01:00:00 hours GMT+0100 (CET)
+                var myBirthday = new Date(optimizedBirthday);
 
-            // set current day on 01:00:00 hours GMT+0100 (CET)
-            var currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00';
+                // set current day on 01:00:00 hours GMT+0100 (CET)
+                var currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00';
 
-            // calculate age comparing current date and borthday
-            var myAge = ~~((Date.now(currentDate) - myBirthday) / (31557600000));
+                // calculate age comparing current date and borthday
+                var myAge = ~~((Date.now(currentDate) - myBirthday) / (31557600000));
 
-            if (myAge < 18) {
-                this.ageStatus = false;
-            } else {
-                this.ageStatus = true;
-            }
-        }
+                console.log(myAge)
+
+                if (myAge < 18) {
+                    this.ageStatus = false;
+                } else {
+                    this.ageStatus = true;
+                }
+            } //Condition calibrace close
+        },
+
+        hollaCheckout(userID, email, totalPrice, payment, quantity) {
+            let self = this;
+            var handler = PaystackPop.setup({
+                key: "pk_test_430bead3adad039c17c6dcd47591eda01dbfcd32",
+                email: email,
+                amount: totalPrice * 100,
+                firstname: this.order.name,
+                currency: "NGN",
+                ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                metadata: {
+                    custom_fields: [{
+                        display_name: "Mobile_number",
+                        variable_name: "mobile_number",
+                        value: this.order.phone,
+                    }, ],
+                },
+                callback: function(response) {
+                    self.placeOrder(response.reference, userID, totalPrice, payment, quantity)
+                },
+                onClose: function() {
+                    alert("window closed");
+                },
+            });
+            handler.openIframe();
+        },
+
 
     }, //Method calibrace close
 

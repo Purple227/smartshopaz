@@ -81,36 +81,30 @@
 
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
-                                                    <label for="validationCustom03">Receiver's First Name</label>
-                                                    <input type="text" class="form-control" v-model="registration.firstName" id="validationCustom03" placeholder="First Name" required>
+                                                    <label for="validationCustom03"> Name</label>
+                                                    <input type="text" class="form-control" v-model="order.name == null ? order.name = '{{ Auth::user()->name }}' : order.name" id="validationCustom03" placeholder="First Name" required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Name.
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="validationCustom03">Receiver's Last Name</label>
-                                                    <input type="text" class="form-control" id="validationCustom03" v-model="registration.lastName" placeholder="Last Name" required>
-                                                    <div class="invalid-feedback">
-                                                        Please provide a valid Name.
-                                                    </div>
-                                                </div>
+
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom03">Phone Number</label>
-                                                    <input type="number" class="form-control" v-model="registration.phone == null ? '{{ Auth::user()->phone}}' : registration.phone" id="validationCustom03" placeholder="Phone" required>
+                                                    <input type="number" class="form-control" v-model="order.phone == null ? order.phone = '{{ Auth::user()->phone}}' : order.phone" id="validationCustom03" placeholder="Phone" required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Phone Number.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label for="validationCustom04">Address</label>
-                                                    <input type="text" class="form-control" v-model="registration.address == null ? '{{ Auth::user()->address}}' : registration.address" id="validationCustom04" placeholder="LGA" required>
+                                                    <input type="text" class="form-control" v-model="order.address == null ? order.address = '{{ Auth::user()->address}}' : order.address" id="validationCustom04" placeholder="LGA" required>
                                                     <div class="invalid-feedback">
                                                         Please provide a valid Address.
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label>State</label>
-                                                    <select class="custom-select" required v-model="registration.state == null ? registration.state = '{{ Auth::user()->state }}' : registration.state">
+                                                    <select class="custom-select" required v-model="order.state == null ? order.state = '{{ Auth::user()->state }}' : order.state">
                                                         <option value="registration.phone"> lol </option>
                                                         <option value="abia">Abia</option>
                                                         <option value="Adamawa">Adamawa</option>
@@ -152,22 +146,14 @@
                                                     </select>
                                                     <div class="invalid-feedback">Example invalid custom select feedback</div>
                                                 </div>
-                                                <div class="col-md-6 mb-3">
+                                                <div class="col-md mb-3">
                                                     <label>Country</label>
                                                     <select class="custom-select" required>
                                                         <option value="nigeria">Nigeria</option>
                                                     </select>
                                                     <!-- <div class="invalid-feedback">Example invalid custom select feedback</div> -->
                                                 </div>
-                                                <div class="col-md-12 mb-3 text-primary">
-                                                    <label>Payment Method</label>
-                                                    <select class="custom-select" v-model="registration.paymentMethod" required>
-                                                    <option value="online">Online - Card</option>
-                                                        <option value="">Bank Transfer</option>
-                                                        
-                                                    </select>
-                                                    <div class="invalid-feedback">Example invalid custom select feedback</div>
-                                                </div>
+                                                
                                             </div>
                                            
                                             <!-- <button class="btn btn-primary" type="submit">Complete</button> -->
@@ -192,14 +178,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="(item, index) in cart" :key="index">>
+                                                <tr v-for="(item, index) in cart" :key="index">
                                                     <td data-th="Product">
                                                         <h6 class="text-primary"> @{{ item.name }}</h6>
                                                     </td>
                                                     <td data-th="Quantity">
                                                         <input type="number" class="form-control form-control-sm text-center" :value="item.count" readonly>
                                                     </td>
-                                                    <td data-th="Price">@{{ item.price }}</td>
+                                                    <td data-th="Price">@{{ item.count * item.price }}</td>
                                                     <!-- <td class="actions" data-th="">
                                                         <div class="text-right">
                                                             <button class="btn btn-white bg-white btn-md mb-2">
@@ -214,19 +200,19 @@
                                                     <td> 
                                                         @{{ sumInCart  }}</td>
                                                 </tr>
-                                                <!--tr>
+                                                <tr>
                                                     <td></td>
                                                     <td>Tax(7.5%):</td>
-                                                    <td>2,300</td>
-                                                </tr -->
+                                                    <td>@{{  (sumInCart / 100 * 7.5).toFixed(2) }}</td>
+                                                </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>Total(₦):</td>
-                                                    <td> @{{ sumInCart + deliveryFee }} </td>
+                                                    <td> @{{ ((sumInCart + deliveryFee) + (sumInCart / 100 * 7.5)).toFixed(2) }} </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-primary btn-block" type="submit" @click="cartCheckout('{{Auth::user()->id }}', '{{ Auth::user()->name }}', '{{ Auth::user()->email }}', sumInCart + deliveryFee, '{{ Auth::user()->account_type}}', '{{ Auth::user()->phone}}', sumInCart, itemInCart, )" >Proceed to Payment</button>
+                                        <button class="btn btn-primary btn-block" type="button" @click="hollaCheckout('{{Auth::user()->id }}', '{{ Auth::user()->email }}', ((sumInCart + deliveryFee) + (sumInCart / 100 * 7.5)).toFixed(2) + deliveryFee, sumInCart, itemInCart)" > Proceed to Payment </button>
                                     </div>
                                 </div>
                             </div> <!-- end col -->
