@@ -250,7 +250,6 @@
                                                             </a>
                                                             <ul>
                                                                 <li>
-
                                                                     <a href="javascript:void(0);" v-for="(user, index) in directDowline[0]" @click="[getDirectDownline(user.id), updateGenerationView()]">
                                                                         <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">
@@ -261,7 +260,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </a>
-
                                                                     <ul>
                                                                         <li>
                                                                             <a href="javascript:void(0);" v-for="(user, index) in directDowline[geneationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView()]">
@@ -275,7 +273,7 @@
                                                                                 </div>
                                                                             </a>
                                                                         </li>
-                                                              
+
                                                                         <a href="javascript:void(0);" v-for="(user, index) in directDowline[generationDownlineIndex]" @click="[getDirectDownline(user.id), updateGenerationView() ]">
                                                                         <div class="member-view-box"><!--img src="../assets-dash/images/icons/redberyl.png" height="15px" alt=""-->
                                                                             <div class="member-image">

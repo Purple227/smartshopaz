@@ -93,6 +93,7 @@
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
+                                                    <th> Amount Paid </th>
                                                     <th>Date joined</th>
                                                 </tr>
                                             </thead>
@@ -106,8 +107,9 @@
                                                     <td> {{ $direct_down_line->name }}</td>
                                                     <td> {{ $direct_down_line->email }} </td>
                                                     <td> {{ $direct_down_line->phone }}</td>
+                                                    <td> {{ $direct_down_line->wallet }}</td>
                                                     <td> {{ $direct_down_line->created_at }} </td>
-                                                @endforeach
+                                            @endforeach
                                                 </tr>
                                             </tbody>
                                         </table>

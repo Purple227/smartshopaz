@@ -122,7 +122,7 @@
                                                 <tr>
                                                     <th>S/N</th>
                                                     <th>Bonus receive Date</th>
-                                                    <th>level</th>
+                                                    <!--th>level</th-->
                                                     <th>percentage</th>
                                                     <th>remark</th>
                                                     <th>Amount</th>
@@ -132,13 +132,15 @@
 
                                             <tbody>
                                                 <tr>
-                                                    <td>WSB-8662</td>
-                                                    <td>12/08/2021</td>
-                                                    <td>Diamond</td>
-                                                    <td>10%</td>
-                                                    <td>purchase of 50,000</td>
-                                                    <td>₦35,000</td>
+                                                @foreach ($bi_weekly as $key => $revenue)
+                                                    <td> {{ $revenue->unique_id }}</td>
+                                                    <td> {{ $revenue->created_at }}</td>
+                                                    <!-- td>Black Opal </td-->
+                                                    <td> {{ $revenue->percentage }}</td>
+                                                    <td> purchase of 50,000</td>
+                                                    <td> {{ $revenue->amount }} </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -155,24 +157,24 @@
                                                 <tr>
                                                     <th>S/N</th>
                                                     <th>Bonus receivd Date</th>
-                                                    <th>level</th>
+                                                    <!--th>level</th-->
                                                     <th>percentage</th>
                                                     <th>remark</th>
                                                     <th>Amount</th>
-                                                    <th>Total</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
                                                 <tr>
-                                                    <td>WSB-8662</td>
-                                                    <td>12/08/2021</td>
-                                                    <td>Diamond</td>
-                                                    <td>10%</td>
-                                                    <td>purchase of 50,000</td>
-                                                    <td>₦3,000</td>
-                                                    <td>₦43,000</td>
+                                                @foreach ($monthly_fulfilment as $key => $revenue)
+                                                    <td> {{ $revenue->unique_id }}</td>
+                                                    <td> {{ $revenue->created_at }}</td>
+                                                    <!-- td>Black Opal </td-->
+                                                    <td> {{ $revenue->percentage }}</td>
+                                                    <td> purchase of 50,000</td>
+                                                    <td> {{ $revenue->amount }} </td>
+                                                @endforeach
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -190,24 +192,24 @@
                                                 <tr>
                                                     <th>S/N</th>
                                                     <th>Bonus receivd Date</th>
-                                                    <th>level</th>
+                                                    <!--th>level</th-->
                                                     <th>percentage</th>
                                                     <th>remark</th>
                                                     <th>Amount</th>
-                                                    <th>Total</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
                                                 <tr>
-                                                    <td>WSB-8662</td>
-                                                    <td>12/08/2021</td>
-                                                    <td>Diamond</td>
-                                                    <td>10%</td>
-                                                    <td>purchase of 50,000</td>
-                                                    <td>₦12,000</td>
-                                                    <td>₦72,000</td>
+                                                @foreach ($monthly_rank as $key => $revenue)
+                                                    <td> {{ $revenue->unique_id }}</td>
+                                                    <td> {{ $revenue->created_at }}</td>
+                                                    <!-- td>Black Opal </td-->
+                                                    <td> {{ $revenue->percentage }}</td>
+                                                    <td> purchase of 50,000</td>
+                                                    <td> {{ $revenue->amount }} </td>
+                                                @endforeach
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -225,25 +227,23 @@
                                                 <tr>
                                                     <th>S/N</th>
                                                     <th>Bonus receivd Date</th>
-                                                    <th>level</th>
+                                                    <!-- th> level </th-->
                                                     <th>percentage</th>
-                                                    <th>remark</th>
                                                     <th>Amount</th>
-                                                    <th>Total</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
                                                 <tr>
-                                                    <td>WSB-8662</td>
-                                                    <td>12/08/2021</td>
-                                                    <td>Diamond</td>
-                                                    <td>10%</td>
-                                                    <td>purchase of 50,000</td>
-                                                    <td>₦4,000</td>
-                                                    <td>₦63,000</td>
+                                                    @foreach ($monthly_link_bonus as $key => $revenue)
+                                                    <td> {{ $revenue->unique_id }}</td>
+                                                    <td> {{ $revenue->created_at }}</td>
+                                                    <!-- td>Black Opal </td-->
+                                                    <td> {{ $revenue->percentage }}</td>
+                                                    <td> {{ $revenue->amount }} </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -260,29 +260,30 @@
                                                 <tr>
                                                     <th>S/N</th>
                                                     <th>Incentive receive Date</th>
-                                                    <th>level</th>
+                                                    <!--th>level</th-->
                                                     <th>percentage</th>
                                                     <th>remark</th>
                                                     <th>Amount Rolled Over</th>
                                                     <th>Total Amount</th>
                                                     <th>Incentive cashout</th>
                                                     <th>Balance</th>
-                                                    <th>Total</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
                                                 <tr>
-                                                    <td>WSB-8662</td>
+                                                @foreach ($monthly_link_bonus as $key => $revenue)
+                                                    <td>{{ $revenue->unique_id }}</td>
                                                     <td>12/08/2021</td>
-                                                    <td>Diamond</td>
+                                                    <!--td>Diamond</td-->
                                                     <td>10%</td>
                                                     <td>purchase of 50,000</td>
                                                     <td>₦2,000</td>
                                                     <td>Car</td>
                                                     <th>5,000</th>
                                                     <td>₦38,000</td>
+                                                @endforeach
                                                 </tr>
                                             </tbody>
                                         </table>

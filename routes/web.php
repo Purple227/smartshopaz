@@ -22,6 +22,8 @@ use App\Http\Controllers\SuperBuyer\GenealogyController;
 use App\Http\Controllers\SuperBuyer\TransactionController as SuperBuyerTransaction;
 use App\Http\Controllers\SuperBuyer\PagesController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SuperBuyer\HomeController as SuperBuyerHomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -120,9 +122,7 @@ Route::get('/add-incentive', [IncentiveController::class, 'addIncentiveUI'])->na
 
 Route::prefix('super-buyer')->group(function () {
     
-Route::get('/', function () {
-    return view('superbuyers/index');
-})->name('super-buyer.home')->middleware('super.buyer');
+Route::get('/', [SuperBuyerHomeController::class, 'index'])->name('super-buyer.home')->middleware('super.buyer');
 
 Route::get('/register', [UserController::class, 'registerUI'])->name('super-buyer.register');
 Route::get('/login', [UserController::class, 'loginUI'])->name('super-buyer.login');

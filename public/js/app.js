@@ -2174,7 +2174,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       geneationDownlineIndex: 0,
       sidebarChecker: false,
       superbuyerSingleProduct: null,
-      selectedVariation: null
+      selectedVariation: null,
+      mainPriceSum: null
     };
   },
   validations: {
@@ -2272,6 +2273,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
     this.ageChecker();
     this.getAdminCategory();
     this.getAdminBrand();
+    this.mainSumMethod();
   },
   methods: {
     //Method calibrace open
@@ -2365,7 +2367,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         state: this.order.state,
         name: this.order.name,
         phone: this.order.phone
-      }, _defineProperty(_Vue$axios$post, "user_id", userID), _defineProperty(_Vue$axios$post, "amount", totalPrice), _defineProperty(_Vue$axios$post, "status", true), _defineProperty(_Vue$axios$post, "transaction_id", transactionID), _defineProperty(_Vue$axios$post, "name", this.order.name), _defineProperty(_Vue$axios$post, "transaction_type", 'order_payment'), _Vue$axios$post)).then(function () {
+      }, _defineProperty(_Vue$axios$post, "user_id", userID), _defineProperty(_Vue$axios$post, "amount", totalPrice), _defineProperty(_Vue$axios$post, "status", true), _defineProperty(_Vue$axios$post, "transaction_id", transactionID), _defineProperty(_Vue$axios$post, "name", this.order.name), _defineProperty(_Vue$axios$post, "main_price_sum", this.mainPriceSum), _Vue$axios$post)).then(function () {
         window.localStorage.removeItem('cartItem');
         self.buttonLoader = false;
         window.location = '/super-buyer/orders';
@@ -2434,10 +2436,10 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         date_of_birth: this.registration.dateOfBirth,
         L_G_A: this.registration.LGA,
         state: this.registration.state,
-        country: this.registration.country
+        country: this.registration.country,
+        transaction_id: transactionID
       }).then(function (response) {
-        self.user = response.data;
-        self.saveTransactionRegister(transactionID, response.data.id, response.data.name);
+        window.location = '/super-buyer/success';
       })["catch"](function (error) {
         self.buttonLoader = false;
         self.registration.error = error.response.data.errors;
@@ -2611,7 +2613,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       })["catch"](function (error) {// Code here
       });
     },
-    addToCart: function addToCart(ID, price, name, count, image) {
+    addToCart: function addToCart(ID, price, name, count, image, mainPrice) {
+      console.log(mainPrice);
       var item = JSON.parse(window.localStorage.getItem("cartItem"));
       item = item == null ? [] : JSON.parse(window.localStorage.getItem("cartItem"));
       item.push({
@@ -2619,12 +2622,14 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         price: parseFloat(price),
         name: name,
         count: count,
-        image: image
+        image: image,
+        mainPrice: parseFloat(mainPrice)
       });
       window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
 
       this.cartMethod();
       this.cartItemCount();
+      this.mainSumMethod();
     },
     removeFromCart: function removeFromCart(ID) {
       var item = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
@@ -2645,6 +2650,16 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         return obj.count * obj.price;
       });
       this.sumInCart = allPrice == null ? null : allPrice.reduce(function (a, b) {
+        return a + b;
+      }, 0);
+    },
+    mainSumMethod: function mainSumMethod() {
+      this.cart = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
+
+      var allMainPrice = this.cart == null ? null : this.cart.map(function (obj) {
+        return obj.count * obj.mainPrice;
+      });
+      this.mainPriceSum = allMainPrice == null ? null : allMainPrice.reduce(function (a, b) {
         return a + b;
       }, 0);
     },

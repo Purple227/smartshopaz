@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\DB;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\ResetPassword;
+use App\Notifications\WelcomeMessage;
 use DateTime;
+use App\Models\Transaction;
 
 class UserController extends Controller
 {
@@ -71,32 +73,53 @@ private $direct_downline_array;
         $ron_code->status = true;
         $ron_code->save(); 
 
-        $sponsor_user_details = User::find($sponsor_code_used->id);
+        $sponsor_user_details = User::find($sponsor_code_used->user_id);
         $request->session()->put('registration_info', $user);
         $request->session()->put('registration_info_password', $request->password);
         $request->session()->put('registration_info_member_id', $sponsor->sponsor_code);
         $request->session()->put('registration_info_sponsor_reference_id', $sponsor_code_used->sponsor_code);
         $request->session()->put('sponsor_details', $sponsor_user_details);
         
-
+ 
         $monthly_link_bonus = $request->register_percentage / 100 * $request->wallet;
 
         $this->userToGetMonthlyLinkBonus($sponsor_code_used->id);
 
+        foreach ($this->direct_downline_array as $value) {
+            $sponsor_user = Sponsor::where('user_id', $value)->first();
+            $this->userToGetMonthlyLinkBonus($sponsor_user->id);
+        }
+
+        $unique_array = array_unique($this->direct_downline_array);
+        $array_without_user = array_diff($unique_array, array($user->id));
+        $count_users = count($array_without_user);
+
         $percentage_shared = 15 / 100 * $monthly_link_bonus;
-        $count_users = count($this->direct_downline_array);
         $share_monthly_link_bonus = $percentage_shared / $count_users;
 
-        foreach ($this->direct_downline_array as $value) {
-            $insert_revenue = Revenue::create([
+        foreach ($array_without_user as $value) {
+            $revenue = Revenue::create([
                 'unique_id' => 'WSB-'.''.mt_rand(1000, 9999),
                 'level' => 'Black Opal',
                 'percentage' => 15,
                 'amount' => $share_monthly_link_bonus,
-                'user_id' => $value
+                'user_id' => $value,
+                'transaction_type' => 'monthly_link_bonus'
             ]);
-          }
+        }
  
+          $transaction = new Transaction;
+          $transaction->user_id = $user->id;
+          $transaction->amount = $request->wallet;
+          $transaction->status = 1;
+          $transaction->transaction_id = $request->transaction_id;
+          $transaction->name = $user->name;
+          $transaction->transaction_type = 'Registration Fee';
+          $transaction->save();
+
+          Notification::route('mail',$user->email)
+          ->notify(new WelcomeMessage( $user ));    
+
         $request->session()->flash('status', 'Task was successful!');
         return $user;
     }
@@ -104,7 +127,6 @@ private $direct_downline_array;
     public function userToGetMonthlyLinkBonus($sponsor_id)
     {
         $get_sponsored_user = User::where('sponsor_id', $sponsor_id)->get();
-        
         foreach ($get_sponsored_user as $user) {
             $this->direct_downline_array[] = $user->id;
         }

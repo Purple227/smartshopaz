@@ -8,22 +8,25 @@
     <meta content="Smartshoppers Admin CMS" name="description" />
     <meta content="Smartshoppers" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets-dash/images/favicon.ico">
-
+    <link rel="shortcut icon" href="{{ asset('assets-dash/images/favicon.ico') }}">
+    <!-- Plugins css -->
+    <link href="{{ asset('assets-dash/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- DataTables -->
-    <link href="../assets-dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets-dash/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- <link href="../assets-dash/libs/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css" /> -->
 
     <!-- Responsive datatable examples -->
-    <link href="../assets-dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/libs/summernote/summernote-bs4.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
-    <link href="../assets-dash/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="../assets-dash/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets-dash/css/tree.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="../assets-dash/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets-dash/css/app.min.css')  }}" rel="stylesheet" type="text/css" />
+
     <style>
         /*----------------genealogy-scroll----------*/
 
@@ -243,72 +246,26 @@
                                                                     <div class="member-image">
                                                                         <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                         <div class="member-details">
-                                                                            Smartshoppers
+                                                                            {{ Auth::user()->name }}
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </a>
                                                             <ul class="active">
+                                                            @foreach ($down_line as $key => $direct_down_line)
                                                                 <li>
                                                                     <a href="javascript:void(0);">
                                                                         <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
                                                                             <div class="member-image">
                                                                                 <i class="rounded-circle header-profile-use ti-user text-primary"></i>
                                                                                 <div class="member-details">
-                                                                                ella
+                                                                                {{ $direct_down_line->name }}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </a>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0);">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                            <div class="member-image">
-                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                <div class="member-details">
-                                                                                malik
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0);">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                            <div class="member-image">
-                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                <div class="member-details">
-                                                                                Ngozi
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0);">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                            <div class="member-image">
-                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                <div class="member-details">
-                                                                                Tunde
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0);">
-                                                                        <div class="member-view-box"><img src="../assets-dash/images/icons/redberyl.png" height="15px" alt="">
-                                                                            <div class="member-image">
-                                                                                <i class="rounded-circle header-profile-use ti-user text-primary"></i>
-                                                                                <div class="member-details">
-                                                                                Ade
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
+                                                                @endforeach
                                                             </ul>
                                                         </li>
                                                     </ul>
@@ -318,9 +275,6 @@
 
                                     </div>
                                 </div>
-]
-
-
 
                             </div> <!-- end col -->
                         </div> <!-- end row -->
@@ -348,37 +302,37 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="../assets-dash/libs/jquery/jquery.min.js"></script>
-    <script src="../assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets-dash/libs/metismenu/metisMenu.min.js"></script>
-    <script src="../assets-dash/libs/simplebar/simplebar.min.js"></script>
-    <script src="../assets-dash/libs/node-waves/waves.min.js"></script>
+    <script src="{{ asset('assets-dash/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/node-waves/waves.min.js') }}"></script>
 
     <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
 
     <!-- Required datatable js -->
-    <script src="../assets-dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <!-- Buttons examples -->
-    <script src="../assets-dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="../assets-dash/libs/jszip/jszip.min.js"></script>
-    <script src="../assets-dash/libs/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../assets-dash/libs/pdfmake/build/vfs_fonts.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
     <!-- Responsive examples -->
-    <script src="../assets-dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../assets-dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets-dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
     <!-- Datatable init js -->
-    <script src="../assets-dash/js/pages/datatables.init.js"></script>
+    <script src="{{ asset('assets-dash/js/pages/datatables.init.js') }}"></script>
 
-    <script src="../assets-dash/js/app.js"></script>
-    <script src="../assets-dash/js/tree.js"></script>
-    <script src="../assets-dash/js/iconify.min.js"></script>
+    <script src="{{ asset('assets-dash/js/app.js') }}"></script>
+    <script src="{{ asset('assets-dash/js/iconify.min.js') }}"></script>
     <script>
         $(function() {
             $('.genealogy-tree ul').hide();

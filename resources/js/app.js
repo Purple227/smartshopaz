@@ -117,7 +117,8 @@ const app = new Vue({
             geneationDownlineIndex: 0,
             sidebarChecker: false,
             superbuyerSingleProduct: null,
-            selectedVariation: null
+            selectedVariation: null,
+            mainPriceSum: null
         }
     },
 
@@ -240,6 +241,7 @@ const app = new Vue({
         this.ageChecker()
         this.getAdminCategory()
         this.getAdminBrand()
+        this.mainSumMethod()
     },
 
     methods: { //Method calibrace open
@@ -337,7 +339,7 @@ const app = new Vue({
                         status: true,
                         transaction_id: transactionID,
                         name: this.order.name,
-                        transaction_type: 'order_payment'
+                        main_price_sum: this.mainPriceSum,
                     }
                 )
                 .then(() => {
@@ -430,10 +432,11 @@ const app = new Vue({
                     L_G_A: this.registration.LGA,
                     state: this.registration.state,
                     country: this.registration.country,
+                    transaction_id: transactionID
+
                 })
                 .then(function(response) {
-                    self.user = response.data
-                    self.saveTransactionRegister(transactionID, response.data.id, response.data.name);
+                    window.location = '/super-buyer/success'
                 })
                 .catch(function(error) {
                     self.buttonLoader = false
@@ -594,13 +597,22 @@ const app = new Vue({
                 })
         },
 
-        addToCart(ID, price, name, count, image) {
+        addToCart(ID, price, name, count, image, mainPrice) {
+            console.log(mainPrice)
             let item = JSON.parse(window.localStorage.getItem("cartItem"));
             item = item == null ? [] : JSON.parse(window.localStorage.getItem("cartItem"));
-            item.push({ id: ID, price: parseFloat(price), name: name, count: count, image: image })
+            item.push({
+                id: ID,
+                price: parseFloat(price),
+                name: name,
+                count: count,
+                image: image,
+                mainPrice: parseFloat(mainPrice)
+            });
             window.localStorage.setItem("cartItem", JSON.stringify(item)); //store cart item
             this.cartMethod();
             this.cartItemCount()
+            this.mainSumMethod()
         },
 
         removeFromCart(ID) {
@@ -616,6 +628,12 @@ const app = new Vue({
             this.cart = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
             let allPrice = this.cart == null ? null : this.cart.map(obj => obj.count * obj.price);
             this.sumInCart = allPrice == null ? null : allPrice.reduce((a, b) => a + b, 0)
+        },
+
+        mainSumMethod() {
+            this.cart = JSON.parse(window.localStorage.getItem("cartItem")); //get them back
+            let allMainPrice = this.cart == null ? null : this.cart.map(obj => obj.count * obj.mainPrice);
+            this.mainPriceSum = allMainPrice == null ? null : allMainPrice.reduce((a, b) => a + b, 0)
         },
 
         cartItemCount() {

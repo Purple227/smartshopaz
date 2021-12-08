@@ -24,13 +24,13 @@
                         <span>Genealogy</span>
                     </a>
                     <ul class=" sub-menu " v-bind:class="{ 'mm-show': dropdownToggle }" aria-expanded="false">
-                        <li><a href="genealogy">Black Opal</a></li>
-                        <li><a href="genealogy">Red Beryl</a></li>
-                        <li><a href="genealogy">Alexandrite</a></li>
-                        <li><a href="genealogy">Emerald</a></li>
-                        <li><a href="genealogy">Ruby</a></li>
-                        <li><a href="genealogy">Jadeite</a></li>
-                        <li><a href="genealogy">Diamond</a></li>
+                        <li><a href="{{ route('genealogy', 'black-opal') }}"> Black Opal </a></li>
+                        <li><a href="{{ route('genealogy', 'red-beryl') }}"> Red Beryl </a></li>
+                        <li><a href="{{ route('genealogy', 'alexandrite') }}">  Alexandrite </a></li>
+                        <li><a href="{{ route('genealogy', 'emerald') }}"> Emerald </a></li>
+                        <li><a href="{{ route('genealogy', 'ruby') }}"> Ruby </a></li>
+                        <li><a href="{{ route('genealogy', 'jadeite') }}"> Jadeite </a></li>
+                        <li><a href="{{ route('genealogy', 'diamond') }}"> Diamond </a></li>
                     </ul>
                 </li>
 
@@ -64,6 +64,25 @@
                 </li>
 
                 <li>
+                    <a href=" {{ route('super-buyer.revenue') }}" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1">
+                            <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
+                        </div>
+                        <span>Revenue</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('super-buyer.bank') }} " class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1">
+                            <!-- <i class="iconify" data-icon="uim:grid"></i> -->
+                        </div>
+                        <!-- <span class="badge badge-pill badge-primary float-right">0</span> -->
+                        <span>Bank</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="{{ route('product.super-buyer') }}" class=" waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:box"></i> -->
@@ -82,33 +101,12 @@
                     </a>
                 </li>
 
-
-
-                <li>
-                    <a href="{{ route('super-buyer.bank') }} " class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:grid"></i> -->
-                        </div>
-                        <!-- <span class="badge badge-pill badge-primary float-right">0</span> -->
-                        <span>Bank</span>
-                    </a>
-                </li>
-
                 <li>
                     <a href=" {{ route('super-buyer.support') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1">
                             <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
                         </div>
                         <span>Support</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href=" {{ route('super-buyer.revenue') }}" class="waves-effect">
-                        <div class="d-inline-block icons-sm mr-1">
-                            <!-- <i class="iconify" data-icon="uim:comment-plus"></i> -->
-                        </div>
-                        <span>Revenue</span>
                     </a>
                 </li>
 

@@ -88,26 +88,32 @@
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>s/n</th>
+                                                    <th>S/N</th>
+                                                    <!--th>Level </th-->
                                                     <th>Member ID</th>
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
+                                                    <th> Amount Paid </th>
+                                                    <!--th> Sponsor ID </th-->
                                                     <th>Date joined</th>
                                                 </tr>
                                             </thead>
 
 
                                             <tbody>
-                                            @foreach ($direct_down_line as $key => $direct_down_line)
+                                            @foreach ($all_downline as $key => $direct_down_line)
                                                 <tr>
                                                     <td> {{ $key +1 }}</td>
+                                                    <!--td> {{-- 'Black-Opal' --}} </td-->
                                                     <td> {{ $direct_down_line->sponsor_code }}</td>
                                                     <td> {{ $direct_down_line->name }}</td>
                                                     <td> {{ $direct_down_line->email }} </td>
                                                     <td> {{ $direct_down_line->phone }}</td>
+                                                    <td> {{ $direct_down_line->wallet }}</td>
+                                                    <!--td> {{-- 'SB' .''.random_int(1000, 9999) --}} </td-->
                                                     <td> {{ $direct_down_line->created_at }} </td>
-                                                @endforeach
+                                            @endforeach
                                                 </tr>
                                             </tbody>
                                         </table>

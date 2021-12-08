@@ -133,7 +133,7 @@
                                                 <div class="media my-2">
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2">Bi-weeekly Performance Bonus Summary</p>
-                                                        <h5 class="mb-0">₦ 0</h5>
+                                                        <h5 class="mb-0">₦ {{ $sum_bi_weekly_bonus  }}</h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <!-- <i class="uim uim-box"></i> -->
@@ -145,7 +145,7 @@
 
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2">Monthly Fulfilment Bonus</p>
-                                                        <h5 class="mb-0">₦ 0</h5>
+                                                        <h5 class="mb-0">₦  {{ $sum_monthly_fulfilment_bonus }}</h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <!-- <i class="uim uim-layer-group"></i> -->
@@ -157,7 +157,7 @@
 
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2">Monthly Rank Bonus</p>
-                                                        <h5 class="mb-0">₦ 0</h5>
+                                                        <h5 class="mb-0">₦ {{ $sum_monthly_rank_bonus }}</h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <!-- <i class="uim uim-layer-group"></i> -->
@@ -168,7 +168,7 @@
                                                 <div class="media my-2">
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2">Monthly link bonus </p>
-                                                        <h5 class="mb-0">₦ 0</h5>
+                                                        <h5 class="mb-0">₦ {{ $sum_monthly_link_bonus }}</h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <!-- <i class="uim uim-analytics"></i> -->
@@ -189,7 +189,7 @@
                                                 <div class="media my-2">
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2">Monthly spur</p>
-                                                        <h5 class="mb-0">₦ 0</h5>
+                                                        <h5 class="mb-0">₦ {{ $sum_monthly_spur_bonus }}</h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <!-- <i class="uim uim-ruler"></i> -->
@@ -211,7 +211,7 @@
                                                 <div class="media my-2">
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2"> Total monthly Earnings</p>
-                                                        <h5 class="mb-0">₦ 0</h5>
+                                                        <h5 class="mb-0">₦ {{$sum_monthly_link_bonus_monthly_query + $sum_bi_weekly_bonus_monthly_query + $sum_monthly_fulfilment_bonus_monthly_query + $sum_monthly_rank_bonus_monthly_query + $sum_monthly_spur_bonus_monthly_query }}  </h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <!-- <i class="uim uim-analytics"></i> -->
@@ -222,7 +222,7 @@
                                                 <div class="media my-2">
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2">Grand Total</p>
-                                                        <h5 class="mb-0">₦ 0</h5>
+                                                        <h5 class="mb-0">₦ {{ $sum_monthly_link_bonus + $sum_bi_weekly_bonus + $sum_monthly_fulfilment_bonus + $sum_monthly_rank_bonus + $sum_monthly_spur_bonus }} </h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <!-- <i class="uim uim-ruler"></i> -->
@@ -249,9 +249,9 @@
                                                 </div>
 
                                                 <div class="mt-1">
-                                                    <h3><sup></sup> 0 <span class="font-size-16">Users</span></h3>
+                                                    <h3><sup></sup> {{ count($direct_downline) }} <span class="font-size-16">Users</span></h3>
                                                     <div class="mt-1 mb-3">
-                                                        <a href="#" class="btn btn-primary">View Downline</a>
+                                                        <a href="{{ route('genealogy', 'black-opal') }}" class="btn btn-primary">View Downline</a>
                                                     </div>
                                                 </div>
                                             </div>

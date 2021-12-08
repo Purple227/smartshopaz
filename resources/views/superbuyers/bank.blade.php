@@ -103,7 +103,7 @@
                                         <div class="media">
                                             <div class="media-body">
                                                 <p class="text-muted mb-2">Total</p>
-                                                <h4>₦ 0</h4>
+                                                <h4>₦ {{ $sum_monthly_link_bonus + $sum_bi_weekly_bonus + $sum_monthly_fulfilment_bonus + $sum_monthly_rank_bonus + $sum_monthly_spur_bonus }}</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
 
                                                 <div class="media-body">
                                                     <p class="text-muted mb-2">Amount</p>
-                                                    <h5 class="mb-0">₦ 0</h5>
+                                                    <h5 class="mb-0">₦ {{ $my_request_withdrawal_sum }} </h5>
                                                 </div>
                                                 <div class="icons-lg ml-2 align-self-center">
                                                     <!-- <i class="uim uim-layer-group"></i> -->
@@ -144,7 +144,7 @@
 
                                                 <div class="media-body">
                                                     <p class="text-muted mb-2">Amount</p>
-                                                    <h5 class="mb-0">₦ 0</h5>
+                                                    <h5 class="mb-0">₦ {{ ($sum_monthly_link_bonus + $sum_bi_weekly_bonus + $sum_monthly_fulfilment_bonus + $sum_monthly_rank_bonus + $sum_monthly_spur_bonus) - ($my_request_withdrawal_sum) }}</h5>
                                                 </div>
                                                 <div class="icons-lg ml-2 align-self-center">
                                                     <!-- <i class="uim uim-layer-group"></i> -->
@@ -220,12 +220,12 @@
 
                                             <div class="form-group">
                                                 <label for="subject-input">Balance (Naira)</label>
-                                                <input type="number"  class="form-control" value="0" readonly />
+                                                <input type="number" name="balance"  class="form-control" value="{{ ($sum_monthly_link_bonus + $sum_bi_weekly_bonus + $sum_monthly_fulfilment_bonus + $sum_monthly_rank_bonus + $sum_monthly_spur_bonus) - ($my_request_withdrawal_sum) }}" readonly />
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Account Number (Nigeria)</label>
-                                                <input type="number" name="acc_no" class="form-control" value="0"/>
+                                                <input type="number" name="acc_no" class="form-control" value=""/>
                                             </div>
 
                                             <div class="form-group">
@@ -267,12 +267,12 @@
 
                                             <tbody>
                                                 <tr>
-                                                @foreach ($my_withdrawal as $key => $withdrawal)
+                                                @foreach ($my_request_withdrawal as $key => $withdrawal)
                                                     <td> {{$withdrawal->transaction_id }}  </td>
                                                     <td class=" {{ $withdrawal->status == true ? 'badge badge-soft-success' :  'badge badge-soft-primary' }}"> {{$withdrawal->status == true ? 'Approved' : 'Waiting' }} </td>
                                                     <td> {{ $withdrawal->created_at }} </td>
                                                     <td>₦{{ $withdrawal->amount }}</td>
-                                                    <td>₦{{-- --}}</td>
+                                                    <td>₦{{$withdrawal->balance}}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

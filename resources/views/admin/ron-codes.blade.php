@@ -78,7 +78,7 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="header-title">Ron Code List</h4>
+                                        <h4 class="header-title">RON Code List</h4>
                                         <p class="card-title-desc"></p>
 
 @if(Session::has('status'))
@@ -91,7 +91,7 @@
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th>S/N</th>
                                                     <th>Code</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -101,7 +101,7 @@
                                             <tbody>
                                                    @foreach ($ron_codes as $key => $code)
                                                 <tr>
-                                                    <td> {{ $key }} </td>
+                                                    <td> {{ $key+1 }} </td>
                                                     <td> {{ $code->ron_code }} </td>
                                                     <th> {{ $code->status == true ? 'used' : 'Unused'}} </th>
                                                 </tr>
