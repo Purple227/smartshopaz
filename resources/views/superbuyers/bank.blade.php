@@ -51,7 +51,7 @@
         }
     </style>
 
-<script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
 
 </head>
 
@@ -94,8 +94,8 @@
                 <div class="page-content-wrapper">
                     <div class="container-fluid">
 
-                    <div class="row">
-                         
+                        <div class="row">
+
                             <div class="col-xl-4">
                                 <div class="card">
                                     <div class="card-body">
@@ -155,27 +155,27 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-header bg-transparent p-3">
-                                        <h5 class="header-title mb-0">Incentive Request</h5>
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <div class="media my-2">
+                            <!--<div class="col-lg-4">-->
+                            <!--    <div class="card">-->
+                            <!--        <div class="card-header bg-transparent p-3">-->
+                            <!--            <h5 class="header-title mb-0">Incentive Request</h5>-->
+                            <!--        </div>-->
+                            <!--        <ul class="list-group list-group-flush">-->
+                            <!--            <li class="list-group-item">-->
+                            <!--                <div class="media my-2">-->
 
-                                                <div class="media-body">
-                                                    <p class="text-muted mb-2">Amount</p>
-                                                    <h5 class="mb-0">₦ 0</h5>
-                                                </div>
-                                                <div class="icons-lg ml-2 align-self-center">
-                                                    <!-- <i class="uim uim-layer-group"></i> -->
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <!--                    <div class="media-body">-->
+                            <!--                        <p class="text-muted mb-2">Amount</p>-->
+                            <!--                        <h5 class="mb-0">₦ 0</h5>-->
+                            <!--                    </div>-->
+                            <!--                    <div class="icons-lg ml-2 align-self-center">-->
+                            <!-- <i class="uim uim-layer-group"></i> -->
+                            <!--                    </div>-->
+                            <!--                </div>-->
+                            <!--            </li>-->
+                            <!--        </ul>-->
+                            <!--    </div>-->
+                            <!--</div>-->
 
                         </div>
 
@@ -183,49 +183,59 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                    <h1>Withdraw</h1>
+                                        <h1>Withdraw</h1>
 
-@if ($errors->any())
-@foreach ($errors->all() as $error)
+                                        @if ($errors->any())
+                                        @foreach ($errors->all() as $error)
                                         <div class="alert alert-danger alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                             <b>oops! {{ $error }} </b>
                                         </div>
-@endforeach
-@endif
+                                        @endforeach
+                                        @endif
 
 
 
-@if(Session::has('status'))
+                                        @if(Session::has('status'))
                                         <div class="alert alert-success alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                             <b> {{ Session::get('status') }} </b>
                                         </div>
-@endif
+                                        @endif
 
 
-@if(Session::has('fail'))
+                                        @if(Session::has('fail'))
                                         <div class="alert alert-warning alert-dismissible">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                             {{ Session::get('fail') }}
                                         </div>
-@endif
+                                        @endif
 
-                                     <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('super-buyer.bank.request') }}">
-                                     @csrf
+                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('super-buyer.bank.request') }}">
+                                            @csrf
                                             <div class="form-group">
-                                                <label for="to-input">How much do you want to withdraw</label>
+                                                <label for="to-input">How much do you want to withdraw?</label>
                                                 <input type="number" name="amount" class="form-control" id="to-input" placeholder="Amount" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Balance (Naira)</label>
-                                                <input type="number" name="balance"  class="form-control" value="{{ ($sum_monthly_link_bonus + $sum_bi_weekly_bonus + $sum_monthly_fulfilment_bonus + $sum_monthly_rank_bonus + $sum_monthly_spur_bonus) - ($my_request_withdrawal_sum) }}" readonly />
+                                                <input type="number" name="balance" class="form-control" value="{{ ($sum_monthly_link_bonus + $sum_bi_weekly_bonus + $sum_monthly_fulfilment_bonus + $sum_monthly_rank_bonus + $sum_monthly_spur_bonus) - ($my_request_withdrawal_sum) }}" readonly />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="subject-input">Account Name</label>
+                                                <input type="text" name="acc_no" class="form-control" value="" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="subject-input">Account Number (Nigeria)</label>
-                                                <input type="number" name="acc_no" class="form-control" value=""/>
+                                                <input type="number" name="acc_no" class="form-control" value="" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="subject-input">Bank</label>
+                                                <input type="text" name="acc_no" class="form-control" value="" />
                                             </div>
 
                                             <div class="form-group">
@@ -247,6 +257,44 @@
                                     </div>
                                 </div>
 
+
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Incentive Request</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Rank</th>
+                                                    <th>Incentive</th>
+                                                    <th>Status</th>
+                                                    <th>Date/Time</th>
+                                                    <th>Transaction ID</th>
+                                                    <th>Request Status</th>
+                                                    <th>Option</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="badge badge-soft-primary"> </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><a href="">View Request</a> | <a href="">Request</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                                 <div class="card">
                                     <div class="card-body">
 
@@ -256,10 +304,10 @@
                                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>Transaction Id</th>
-                                                    <th>Request Status</th>
-                                                    <th>Date/Time of Request</th>
                                                     <th>Amount</th>
+                                                    <th>Transaction ID</th>
+                                                    <th>Date/Time of Request</th>
+                                                    <th>Request Status</th>
                                                     <th>Balance</th>
                                                 </tr>
                                             </thead>
@@ -267,11 +315,11 @@
 
                                             <tbody>
                                                 <tr>
-                                                @foreach ($my_request_withdrawal as $key => $withdrawal)
-                                                    <td> {{$withdrawal->transaction_id }}  </td>
-                                                    <td class=" {{ $withdrawal->status == true ? 'badge badge-soft-success' :  'badge badge-soft-primary' }}"> {{$withdrawal->status == true ? 'Approved' : 'Waiting' }} </td>
-                                                    <td> {{ $withdrawal->created_at }} </td>
+                                                    @foreach ($my_request_withdrawal as $key => $withdrawal)
                                                     <td>₦{{ $withdrawal->amount }}</td>
+                                                    <td> {{$withdrawal->transaction_id }} </td>
+                                                    <td> {{ $withdrawal->created_at }} </td>
+                                                    <td class=" {{ $withdrawal->status == true ? 'badge badge-soft-success' :  'badge badge-soft-primary' }}"> {{$withdrawal->status == true ? 'Approved' : 'Waiting' }} </td>
                                                     <td>₦{{$withdrawal->balance}}</td>
                                                 </tr>
                                                 @endforeach
@@ -281,35 +329,7 @@
                                 </div>
 
 
-                                <div class="card">
-                                    <div class="card-body">
 
-                                        <h4 class="header-title">Encashment</h4>
-                                        <p class="card-title-desc"></p>
-
-                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th>Transaction Id</th>
-                                                    <th>Request Status</th>
-                                                    <th>Date/Time of Request</th>
-                                                    <th>Amount</th>
-                                                    <th>Options</th>
-                                                </tr>
-                                            </thead>
-
-
-                                            <tbody>
-                                                <tr>
-                                                    <td>WSB-8662</td>
-                                                    <td class="badge badge-soft-primary"> waiting</td>
-                                                    <td>12/08/2021</td>
-                                                    <td>₦135,000</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
                             </div> <!-- end col -->
                         </div> <!-- end row -->
 

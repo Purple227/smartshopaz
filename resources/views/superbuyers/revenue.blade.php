@@ -290,6 +290,47 @@
                                     </div>
                                 </div>
 
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="header-title">Monthly Partners Premium</h4>
+                                        <p class="card-title-desc"></p>
+
+                                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/N</th>
+                                                    <th>Pool Date</th>
+                                                    <!--th>level</th-->
+                                                    <th>Rank</th>
+                                                    <th>Percentage</th>
+                                                    <th>Remark</th>
+                                                    <th>Amount</th>
+                                                    <th>Total</th>
+                                                    <!--<th>Balance</th>-->
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                <tr>
+                                                @foreach ($monthly_link_bonus as $key => $revenue)
+                                                    <td></td>
+                                                    <td></td>
+                                                    <!--td>Diamond</td-->
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <th></th>
+                                                    <!--<td></td>-->
+                                                @endforeach
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                     </div>
                     <!-- end container-fluid -->
                 </div>

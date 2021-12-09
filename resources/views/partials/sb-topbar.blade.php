@@ -4,12 +4,12 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="./" class="logo logo-dark">
+                <a href="./" class="logo logo-dark" style="z-index:4000;">
                     <span class="logo-sm">
                         <img src="../assets-dash/images/logo-sm-dark.png" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="../assets-dash/images/logo-dark.png" alt="" height="20">
+                        <img src="../assets-dash/images/logo-super.png" alt="" height="20">
                     </span>
                 </a>
 

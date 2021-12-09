@@ -112,7 +112,7 @@
                                             <div class="media">
                                                 <div class="media-body">
                                                     <p class="text-muted">Total Number of Downlines</p>
-                                                    <h5 class="mb-0">0 <span class="font-size-14 text-muted ml-1">From previous period</span></h5>
+                                                    <h5 class="mb-0">{{ count($direct_downline) }} <span class="font-size-14 text-muted ml-1">From previous period</span></h5>
                                                 </div>
 
                                                 <div class="align-self-end ml-2">

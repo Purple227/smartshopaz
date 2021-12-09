@@ -203,10 +203,10 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <h4 class="page-title mb-1">Downlines</h4>
+                                <h4 class="page-title mb-1">Generation View</h4>
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                                    <li class="breadcrumb-item active">Dowlines</li>
+                                    <li class="breadcrumb-item active">Generation View</li>
                                 </ol>
                             </div>
                             <!-- <div class="col-md-4">
@@ -397,112 +397,6 @@
                                 </div>
 
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <ul id="tree1">
-                                                    <li><a href="#">View Downline Hierarchy</a>
-                                                    <li><a href="#">Smartshoppers <img src="../assets-dash/images/icons/diamond.png" height="20px" alt=""></a>
-
-                                                        <ul>
-                                                            <li>level 1 <img src="../assets-dash/images/icons/blackopal.png" height="20px" alt="">
-                                                                <ul>
-                                                                    <li>level 1 <img src="../assets-dash/images/icons/blackopal.png" height="20px" alt="">
-                                                                        <ul>
-                                                                            <li>level 1 </li>
-                                                                            <li>level 2</li>
-                                                                            <li>level 3</li>
-                                                                            <li>level 4</li>
-                                                                            <li>level 5</li>
-                                                                        </ul>
-                                                                    </li>
-                                                                    <li>level 2</li>
-                                                                    <li>level 3</li>
-                                                                    <li>level 4</li>
-                                                                    <li>level 5</li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>level 2 <img src="../assets-dash/images/icons/redberyl.png" height="20px" alt=""></li>
-                                                            <li>level 3 <img src="../assets-dash/images/icons/redberyl.png" height="20px" alt=""></li>
-                                                            <li>level 4</li>
-                                                            <li>level 5</li>
-                                                        </ul>
-                                                    </li>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <ul id="tree2">
-                                                    <li><img src="../assets-dash/images/icons/blackopal.png" height="20px" alt=""> Black Opal (level 1)
-                                                        <ul>
-                                                            <li>ade (SB0001)</li>
-                                                            <li>john(SB0002)</li>
-                                                            <li>Kennedy (SB0003)</li>
-                                                            <li>helen (SB0004)</li>
-                                                            <li>Ron (SB0005)</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><img src="../assets-dash/images/icons/redberyl.png" height="20px" alt=""> Red Beryl (level 1)
-                                                        <ul>
-                                                            <li>ade (SB0001)</li>
-                                                            <li>john(SB0002)</li>
-                                                            <li>Kennedy (SB0003)</li>
-                                                            <li>helen (SB0004)</li>
-                                                            <li>Ron (SB0005)</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><img src="../assets-dash/images/icons/alexandrite.png" height="20px" alt=""> Alexandrite (level 2)
-                                                        <ul>
-                                                            <li>ade (SB0001)</li>
-                                                            <li>john(SB0002)</li>
-                                                            <li>Kennedy (SB0003)</li>
-                                                            <li>helen (SB0004)</li>
-                                                            <li>Ron (SB0005)</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><img src="../assets-dash/images/icons/emerald.png" height="20px" alt=""> Emerald (level 3)
-                                                        <ul>
-                                                            <li>ade (SB0001)</li>
-                                                            <li>john(SB0002)</li>
-                                                            <li>Kennedy (SB0003)</li>
-                                                            <li>helen (SB0004)</li>
-                                                            <li>Ron (SB0005)</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><img src="../assets-dash/images/icons/ruby.png" height="20px" alt=""> Ruby (level 4)
-                                                        <ul>
-                                                            <li>ade (SB0001)</li>
-                                                            <li>john(SB0002)</li>
-                                                            <li>Kennedy (SB0003)</li>
-                                                            <li>helen (SB0004)</li>
-                                                            <li>Ron (SB0005)</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><img src="../assets-dash/images/icons/jadeite.png" height="20px" alt=""> Jadeite (level 5)
-                                                        <ul>
-                                                            <li>ade (SB0001)</li>
-                                                            <li>john(SB0002)</li>
-                                                            <li>Kennedy (SB0003)</li>
-                                                            <li>helen (SB0004)</li>
-                                                            <li>Ron (SB0005)</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><img src="../assets-dash/images/icons/Diamond.png" height="20px" alt=""> Diamond (level 6)
-                                                        <ul>
-                                                            <li>ade (SB0001)</li>
-                                                            <li>john(SB0002)</li>
-                                                            <li>Kennedy (SB0003)</li>
-                                                            <li>helen (SB0004)</li>
-                                                            <li>Ron (SB0005)</li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
 
 
 
