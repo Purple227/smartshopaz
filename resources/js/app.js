@@ -90,8 +90,9 @@ const app = new Vue({
             order: {
                 name: null,
                 address: null,
-                stat: null,
+                state: null,
                 phone: null,
+                country: null
             },
 
             buttonLoader: false,
@@ -182,6 +183,28 @@ const app = new Vue({
             },
 
         }, // RegistrationDetails calibrace closes
+
+        order: {
+            state: {
+                required,
+            },
+
+            address: {
+                required,
+            },
+
+            country: {
+                required,
+            },
+
+            name: {
+                required,
+            },
+
+            phone: {
+                required,
+            }
+        },
 
     }, // Validation calibrace close
 
@@ -462,17 +485,15 @@ const app = new Vue({
 
         RONCodeMethod() {
             self = this
-            if (this.registration.RONCode.length > 2) {
-                axios.get('ron-code', { params: { ron_code: this.registration.RONCode } })
-                    .then(response => {
-                        this.utilities.RONCode = response.data
-                        this.utilities.RONCodeStatus = true
-                    })
-                    .catch(function(error) {
-                        self.utilities.RONCodeStatus = false
-                        self.utilities.RONCode = error.response.data
-                    });
-            }
+            axios.get('ron-code', { params: { ron_code: this.registration.RONCode } })
+                .then(response => {
+                    this.utilities.RONCode = response.data
+                    this.utilities.RONCodeStatus = true
+                })
+                .catch(function(error) {
+                    self.utilities.RONCodeStatus = false
+                    self.utilities.RONCode = error.response.data
+                });
         },
 
         getUser(ID) {

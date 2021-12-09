@@ -105,7 +105,7 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label>State</label>
                                                     <select class="custom-select" required v-model="order.state == null ? order.state = '{{ Auth::user()->state }}' : order.state">
-                                                        <option value="registration.phone"> lol </option>
+                                                    <option :value="order.state"> @{{ order.state }}</option>
                                                         <option value="abia">Abia</option>
                                                         <option value="Adamawa">Adamawa</option>
                                                         <option value="Akwa Ibom">Akwa Ibom</option>
@@ -148,8 +148,8 @@
                                                 </div>
                                                 <div class="col-md mb-3">
                                                     <label>Country</label>
-                                                    <select class="custom-select" required>
-                                                        <option value="nigeria">Nigeria</option>
+                                                    <select class="custom-select" v-model="order.country == null ? order.country = '{{ Auth::user()->country }}' : order.country"   required>
+                                                        <option :value="order.country"> @{{order.country}} </option>
                                                     </select>
                                                     <!-- <div class="invalid-feedback">Example invalid custom select feedback</div> -->
                                                 </div>
@@ -212,7 +212,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-primary btn-block" type="button" @click="hollaCheckout('{{Auth::user()->id }}', '{{ Auth::user()->email }}', ((sumInCart + deliveryFee) + (sumInCart / 100 * 7.5)).toFixed(2) + deliveryFee, sumInCart, itemInCart)" > Proceed to Payment </button>
+                                        <button class="btn btn-primary btn-block" type="button" @click="hollaCheckout('{{Auth::user()->id }}', '{{ Auth::user()->email }}', ((sumInCart + deliveryFee) + (sumInCart / 100 * 7.5)).toFixed(2) + deliveryFee, sumInCart, itemInCart)" :disabled="$v.order.$invalid == true"> Proceed to Payment </button>
                                     </div>
                                 </div>
                             </div> <!-- end col -->

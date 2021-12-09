@@ -2148,8 +2148,9 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       order: {
         name: null,
         address: null,
-        stat: null,
-        phone: null
+        state: null,
+        phone: null,
+        country: null
       },
       buttonLoader: false,
       user: null,
@@ -2222,8 +2223,25 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       passwordConfirmation: {
         sameAsPassword: (0,vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.sameAs)('password')
       }
-    } // RegistrationDetails calibrace closes
-
+    },
+    // RegistrationDetails calibrace closes
+    order: {
+      state: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      address: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      country: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      name: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      },
+      phone: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_4__.required
+      }
+    }
   },
   // Validation calibrace close
   watch: {
@@ -2471,20 +2489,17 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       var _this4 = this;
 
       self = this;
-
-      if (this.registration.RONCode.length > 2) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().get('ron-code', {
-          params: {
-            ron_code: this.registration.RONCode
-          }
-        }).then(function (response) {
-          _this4.utilities.RONCode = response.data;
-          _this4.utilities.RONCodeStatus = true;
-        })["catch"](function (error) {
-          self.utilities.RONCodeStatus = false;
-          self.utilities.RONCode = error.response.data;
-        });
-      }
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('ron-code', {
+        params: {
+          ron_code: this.registration.RONCode
+        }
+      }).then(function (response) {
+        _this4.utilities.RONCode = response.data;
+        _this4.utilities.RONCodeStatus = true;
+      })["catch"](function (error) {
+        self.utilities.RONCodeStatus = false;
+        self.utilities.RONCode = error.response.data;
+      });
     },
     getUser: function getUser(ID) {
       var _this5 = this;
