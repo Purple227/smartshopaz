@@ -20,7 +20,8 @@
   </head>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <body>
-<div id="app">
+    
+<div id="layout-wrapper">
 
     <div id="main">
       <header>
@@ -31,7 +32,7 @@
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-12 col-lg-4 col-xl-3 order-2 order-md-1">
-              @include('partials/main-categories')
+           {{--   @include('partials/main-categories')   --}}
               </div>
               <div class="col-12 col-md-12 col-lg-8 col-xl-9 order-1 order-md-2">
               @include('partials/main-search')
@@ -114,7 +115,7 @@
                   <tbody>
                     <tr v-for="(item, index) in cart" :key="index">
                       <td class="product-iamge"> 
-                        <div class="img-wrapper"><img src="assets/images/product/product03.png" alt="product image"></div>
+                        <div class="img-wrapper"><img :src="product.image" alt="product image"></div>
                       </td>
                       <td class="product-name"> @{{ item.name }}</td>
                       <td class="product-price">₦ @{{ item.price }} </td>
@@ -185,7 +186,8 @@
     </div>
 
 </div>
-    
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/jquery.countdown.min.js"></script>
@@ -199,5 +201,6 @@
     <script src="assets/js/vanilla-tilt.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script></script>
+
   </body>
 </html>

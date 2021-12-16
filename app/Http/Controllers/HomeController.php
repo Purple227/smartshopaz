@@ -6,20 +6,32 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\Slider;
+use App\Models\Banner;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $list_categories = Category::has('products')->get();
-        $list_product_latest = Product::orderBy('id', 'desc')->with('category')->take(10)->get();
+        $list_product_latest = Product::orderBy('id', 'desc')->where('regular_price', '!=', null)->with('category')->take(10)->get();
         $list_brands = Brand::has('products')->get();
+        $sliders = Slider::orderBy('id', 'desc')->get();
+
+        $banners = Banner::orderBy('id', 'desc')->get();
 
         $review_product = Product::orderBy('id', 'desc')->with('category')->inRandomOrder()->take(10)->get();
         $top_rated_product = Product::orderBy('id', 'desc')->with('category')->inRandomOrder()->take(10)->get();
 
-        return view('index', [
-            'list_categories' => $list_categories, 'list_product_latest' => $list_product_latest, 'list_brands' => $list_brands, 'top_rated_product' => $top_rated_product, 'review_product' => $review_product 
+        return view('index', 
+        [
+            'list_categories' => $list_categories, 
+            'list_product_latest' => $list_product_latest, 
+            'list_brands' => $list_brands, 
+            'top_rated_product' => $top_rated_product, 
+            'review_product' => $review_product,
+            'sliders' => $sliders,
+            'banners' => $banners
         ]);
     }
 
@@ -62,6 +74,14 @@ class HomeController extends Controller
     {
         $product = Product::where('id', $id)->with('category', 'brand')->first();
         return $product;
+    }
+
+    public function categoryUI($slug)
+    {
+        $list_categories = Category::has('products')->get();
+        $category = Category::where('slug', $slug)->first();
+        $list_product_latest = Product::where('category_id', $category->id)->orderBy('id', 'desc')->with('category')->paginate(20);
+        return view('categories', ['list_product_latest' => $list_product_latest, 'list_categories' => $list_categories]);
     }
 
 }

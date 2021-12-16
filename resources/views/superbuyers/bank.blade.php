@@ -225,7 +225,7 @@
 
                                             <div class="form-group">
                                                 <label for="subject-input">Account Name</label>
-                                                <input type="text" name="acc_no" class="form-control" value="" />
+                                                <input type="text" name="acc_name" class="form-control" value="" />
                                             </div>
 
                                             <div class="form-group">
@@ -235,7 +235,7 @@
 
                                             <div class="form-group">
                                                 <label for="subject-input">Bank</label>
-                                                <input type="text" name="acc_no" class="form-control" value="" />
+                                                <input type="text" name="bank" class="form-control" value="" />
                                             </div>
 
                                             <div class="form-group">

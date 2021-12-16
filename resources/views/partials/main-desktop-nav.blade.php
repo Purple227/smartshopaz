@@ -1,12 +1,12 @@
 <nav class="navigation d-flex align-items-center">
           <div class="container">
             <div class="row">
-              <div class="col-2"><a class="logo" href="./"><img src="assets/images/logo.png" width="200px" alt=""></a></div>
+              <div class="col-2"><a class="logo" href="{{ route('home') }}"><img src="assets/images/logo.png" width="200px" alt=""></a></div>
               <div class="col-8">
                 <div class="navgition-menu d-flex align-items-center justify-content-center">
                   <ul class="mb-0">
-                    <li class="toggleable"> <a class="menu-item" href="./">Home</a></li>
-                    <li class="toggleable"> <a class="menu-item" href="shop">Shop </a>
+                    <li class="toggleable"> <a class="menu-item" href="{{ route('home') }}">Home</a></li>
+                    <li class="toggleable"> <a class="menu-item" href="{{ route('shop') }}">Shop </a>
                       <!-- <ul class="sub-menu shop d-flex">
                         <div class="nav-column">
                           <h2>Layout shop</h2>

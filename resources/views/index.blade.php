@@ -19,12 +19,13 @@
     <link rel="stylesheet" href="assets/css/icomoon.css">
     <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
     <link rel="shortcut icon" href="assets/images/shortcut_logo.png">
+
 </head>
 
 
 <body>
 
-<div id="app">
+<div id="layout-wrapper">
 
     <div id="main">
         <header  class="coffee-2">
@@ -41,7 +42,7 @@
                                 <div class="department-dropdown-menu down">
                                     <ul>
                                         @foreach ($list_categories as $key => $category)
-                                        <li> <a href="sub-categories"> <i class="icon-11"> </i> {{ $category->name }} </a> </li>
+                                        <li> <a href="{{ route('category',$category->slug) }}"> <i class="icon-11"> </i> {{ $category->name }} </a> </li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -54,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            
         </header>
         <!-- End header-->
         <div class="banner_v3">
@@ -61,44 +63,18 @@
                 <div class="row">
                     <div class="col-xl-3"></div>
                     <div class="col-12 col-xl-9">
-                        <!-- <div class="banner-block" style="background-image: url(assets/images/homepage05/);background-color: #fff;opacity: 0.9;background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #fff 10px ), repeating-linear-gradient( #fff, #f79823 );">
-                <div class="row no-gutters justify-content-center align-items-md-center">
-                  <div class="col-10 col-md-5 col-xl-6" >
-                    <div class="banner-text text-center text-md-left">
-                      <h5 class="color-subtitle coffee">Discount Sale</h5>
-                      <h2 class="title">Gadgets and Laptops</h2>
-                      <a class="normal-btn coffee" href="sub-categories">Shop now</a>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-5 col-xl-5"></div>
-                </div>
-              </div> -->
+
                         <!-- Slideshow container -->
                         <div class="slideshow-container">
-
                             <!-- Full-width images with number and caption text -->
-                            <!-- <div class="mySlides fade">
-                                <a href="">
-                                <img src="assets/images/homepage05/test4.jpeg" style="width:100%">
-                                </a>
-                            </div>
 
-                            <div class="mySlides fade">
+                            @foreach ($sliders as $key => $slide)
+                            <div class="mySlides fade"> 
                             <a href="">
-                                <img src="assets/images/homepage05/test3.jpeg" style="width:100%">
+                                <img src="{{ asset($slide->image) }}" style="width:100%">
                                 </a>
-                            </div> -->
-
-                            <div class="mySlide fad">
-                            <a href="">
-                                <img src="assets/images/homepage05/test2.jpeg" style="width:100%">
-                                </a>
-                            </div>
-                            <!-- <div class="mySlides fade"> -->
-                            <!-- <a href="">
-                                <img src="assets/images/homepage05/test1.jpeg" style="width:100%">
-                                </a>
-                            </div> -->
+                            </div> 
+                            @endforeach
 
                             <!-- Next and previous buttons -->
                             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -152,10 +128,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <div class="small-banner" style="background-image: url(assets/images/homepage05/);background-color: #fff;opacity: 0.9;background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #fff 10px ), repeating-linear-gradient( #fff, #f79823 );"></div>
+                        <div class="small-banner" style="background-image: url({{ $banners[0]->image }} );"></div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <div class="large-banner" style="background-image: url(assets/images/homepage05/);background-color: #fff;opacity: 0.9;background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #fff 10px ), repeating-linear-gradient( #fff, #f79823 );"></div>
+                        <div class="large-banner" style="background-image: url( {{ $banners[1]->image }}  );"></div>
                     </div>
                 </div>
             </div>
@@ -177,7 +153,7 @@
 
                     @foreach ($list_product_latest as $key => $product)
                                     <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="assets/images/product/product08.png" alt=""></a>
+                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt=""></a>
                                             <h5 class="product-type">{{ $product->category == null ? '' : $product->category->name }}</h5>
                                             <h3 class="product-name"> {{ $product->title }} </h3>
                                             <h3 class="product-price"> ₦{{ $product->regular_price - ($product->discount / 100)  }}
@@ -271,7 +247,7 @@
                                 <div class="mini-product_block">
                                     @foreach ($list_product_latest as $key => $product)
                                     <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
+                                        <div class="mini-product_img"><a href="shop_detail"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
                                         <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
                                             <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
                                                 <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
@@ -295,7 +271,7 @@
                                 <div class="mini-product_block">
                                     @foreach ($list_product_latest as $key => $product)
                                     <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
+                                        <div class="mini-product_img"><a href="shop_detail"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
                                         <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
                                             <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
                                                 <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
@@ -319,7 +295,7 @@
                                 <div class="mini-product_block">
                                     @foreach ($review_product as $key => $product)
                                     <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="assets/images/product/product15.png" alt="product image"></a></div>
+                                        <div class="mini-product_img"><a href="shop_detail"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
                                         <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
                                             <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
                                                 <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
@@ -347,7 +323,7 @@
 
 </div>
 
-    
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/jquery.countdown.min.js"></script>

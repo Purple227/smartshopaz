@@ -21,6 +21,7 @@ use App\Http\Controllers\SuperBuyer\OrderController;
 use App\Http\Controllers\SuperBuyer\GenealogyController;
 use App\Http\Controllers\SuperBuyer\TransactionController as SuperBuyerTransaction;
 use App\Http\Controllers\SuperBuyer\PagesController;
+use App\Http\Controllers\Admin\PageController as AdminPageController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SuperBuyer\HomeController as SuperBuyerHomeController;
 
@@ -39,6 +40,7 @@ use App\Http\Controllers\SuperBuyer\HomeController as SuperBuyerHomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search-product', [HomeController::class, 'search']);
 Route::get('/shop', [HomeController::class, 'shopUI'])->name('shop');
+Route::get('/category/{slug}', [HomeController::class, 'categoryUI'])->name('category');
 
 Route::get('/product-api', [HomeController::class, 'ProductAPIs']);
 Route::get('/alpha-sort-product', [HomeController::class, 'ProductAlphabetAPIsSort']);
@@ -93,6 +95,7 @@ Route::get('/list-products', [ProductController::class, 'index'])->name('list.pr
 Route::get('/delete-product/{id}', [ProductController::class, 'destroy'])->name('destroy.product');
 Route::patch('/update-product/{id}', [ProductController::class, 'update'])->name('patch.product');
 Route::get('/update-product/{slug}', [ProductController::class, 'updateProductUI'])->name('update.product')->middleware('admin'); 
+Route::post('/add-product-multiple', [ProductController::class, 'addMultipleProduct']);
 
 // Admin Super Buyer
 Route::get('/super-buyer', [SuperBuyerController::class, 'index'])->name('admin.list.super-buyer')->middleware('admin');
@@ -118,6 +121,11 @@ Route::patch('/edit-rank/{id}', [RankController::class, 'update'])->name('admin.
 // Admin Incensive
 Route::get('/add-incentive', [IncentiveController::class, 'addIncentiveUI'])->name('admin.add.incentive');
 
+// Banners 
+Route::post('/save-slider', [AdminPageController::class, 'storeSlider'])->name('admin.slider.store');
+Route::get('/slider', [AdminPageController::class, 'sliderUI'])->name('admin.slider');
+Route::get('/banners', [AdminPageController::class, 'bannerUI'])->name('admin.banner');
+Route::post('save-banner', [AdminPageController::class, 'storeBanner'])->name('admin.banner.store');
 });
 
 Route::prefix('super-buyer')->group(function () {

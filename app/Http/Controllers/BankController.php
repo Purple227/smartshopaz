@@ -16,6 +16,8 @@ class BankController extends Controller
             'password' => ['required'],
             'amount' => ['required'],
             'acc_no' => ['required'],
+            'acc_name' => ['required'],
+            'bank' => ['required'],
         ]);
 
         if($request->amount <= 10000) {
@@ -37,6 +39,8 @@ class BankController extends Controller
 
         $request_withdrawal = new Bank;
         $request_withdrawal->amount = $request->amount;
+        $request_withdrawal->acc_name = $request->acc_name;
+        $request_withdrawal->bank = $request->bank;
         $request_withdrawal->balance = $request->balance;
         $request_withdrawal->acc_no = $request->acc_no;
         $request_withdrawal->user_id = 4;

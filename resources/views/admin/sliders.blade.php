@@ -58,10 +58,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -97,7 +97,25 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <form id="form">
+
+                                        @if(Session::has('fail'))
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b> {{ Session::get('fail') }} </b>
+                                        </div>
+                                        @endif
+
+
+
+                                        @if(Session::has('status'))
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b> {{ Session::get('status') }} </b>
+                                        </div>
+                                        @endif
+
+                                        <form id="form" enctype="multipart/form-data" method="POST" action=" {{ route('admin.slider.store') }}">
+                                            @csrf
 
                                             <div class="form-group">
                                                 <h4 class="header-title">Select Pictures</h4>
@@ -105,8 +123,8 @@
                                                 <div>
                                                     <div class="dropzone">
                                                         <div class="fallback">
-                                                            <input type="file" name="Image" id="image" multiple="" class="d-none" onchange="image_select()">
-                                                            <button class="btn btn-sm btn-primary" type="button" onclick="document.getElementById('image').click()">Choose Images</button>
+                                                            <input type="file" name="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+
                                                             <div class="card-body d-flex flex-wrap justify-content-start" id="container">
                                                                 <!-- image preview -->
                                                             </div>
@@ -117,9 +135,7 @@
 
                                             <div class="btn-toolbar form-group mb-0">
                                                 <div class="">
-                                                    <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-save"></i></button>
-                                                    <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-trash-alt"></i></button>
-                                                    <button class="btn btn-primary waves-effect waves-light"> <span>Post</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Post</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
                                                 </div>
                                             </div>
 
@@ -139,7 +155,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -147,7 +163,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

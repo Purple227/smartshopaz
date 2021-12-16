@@ -58,10 +58,10 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        @include('../partials/admin-topbar.php')
+        @include('partials/admin-topbar')
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('../partials/admin-sidebar.php')
+        @include('partials/admin-sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -95,11 +95,29 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
+
+                                    @if(Session::has('fail'))
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b> {{ Session::get('fail') }} </b>
+                                        </div>
+                                        @endif
+
+
+
+                                        @if(Session::has('status'))
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <b> {{ Session::get('status') }} </b>
+                                        </div>
+                                        @endif
+
                                         <div>
                                             <h4 class="header-title">Banner 1</h4>
-                                            <form action="#" class="dropzone">
+                                            <form id="form" class="dropzone" enctype="multipart/form-data" method="POST" action=" {{ route('admin.banner.store') }}">
+                                                @csrf
                                                 <!-- <div class="fallback"> -->
-                                                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+                                                <input type="file" name="banner_1" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
                                                 <!-- <button class="btn btn-sm btn-primary" type="button">Choose Images</button> -->
                                                 <div class="preview">
                                                     <img id="file-ip-1-preview" style="width: 100%;">
@@ -109,15 +127,17 @@
                                                     <h4>Drop files here to upload</h4>
                                                 </div> -->
                                                 <div class="text-center">
-                                                    <button type="button" class="btn btn-primary waves-effect waves-light">Update</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
                                                 </div>
                                             </form>
                                         </div>
+
                                         <div class="mt-5">
                                             <h4 class="header-title">Banner 2</h4>
-                                            <form action="#" class="dropzone">
+                                            <form id="form" class="dropzone" enctype="multipart/form-data" method="POST" action=" {{ route('admin.banner.store') }}">
+                                                @csrf
                                                 <!-- <div class="fallback"> -->
-                                                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview2(event);">
+                                                <input type="file" name="banner_2" id="file-ip-2" accept="image/*" onchange="showPreview2(event);">
                                                 <!-- <button class="btn btn-sm btn-primary" type="button">Choose Images</button> -->
                                                 <div class="preview">
                                                     <img id="file-ip-2-preview" style="width: 100%;">
@@ -127,15 +147,18 @@
                                                     <h4>Drop files here to upload</h4>
                                                 </div> -->
                                                 <div class="text-center">
-                                                    <button type="button" class="btn btn-primary waves-effect waves-light">Update</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
                                                 </div>
                                             </form>
                                         </div>
+
+
                                         <div class="mt-5">
                                             <h4 class="header-title">Banner 3</h4>
-                                            <form action="#" class="dropzone">
+                                            <form id="form" class="dropzone" enctype="multipart/form-data" method="POST" action=" {{ route('admin.banner.store') }}">
+                                                @csrf
                                                 <!-- <div class="fallback"> -->
-                                                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview3(event);">
+                                                <input type="file" name="banner_3" id="file-ip-3" accept="image/*" onchange="showPreview3(event);">
                                                 <!-- <button class="btn btn-sm btn-primary" type="button">Choose Images</button> -->
                                                 <div class="preview">
                                                     <img id="file-ip-3-preview" style="width: 100%;">
@@ -145,15 +168,18 @@
                                                     <h4>Drop files here to upload</h4>
                                                 </div> -->
                                                 <div class="text-center">
-                                                    <button type="button" class="btn btn-primary waves-effect waves-light">Update</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
                                                 </div>
                                             </form>
                                         </div>
+
+                                        
                                         <div class="mt-5">
                                             <h4 class="header-title">Banner 4</h4>
-                                            <form action="#" class="dropzone">
+                                            <form id="form" class="dropzone" enctype="multipart/form-data" method="POST" action=" {{ route('admin.banner.store') }}">
+                                                @csrf
                                                 <!-- <div class="fallback"> -->
-                                                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview4(event);">
+                                                <input type="file" name="banner_4" id="file-ip-4" accept="image/*" onchange="showPreview4(event);">
                                                 <!-- <button class="btn btn-sm btn-primary" type="button">Choose Images</button> -->
                                                 <div class="preview">
                                                     <img id="file-ip-4-preview" style="width: 100%;">
@@ -163,15 +189,16 @@
                                                     <h4>Drop files here to upload</h4>
                                                 </div> -->
                                                 <div class="text-center">
-                                                    <button type="button" class="btn btn-primary waves-effect waves-light">Update</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="mt-5">
                                             <h4 class="header-title">Banner 5</h4>
-                                            <form action="#" class="dropzone">
+                                            <form id="form" class="dropzone" enctype="multipart/form-data" method="POST" action=" {{ route('admin.banner.store') }}">
+                                                @csrf
                                                 <!-- <div class="fallback"> -->
-                                                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview5(event);">
+                                                <input type="file" name="banner_5" id="file-ip-5" accept="image/*" onchange="showPreview5(event);">
                                                 <!-- <button class="btn btn-sm btn-primary" type="button">Choose Images</button> -->
                                                 <div class="preview">
                                                     <img id="file-ip-5-preview" style="width: 100%;">
@@ -181,15 +208,16 @@
                                                     <h4>Drop files here to upload</h4>
                                                 </div> -->
                                                 <div class="text-center">
-                                                    <button type="button" class="btn btn-primary waves-effect waves-light">Update</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="mt-5">
                                             <h4 class="header-title">Banner 6</h4>
-                                            <form action="#" class="dropzone">
+                                            <form id="form" class="dropzone" enctype="multipart/form-data" method="POST" action=" {{ route('admin.banner.store') }}">
+                                                @csrf
                                                 <!-- <div class="fallback"> -->
-                                                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview6(event);">
+                                                <input type="file" name="banner_6" id="file-ip-6" accept="image/*" onchange="showPreview6(event);">
                                                 <!-- <button class="btn btn-sm btn-primary" type="button">Choose Images</button> -->
                                                 <div class="preview">
                                                     <img id="file-ip-6-preview" style="width: 100%;">
@@ -199,7 +227,7 @@
                                                     <h4>Drop files here to upload</h4>
                                                 </div> -->
                                                 <div class="text-center">
-                                                    <button type="button" class="btn btn-primary waves-effect waves-light">Update</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -216,7 +244,7 @@
             <!-- End Page-content -->
 
 
-            @include('../partials/admin-footer.php')
+            @include('partials/admin-footer')
         </div>
         <!-- end main content-->
 
@@ -224,7 +252,7 @@
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
-    @include('../partials/admin-rightbar.php')
+    @include('partials/admin-rightbar')
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->
@@ -251,6 +279,7 @@
 
     <script src="../assets-dash/js/app.js"></script>
     <script src="../assets-dash/js/iconify.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $("input[name$='type']").click(function() {
@@ -269,6 +298,7 @@
                 preview.style.display = "block";
             }
         }
+
         function showPreview2(event) {
             if (event.target.files.length > 0) {
                 var src = URL.createObjectURL(event.target.files[0]);
@@ -277,6 +307,7 @@
                 preview.style.display = "block";
             }
         }
+
         function showPreview3(event) {
             if (event.target.files.length > 0) {
                 var src = URL.createObjectURL(event.target.files[0]);
@@ -285,6 +316,7 @@
                 preview.style.display = "block";
             }
         }
+
         function showPreview4(event) {
             if (event.target.files.length > 0) {
                 var src = URL.createObjectURL(event.target.files[0]);
@@ -293,6 +325,7 @@
                 preview.style.display = "block";
             }
         }
+
         function showPreview5(event) {
             if (event.target.files.length > 0) {
                 var src = URL.createObjectURL(event.target.files[0]);
@@ -301,6 +334,7 @@
                 preview.style.display = "block";
             }
         }
+
         function showPreview6(event) {
             if (event.target.files.length > 0) {
                 var src = URL.createObjectURL(event.target.files[0]);

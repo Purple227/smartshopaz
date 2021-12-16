@@ -10,6 +10,11 @@ Vue.use(VueAxios, axios);
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate);
 
+import AddProduct from './components/AddProduct.vue';
+Vue.component('add-product', AddProduct);
+
+//Vue.component('add-product', require('./components/AddProduct.vue'));
+
 const PaystackPop = window.PaystackPop;
 
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
@@ -75,18 +80,6 @@ const app = new Vue({
                 total: null,
             },
 
-            productForm: {
-                title: '',
-                discount: '',
-                category: null,
-                brandID: '',
-                stock: '',
-                mainPrice: '',
-                regularPrice: '',
-                superBuyerPrice: '',
-                description: '',
-            },
-
             order: {
                 name: null,
                 address: null,
@@ -107,8 +100,6 @@ const app = new Vue({
             singleProduct: null,
             registerFee: null,
             registerPercent: null,
-            adminCategory: null,
-            adminBrand: null,
             superBuyerProduct: null,
             deliveryFee: '',
             itemInCart: '',
@@ -254,16 +245,12 @@ const app = new Vue({
         this.searchProductData()
         this.getProduct()
         this.cartMethod()
-        this.getAdminBrand()
-        this.getAdminCategory()
         this.userNameMethod()
         this.productSuperBuyer()
         this.getDeliveryFee()
         this.cartItemCount()
         this.getSetSuperBuyerDetail()
         this.ageChecker()
-        this.getAdminCategory()
-        this.getAdminBrand()
         this.mainSumMethod()
     },
 
@@ -524,22 +511,6 @@ const app = new Vue({
                 })
         },
 
-        getAdminCategory() {
-            self = this
-            axios.get(`list-categories-api`)
-                .then(response => {
-                    this.adminCategory = response.data
-                })
-        },
-
-        getAdminBrand() {
-            self = this
-            axios.get(`list-brands-api`)
-                .then(response => {
-                    this.adminBrand = response.data
-                })
-        },
-
         productSuperBuyer() {
             self = this
             axios.get(`products-super-buyer`)
@@ -619,7 +590,7 @@ const app = new Vue({
         },
 
         addToCart(ID, price, name, count, image, mainPrice) {
-            console.log(mainPrice)
+            console.log(id)
             let item = JSON.parse(window.localStorage.getItem("cartItem"));
             item = item == null ? [] : JSON.parse(window.localStorage.getItem("cartItem"));
             item.push({
@@ -684,7 +655,7 @@ const app = new Vue({
         },
 
         ageChecker(birthday) {
-            if (this.registration.dateOfBirth != null) { // Condition calibrace open
+            if (birthday != null) { // Condition calibrace open
                 console.log('insane')
                     // it will accept two types of format yyyy-mm-dd and yyyy/mm/dd
                 var optimizedBirthday = birthday.replace(/-/g, "/");

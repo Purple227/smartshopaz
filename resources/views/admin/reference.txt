@@ -1,0 +1,167 @@
+    <button type="submit" class="btn btn-primary waves-effect waves-light" @click="saveProduct"> <span>Add</span> <i class="mdi mdi-card-plus-outline ml-1"></i> </button>
+
+
+
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                            <div class="form-group">
+                                                <label for="to-input">Product Name</label>
+                                                <input type="text" name="title" v-model="productForm.title" class="form-control" id="to-input" placeholder="Title">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="subject-input">Discount(%)</label>
+                                                <input type="number" v-model="productForm.discount" name="discount" class="form-control" placeholder="Discount" />
+                                            </div>
+
+                                            <div class="form-group ">
+                                                <label>Categories</label>
+                                                <select class="form-control" v-model="productForm.category">
+                                                    <option v-for="category in adminCategory" :value="category.id"> @{{ category.name}} </option>
+                                               </select>
+                                            </div>
+
+                                            <div class="form-group ">
+                                                <label>Brand</label>
+                                                <select class="form-control" v-model="productForm.brandID">
+                                                    <option :value="null" disabled>Select Brand</option>
+                                                    <option v-for="brand in adminBrand" :value="brand.id"> @{{ brand.name}} </option>
+                                               </select>
+                                            </div>
+
+                                            <div class="form-group ">
+                                                <label>Status</label>
+                                                <select class="form-control" id="siteID" class="abcd" name="stock" v-model="productForm.stock">
+                                                    <option value="">Select...</option>
+                                                    <option value="instock"> In stock </option>
+                                                    <option value="outstock"> Out of stock </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col-sm-12">
+                                                    <div class="">
+                                                        <h5 class="font-size-14 mb-3">Product Type</h5>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="custominlineRadio1" name="type" class="custom-control-input" value="single" checked>
+                                                            <label class="custom-control-label" for="custominlineRadio1">Single Option</label>
+                                                        </div>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="custominlineRadio2" name="type" class="custom-control-input" value="multi">
+                                                            <label class="custom-control-label" for="custominlineRadio2">Multiple options</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row types" id="Typesingle">
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="validationCustom01">Main Price(₦)</label>
+                                                    <input type="number" name="main_price" v-model="productForm.mainPrice" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="">
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="validationCustom02">Regular Price(₦)</label>
+                                                    <input type="number" name="regular_price" v-model="productForm.regularPrice" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" >
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="validationCustom02">SuperBuyers Price(₦)</label>
+                                                    <input type="number" name="super_buyer_price" v-model="productForm.superBuyerPrice" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="" >
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="validationCustom01">Weight(kg)</label>
+                                                    <input type="number" v-model="productForm.weight" name="weight" class="form-control" id="validationCustom01" placeholder="Weight" value="">
+                                                    <div class="valid-feedback">
+                                                        Looks good!
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="types" id="Typemulti" style="display: none;">
+                                                <div class="row" v-for="(multi, index) in productMultiOption" :key="index">
+                                                <p> @{{ index+1 }}</p>
+                                                <div class="col-md-1 mb-2">
+                                                        <p @click="addMultiOption"> add </p>
+                                                        <p @click="removeMultiOption(index)" v-if='index >= 1' >  remove </p>
+                                                    </div>
+
+                                                    <div class="col-md-3 mb-3">
+                                                        <label for="validationCustom01">Variation Name</label>
+                                                        <input type="text" name="variation_name" v-model="multi.variationName" class="form-control" id="validationCustom01" placeholder="e.g: Adidas" value="">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label for="validationCustom01">Weight(kg)</label>
+                                                        <input type="number" name="multiple_weight" v-model="multi.weight" class="form-control" id="validationCustom01" placeholder="e.g 20" value="">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 mb-3">
+                                                        <label for="validationCustom01">Main Price(₦)</label>
+                                                        <input type="number" name="multiple_main_price" v-model="multi.mainPrice" class="form-control" id="validationCustom01" placeholder="e.g: 20,000" value="">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 mb-3">
+                                                        <label for="validationCustom02">Regular Price(₦)</label>
+                                                        <input type="number" name="multiple_regular_price" v-model="multi.regularPrice" class="form-control" id="validationCustom02" placeholder="e.g: 23,000" value="" >
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2 mb-3">
+                                                        <label for="validationCustom02">SuperBuyers Price(₦)</label>
+                                                        <input type="number" name="multiple_super_buyer_price" v-model="multi.superBuyerPrice" class="form-control" id="validationCustom02" placeholder="e.g: 20,100" value="">
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                            <label for="to-input"> Product Description </label>
+                                                <textarea  name="description" v-model="productForm.description" class="form-control" rows="3"> </textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <h4 class="header-title">Select Pictures</h4>
+
+                                                <div>
+                                                    <div class="dropzone">
+                                                        <div class="fallback">
+                                                            <input type="file" name="product_image" id="image" multiple="" class="d-none" @change="fileUpload">
+                                                            <button class="btn btn-sm btn-primary" type="button" onclick="document.getElementById('image').click()">Choose Images</button>
+                                                            <div class="card-body d-flex flex-wrap justify-content-start" id="container">
+                                                                <!-- image preview -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="btn-toolbar form-group mb-0">
+                                                <div class="">
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>

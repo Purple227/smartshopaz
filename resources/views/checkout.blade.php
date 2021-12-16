@@ -176,16 +176,21 @@
                       </tbody>
                     </table>
                   </div>
+
                   <div class="form-group">
                     <input type="radio" name="paymethod" id="shipping" value="option1" checked>
                     <label for="shipping">Cash on delivery</label>
                   </div>
+
                   <div class="form-group">
                     <input type="radio" name="paymethod" id="paypal" value="option2">
                     <label for="paypal">Paypal</label>
                   </div>
+
                   <button class="normal-btn submit-btn">Place order</button>
+
                 </div>
+                
               </div>
             </div>
           </form>

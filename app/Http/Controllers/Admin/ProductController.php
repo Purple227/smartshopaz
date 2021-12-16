@@ -17,7 +17,6 @@ use App\Models\ProductOption;
 class ProductController extends Controller
 {
     
-
     public function addProductUI()
     {
         $list_brands = Brand::all();
@@ -28,11 +27,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-        'title' => 'required',
-        'main_price' => 'required_if:multi_product_option,==,null',
-        'description' => 'required',
-        ]);
 
         $random = Str::random(4);
         $slug = Str::slug($request->title, '-');
@@ -40,15 +34,19 @@ class ProductController extends Controller
 
         $product = new Product;
 
-        if ($request->file != null) {
-        $path = $request->file('file')->store('public/images');
-        $product->image = $path ;
-        }
+        if ( $request->hasFile('file') ) {
+             $gimages = request('file');
+             $gbasename = Str::random();
+             $goriginal = $gbasename.'.'.$gimages->getClientOriginalExtension();
+             $gimages->move('images', $goriginal);
+             $path = 'images/'.$goriginal;
+             $product->image = $path;
+        } 
 
         $product->title = $request->title;
         $product->discount = $request->discount;
-        $product->category_id = $request->category_id;
-        $product->brand_id = $request->brand_id;
+        //$product->category_id = $request->category_id;
+        //$product->brand_id = $request->brand_id;
         $product->main_price = $request->main_price;
         $product->regular_price = $request->regular_price;
         $product->super_buyer_price = $request->super_buyer_price;
@@ -58,6 +56,13 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->save();
 
+        $request->session()->flash('status', 'Task was successful!');
+        return $product->id;
+        //return redirect()->route('list.product');
+    }
+
+    public function addMultipleProduct(Request $request)
+    {
         $b = $request->multi_product_option;
         for ($i=0; $i < count($b) ; $i++) { 
             $save_multiple_option = ProductOption::create([
@@ -66,12 +71,9 @@ class ProductController extends Controller
                 'regular_price' => $b[$i] ['regularPrice'],
                 'super_buyer_price' => $b[$i] ['superBuyerPrice'],
                 'weight' => $b[$i] ['weight'],
-                'product_id' => $product->id
+                'product_id' => $request->id
             ]);
         }
-
-        $request->session()->flash('status', 'Task was successful!');
-        return redirect()->route('list.product');
     }
 
     public function update(Request $request, $id)

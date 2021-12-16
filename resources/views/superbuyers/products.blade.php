@@ -95,7 +95,7 @@
                                 </div> -->
                                 <div class="card">
                                 <a :href="'/super-buyer/product-super-buyer/'+product.slug">
-                                    <img class="img-fluid" src="../assets-dash/images/small/img-4.jpg" alt="Card image cap">
+                                    <img class="img-fluid" :src="product.image == null ? '../assets-dash/images/small/img-4.jpg' : product.image" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title font-size-16 mt-0">@{{ product.title }}</h4>
                                         <h6 class="card-subtitle font-14 text-muted">NGN @{{ product.super_buyer_price - (product.discount / 100)  }} </h6>
