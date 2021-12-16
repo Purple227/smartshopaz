@@ -56,6 +56,7 @@
                                     <li class="breadcrumb-item active">Welcome to smartshoppers Dashboard</li>
                                     </ol>
                                 </div>
+                                {{--
                                 <div class="col-md-4">
                                     <div class="float-right d-none d-md-block">
                                         <div class="dropdown">
@@ -72,6 +73,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                --}}
                             </div>
 
                         </div>
@@ -104,53 +106,182 @@
                                     </div>
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="header-title mb-4">Monthy sale Report</h5>
+                                            <h5 class="header-title mb-4"> Sale Report </h5>
                                             <div class="media">
                                                 <div class="media-body">
                                                     <p class="text-muted mb-2">This month Sale</p>
-                                                    <h4>₦ 13,425</h4>
-                                                </div>
-                                                <div dir="ltr" class="ml-2">
-                                                    <input data-plugin="knob" data-width="56" data-height="56" data-linecap=round data-displayInput=false
-                                                    data-fgColor="#f15959" value="56" data-skin="tron" data-angleOffset="56"
-                                                    data-readOnly=true data-thickness=".17" />
+                                                    <h4>₦ {{ $monthly_order_sale }}</h4>
                                                 </div>
                                             </div>
                                             <hr>
                                             <div class="media">
                                                 <div class="media-body">
-                                                    <p class="text-muted">Sale status</p>
-                                                    <h5 class="mb-0"> + 12 % <span class="font-size-14 text-muted ml-1">From previous period</span></h5>
+                                                    <p class="text-muted">Number of Sales</p>
+                                                    <h5 class="mb-0"> {{ $total_number_of_sale}} <span class="font-size-14 text-muted ml-1">From previous period</span></h5>
                                                 </div>
 
-                                                <div class="align-self-end ml-2">
-                                                    <a href="#" class="btn btn-primary btn-sm">View more</a>
+                                            </div>
+                                            <hr>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <p class="text-muted">Sales Revenue</p>
+                                                    <h5 class="mb-0"> {{ $order_total_revenue}} <span class="font-size-14 text-muted ml-1">From previous period</span></h5>
                                                 </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="col-xl-8">
+                                    
+
+
+
+
+
+
+
+
+
+
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            {{--
+                                            <div class="float-right ml-2">
+                                                <a href="#">View all</a>
+                                            </div>
+                                            --}}
+                                            <h5 class="header-title mb-4">Latest Transaction</h5>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-centered table-hover mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Transaction ID</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">status</th>
+                                                            <th scope="col">Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($top_five_transaction as $transaction)
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <a href="#"> {{ $transaction->transaction_id }}</a>
+                                                            </th>
+                                                            <td> {{ $transaction->name }}</td>
+                                                            <td> {{ $transaction->created_at }}</td>
+                                                            <td>
+                                                                <div class="badge badge-soft-secondary"> Confirm </div>
+                                                            </td>
+                                                            <td>₦{{ $transaction->amount }}</td>
+                                                         
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <ul class="pagination pagination-rounded justify-content-center mb-0">
+                                                    <li class="page-item disabled">
+                                                        <a class="page-link" href="#" aria-label="Previous">
+                                                            <i class="mdi mdi-chevron-left"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Next">
+                                                            <i class="mdi mdi-chevron-right"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-xl-8">
+
+                                {{--
+                                <div class="col-lg-4">
                                     <div class="card">
                                         <div class="card-body">
-                                            <form class="form-inline float-right">
-                                                <div class="input-group mb-3">
-                                                    <input type="text" class="form-control form-control-sm datepicker-here" data-range="true"  data-multiple-dates-separator=" - " data-language="en" placeholder="Select Date" />
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text"><i class="far fa-calendar font-size-12"></i></span>
-                                                    </div>
+                                            <h5 class="header-title mb-4">Revenue by Location</h5>
+
+                                            <div id="usa-map"  style="height: 150px" class="mb-5"></div>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-centered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">California</th>
+                                                            <td>₦ 8,257</td>
+                                                            <td>
+                                                                <div dir="ltr" class="ml-2">
+                                                                    <input data-plugin="knob" data-width="36" data-height="36" data-linecap=round data-displayInput=false
+                                                                    data-fgColor="#f15959" value="56" data-skin="tron" data-angleOffset="36"
+                                                                    data-readOnly=true data-thickness=".2" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">New York</th>
+                                                            <td>₦ 7,253</td>
+                                                            <td>
+                                                                <div dir="ltr" class="ml-2">
+                                                                    <input data-plugin="knob" data-width="36" data-height="36" data-linecap=round data-displayInput=false
+                                                                    data-fgColor="#f15959" value="42" data-skin="tron" data-angleOffset="36"
+                                                                    data-readOnly=true data-thickness=".2" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="text-center">
+                                                    <a href="#" class="btn btn-primary btn-sm">View more <i class="mdi mdi-arrow-right ml-1"></i></a>
                                                 </div>
-                                            </form>
-                                            <h5 class="header-title mb-4">Sales Report</h5>
-                                            <div id="yearly-sale-chart" class="apex-charts"></div>
+                                            </div>
                                         </div>
                                     </div>
+
+
+
+
+
+
+
+
+
+
+
                                 </div>
+                                --}}
+
 
                             </div>
                             <!-- end row -->
 
+                            {{--
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="card">
@@ -163,7 +294,7 @@
 
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2">Number of Sales</p>
-                                                        <h5 class="mb-0">1,625</h5>
+                                                        <h5 class="mb-0"> {{ $total_number_of_sale }} </h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <i class="uim uim-layer-group"></i>
@@ -174,38 +305,20 @@
                                                 <div class="media my-2">
                                                     <div class="media-body">
                                                         <p class="text-muted mb-2">Sales Revenue </p>
-                                                        <h5 class="mb-0">₦ 42,235</h5>
+                                                        <h5 class="mb-0">₦ {{ $order_total_revenue }} </h5>
                                                     </div>
                                                     <div class="icons-lg ml-2 align-self-center">
                                                         <i class="uim uim-analytics"></i>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="list-group-item">
-                                                <div class="media my-2">
-                                                    <div class="media-body">
-                                                        <p class="text-muted mb-2">Average Price</p>
-                                                        <h5 class="mb-0">₦ 14.56</h5>
-                                                    </div>
-                                                    <div class="icons-lg ml-2 align-self-center">
-                                                        <i class="uim uim-ruler"></i>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="media my-2">
-                                                    <div class="media-body">
-                                                        <p class="text-muted mb-2">Product Sold</p>
-                                                        <h5 class="mb-0">8,235</h5>
-                                                    </div>
-                                                    <div class="icons-lg ml-2 align-self-center">
-                                                        <i class="uim uim-box"></i>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                          
+                                          
                                         </ul>
                                     </div>
                                 </div>
+
+                                {{--
                                 <div class="col-lg-4">
                                     <div class="card">
                                         <div class="card-body">
@@ -231,6 +344,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                --}}
+
+                                {{--
                                 <div class="col-lg-4">
                                     <div class="card">
                                         <div class="card-body">
@@ -240,9 +356,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                --}}
+
                             </div>
+                            --}}
                             <!-- end row -->
 
+                            {{--
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="card">
@@ -411,49 +531,11 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="header-title mb-4">Revenue by Location</h5>
 
-                                            <div id="usa-map"  style="height: 150px" class="mb-5"></div>
 
-                                            <div class="table-responsive">
-                                                <table class="table table-centered">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">California</th>
-                                                            <td>₦ 8,257</td>
-                                                            <td>
-                                                                <div dir="ltr" class="ml-2">
-                                                                    <input data-plugin="knob" data-width="36" data-height="36" data-linecap=round data-displayInput=false
-                                                                    data-fgColor="#f15959" value="56" data-skin="tron" data-angleOffset="36"
-                                                                    data-readOnly=true data-thickness=".2" />
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">New York</th>
-                                                            <td>₦ 7,253</td>
-                                                            <td>
-                                                                <div dir="ltr" class="ml-2">
-                                                                    <input data-plugin="knob" data-width="36" data-height="36" data-linecap=round data-displayInput=false
-                                                                    data-fgColor="#f15959" value="42" data-skin="tron" data-angleOffset="36"
-                                                                    data-readOnly=true data-thickness=".2" />
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
 
-                                                <div class="text-center">
-                                                    <a href="#" class="btn btn-primary btn-sm">View more <i class="mdi mdi-arrow-right ml-1"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
+                            --}}
                             <!-- end row -->
 
                         </div> <!-- container-fluid -->

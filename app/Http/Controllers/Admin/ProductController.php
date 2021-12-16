@@ -27,7 +27,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-
         $random = Str::random(4);
         $slug = Str::slug($request->title, '-');
         $unique_slug = $slug.'-'.$random;
@@ -128,10 +127,8 @@ class ProductController extends Controller
     public function updateProductUI($slug)
     {
         $product = Product::where('slug', $slug)->with('category', 'brand')->first();
-
         $list_brands = Brand::all();
         $list_categories = Category::all();
-
         return view('admin.edit-product',  ['product' => $product, 'list_brands' => $list_brands, 'list_categories' => $list_categories]);
     }
 

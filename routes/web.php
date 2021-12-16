@@ -24,6 +24,7 @@ use App\Http\Controllers\SuperBuyer\PagesController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SuperBuyer\HomeController as SuperBuyerHomeController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 /*
@@ -66,9 +67,7 @@ Route::get('/list-ron-code', [RonCodeController::class, 'index'])->name('list.ro
 
 Route::prefix('admin')->group(function () {
 
-Route::get('/', function () {
-    return view('admin/index');
-})->name('admin.home')->middleware('admin');
+Route::get('/', [DashboardController::class, 'index'])->name('admin.home')->middleware('admin');
 
 // Admin category section
 Route::get('/add-category', [CategryController::class, 'addCategoryUI'])->name('add.catgory')->middleware('admin');

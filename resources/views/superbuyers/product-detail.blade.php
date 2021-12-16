@@ -125,7 +125,16 @@
                                                     </div>
 
                                                     <button type="button"  class="btn btn-primary mt-3 mt-sm-0" v-if="cart == null ? false : cart.some(check => check.id ==   superbuyerSingleProduct.single_product.id)" @click="removeFromCart(selectedVariation ==null ? superbuyerSingleProduct.single_product.id : superbuyerSingleProduct.product_variety[selectedVariation].id)"> Remove From Cart </button>
-                                                    <button type="button"  class="btn btn-primary mt-3 mt-sm-0" @click="addToCart(selectedVariation == null ? superbuyerSingleProduct.single_product.id : superbuyerSingleProduct.product_variety[selectedVariation].id,selectedVariation ==null ? superbuyerSingleProduct.single_product.super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100) : superbuyerSingleProduct.product_variety[selectedVariation].super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100),selectedVariation == null ? superbuyerSingleProduct.single_product.title + '(Default)' :superbuyerSingleProduct.single_product.title + '(' + superbuyerSingleProduct.product_variety[selectedVariation].variation_name + ')', 1, superbuyerSingleProduct.single_product.image, selectedVariation == null ? superbuyerSingleProduct.single_product.main_price : superbuyerSingleProduct.product_variety[selectedVariation].main_price)" v-else> Add To Cart </button>
+                                                    <button type="button"  class="btn btn-primary mt-3 mt-sm-0" @click="addToCart
+                                                    (
+                                                        selectedVariation == null ? superbuyerSingleProduct.single_product.id : superbuyerSingleProduct.product_variety[selectedVariation].id, 
+                                                        selectedVariation ==null ? superbuyerSingleProduct.single_product.super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100) : superbuyerSingleProduct.product_variety[selectedVariation].super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100),
+                                                        selectedVariation == null ? superbuyerSingleProduct.single_product.title + '(Default)' :superbuyerSingleProduct.single_product.title + '(' + superbuyerSingleProduct.product_variety[selectedVariation].variation_name + ')', 
+                                                        1, 
+                                                        superbuyerSingleProduct.single_product.image, selectedVariation == null ? superbuyerSingleProduct.single_product.main_price : superbuyerSingleProduct.product_variety[selectedVariation].main_price
+                                                        )"
+                                                         v-else> Add To Cart 
+                                                    </button>
 
                                                 </form>
                                             </div>

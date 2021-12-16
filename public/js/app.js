@@ -3021,7 +3021,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       });
     },
     addToCart: function addToCart(ID, price, name, count, image, mainPrice) {
-      console.log(id);
+      console.log(ID);
       var item = JSON.parse(window.localStorage.getItem("cartItem"));
       item = item == null ? [] : JSON.parse(window.localStorage.getItem("cartItem"));
       item.push({

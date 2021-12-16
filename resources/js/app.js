@@ -590,7 +590,7 @@ const app = new Vue({
         },
 
         addToCart(ID, price, name, count, image, mainPrice) {
-            console.log(id)
+            console.log(ID)
             let item = JSON.parse(window.localStorage.getItem("cartItem"));
             item = item == null ? [] : JSON.parse(window.localStorage.getItem("cartItem"));
             item.push({
