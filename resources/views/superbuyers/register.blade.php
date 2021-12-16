@@ -103,7 +103,7 @@
                                         <div class="form-group form-group-custom mb-4">
                                             <input type="text" name="name" class="form-control" v-model="registration.LGA" id="lastname" required>
                                             <label for="username"> LGA </label>
-                                            <p v-bind:class="{ 'text-success': registration.LGA.length > 3, 'text-danger': registration.LGA.length < 3 }"> @{{ registration.LGA.length > 3 ? 'Looking Good' : 'LGA field is required' }} </>
+                                            <p v-bind:class="{ 'text-success': registration.LGA.length > 2, 'text-danger': registration.LGA.length < 2 }"> @{{ registration.LGA.length > 2 ? 'Looking Good' : 'LGA field is required' }} </>
                                         </div>
 
                                         <div class="form-group form-group-custom mb-4">
