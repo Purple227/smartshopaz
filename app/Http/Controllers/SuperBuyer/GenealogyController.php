@@ -15,14 +15,37 @@ class GenealogyController extends Controller
     public function genealogy($slug)
     {
         $sponsor = Sponsor::where('user_id', Auth::user()->id)->first();
-        $down_line = User::where('sponsor_id', $sponsor->id)->get();
+
+        $this->getDownlineUserGeanology($sponsor->id, Auth::user()->created_at);
+
+        $down_line_count = User::where('sponsor_id', $sponsor->id)->where('created_at', '<', Auth::user()->created_at)->count(); 
+        if($slug == 'black-opal' && $down_line_count <= 5) 
+        {
+            $down_line = User::where('sponsor_id', $sponsor->id)->where('created_at', '<', Auth::user()->created_at)->get();
+        }  
+
+        if($slug == 'red-beryl' &&) 
+        {
+
+        }
+
         return view('superbuyers.genealogy', ['down_line' => $down_line]);
     }
+
+
+    public function getDownlineUserGeanology($sponsor_id, $date_join)
+    {
+        $get_sponsored_user = User::where('sponsor_id', $sponsor_id)->get();
+        foreach ($get_sponsored_user as $user) {
+            $this->direct_downline_array[] = $user->id;
+        }
+    }
+
 
     public function directDownline()
     {
         $sponsor = Sponsor::where('user_id', Auth::user()->id)->first();
-        $direct_down_line = User::where('sponsor_id', $sponsor->id)->get();
+        $direct_down_line = User::where('sponsor_id', $sponsor->id)->where('created_at', '<', Auth::user()->created_at)->get();
         return view('superbuyers.direct-downline', ['direct_down_line' => $direct_down_line]);
     }
 
@@ -45,7 +68,7 @@ class GenealogyController extends Controller
         $array_without_user = array_diff($unique_array, array(Auth::user()->id));
         $users = User::all();
         $all_downline = $users->find($array_without_user);
-        return view('superbuyers.all-downline-details', ['all_downline' => $all_downline]);
+        return view('superbuyers.all-downline-details', ['all_downline' => $all_downline, 'array_without_user' => $array_without_user ]);
     }
 
     public function getDownlineUser($sponsor_id)

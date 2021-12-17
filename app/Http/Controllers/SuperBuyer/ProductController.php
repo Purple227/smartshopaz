@@ -11,8 +11,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        
-        return view('superbuyers.products');
+        $product = Product::orderBy('id', 'desc')->with('category', 'brand')->get();
+        return view('superbuyers.products', ['product' => $product]);
     }
 
     public function products()

@@ -52,6 +52,7 @@ private $direct_downline_array;
         $user->gender = $request->gender;
         $user->country = $request->country;
         $user->state = $request->state;
+        $user->address = $request->address;
         $user->policy = 1;
         $user->complete_registration = 1;
         $user->title = $request->title;
@@ -83,11 +84,11 @@ private $direct_downline_array;
  
         $monthly_link_bonus = $request->register_percentage / 100 * $request->wallet;
 
-        $this->userToGetMonthlyLinkBonus($sponsor_code_used->id);
+        $this->userToGetMonthlyLinkBonus($sponsor_code_used->id, $sponsor_user_details->created_at);
 
         foreach ($this->direct_downline_array as $value) {
             $sponsor_user = Sponsor::where('user_id', $value)->first();
-            $this->userToGetMonthlyLinkBonus($sponsor_user->id);
+            $this->userToGetMonthlyLinkBonus($sponsor_user->id, $sponsor_user_details->created_at);
         }
 
         $unique_array = array_unique($this->direct_downline_array);
@@ -124,9 +125,10 @@ private $direct_downline_array;
         return $user;
     }
 
-    public function userToGetMonthlyLinkBonus($sponsor_id)
+    public function userToGetMonthlyLinkBonus($sponsor_id, $join_date)
     {
-        $get_sponsored_user = User::where('sponsor_id', $sponsor_id)->get();
+        $get_sponsored_user = User::where('sponsor_id', $sponsor_id)->where('created_at', '>', $join_date)->get();
+        
         foreach ($get_sponsored_user as $user) {
             $this->direct_downline_array[] = $user->id;
         }

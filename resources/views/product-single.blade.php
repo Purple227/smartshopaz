@@ -6,32 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <meta name="keywords" content="smartshoppers, smartshoppers, smartshoppaz, free shopping, online shopping, online shopping nigeria, best online shops in nigeria, wholesalers in nigeria,  retailers in nigeria, best wholesaler, best wholesalers in nigeria">
     <meta name="author" content="Smartshoppers | Development Team">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/custom_bootstrap.css">
-    <link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/elegant.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/scroll.css">
-    <link rel="stylesheet" href="assets/css/icomoon.css">
-    <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
-    <link rel="shortcut icon" href="assets/images/shortcut_logo.png">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom_bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/elegant.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/scroll.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.fancybox.min.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/shortcut_logo.png') }}">
   </head>
   <body>
-    <div id="main">
+    <div id="layout-wrapper">
     <header>
-        @include('inc/main-topbar.php')
-        @include('inc/main-desktop-nav.php')
-        @include('inc/main-mobile-nav.php')
+        @include('inc/main-topbar')
+        @include('inc/main-desktop-nav')
+        @include('inc/main-mobile-nav')
         <div class="navigation-filter"> 
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-4 col-lg-4 col-xl-3 order-2 order-md-1">
-              @include('inc/main-categories.php')
+              <div class="department-menu_block down">
+                                <div class="department-menu d-flex justify-content-between align-items-center"><i class="fas fa-bars"></i>Categories<span><i class="arrow_carrot-up"></i></span></div>
+                                <div class="department-dropdown-menu down">
+                                    <ul>
+                                        @foreach ($list_categories as $key => $category)
+                                        <li> <a href="{{ route('category',$category->slug) }}"> <i class="icon-11"> </i> {{ $category->name }} </a> </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
               </div>
               <div class="col-12 col-md-8 col-lg-8 col-xl-9 order-1 order-md-2">
-              @include('inc/main-search.php')
+              @include('inc/main-search')
               </div>
             </div>
           </div>
@@ -41,9 +50,9 @@
       <div class="ogami-breadcrumb">
         <div class="container">
           <ul>
-            <li> <a class="breadcrumb-link" href="./"> <i class="fas fa-home"></i>Home</a></li>
-            <li> <a class="breadcrumb-link" href="shop">Shop</a></li>
-            <li> <a class="breadcrumb-link active" href="shop_detail">Product Title</a></li>
+            <li> <a class="breadcrumb-link" href="../"> <i class="fas fa-home"></i>Home</a></li>
+            <li> <a class="breadcrumb-link" href="../shop">Shop</a></li>
+            <li> <a class="breadcrumb-link active" > {{ $product->title }}</a></li>
           </ul>
         </div>
       </div>
@@ -95,46 +104,68 @@
                     <div class="shop-detail_img">
                       <button class="round-icon-btn" id="zoom-btn"> <i class="icon_zoom-in_alt"></i></button>
                       <div class="big-img">
-                        <div class="big-img_block"><img src="assets/images/shop/zoom_img_1.png" alt="product image"></div>
-                        <div class="big-img_block"><img src="assets/images/shop/zoom_img_2.png" alt="product image"></div>
-                        <div class="big-img_block"><img src="assets/images/shop/zoom_img_3.png" alt="product image"></div>
+                        <div class="big-img_block"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></div>
                       </div>
+                      {{--
                       <div class="slide-img">
                         <div class="slide-img_block"><img src="assets/images/shop/zoom_img_1.png" alt="product image"></div>
                         <div class="slide-img_block"><img src="assets/images/shop/zoom_img_2.png" alt="product image"></div>
                         <div class="slide-img_block"><img src="assets/images/shop/zoom_img_3.png" alt="product image"></div>
                       </div>
+                      --}}
                     </div>
                     <div class="img_control"></div>
                   </div>
                   <div class="col-12 col-lg-6">
                     <div class="shop-detail_info">
-                      <h5 class="product-type color-type">Oranges</h5>
-                      <h2 class="product-name">@{{singleProduct.title }}</h2>
-                      <p class="product-describe">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor </p><a class="product-more" href="#">View more <i class="arrow_carrot-2right"></i></a>
-                      <p class="delivery-status">Free delivery</p>
+                      <h5 class="product-type color-type">{{ $product->category == null ? '' : $product->category->name }}</h5>
+                      <h2 class="product-name">{{ $product->title }}</h2>
+                      <p class="product-describe">{{ $product->description }} </p>
                       <div class="price-rate">
                         <h3 class="product-price"> 
-                          <del>₦35.00</del>₦14.00
+                          <del>₦{{ $product->regular_price.''.'.00' }} </del>₦{{ $product->regular_price - ($product->discount / 100)  }}
                         </h3>
+                        {{--
                         <h5 class="product-rated"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star-half"></i><span>(15)</span></h5>
+                        --}}
                       </div>
+                      {{--
                       <div class="color-select">
                         <h5>Select Color:</h5><a class="color bg-danger" href="#"></a><a class="color bg-success" href="#"></a><a class="color bg-info" href="#"></a>
                       </div>
-                      <div class="quantity-select">
-                        <label for="quantity">Quatity:</label>
-                        <input class="no-round-input" id="quantity" type="number" min="0" value="1">
-                      </div>
+                      --}}
+
+                      <div class="mt-3 mt-sm-0 mr-sm-3 mb-3" id="inlineFormInputName2">
+                                                        <select class="form-control" v-model="selectedVariation">
+                                                        <option :value="null" disabled> Select Variation </option>
+                                                            <option v-for="(product, index) in superbuyerSingleProduct.product_variety" :value="index"> @{{ product.variation_name }}</option>                                                            
+                                                        </select>
+                       </div>
+
+
                       <div class="product-select">
-                        <button class="add-to-cart normal-btn outline">Add to Cart</button>
-                        <button class="add-to-compare normal-btn outline">+ Add to Compare</button>
+
+                      <button class="add-to-compare normal-btn outline"v-if="cart == null ? false : cart.some(check => check.id ==   superbuyerSingleProduct.single_product.id)" @click="removeFromCart(selectedVariation ==null ? superbuyerSingleProduct.single_product.id : superbuyerSingleProduct.product_variety[selectedVariation].id)" > Remove From Cart</button>
+
+                        <button class="add-to-cart normal-btn outline" @click="addToCart
+                                                    (
+                                                        selectedVariation == null ? superbuyerSingleProduct.single_product.id : superbuyerSingleProduct.product_variety[selectedVariation].id, 
+                                                        selectedVariation ==null ? superbuyerSingleProduct.single_product.super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100) : superbuyerSingleProduct.product_variety[selectedVariation].super_buyer_price - (superbuyerSingleProduct.single_product.discount / 100),
+                                                        selectedVariation == null ? superbuyerSingleProduct.single_product.title + '(Default)' :superbuyerSingleProduct.single_product.title + '(' + superbuyerSingleProduct.product_variety[selectedVariation].variation_name + ')', 
+                                                        1, 
+                                                        superbuyerSingleProduct.single_product.image, selectedVariation == null ? superbuyerSingleProduct.single_product.main_price : superbuyerSingleProduct.product_variety[selectedVariation].main_price
+                                                        )" v-else>Add to Cart</button>
                       </div>
+                      {{--
                       <div class="product-share">
                         <h5>Share link:</h5><a href=""><i class="fab fa-facebook-f"> </i></a><a href=""><i class="fab fa-twitter"></i></a><a href=""><i class="fab fa-invision"> </i></a><a href=""><i class="fab fa-pinterest-p"></i></a>
                       </div>
+                      --}}
                     </div>
                   </div>
+
+
+                  {{--
                   <div class="col-12">
                     <div class="shop-detail_more-info">
                       <div id="tab-so3">
@@ -266,6 +297,7 @@
                       </div>
                     </div>
                   </div>
+                  --}}
                 </div>
               </div>
             </div>
@@ -273,23 +305,24 @@
         </div>
       </div>
       <!-- End shop layout-->
-      @include('inc/fab-button.php')
-      @include('inc/main-partners.php')
+      @include('inc/fab-button')
+      @include('inc/main-partners')
       <!-- End partner-->
-    @include('inc/main-footer.php')
+    @include('inc/main-footer')
       <!-- End footer-->
     </div>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="assets/js/jquery.countdown.min.js"></script>
-    <script src="assets/js/slick.min.js"></script>
-    <script src="assets/js/jquery.easing.js"></script>
-    <script src="assets/js/jquery.scrollUp.min.js"></script>
-    <script src="assets/js/jquery.zoom.min.js"></script>
-    <script src="assets/js/parallax.js"></script>
-    <script src="assets/js/jquery.fancybox.js"></script>
-    <script src="assets/js/numscroller-1.0.js"></script>
-    <script src="assets/js/vanilla-tilt.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.easing.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.zoom.min.js') }}"></script>
+    <script src="{{ asset('assets/js/parallax.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.fancybox.js') }}"></script>
+    <script src="{{ asset('assets/js/numscroller-1.0.js') }}"></script>
+    <script src="{{ asset('assets/js/vanilla-tilt.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
   </body>
 </html>

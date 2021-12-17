@@ -77,8 +77,8 @@
                     <div class="container-fluid">
 
                         <div class="row">
-
-                            <div class="col-md-6 col-xl-3" v-for="product in superBuyerProduct" :key="product.id">
+@foreach($product as $product)
+                            <div class="col-md-6 col-xl-3">
 
                                 <!-- <div class="card">
                                     <div class="card-body">
@@ -94,16 +94,17 @@
                                     </div>
                                 </div> -->
                                 <div class="card">
-                                <a :href="'/super-buyer/product-super-buyer/'+product.slug">
-                                    <img class="img-fluid" :src="product.image == null ? '../assets-dash/images/small/img-4.jpg' : product.image" alt="Card image cap">
+                                <a href="{{ route('single.product', $product->slug) }}">
+                                    <img class="img-fluid" src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="Card image cap">
                                     <div class="card-body">
-                                        <h4 class="card-title font-size-16 mt-0">@{{ product.title }}</h4>
-                                        <h6 class="card-subtitle font-14 text-muted">NGN @{{ product.super_buyer_price - (product.discount / 100)  }} </h6>
+                                        <h4 class="card-title font-size-16 mt-0"> {{ $product->title }}</h4>
+                                        <h6 class="card-subtitle font-14 text-muted">NGN {{ $product->super_buyer_price - ($product->discount / 100)  }} </h6>
                                     </div>
                                     </a>
                                 </div>
 
                             </div><!-- end col -->
+                            @endforeach
                         </div>
                         <ul class="pagination pagination-rounded mb-0 text-center">
                             <li class="page-item disabled">

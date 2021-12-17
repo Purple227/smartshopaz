@@ -104,7 +104,6 @@
                     <tr>
                       <th class="product-iamge" scope="col">Image</th>
                       <th class="product-name" scope="col">Product name</th>
-                      <th class="product-price" scope="col">Price</th>
                       <th class="product-quantity" scope="col">Quantity</th>
                       <th class="product-total" scope="col">Total</th>
                       <th class="product-clear" scope="col"> 
@@ -115,12 +114,11 @@
                   <tbody>
                     <tr v-for="(item, index) in cart" :key="index">
                       <td class="product-iamge"> 
-                        <div class="img-wrapper"><img :src="product.image" alt="product image"></div>
+                        <div class="img-wrapper"><img :src="item.image" alt="product image"></div>
                       </td>
                       <td class="product-name"> @{{ item.name }}</td>
-                      <td class="product-price">₦ @{{ item.price }} </td>
                       <td class="product-quantity"> 
-                        <input class="quantity no-round-input" type="number" min="1" v-model="item.count" @click="itemCounterMethod(item.id, item.count * item.price, item.name, item.count)">
+                        <input class="quantity no-round-input" type="number" min="1" v-model="item.count" @change="itemCounterMethod(item.id, item.price, item.name, item.count)">
                       </td>
                       <td class="product-total">₦ @{{ item.count * item.price  }}</td>
                       <td class="product-clear" @click="removeFromCart(item.id)"> 
@@ -131,6 +129,8 @@
                 </table>
               </div>
             </div>
+
+            {{--
             <div class="col-12 col-sm-8">
               <div class="coupon">
                 <form action="" method="post">
@@ -139,9 +139,13 @@
                 </form>
               </div>
             </div>
+            --}}
+
+            {{--
             <div class="col-12 col-sm-4 text-right">
               <button class="no-round-btn black cart-update">Upadate cart</button>
             </div>
+            --}}
           </div>
           <div class="row justify-content-end">
             <div class="col-12 col-md-6 col-lg-4">
@@ -155,8 +159,9 @@
                   <tbody>
                     <tr>
                       <th>SUBTOTAL</th>
-                      <td>NGN169.00</td>
+                      <td>NGN@{{ sumInCart  }}</td>
                     </tr>
+                    {{--
                     <tr>
                       <th>SHIPPING</th>
                       <td>
@@ -164,14 +169,21 @@
                         <p>Calculate shipping</p>
                       </td>
                     </tr>
+                    --}}
+
+                    <tr>
+                      <th>Tax(7.5%):</th>
+                      <td>NGN@{{  (sumInCart / 100 * 7.5).toFixed(2) }}</td>
+                    </tr>
+
                     <tr>
                       <th>TOTAL</th>
-                      <td>NGN169.00</td>
+                      <td>NGN@{{ ((sumInCart + deliveryFee) + (sumInCart / 100 * 7.5)).toFixed(2) }}</td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="checkout-method">
-                  <button class="normal-btn">Proceed to Checkout</button><span>- or -</span><a href="shop_checkout">Check out with PayPal</a>
+                  <a href="/checkout"  class="normal-btn">Proceed to Checkout</a><span>
                 </div>
               </div>
             </div>

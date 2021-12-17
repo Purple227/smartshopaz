@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Banner;
+use App\Models\ProductOption;
 
 class HomeController extends Controller
 {
@@ -82,6 +83,14 @@ class HomeController extends Controller
         $category = Category::where('slug', $slug)->first();
         $list_product_latest = Product::where('category_id', $category->id)->orderBy('id', 'desc')->with('category')->paginate(20);
         return view('categories', ['list_product_latest' => $list_product_latest, 'list_categories' => $list_categories]);
+    }
+
+    public function singleProductUI($slug)
+    {
+        $product = Product::where('slug', $slug)->with('category', 'brand')->first();
+        $product_variety = ProductOption::where('product_id', $product->id)->get();
+        $list_categories = Category::has('products')->get();
+        return view('product-single', ['product' => $product, 'product_variety' => $product_variety,'list_categories' => $list_categories ]);
     }
 
 }

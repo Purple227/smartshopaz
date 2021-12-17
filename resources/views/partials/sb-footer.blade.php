@@ -22,7 +22,7 @@
                             <td data-th="Product">
                                 <div class="row">
                                     <div class="col-md-3 text-left">
-                                        <img src="https://via.placeholder.com/250x250/5fa9f8/ffffff" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                        <img :src="item.image" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
                                     </div>
                                     <div class="col-md-9 text-left mt-sm-2">
                                         <h6> @{{ item.name }} </h6>

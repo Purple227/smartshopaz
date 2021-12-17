@@ -10,7 +10,7 @@
                           <div class="categories-select_box">
                             <ul id="myUL">
                               <li v-for="(product, index) in searchProductResult" :key="index"> 
-                                <a href="#"> @{{ product.title }}</a>  <span> in @{{ product.category == null ? '' : product.category.name }} </span>
+                                <a :href="'/single-product/'+product.slug"> @{{ product.title }}</a>  <span> in @{{ product.category == null ? '' : product.category.name }} </span>
                               </li>
                             </ul>
                           </div>

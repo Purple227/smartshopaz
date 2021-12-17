@@ -2863,7 +2863,8 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
         L_G_A: this.registration.LGA,
         state: this.registration.state,
         country: this.registration.country,
-        transaction_id: transactionID
+        transaction_id: transactionID,
+        gender: this.registration.gender
       }).then(function (response) {
         window.location = '/super-buyer/success';
       })["catch"](function (error) {
@@ -2932,7 +2933,7 @@ var app = new (vue_dist_vue_js__WEBPACK_IMPORTED_MODULE_2___default())({
       var _this7 = this;
 
       self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("delivery-fee-api").then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/super-buyer/delivery-fee-api").then(function (response) {
         _this7.deliveryFee = response.data;
       });
     },

@@ -3,7 +3,7 @@
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="header-left d-flex flex-column flex-md-row align-items-center">
-                  <a href="superbuyers/" class="d-flex align-items-center text-dark"><i class="fas fa-"></i>Superbuyers</a>
+                  <a href="super-buyer" class="d-flex align-items-center text-dark"><i class="fas fa-"></i>Superbuyers</a>
                   <p class="d-flex align-items-center text-dark"><i class="fas fa-"></i>Smartshoppers express</p>
                 </div>
               </div>

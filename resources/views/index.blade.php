@@ -153,18 +153,20 @@
 
                     @foreach ($list_product_latest as $key => $product)
                                     <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="product coffee"><a class="product-img" href="shop_detail"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt=""></a>
+                                        <div class="product coffee"><a class="product-img" href="{{ route('single-product', $product->slug) }}"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt=""></a>
                                             <h5 class="product-type">{{ $product->category == null ? '' : $product->category->name }}</h5>
                                             <h3 class="product-name"> {{ $product->title }} </h3>
                                             <h3 class="product-price"> ₦{{ $product->regular_price - ($product->discount / 100)  }}
                                                 <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
                                             </h3>
+                                            {{--
                                             <div class="product-select">
                                                 <button class="add-to-wishlist round-icon-btn coffee"> <i class="icon_heart_alt"></i></button>
                                                 <button class="add-to-cart round-icon-btn coffee"> <i class="icon_bag_alt"></i></button>
                                                 <button class="add-to-compare round-icon-btn coffee"> <i class="fas fa-random"></i></button>
                                                 <button class="quickview round-icon-btn coffee"><i class="far fa-eye"></i></button>
                                             </div>
+                                            --}}
                                         </div>
                                     </div>
                     @endforeach
@@ -247,8 +249,8 @@
                                 <div class="mini-product_block">
                                     @foreach ($list_product_latest as $key => $product)
                                     <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
+                                        <div class="mini-product_img"><a href="{{ route('single-product', $product->slug) }}"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
+                                        <div class="mini-product_info"> <a href="{{ route('single-product', $product->slug) }}"> {{ $product->title }} </a>
                                             <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
                                                 <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
                                             </p>
@@ -271,8 +273,8 @@
                                 <div class="mini-product_block">
                                     @foreach ($list_product_latest as $key => $product)
                                     <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
+                                        <div class="mini-product_img"><a href="{{ route('single-product', $product->slug) }}"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
+                                        <div class="mini-product_info"> <a href="{{ route('single-product', $product->slug) }}"> {{ $product->title }} </a>
                                             <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
                                                 <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
                                             </p>
@@ -295,8 +297,8 @@
                                 <div class="mini-product_block">
                                     @foreach ($review_product as $key => $product)
                                     <div class="mini-product coffee">
-                                        <div class="mini-product_img"><a href="shop_detail"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
-                                        <div class="mini-product_info"> <a href="shop_detail"> {{ $product->title }} </a>
+                                        <div class="mini-product_img"><a href="{{ route('single-product', $product->slug) }}"><img src="{{ asset($product->image == null ? 'assets/images/product/product08.png' : $product->image ) }}" alt="product image"></a></div>
+                                        <div class="mini-product_info"> <a href="{{ route('single-product', $product->slug) }}"> {{ $product->title }} </a>
                                             <p>₦{{ $product->regular_price - ($product->discount / 100)  }}
                                                 <del> ₦ {{ $product->regular_price.''.'.00' }} </del>
                                             </p>

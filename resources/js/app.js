@@ -442,7 +442,8 @@ const app = new Vue({
                     L_G_A: this.registration.LGA,
                     state: this.registration.state,
                     country: this.registration.country,
-                    transaction_id: transactionID
+                    transaction_id: transactionID,
+                    gender: this.registration.gender
 
                 })
                 .then(function(response) {
@@ -505,7 +506,7 @@ const app = new Vue({
 
         getDeliveryFee() {
             self = this
-            axios.get(`delivery-fee-api`)
+            axios.get(`/super-buyer/delivery-fee-api`)
                 .then(response => {
                     this.deliveryFee = response.data
                 })

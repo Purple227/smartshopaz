@@ -42,6 +42,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search-product', [HomeController::class, 'search']);
 Route::get('/shop', [HomeController::class, 'shopUI'])->name('shop');
 Route::get('/category/{slug}', [HomeController::class, 'categoryUI'])->name('category');
+Route::get('/single-product/{slug}', [HomeController::class, 'singleProductUI'])->name('single-product');
+
 
 Route::get('/product-api', [HomeController::class, 'ProductAPIs']);
 Route::get('/alpha-sort-product', [HomeController::class, 'ProductAlphabetAPIsSort']);
@@ -54,6 +56,10 @@ Route::get('/about', function () {
 
 Route::get('/cart', function () {
     return view('cart');
+});
+
+Route::get('/checkout', function () {
+    return view('checkout');
 });
 
 Route::prefix('admin')->group(function () {

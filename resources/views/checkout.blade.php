@@ -20,19 +20,19 @@
   </head>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <body>
-    <div id="main">
+    <div id="layout-wrapper">
     <header>
-        @include('inc/main-topbar.php')
-        @include('inc/main-desktop-nav.php')
-        @include('inc/main-mobile-nav.php')
+        @include('inc/main-topbar')
+        @include('inc/main-desktop-nav')
+        @include('inc/main-mobile-nav')
         <div class="navigation-filter"> 
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-12 col-lg-4 col-xl-3 order-2 order-md-1">
-              @include('inc/main-categories.php')
+              {{-- @include('inc/main-categories.php') --}}
               </div>
               <div class="col-12 col-md-12 col-lg-8 col-xl-9 order-1 order-md-2">
-              @include('inc/main-search.php')
+              @include('inc/main-search')
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@
           <ul>
             <li> <a class="breadcrumb-link" href=""> <i class="fas fa-home"></i></a></li>
             <li> <a class="breadcrumb-link" href="cart">Cart</a></li>
-            <li> <a class="breadcrumb-link active" href="index">Checkout</a></li>
+            <li> <a class="breadcrumb-link active">Checkout</a></li>
           </ul>
         </div>
       </div>
@@ -197,10 +197,11 @@
         </div>
       </div>
       <!-- End partner-->
-      @include('inc/fab-button.php')
-      @include('inc/main-footer.php')
+      @include('inc/fab-button')
+      @include('inc/main-footer')
       <!-- End footer-->
     </div>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script src="assets/js/jquery.countdown.min.js"></script>
